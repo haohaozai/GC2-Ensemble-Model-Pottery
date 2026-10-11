@@ -1,0 +1,7 @@
+# Text branch (text_branch/). For GPU, install a CUDA build of torch first:
+# https://pytorch.org/get-started/locally/
+numpy>=1.24
+pyyaml>=6.0
+torch>=2.1
+sentence-transformers>=5.0
+pytest>=8.0
