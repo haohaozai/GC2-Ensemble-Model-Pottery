@@ -1,0 +1,53 @@
+{
+ "attribute": "glaze_effect",
+ "attribute_label": "glaze effects",
+ "value": "flowing",
+ "title": "Dripping / flowing",
+ "vi": "Men chảy",
+ "identify": [
+  "Downward streaks or rivulets.",
+  "Colour pooling near lower edges.",
+  "Uneven glaze thickness."
+ ],
+ "recognition": "Gravity-aligned flowing patterns, often extending vertically.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.7",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "breaking at edges",
+   "difference": "Flowing is gravity-aligned streaking; breaking is thinning / colour change over raised ridges.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §3"
+  },
+  {
+   "value": "excessive glaze running",
+   "difference": "Not every drip is a defect: call it running only with clear excessive accumulation.",
+   "source": "Glaze_Effects_Defects_Surface_Transparency_Reference_v2.pdf §3"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Dripping / flowing - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.7)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "230305_1",
+   "model_p": 0.735,
+   "phrase": "running streaks",
+   "dino": 0.245,
+   "caption": "database object 230305_1: Claude's label is flowing; model probability 0.73; box = Grounding DINO phrase 'running streaks'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "598071_1",
+   "model_p": 0.661,
+   "phrase": "running streaks",
+   "dino": 0.197,
+   "caption": "database object 598071_1: Claude's label is flowing; model probability 0.66; box = Grounding DINO phrase 'running streaks'"
+  }
+ ],
+ "n_database_labels": 236
+}

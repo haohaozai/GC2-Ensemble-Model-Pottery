@@ -1,0 +1,46 @@
+{
+ "attribute": "form",
+ "attribute_label": "object form",
+ "value": "plate",
+ "title": "Plate",
+ "vi": "",
+ "identify": [
+  "Flat, wide and shallow, with a low rim."
+ ],
+ "recognition": "Look at the low profile and the wide flat centre.",
+ "source": "general description - not defined in your reference manuals (photo: Ceramic Attribute Taxonomy (craze documentaries.pdf) p.10)",
+ "general": true,
+ "confused_with": [
+  {
+   "value": "bowl",
+   "difference": "A bowl is deeper, with a curved wall.",
+   "source": "general description - not defined in your reference manuals"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Plate - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.10)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "794703_1",
+   "model_p": 0.976,
+   "phrase": "plate",
+   "dino": 0.651,
+   "caption": "database object 794703_1: Claude's label is plate; model probability 0.98"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "675601_1",
+   "model_p": 0.971,
+   "phrase": "plate",
+   "dino": 0.647,
+   "caption": "database object 675601_1: Claude's label is plate; model probability 0.97"
+  }
+ ],
+ "n_database_labels": 108
+}

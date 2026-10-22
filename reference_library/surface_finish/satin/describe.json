@@ -1,0 +1,53 @@
+{
+ "attribute": "surface_finish",
+ "attribute_label": "surface finish",
+ "value": "satin",
+ "title": "Satin",
+ "vi": "Bóng mờ như lụa",
+ "identify": [
+  "Soft, silky sheen.",
+  "Broad, gentle light reflections.",
+  "Visually between matte and glossy."
+ ],
+ "recognition": "Soft luminous highlights, without a mirror-like reflection.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.2",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "semi-glossy",
+   "difference": "Semi-glossy still shows visible (softer) highlights; satin only a broad gentle sheen.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §6"
+  },
+  {
+   "value": "satin-matte",
+   "difference": "Satin, semi-matte and satin-matte overlap considerably; one photo may not separate them.",
+   "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.3"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Satin - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.2)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "766230_12",
+   "model_p": 0.527,
+   "phrase": "silky sheen",
+   "dino": 0.275,
+   "caption": "database object 766230_12: Claude's label is satin; model probability 0.53; box = Grounding DINO phrase 'silky sheen'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "678115_2",
+   "model_p": 0.562,
+   "phrase": "silky sheen",
+   "dino": 0.228,
+   "caption": "database object 678115_2: Claude's label is satin; model probability 0.56; box = Grounding DINO phrase 'silky sheen'"
+  }
+ ],
+ "n_database_labels": 512
+}

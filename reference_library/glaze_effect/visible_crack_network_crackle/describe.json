@@ -1,0 +1,48 @@
+{
+ "attribute": "glaze_effect",
+ "attribute_label": "glaze effects",
+ "value": "visible crack network (crackle)",
+ "title": "Crackle",
+ "vi": "Men rạn",
+ "identify": [
+  "Fine interconnected lines.",
+  "Polygon-like networks.",
+  "Lines may be darkened for decorative effect."
+ ],
+ "recognition": "A connected web of fine cracks, distinct from random speckles.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.7",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "crazing",
+   "difference": "Crackle and crazing can look almost identical in photos: crackle is usually intended, crazing is cracking from a glaze-body mismatch. Record the visible network; the photo cannot establish intent.",
+   "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.9 · Ceramic_Real_Photo_Comparison_Guide_V4.pdf §2"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Crackle - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.7)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "382017_1",
+   "model_p": 0.984,
+   "phrase": "crackle lines",
+   "dino": 0.21,
+   "caption": "database object 382017_1: Claude's label is visible crack network (crackle); model probability 0.98; box = Grounding DINO phrase 'crackle lines'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "19106_1",
+   "model_p": 0.993,
+   "phrase": "crackle lines",
+   "dino": 0.129,
+   "caption": "database object 19106_1: Claude's label is visible crack network (crackle); model probability 0.99; box = Grounding DINO phrase 'crackle lines'"
+  }
+ ],
+ "n_database_labels": 86
+}

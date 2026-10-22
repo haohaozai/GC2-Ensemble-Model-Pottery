@@ -1,0 +1,47 @@
+{
+ "attribute": "transparency",
+ "attribute_label": "transparency",
+ "value": "opaque",
+ "title": "Opaque",
+ "vi": "Đục",
+ "identify": [
+  "Underlying clay is visually concealed.",
+  "Underlying clay body or decoration is visually concealed."
+ ],
+ "recognition": "A white body colour does not prove an opaque glaze; glossy highlights do not prove a transparent glaze.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.6 · Glaze_Effects_Defects_Surface_Transparency_Reference_v2.pdf p.3",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "translucent",
+   "difference": "Translucent lets some detail through, diffusely.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §8"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Opaque - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.6)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "515280_1",
+   "model_p": 0.945,
+   "phrase": "opaque glaze",
+   "dino": 0.383,
+   "caption": "database object 515280_1: Claude's label is opaque; model probability 0.94; box = Grounding DINO phrase 'opaque glaze'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "792386_5",
+   "model_p": 0.968,
+   "phrase": "opaque glaze",
+   "dino": 0.349,
+   "caption": "database object 792386_5: Claude's label is opaque; model probability 0.97; box = Grounding DINO phrase 'opaque glaze'"
+  }
+ ],
+ "n_database_labels": 1396
+}

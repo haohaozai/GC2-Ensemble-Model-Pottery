@@ -1,0 +1,47 @@
+{
+ "attribute": "glaze_effect",
+ "attribute_label": "glaze effects",
+ "value": "breaking at edges",
+ "title": "Breaking at edges",
+ "vi": "Men đổi màu ở cạnh",
+ "identify": [
+  "Colour changes at raised edges or ridges.",
+  "Thinner glaze areas expose a different tone."
+ ],
+ "recognition": "Colour changes consistently follow the shape of the pottery.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.7-8",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "flowing",
+   "difference": "Flowing follows gravity; breaking follows the ridges and edges of the form.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §3"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Breaking at edges - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.8)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "317761_1",
+   "model_p": 0.7,
+   "phrase": "thin glaze on ridges",
+   "dino": 0.298,
+   "caption": "database object 317761_1: Claude's label is breaking at edges; model probability 0.70; box = Grounding DINO phrase 'thin glaze on ridges'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "635654_1",
+   "model_p": 0.758,
+   "phrase": "thin glaze on ridges",
+   "dino": 0.223,
+   "caption": "database object 635654_1: Claude's label is breaking at edges; model probability 0.76; box = Grounding DINO phrase 'thin glaze on ridges'"
+  }
+ ],
+ "n_database_labels": 506
+}

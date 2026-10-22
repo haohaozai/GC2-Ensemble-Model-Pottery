@@ -1,0 +1,48 @@
+{
+ "attribute": "surface_finish",
+ "attribute_label": "surface finish",
+ "value": "stony matte",
+ "title": "Stony matte",
+ "vi": "Mờ giống đá",
+ "identify": [
+  "Stone-like visual appearance.",
+  "May have granular or mineral-looking texture.",
+  "Irregular light scattering."
+ ],
+ "recognition": "Resembles natural stone rather than smooth glass.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.3",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "smooth matte",
+   "difference": "Smooth matte looks even and low-gloss; stony matte appears granular / mineral.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §7"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Stony matte - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.3)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "146821_22",
+   "model_p": 0.004,
+   "phrase": "",
+   "dino": null,
+   "caption": "database object 146821_22: Claude's label is stony matte; model probability 0.00; no box: the model does not propose this value in its top 3"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "628231_30",
+   "model_p": 0.004,
+   "phrase": "",
+   "dino": null,
+   "caption": "database object 628231_30: Claude's label is stony matte; model probability 0.00; no box: the model does not propose this value in its top 3"
+  }
+ ],
+ "n_database_labels": 5
+}

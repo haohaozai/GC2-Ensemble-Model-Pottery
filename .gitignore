@@ -1,0 +1,20 @@
+# Python environment and caches (SETUP.bat makes them)
+.venv/
+__pycache__/
+*.pyc
+
+# local settings (copy .env.example to .env) and the Supabase settings of the online review page
+.env
+web/publish_settings.json
+
+# data that comes from the release download (DOWNLOAD_DATA.bat) or is written by the apps
+multimodal_experiments/work/
+multimodal_experiments/cache/
+.cg2_data/
+_downloads/
+*.tar
+*.part
+*.tmp
+
+# builder bookkeeping (scripts/29_build_github_package.py on the first PC)
+.package_files.json

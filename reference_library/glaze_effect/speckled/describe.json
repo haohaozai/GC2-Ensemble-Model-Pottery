@@ -1,0 +1,52 @@
+{
+ "attribute": "glaze_effect",
+ "attribute_label": "glaze effects",
+ "value": "speckled",
+ "title": "Speckled",
+ "vi": "Men chấm li ti",
+ "identify": [
+  "Tiny contrasting dots distributed across the glaze.",
+  "Random or approximately uniform distribution."
+ ],
+ "recognition": "Small dark or coloured spots that do not necessarily form a regular pattern.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.7",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "oil spot",
+   "difference": "Oil spot: larger rounded, often metallic spots.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §1"
+  },
+  {
+   "value": "pinholes",
+   "difference": "Speckles are coloured marks, not holes; pinholes are tiny openings.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §4"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Speckled - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.7)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "648343_10",
+   "model_p": 0.974,
+   "phrase": "small dark dots",
+   "dino": 0.179,
+   "caption": "database object 648343_10: Claude's label is speckled; model probability 0.97; box = Grounding DINO phrase 'small dark dots'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "510475_1",
+   "model_p": 0.816,
+   "phrase": "small dark dots",
+   "dino": 0.152,
+   "caption": "database object 510475_1: Claude's label is speckled; model probability 0.82; box = Grounding DINO phrase 'small dark dots'"
+  }
+ ],
+ "n_database_labels": 457
+}

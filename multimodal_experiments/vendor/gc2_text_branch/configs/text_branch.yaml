@@ -1,0 +1,84 @@
+# Text branch configuration (recipe tags -> text encoder -> projection head).
+# Mirrors the defaults in text_branch/config.py; tests check they stay in sync.
+# Relative paths resolve against the repository root.
+
+paths:
+  source_csv: data/glazy_20260531.csv   # raw Glazy export; never modified
+  output_dir: outputs/text_branch
+
+cleaning:
+  # Logical field -> CSV column header.
+  columns:
+    recipe_id: ID
+    name: Name
+    record_type: Type
+    state: State
+    subtype: Subtype
+    cone: Cone
+    surface: Surface
+    transparency: Transparency
+    atmospheres: Atmospheres
+    country: Country
+    other_names: Other Names
+  in_scope_types: [Recipe]          # Material / Analysis rows are kept but not embedded
+  subtype_separator: '\s+-\s+'      # regex; "Glaze - Iron - Celadon" -> 3 levels, keeps "Single-Fire"
+  atmosphere_separator: ';'
+  other_names_separator: '[;,]'     # regex; alias lookup only
+  # Orton cones, coolest -> hottest. Labels are strings: "06" != "6".
+  cone_order: ["022", "021", "020", "019", "018", "017", "016", "015", "014", "013",
+               "012", "011", "010", "09", "08", "07", "06", "05 1/2", "05", "04", "03",
+               "02", "01", "1", "2", "3", "4", "5", "5 1/2", "6", "7", "8", "9", "10",
+               "11", "12", "13", "14"]
+  vocabularies:
+    surface: [glossy, semi-glossy, satin, satin-matte, semi-matte, smooth matte, matte, dry matte, stony matte]
+    transparency: [transparent, translucent, semi-opaque, opaque]
+    atmosphere: [oxidation, neutral, reduction, salt & soda, wood, raku, luster]
+    subtype_root: [glaze, clay body, slip & engobe, underglaze, overglaze, clay, feldspar, flux,
+                   frit, primitive, colorant, silica, alumina, ash, miscellaneous, opacifier]
+  # Verified spelling variants / synonyms ONLY (hyphenation, British spelling,
+  # adjective forms of the exact Glazy labels). Used for source data and for
+  # user-supplied filters. Do not add guesses.
+  synonyms:
+    surface:
+      gloss: glossy
+      semi gloss: semi-glossy
+      semi-gloss: semi-glossy
+      semi glossy: semi-glossy
+      satin matte: satin-matte
+      semi matte: semi-matte
+    transparency:
+      semi opaque: semi-opaque
+    atmosphere:
+      oxidising: oxidation
+      oxidizing: oxidation
+      reducing: reduction
+      salt and soda: salt & soda
+      salt/soda: salt & soda
+      lustre: luster
+    subtype: {}
+    cone: {}
+  # Flag (never fix) tags that contradict the recipe's own subtype.
+  contradiction_rules:
+    - {id: clear_subtype_vs_opaque, subtype_keyword: clear, field: transparency, values: [opaque]}
+    - {id: matte_subtype_vs_glossy_surface, subtype_keyword: matte, field: surface,
+       values: [glossy, semi-glossy]}
+    - {id: glossy_subtype_vs_matte_surface, subtype_keyword: glossy, field: surface,
+       values: [satin-matte, semi-matte, smooth matte, matte, dry matte, stony matte]}
+  min_semantic_fields: 1
+  description_metadata_fields: []   # only "country" is supported; empty = not embedded
+
+encoder:
+  model_name: sentence-transformers/all-MiniLM-L6-v2
+  revision: 1110a243fdf4706b3f48f1d95db1a4f5529b4d41   # set null (or pin anew) when changing model_name
+  device: null          # null = cuda if available, else mps, else cpu
+  batch_size: 64
+  query_prompt: null    # null = model-defined prompt (empty for all-MiniLM-L6-v2)
+  document_prompt: null
+  seed: 0
+  use_cache: true
+
+projection:
+  output_dim: 128       # team shared-space dimension (initial default)
+  hidden_dim: null      # null = linear; integer = 2-layer MLP
+  dropout: 0.0
+  seed: 0

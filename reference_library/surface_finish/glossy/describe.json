@@ -1,0 +1,53 @@
+{
+ "attribute": "surface_finish",
+ "attribute_label": "surface finish",
+ "value": "glossy",
+ "title": "Glossy",
+ "vi": "Bóng cao",
+ "identify": [
+  "Strong, sharp white highlights.",
+  "Reflections can resemble glass.",
+  "Smooth-looking, reflective surface."
+ ],
+ "recognition": "Look for bright, concentrated reflections of the light source.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.2",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "semi-glossy",
+   "difference": "Glossy: sharp bright reflections; semi-glossy: softer highlights; satin: broad gentle sheen. Lighting and viewing angle are confounders.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §6"
+  },
+  {
+   "value": "metallic / iridescent",
+   "difference": "Metallic has a metal-like or angle-dependent coloured sheen; ordinary gloss is strong specular reflection without a metallic glaze.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §10"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Glossy - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.2)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "4004_1",
+   "model_p": 0.863,
+   "phrase": "mirror-like reflection",
+   "dino": 0.546,
+   "caption": "database object 4004_1: Claude's label is glossy; model probability 0.86; box = Grounding DINO phrase 'mirror-like reflection'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "621913_1",
+   "model_p": 0.944,
+   "phrase": "mirror-like reflection",
+   "dino": 0.406,
+   "caption": "database object 621913_1: Claude's label is glossy; model probability 0.94; box = Grounding DINO phrase 'mirror-like reflection'"
+  }
+ ],
+ "n_database_labels": 990
+}

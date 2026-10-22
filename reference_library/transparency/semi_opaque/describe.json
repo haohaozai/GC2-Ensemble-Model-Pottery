@@ -1,0 +1,42 @@
+{
+ "attribute": "transparency",
+ "attribute_label": "transparency",
+ "value": "semi-opaque",
+ "title": "Semi-opaque",
+ "vi": "",
+ "identify": [
+  "Mostly conceals the clay body; a faint hint of what is below may show at thin edges.",
+  "Between translucent and opaque."
+ ],
+ "recognition": "Use when the body is hidden almost everywhere but not completely.",
+ "source": "general description - not defined in your reference manuals",
+ "general": true,
+ "confused_with": [
+  {
+   "value": "opaque",
+   "difference": "Opaque hides the body completely (your manuals have no semi-opaque value).",
+   "source": "general description - not defined in your reference manuals"
+  }
+ ],
+ "images": [
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "559735_6",
+   "model_p": 0.037,
+   "phrase": "",
+   "dino": null,
+   "caption": "database object 559735_6: Claude's label is semi-opaque; model probability 0.04; no box: the model does not propose this value in its top 3"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "636689_1",
+   "model_p": 0.036,
+   "phrase": "",
+   "dino": null,
+   "caption": "database object 636689_1: Claude's label is semi-opaque; model probability 0.04; no box: the model does not propose this value in its top 3"
+  }
+ ],
+ "n_database_labels": 79
+}

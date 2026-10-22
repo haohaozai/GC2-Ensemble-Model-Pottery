@@ -1,0 +1,46 @@
+{
+ "attribute": "form",
+ "attribute_label": "object form",
+ "value": "vase",
+ "title": "Vase",
+ "vi": "",
+ "identify": [
+  "Tall, mostly closed form with a narrower neck or opening."
+ ],
+ "recognition": "Look at the height and the narrow opening.",
+ "source": "general description - not defined in your reference manuals (photo: Ceramic Attribute Taxonomy (craze documentaries.pdf) p.10)",
+ "general": true,
+ "confused_with": [
+  {
+   "value": "jar",
+   "difference": "A jar has a wide mouth and often a lid.",
+   "source": "general description - not defined in your reference manuals"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Vase - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.10)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "410101_1",
+   "model_p": 0.95,
+   "phrase": "vase",
+   "dino": 0.623,
+   "caption": "database object 410101_1: Claude's label is vase; model probability 0.95"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "314470_1",
+   "model_p": 0.937,
+   "phrase": "vase",
+   "dino": 0.704,
+   "caption": "database object 314470_1: Claude's label is vase; model probability 0.94"
+  }
+ ],
+ "n_database_labels": 108
+}

@@ -1,0 +1,41 @@
+{
+ "attribute": "form",
+ "attribute_label": "object form",
+ "value": "irregular ceramic form",
+ "title": "Irregular ceramic form",
+ "vi": "",
+ "identify": [
+  "Uneven, asymmetric or fragmentary piece that fits none of the regular forms (e.g. shards, pinched or slumped pieces)."
+ ],
+ "recognition": "Use when no regular form fits.",
+ "source": "general description - not defined in your reference manuals",
+ "general": true,
+ "confused_with": [
+  {
+   "value": "abstract ceramic artwork",
+   "difference": "An abstract artwork is a deliberate art piece.",
+   "source": "general description - not defined in your reference manuals"
+  }
+ ],
+ "images": [
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "680754_1",
+   "model_p": 0.66,
+   "phrase": "irregular hand-built form",
+   "dino": 0.372,
+   "caption": "database object 680754_1: Claude's label is irregular ceramic form; model probability 0.66"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "680714_2",
+   "model_p": 0.628,
+   "phrase": "irregular hand-built form",
+   "dino": 0.274,
+   "caption": "database object 680714_2: Claude's label is irregular ceramic form; model probability 0.63"
+  }
+ ],
+ "n_database_labels": 41
+}

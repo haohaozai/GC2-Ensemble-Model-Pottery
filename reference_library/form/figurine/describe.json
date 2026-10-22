@@ -1,0 +1,32 @@
+{
+ "attribute": "form",
+ "attribute_label": "object form",
+ "value": "figurine",
+ "title": "Figurine",
+ "vi": "",
+ "identify": [
+  "Small figure of a person, an animal or a character."
+ ],
+ "recognition": "Recognisable figure, small scale.",
+ "source": "general description - not defined in your reference manuals",
+ "general": true,
+ "confused_with": [
+  {
+   "value": "sculpture",
+   "difference": "A sculpture is a larger or abstract sculptural piece.",
+   "source": "general description - not defined in your reference manuals"
+  }
+ ],
+ "images": [
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "308816_2",
+   "model_p": 0.24,
+   "phrase": "figurine",
+   "dino": 0.23,
+   "caption": "database object 308816_2: Claude's label is figurine; model probability 0.24"
+  }
+ ],
+ "n_database_labels": 18
+}

@@ -1,0 +1,47 @@
+{
+ "attribute": "defect",
+ "attribute_label": "possible defects",
+ "value": "crawling",
+ "title": "Crawling",
+ "vi": "Co men",
+ "identify": [
+  "Glaze separates into islands, exposing clay.",
+  "Glaze retreats into islands leaving exposed clay; may be intentionally used."
+ ],
+ "recognition": "Bare clay between glaze islands; the photo cannot tell whether it was intended.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.9 · Glaze_Effects_Defects_Surface_Transparency_Reference_v2.pdf p.1",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "mottled",
+   "difference": "Mottling is colour variation within the glaze, without bare clay.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §5"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Crawling - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.9)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "27803_2",
+   "model_p": 0.501,
+   "phrase": "crawled glaze",
+   "dino": 0.231,
+   "caption": "database object 27803_2: Claude's label is crawling; model probability 0.50; box = Grounding DINO phrase 'crawled glaze'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "245468_1",
+   "model_p": 0.427,
+   "phrase": "crawled glaze",
+   "dino": 0.202,
+   "caption": "database object 245468_1: Claude's label is crawling; model probability 0.43; box = Grounding DINO phrase 'crawled glaze'"
+  }
+ ],
+ "n_database_labels": 44
+}

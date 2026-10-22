@@ -1,0 +1,48 @@
+{
+ "attribute": "glaze_effect",
+ "attribute_label": "glaze effects",
+ "value": "metallic / iridescent",
+ "title": "Metallic / iridescent",
+ "vi": "Men ánh kim",
+ "identify": [
+  "Metal-like reflections.",
+  "Gold, silver, copper, or rainbow-like highlights.",
+  "Strong viewing-angle dependence."
+ ],
+ "recognition": "Reflective colour shifts and metal-like sheen.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.8",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "glossy",
+   "difference": "Single-photo lighting can imitate metallic effects; ordinary gloss is a strong reflection without metallic colour.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §10"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Metallic / iridescent - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.8)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "403179_1",
+   "model_p": 0.219,
+   "phrase": "metallic sheen",
+   "dino": 0.269,
+   "caption": "database object 403179_1: Claude's label is metallic / iridescent; model probability 0.22; box = Grounding DINO phrase 'metallic sheen'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "629570_1",
+   "model_p": 0.182,
+   "phrase": "metallic sheen",
+   "dino": 0.294,
+   "caption": "database object 629570_1: Claude's label is metallic / iridescent; model probability 0.18; box = Grounding DINO phrase 'metallic sheen'"
+  }
+ ],
+ "n_database_labels": 71
+}

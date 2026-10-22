@@ -1,0 +1,194 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CG2 Color Search Lab</title><style>
+:root{font-family:Inter,system-ui,sans-serif;color:#26352f;background:#f4f6f2}*{box-sizing:border-box}body{margin:0}header{background:#1c4436;color:white;padding:24px max(20px,calc((100vw - 1100px)/2))}header h1{margin:0;font-size:26px}header p{margin:6px 0 0;color:#d1e3d8}main{max-width:1100px;margin:24px auto;padding:0 18px}.grid{display:grid;grid-template-columns:380px 1fr;gap:18px}.card{background:white;border:1px solid #e0e8df;border-radius:16px;padding:20px;box-shadow:0 3px 15px #183b2710}h2{font-size:17px;margin:0 0 12px}h3{font-size:15px;margin:18px 0 10px}.muted,.help{font-size:12px;color:#64766b;line-height:1.6}.mode{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #dce6dc;border-radius:10px;margin:7px 0;cursor:pointer}.mode:has(input:checked){background:#edf7ef;border-color:#2c8056}.mode input{accent-color:#246d4c}.mode strong{font-size:13px}.mode small{display:block;color:#64766b;font-size:11px;margin-top:2px}.field{width:100%;padding:11px;border:1px solid #ccd8cd;border-radius:9px;font:inherit;margin:7px 0}.btn{border:0;background:#246e4e;color:white;padding:11px 15px;border-radius:9px;font-weight:650;cursor:pointer}.btn.alt{background:#e6eee8;color:#28503a}.btn:disabled{opacity:.45;cursor:default}.pane{margin-top:18px;padding-top:14px;border-top:1px solid #e5ece5}.hide{display:none!important}.drop{padding:15px;border:2px dashed #b6c9b9;border-radius:10px;text-align:center;cursor:pointer;background:#f7faf7}.canvas-wrap{position:relative;margin-top:12px;overflow:hidden;border-radius:9px;border:1px solid #dbe4da;touch-action:none}.canvas-wrap canvas{width:100%;display:block;cursor:crosshair;touch-action:none}.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.swatch{border:1px solid #dfe5dc;border-radius:10px;overflow:hidden;background:white;cursor:pointer;text-align:left;padding:0}.swatch .paint{height:65px}.swatch .info{padding:8px;font-size:12px}.swatch.selected{outline:3px solid #33805b}.result{display:flex;gap:15px;align-items:center;margin:10px 0}.bigcolor{width:96px;height:96px;border:1px solid #d9dfd7;border-radius:12px;flex-shrink:0}.result h2{font-size:25px;margin:0}.mono{font-family:ui-monospace,monospace}.branch{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:9px}.item{border:1px solid #dfe7df;border-radius:11px;padding:10px;display:flex;gap:9px;align-items:center;background:#fff}.dot{height:42px;width:42px;border-radius:8px;border:1px solid #dce2d9;flex-shrink:0}.item strong{font-size:13px}.item small{font-size:11px;color:#6b786d;display:block}.wordlist{display:grid;gap:8px}.word{padding:11px;border:1px solid #dce6dd;border-radius:10px;display:flex;align-items:center;gap:10px;background:#fff;cursor:pointer;text-align:left}.word:hover{background:#f1f8f2}.word .dot{width:34px;height:34px}.tag{font-size:11px;color:#35694d;background:#e7f3e9;border-radius:15px;padding:3px 7px;display:inline-block}.error{color:#a73535;font-size:13px}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}footer{padding:24px 0 35px;font-size:12px;color:#687a6e;line-height:1.7}@media(max-width:790px){.grid{grid-template-columns:1fr}header{padding:22px}}
+.picker-layout{display:grid;grid-template-columns:minmax(0,1fr) 28px;gap:12px;margin:12px 0;max-width:350px}.sv-board{width:100%;aspect-ratio:1.2;display:block;cursor:crosshair;border:1px solid #cbd7cc;border-radius:8px;touch-action:none}.hue-rail{width:28px;height:100%;min-height:170px;appearance:none;-webkit-appearance:none;writing-mode:vertical-lr;direction:rtl;background:linear-gradient(to top,red,#ff00ff,blue,cyan,lime,yellow,red);border-radius:8px;cursor:pointer}.hue-rail::-webkit-slider-thumb{appearance:none;width:32px;height:8px;border:2px solid white;border-radius:5px;background:#333;box-shadow:0 0 0 1px #333}.picker-preview{width:74px;height:74px;border:1px solid #cbd7cc;border-radius:9px;flex-shrink:0}.picker-hint{font-size:12px;color:#64766b}.item.clickable{cursor:pointer;text-align:left;width:100%;font:inherit;transition:background .12s,border-color .12s}.item.clickable:hover,.item.clickable:focus-visible{background:#edf7ef;border-color:#34865c;outline:2px solid transparent}.item.clickable:focus-visible{outline:2px solid #34865c}.item small{line-height:1.5} </style></head><body><header><h1>CG2 / Ceramic Color Search Lab</h1><p>Four ways to find a color → CIELAB naming → related-color branches</p></header><main><div class="grid"><section class="card"><h2>1. Choose input method</h2>
+<label class="mode"><input type="radio" name="mode" value="word" checked><span><strong>1 · Word → color</strong><small>Rank 5 candidate color words using local text vectors</small></span></label>
+<label class="mode"><input type="radio" name="mode" value="hex"><span><strong>2 · HEX → color</strong><small>Enter #D2B48C or D2B48C</small></span></label>
+<label class="mode"><input type="radio" name="mode" value="crop"><span><strong>3 · Crop image → 3 HEX</strong><small>Drag a rectangle on the image; select one of 3 colors</small></span></label>
+<label class="mode"><input type="radio" name="mode" value="pick"><span><strong>4 · HEX pen (eyedropper)</strong><small>Click the image to sample a pixel or small area</small></span></label>
+<div id="wordPane" class="pane"><h3>Enter a color word</h3><input class="field" id="word" placeholder="tan, sandy, light brown..." value="tan"><button class="btn" id="wordGo">Find 5 likely names</button><p class="help">Uses a local TF-IDF character-ngram vector index plus a small color synonym lexicon; not a pretrained language model.</p></div>
+<div id="hexPane" class="pane hide"><h3>Enter HEX</h3><input class="field mono" id="hex" placeholder="#D2B48C" value="#D2B48C"><div class="picker-layout"><canvas id="svBoard" class="sv-board" width="280" height="230" aria-label="Color saturation and brightness board"></canvas><input id="hueRail" class="hue-rail" type="range" min="0" max="360" step="1" value="34" aria-label="Hue"></div><div class="row" style="margin:10px 0"><div id="pickerPreview" class="picker-preview" style="background:#D2B48C"></div><div class="picker-hint">Click or drag inside the square to select a color.<br>Use the vertical rainbow bar to change hue.<br>HEX and preview update together.</div></div><button class="btn" id="hexGo">Find color</button><div id="hexError" class="error"></div></div>
+<div id="imagePane" class="pane hide"><div id="drop" class="drop"><strong>Drop image, paste Ctrl+V, or choose file</strong><p class="help">For ceramic segmentation PNGs, transparent pixels are ignored in crop extraction.</p><button class="btn alt" id="browse" type="button">Choose image</button><input id="file" type="file" accept="image/*" hidden></div><div id="imageControls" class="hide"><div class="canvas-wrap"><canvas id="photo"></canvas></div><p id="imageHelp" class="help"></p><div class="row"><button class="btn alt" id="resetCrop">Reset selection</button><label class="help">Pen sample radius <select id="radius"><option value="0">1 pixel</option><option value="3" selected>7 × 7</option><option value="7">15 × 15</option></select></label></div><div id="three" class="swatches"></div></div></div>
+<div class="pane"><h3>Ranking options</h3><label class="help">Common-name ranking bias: <b id="commonValue">35%</b><input style="width:100%;accent-color:#2a7853" id="common" type="range" min="0" max="80" step="5" value="35"></label><p class="help">0% = prioritize nearest visual match; 80% = stronger preference for familiar names. This is a heuristic ranking weight, NOT a probability or measured usage frequency.</p><label class="help">Related colors <select class="field" id="family"><option value="both">Nearest + same family</option><option value="near">Nearest only</option><option value="family">Same family only</option></select></label></div></section>
+<section class="card"><h2>2. Search results</h2><div id="candidates" class="hide"><h3>5 most likely color words · select one</h3><div class="wordlist" id="words"></div></div><div id="selected"><p class="muted">Choose a method to begin. Word mode starts with “tan”.</p></div><div id="related"></div></section></div><footer><b>Method and limitations:</b> ColorThief-style median-cut extracts a 3-color palette from the selected crop; it is not the official ColorThief package. RGB → CIELAB (D65) and CIEDE2000 compare colors. Naming uses a curated vocabulary and heuristic common-name weights (not measured frequency). Text matching uses local character-ngram vector embeddings and a small manually defined synonym vocabulary, not a neural pretrained model. Image processing happens locally in your browser; no server or internet required. A clicked pixel may reflect glare, shadows, or lighting rather than true glaze color.</footer></main><script>
+'use strict';
+const RAW=`Black|#000000|neutral|10
+White|#FFFFFF|neutral|10
+Gray|#808080|neutral|10
+Light Gray|#D3D3D3|neutral|9
+Dark Gray|#555555|neutral|9
+Charcoal|#36454F|neutral|8
+Slate Gray|#708090|neutral|8
+Silver|#C0C0C0|neutral|9
+Ivory|#FFFFF0|cream|9
+Cream|#FFFDD0|cream|10
+Off White|#FAF9F6|cream|9
+Eggshell|#F0EAD6|cream|8
+Vanilla|#F3E5AB|cream|7
+Pearl|#EAE0C8|cream|7
+Beige|#F5F5DC|earth|10
+Tan|#D2B48C|earth|10
+Sand|#C2B280|earth|9
+Sandy Brown|#F4A460|earth|8
+Khaki|#C3B091|earth|9
+Dark Khaki|#BDB76B|earth|7
+Camel|#C19A6B|earth|8
+Fawn|#E5AA70|earth|6
+Taupe|#8B8589|earth|8
+Greige|#B5B1A4|earth|7
+Ecru|#C2B280|earth|6
+Oatmeal|#D6C7AE|earth|7
+Linen|#FAF0E6|cream|8
+Bone|#E3DAC9|cream|7
+Almond|#EFDECD|cream|8
+Buff|#F0DC82|earth|6
+Wheat|#F5DEB3|earth|8
+Biscuit|#E3C9A0|earth|7
+Parchment|#F1E9D2|cream|6
+Brown|#A52A2A|brown|10
+Light Brown|#B5651D|brown|9
+Dark Brown|#654321|brown|9
+Chocolate|#7B3F00|brown|9
+Coffee|#6F4E37|brown|9
+Mocha|#967969|brown|8
+Caramel|#AF6F09|brown|8
+Chestnut|#954535|brown|8
+Cocoa|#D2691E|brown|7
+Umber|#635147|brown|7
+Sienna|#A0522D|brown|8
+Burnt Sienna|#E97451|brown|7
+Sepia|#704214|brown|7
+Rust|#B7410E|orange|9
+Terracotta|#E2725B|orange|9
+Clay|#B66A50|orange|8
+Brick Red|#CB4154|red|8
+Copper|#B87333|orange|8
+Bronze|#CD7F32|orange|7
+Gold|#FFD700|yellow|9
+Mustard|#FFDB58|yellow|9
+Ochre|#CC7722|yellow|8
+Yellow|#FFFF00|yellow|10
+Pale Yellow|#FFFF99|yellow|9
+Lemon|#FFF44F|yellow|8
+Amber|#FFBF00|yellow|9
+Honey|#FFC30B|yellow|7
+Orange|#FFA500|orange|10
+Peach|#FFE5B4|orange|9
+Apricot|#FBCEB1|orange|8
+Coral|#FF7F50|orange|9
+Salmon|#FA8072|red|9
+Red|#FF0000|red|10
+Dark Red|#8B0000|red|9
+Maroon|#800000|red|9
+Burgundy|#800020|red|9
+Crimson|#DC143C|red|8
+Scarlet|#FF2400|red|8
+Rose|#FF007F|pink|8
+Pink|#FFC0CB|pink|10
+Blush|#DE5D83|pink|8
+Dusty Rose|#C08081|pink|8
+Mauve|#E0B0FF|purple|8
+Magenta|#FF00FF|pink|9
+Purple|#800080|purple|10
+Lavender|#E6E6FA|purple|9
+Lilac|#C8A2C8|purple|9
+Violet|#8F00FF|purple|9
+Plum|#8E4585|purple|8
+Indigo|#4B0082|purple|8
+Blue|#0000FF|blue|10
+Navy|#000080|blue|10
+Sky Blue|#87CEEB|blue|9
+Light Blue|#ADD8E6|blue|10
+Baby Blue|#89CFF0|blue|8
+Powder Blue|#B0E0E6|blue|9
+Steel Blue|#4682B4|blue|8
+Royal Blue|#4169E1|blue|9
+Cobalt Blue|#0047AB|blue|9
+Cerulean|#007BA7|blue|8
+Teal|#008080|cyan|10
+Turquoise|#40E0D0|cyan|9
+Aqua|#00FFFF|cyan|9
+Cyan|#00FFFF|cyan|9
+Mint|#98FF98|green|9
+Seafoam|#93E9BE|green|8
+Green|#008000|green|10
+Dark Green|#006400|green|9
+Forest Green|#228B22|green|9
+Olive|#808000|green|9
+Olive Green|#708238|green|9
+Sage|#BCB88A|green|9
+Moss Green|#8A9A5B|green|8
+Lime|#00FF00|green|9
+Chartreuse|#7FFF00|green|7
+Emerald|#50C878|green|8
+Jade|#00A86B|green|9
+Pistachio|#93C572|green|7
+Celadon|#ACE1AF|green|9
+Sea Green|#2E8B57|green|8
+Ash Gray|#B2BEB5|neutral|7
+Warm Gray|#A49A91|neutral|8
+Cool Gray|#8C92AC|neutral|8
+Stone|#928E85|neutral|8
+Putty|#C9B9A3|earth|7
+Mushroom|#B4A69F|earth|7
+Driftwood|#AF9988|earth|6
+Desert Sand|#EDC9AF|earth|8
+Champagne|#F7E7CE|cream|8
+Porcelain|#F8F4E9|cream|7
+Milk White|#FDF9F1|cream|8
+Glaze Blue|#6A9FBD|blue|5
+Oxide Red|#A44A3F|red|5
+Iron Brown|#795548|brown|6
+Copper Green|#55946B|green|5`;
+const $=id=>document.getElementById(id);
+function rgbHex(rgb){return '#'+rgb.map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('').toUpperCase()}
+function hexRgb(hex){return [1,3,5].map(i=>parseInt(hex.slice(i,i+2),16))}
+function rgbLab(rgb){let [r,g,b]=rgb.map(x=>{x/=255;return x<=.04045?x/12.92:((x+.055)/1.055)**2.4});let x=(r*.4124564+g*.3575761+b*.1804375)/.95047,y=(r*.2126729+g*.7151522+b*.0721750),z=(r*.0193339+g*.1191920+b*.9503041)/1.08883;const f=t=>t>216/24389?Math.cbrt(t):(24389/27*t+16)/116;let fx=f(x),fy=f(y),fz=f(z);return [116*fy-16,500*(fx-fy),200*(fy-fz)]}
+function hexLab(h){return rgbLab(hexRgb(h))}
+// CIEDE2000 implementation, kL=kC=kH=1.
+function deltaE(a,b){let [L1,a1,b1]=a,[L2,a2,b2]=b;let C1=Math.hypot(a1,b1),C2=Math.hypot(a2,b2),barC=(C1+C2)/2,G=.5*(1-Math.sqrt(barC**7/(barC**7+25**7)));let A1=(1+G)*a1,A2=(1+G)*a2,c1=Math.hypot(A1,b1),c2=Math.hypot(A2,b2);let h=(x,y)=>{let d=Math.atan2(y,x)*180/Math.PI;return d<0?d+360:d};let h1=h(A1,b1),h2=h(A2,b2),dl=L2-L1,dc=c2-c1,dh=0;if(c1*c2!==0){let v=h2-h1;if(v>180)v-=360;if(v< -180)v+=360;dh=v}let dH=2*Math.sqrt(c1*c2)*Math.sin(dh*Math.PI/360),barL=(L1+L2)/2,barc=(c1+c2)/2,barh;if(c1*c2===0)barh=h1+h2;else if(Math.abs(h1-h2)<=180)barh=(h1+h2)/2;else if(h1+h2<360)barh=(h1+h2+360)/2;else barh=(h1+h2-360)/2;let T=1-.17*Math.cos((barh-30)*Math.PI/180)+.24*Math.cos(2*barh*Math.PI/180)+.32*Math.cos((3*barh+6)*Math.PI/180)-.20*Math.cos((4*barh-63)*Math.PI/180);let dtheta=30*Math.exp(-(((barh-275)/25)**2)),Rc=2*Math.sqrt(barc**7/(barc**7+25**7)),Sl=1+.015*(barL-50)**2/Math.sqrt(20+(barL-50)**2),Sc=1+.045*barc,Sh=1+.015*barc*T,Rt=-Math.sin(2*dtheta*Math.PI/180)*Rc;let x=dl/Sl,y=dc/Sc,z=dH/Sh;return Math.sqrt(Math.max(0,x*x+y*y+z*z+Rt*y*z))}
+
+const NAMES=RAW.trim().split('\n').map((s,i)=>{const [name,hex,family,pop]=s.split('|');return {id:i,name,hex,family,pop:+pop,lab:hexLab(hex)}});
+function extract(image,n){const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d',{willReadFrequently:true});let scale=Math.min(1,520/Math.max(image.naturalWidth,image.naturalHeight));canvas.width=Math.max(1,Math.round(image.naturalWidth*scale));canvas.height=Math.max(1,Math.round(image.naturalHeight*scale));ctx.drawImage(image,0,0,canvas.width,canvas.height);let d=ctx.getImageData(0,0,canvas.width,canvas.height).data,pts=[];for(let i=0;i<d.length;i+=16){let r=d[i],g=d[i+1],b=d[i+2],alpha=d[i+3];if(alpha<125)continue;if(r>249&&g>249&&b>249)continue;pts.push([r,g,b])}if(!pts.length){for(let i=0;i<d.length;i+=16)if(d[i+3]>=125)pts.push([d[i],d[i+1],d[i+2]])}if(!pts.length)return [];let boxes=[pts];while(boxes.length<n){let best=-1,score=-1,axis=0;for(let j=0;j<boxes.length;j++){let box=boxes[j];if(box.length<2)continue;let min=[255,255,255],max=[0,0,0];for(const p of box)for(let k=0;k<3;k++){if(p[k]<min[k])min[k]=p[k];if(p[k]>max[k])max[k]=p[k]}let ranges=max.map((v,k)=>v-min[k]),a=ranges.indexOf(Math.max(...ranges)),s=ranges[a]*Math.sqrt(box.length);if(s>score){score=s;best=j;axis=a}}if(best<0||score<=0)break;let box=boxes.splice(best,1)[0];box.sort((a,b)=>a[axis]-b[axis]);let m=Math.floor(box.length/2);boxes.push(box.slice(0,m),box.slice(m))}let res=boxes.map(box=>{let sums=[0,0,0];for(const p of box)for(let k=0;k<3;k++)sums[k]+=p[k];return {hex:rgbHex(sums.map(v=>v/box.length)),pct:100*box.length/pts.length}}).sort((a,b)=>b.pct-a.pct);return res}
+
+let mode='word',image=null,selection=null,currentHex=null,penHex=null;
+let pickerH=34,pickerS=.333,pickerV=.824,pickerDrag=false;
+function hsvRgb(h,s,v){let c=v*s,x=c*(1-Math.abs((h/60)%2-1)),m=v-c;let a=h<60?[c,x,0]:h<120?[x,c,0]:h<180?[0,c,x]:h<240?[0,x,c]:h<300?[x,0,c]:[c,0,x];return a.map(z=>(z+m)*255)}
+function rgbHsv([r,g,b]){r/=255;g/=255;b/=255;let mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn,h=0;if(d){if(mx===r)h=60*((g-b)/d%6);else if(mx===g)h=60*((b-r)/d+2);else h=60*((r-g)/d+4)}return [(h+360)%360,mx===0?0:d/mx,mx]}
+function drawPicker(){let board=$('svBoard'),c=board.getContext('2d'),w=board.width,h=board.height;c.clearRect(0,0,w,h);c.fillStyle=`hsl(${pickerH},100%,50%)`;c.fillRect(0,0,w,h);let white=c.createLinearGradient(0,0,w,0);white.addColorStop(0,'white');white.addColorStop(1,'rgba(255,255,255,0)');c.fillStyle=white;c.fillRect(0,0,w,h);let black=c.createLinearGradient(0,0,0,h);black.addColorStop(0,'rgba(0,0,0,0)');black.addColorStop(1,'black');c.fillStyle=black;c.fillRect(0,0,w,h);let x=pickerS*w,y=(1-pickerV)*h;c.beginPath();c.arc(x,y,7,0,2*Math.PI);c.strokeStyle='white';c.lineWidth=3;c.stroke();c.beginPath();c.arc(x,y,8,0,2*Math.PI);c.strokeStyle='#26352f';c.lineWidth=1;c.stroke();$('hueRail').value=Math.round(pickerH);$('pickerPreview').style.background=rgbHex(hsvRgb(pickerH,pickerS,pickerV))}
+function syncPickerFromHex(h){let v=normalizeHex(h);if(!v)return;[pickerH,pickerS,pickerV]=rgbHsv(hexRgb(v));drawPicker()}
+function updatePickerHex(){let hex=rgbHex(hsvRgb(pickerH,pickerS,pickerV));$('hex').value=hex;$('hexError').textContent='';drawPicker();choose(hex,'visual HEX picker')}
+function pickerPoint(e){let r=$('svBoard').getBoundingClientRect();pickerS=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));pickerV=1-Math.max(0,Math.min(1,(e.clientY-r.top)/r.height));updatePickerHex()}
+$('svBoard').addEventListener('pointerdown',e=>{pickerDrag=true;$('svBoard').setPointerCapture(e.pointerId);pickerPoint(e)});
+$('svBoard').addEventListener('pointermove',e=>{if(pickerDrag)pickerPoint(e)});
+$('svBoard').addEventListener('pointerup',()=>pickerDrag=false);
+$('svBoard').addEventListener('pointercancel',()=>pickerDrag=false);
+$('hueRail').addEventListener('input',e=>{pickerH=+e.target.value;updatePickerHex()});
+$('hex').addEventListener('input',e=>{if(normalizeHex(e.target.value)){syncPickerFromHex(e.target.value);$('hexError').textContent=''}});
+
+function normalizeHex(x){x=x.trim().replace(/^#/,'');if(/^[0-9a-f]{3}$/i.test(x))x=[...x].map(c=>c+c).join('');return /^[0-9a-f]{6}$/i.test(x)?'#'+x.toUpperCase():null}
+function nearest(hex){let lab=hexLab(hex);return NAMES.map(n=>({...n,d:deltaE(lab,n.lab)})).sort((a,b)=>a.d-b.d)}
+function bestName(hex){let arr=nearest(hex),priority=+$('common').value/100,min=arr[0].d;return {literal:arr[0],best:[...arr].filter(x=>x.d<=min+Math.max(1,priority*8)).sort((a,b)=>(a.d-priority*a.pop*1.3)-(b.d-priority*b.pop*1.3))[0]}}
+function related(hex,base){let arr=nearest(hex).filter(n=>n.id!==base.id),m=$('family').value,p=+$('common').value/100;return arr.filter(n=>m==='near'||(m==='family'?n.family===base.family:(n.d<=28||n.family===base.family))).sort((a,b)=>(a.d-p*a.pop*1.5)-(b.d-p*b.pop*1.5)).slice(0,18)}
+function choose(hex,source=''){hex=normalizeHex(hex);if(!hex)return;currentHex=hex;if(source==='HEX input'||source==='visual HEX picker'||source==='related color'){ $('hex').value=hex;syncPickerFromHex(hex) }let {best,literal}=bestName(hex),lab=hexLab(hex);$('selected').innerHTML=`<h3>Selected color ${source?`· ${source}`:''}</h3><div class="result"><div class="bigcolor" style="background:${hex}"></div><div><h2>${best.name}</h2><div class="mono">${hex}</div><span class="tag">ΔE00 ${best.d.toFixed(2)} to label</span><div class="help">CIELAB: ${lab.map(x=>x.toFixed(1)).join(' / ')}</div></div></div>${best.id!==literal.id?`<p class="help">Numerically closest name: <b>${literal.name}</b> (ΔE00 ${literal.d.toFixed(2)}). Preferred familiar label: <b>${best.name}</b>.</p>`:''}<p class="help">HEX → CIELAB → nearest reference → preferred common name → related branches</p><button class="btn alt" id="copyHex">Copy HEX</button>`;$('copyHex').onclick=()=>navigator.clipboard?.writeText(hex);let rel=related(hex,best);$('related').innerHTML=`<h3>3. Related colors (${rel.length})</h3><div class="branch">${rel.map(n=>`<button type="button" class="item clickable" data-hex="${n.hex}" title="Use ${n.name} as the new selected color"><div class="dot" style="background:${n.hex}"></div><div><strong>${n.name}</strong><small>${n.hex} · ΔE00 ${n.d.toFixed(1)}</small><small>${n.family} ${n.pop>=9?'· common':''}</small></div></button>`).join('')}</div><p class="help">Click any color card to make it the new selected HEX and explore its neighbors. These are ranked neighbors, not necessarily true linguistic synonyms. A small ΔE indicates visual similarity.</p>`;document.querySelectorAll('#related .item[data-hex]').forEach(b=>b.addEventListener('click',()=>{choose(b.dataset.hex,'related color');$('selected').scrollIntoView({behavior:'smooth',block:'nearest'})}))}
+const ALIASES={tan:['sandy','light brown','beige','camel','sand'],sand:['sandy','beach','tan','beige'],beige:['neutral','cream','tan','sand'],cream:['ivory','off white','eggshell'],terracotta:['terra cotta','clay','earthenware','rust'],sage:['sage green','muted green'],olive:['olive green','khaki'],turquoise:['blue green','teal','aqua'],navy:['navy blue','dark blue'],maroon:['wine','dark red','burgundy'],gray:['grey'],lightgray:['light grey'],darkgray:['dark grey'],brown:['earthy','earth tone'],gold:['golden'],white:['snow'],black:['jet black']};
+function textNorm(s){return s.toLowerCase().replace(/grey/g,'gray').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim()}
+function grams(s){s=' '+textNorm(s)+' ';let out=[];for(let n of [2,3,4])for(let i=0;i<=s.length-n;i++)out.push(s.slice(i,i+n));return out}
+const DOCS=NAMES.map(n=>{let key=textNorm(n.name).replace(/ /g,'');return {n,phrases:[n.name,...(ALIASES[key]||[])]}}),DF={};for(let d of DOCS){let g=new Set(d.phrases.flatMap(grams));for(let t of g)DF[t]=(DF[t]||0)+1}
+function vec(s){let counts={};for(let t of grams(s))counts[t]=(counts[t]||0)+1;let norm=0;for(let t in counts){counts[t]*=Math.log(1+(DOCS.length+1)/(1+(DF[t]||0)));norm+=counts[t]**2}norm=Math.sqrt(norm)||1;for(let t in counts)counts[t]/=norm;return counts}
+function cosine(a,b){let score=0;for(let t in a)score+=a[t]*(b[t]||0);return score}
+const INDEX=DOCS.map(d=>({...d,vectors:d.phrases.map(vec)}));
+function searchWords(){let query=$('word').value.trim();if(!query){$('words').textContent='Enter a color word.';return}let v=vec(query),q=textNorm(query),rank=INDEX.map(d=>{let similarity=Math.max(...d.vectors.map(w=>cosine(v,w)));if(textNorm(d.n.name)===q)similarity+=.3;return {...d.n,similarity,score:similarity+.008*d.n.pop}}).sort((a,b)=>b.score-a.score).slice(0,5);$('candidates').classList.remove('hide');$('words').innerHTML='';rank.forEach((n,i)=>{let b=document.createElement('button');b.className='word';b.innerHTML=`<div class="dot" style="background:${n.hex}"></div><div><strong>${i+1}. ${n.name}</strong><small class="muted">${n.hex} · lexical score ${n.similarity.toFixed(2)}</small></div>`;b.onclick=()=>choose(n.hex,'word: '+n.name);$('words').appendChild(b)});choose(rank[0].hex,'word: '+rank[0].name)}
+function switchMode(v){mode=v;if(v==='hex')syncPickerFromHex($('hex').value);$('wordPane').classList.toggle('hide',v!=='word');$('hexPane').classList.toggle('hide',v!=='hex');$('imagePane').classList.toggle('hide',!['crop','pick'].includes(v));$('candidates').classList.toggle('hide',v!=='word');$('three').classList.toggle('hide',v!=='crop');$('resetCrop').classList.toggle('hide',v!=='crop');$('radius').parentElement.classList.toggle('hide',v!=='pick');$('imageHelp').textContent=v==='crop'?'Drag a rectangle over the desired ceramic area to extract 3 dominant colors.': 'Click on the glaze to sample its HEX color (adjust the sample radius if needed).';if(image)drawCanvas()}
+document.querySelectorAll('input[name=mode]').forEach(r=>r.onchange=()=>{if(r.checked)switchMode(r.value)});$('wordGo').onclick=searchWords;$('word').onkeydown=e=>{if(e.key==='Enter')searchWords()};$('hexGo').onclick=()=>{let h=normalizeHex($('hex').value);$('hexError').textContent=h?'':'Invalid HEX. Try #D2B48C.';if(h){syncPickerFromHex(h);choose(h,'HEX input')}};$('hex').onkeydown=e=>{if(e.key==='Enter')$('hexGo').click()};$('common').oninput=()=>{$('commonValue').textContent=$('common').value+'%';if(currentHex)choose(currentHex)};$('family').onchange=()=>{if(currentHex)choose(currentHex)};
+const canvas=$('photo'),ctx=canvas.getContext('2d',{willReadFrequently:true});let dragStart=null;
+function drawCanvas(){if(!image)return;let w=image.naturalWidth,h=image.naturalHeight,s=Math.min(1,900/Math.max(w,h));canvas.width=Math.round(w*s);canvas.height=Math.round(h*s);ctx.drawImage(image,0,0,canvas.width,canvas.height);if(selection&&mode==='crop'){let r=selection;ctx.strokeStyle='#00e8a5';ctx.lineWidth=3;ctx.setLineDash([8,5]);ctx.strokeRect(r.x,r.y,r.w,r.h);ctx.setLineDash([])}}
+function pos(e){let r=canvas.getBoundingClientRect();return {x:Math.max(0,Math.min(canvas.width-1,Math.floor((e.clientX-r.left)*canvas.width/r.width))),y:Math.max(0,Math.min(canvas.height-1,Math.floor((e.clientY-r.top)*canvas.height/r.height)))}}
+function sample(x,y){drawCanvas();let r=+$('radius').value,dat=ctx.getImageData(Math.max(0,x-r),Math.max(0,y-r),Math.min(canvas.width,x+r+1)-Math.max(0,x-r),Math.min(canvas.height,y+r+1)-Math.max(0,y-r)).data,sum=[0,0,0],count=0;for(let i=0;i<dat.length;i+=4){if(dat[i+3]<125)continue;for(let k=0;k<3;k++)sum[k]+=dat[i+k];count++}if(count)choose(rgbHex(sum.map(x=>x/count)),'eyedropper')}
+canvas.addEventListener('pointerdown',e=>{if(!image)return;canvas.setPointerCapture(e.pointerId);let p=pos(e);if(mode==='pick'){sample(p.x,p.y);return}dragStart=p;selection={x:p.x,y:p.y,w:0,h:0};drawCanvas()});canvas.addEventListener('pointermove',e=>{if(mode!=='crop'||!dragStart)return;let p=pos(e);selection={x:Math.min(p.x,dragStart.x),y:Math.min(p.y,dragStart.y),w:Math.abs(p.x-dragStart.x),h:Math.abs(p.y-dragStart.y)};drawCanvas()});canvas.addEventListener('pointerup',e=>{if(mode!=='crop'||!dragStart)return;dragStart=null;let r=selection;if(r.w<3||r.h<3){$('imageHelp').textContent='Drag a larger rectangle to extract 3 colors.';return}cropThree(r)});
+function cropThree(r){drawCanvas();let tmp=document.createElement('canvas');tmp.width=Math.max(1,Math.round(r.w));tmp.height=Math.max(1,Math.round(r.h));tmp.getContext('2d').drawImage(canvas,r.x,r.y,r.w,r.h,0,0,tmp.width,tmp.height);let i=new Image();i.onload=()=>{let arr=extract(i,3);$('three').innerHTML='';arr.forEach((c,j)=>{let b=document.createElement('button');b.className='swatch';let label=bestName(c.hex).best.name;b.innerHTML=`<div class="paint" style="background:${c.hex}"></div><div class="info"><b>${j+1}. ${label}</b><br><span class="mono">${c.hex}</span><br>${c.pct.toFixed(0)}%</div>`;b.onclick=()=>{document.querySelectorAll('.swatch').forEach(el=>el.classList.remove('selected'));b.classList.add('selected');choose(c.hex,'cropped palette #'+(j+1))};$('three').appendChild(b);if(j===0)b.click()})};i.src=tmp.toDataURL('image/png')}
+$('resetCrop').onclick=()=>{selection=null;drawCanvas();$('three').innerHTML=''};
+function loadFile(f){if(!f||!f.type.startsWith('image/'))return;let u=URL.createObjectURL(f),i=new Image();i.onload=()=>{if(image?.dataset?.url)URL.revokeObjectURL(image.dataset.url);image=i;image.dataset.url=u;selection=null;$('imageControls').classList.remove('hide');drawCanvas();if(mode==='crop'){selection={x:0,y:0,w:canvas.width,h:canvas.height};cropThree(selection);selection=null;drawCanvas()}};i.onerror=()=>{URL.revokeObjectURL(u);alert('Unable to open image')};i.src=u}
+$('browse').onclick=e=>{e.stopPropagation();$('file').click()};$('file').onchange=e=>loadFile(e.target.files[0]);$('drop').onclick=e=>{if(e.target.id!=='browse')$('file').click()};for(let t of ['dragenter','dragover'])$('drop').addEventListener(t,e=>{e.preventDefault();$('drop').style.background='#e3f5e9'});for(let t of ['dragleave','drop'])$('drop').addEventListener(t,e=>{e.preventDefault();$('drop').style.background=''});$('drop').addEventListener('drop',e=>loadFile([...e.dataTransfer.files].find(f=>f.type.startsWith('image/'))));document.addEventListener('paste',e=>{let f=[...(e.clipboardData?.items||[])].find(x=>x.type.startsWith('image/'))?.getAsFile();if(f){e.preventDefault();if(mode!=='crop'&&mode!=='pick'){document.querySelector('input[value=crop]').checked=true;switchMode('crop')}loadFile(f)}});
+switchMode('word');searchWords();
+syncPickerFromHex($('hex').value);
+</script></body></html>

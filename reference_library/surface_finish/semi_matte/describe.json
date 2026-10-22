@@ -1,0 +1,48 @@
+{
+ "attribute": "surface_finish",
+ "attribute_label": "surface finish",
+ "value": "semi-matte",
+ "title": "Semi-matte",
+ "vi": "Gần mờ, hơi bóng",
+ "identify": [
+  "Mostly non-reflective.",
+  "Small amounts of diffuse sheen.",
+  "Can resemble satin under certain lighting."
+ ],
+ "recognition": "Mostly matte appearance, with weak reflections at some viewing angles.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.2-3",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "satin-matte",
+   "difference": "Satin, semi-matte and satin-matte overlap considerably; one photo may not separate them.",
+   "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.3"
+  },
+  {
+   "value": "matte",
+   "difference": "Matte: little or no sharp reflection at any angle.",
+   "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.2"
+  }
+ ],
+ "images": [
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "578173_2",
+   "model_p": 0.023,
+   "phrase": "",
+   "dino": null,
+   "caption": "database object 578173_2: Claude's label is semi-matte; model probability 0.02; no box: the model does not propose this value in its top 3"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "582770_1",
+   "model_p": 0.022,
+   "phrase": "",
+   "dino": null,
+   "caption": "database object 582770_1: Claude's label is semi-matte; model probability 0.02; no box: the model does not propose this value in its top 3"
+  }
+ ],
+ "n_database_labels": 28
+}

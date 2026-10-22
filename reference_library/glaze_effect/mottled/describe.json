@@ -1,0 +1,48 @@
+{
+ "attribute": "glaze_effect",
+ "attribute_label": "glaze effects",
+ "value": "mottled",
+ "title": "Mottled / variegated",
+ "vi": "Men loang màu",
+ "identify": [
+  "Irregular patches of different colours.",
+  "Cloud-like transitions.",
+  "Uneven colour distribution."
+ ],
+ "recognition": "Blended patches without clearly defined geometric boundaries.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.7",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "crawling",
+   "difference": "Crawling reveals bare clay between separated glaze islands; mottling is colour variation within the glaze.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §5"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Mottled / variegated - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.7)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "22939_1",
+   "model_p": 0.777,
+   "phrase": "mottled pattern",
+   "dino": 0.279,
+   "caption": "database object 22939_1: Claude's label is mottled; model probability 0.78; box = Grounding DINO phrase 'mottled pattern'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "788681_1",
+   "model_p": 0.795,
+   "phrase": "mottled pattern",
+   "dino": 0.216,
+   "caption": "database object 788681_1: Claude's label is mottled; model probability 0.80; box = Grounding DINO phrase 'mottled pattern'"
+  }
+ ],
+ "n_database_labels": 305
+}

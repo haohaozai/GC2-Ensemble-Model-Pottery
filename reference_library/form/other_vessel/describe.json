@@ -1,0 +1,40 @@
+{
+ "attribute": "form",
+ "attribute_label": "object form",
+ "value": "other vessel",
+ "title": "Other vessel",
+ "vi": "",
+ "identify": [
+  "Vessel that is not a bowl, cup, plate, vase or jar: teapot, pitcher, bottle, planter, dish …"
+ ],
+ "recognition": "Has a vessel function (holds something) but another shape.",
+ "source": "general description - not defined in your reference manuals (your manual lists Pitcher, Planter, Bottle, Vessel; photo 'Teapot': Ceramic Attribute Taxonomy (craze documentaries.pdf) p.10)",
+ "general": true,
+ "confused_with": [],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Other vessel - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.10)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "68045_1",
+   "model_p": 0.964,
+   "phrase": "teapot",
+   "dino": 0.646,
+   "caption": "database object 68045_1: Claude's label is other vessel; model probability 0.96"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "557666_1",
+   "model_p": 0.919,
+   "phrase": "teapot",
+   "dino": 0.755,
+   "caption": "database object 557666_1: Claude's label is other vessel; model probability 0.92"
+  }
+ ],
+ "n_database_labels": 39
+}

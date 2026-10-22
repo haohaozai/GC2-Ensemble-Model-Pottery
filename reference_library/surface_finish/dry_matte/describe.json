@@ -1,0 +1,48 @@
+{
+ "attribute": "surface_finish",
+ "attribute_label": "surface finish",
+ "value": "dry matte",
+ "title": "Dry matte",
+ "vi": "Mờ khô, phấn",
+ "identify": [
+  "Almost no visible sheen.",
+  "Chalky or powdery-looking finish.",
+  "Can resemble unglazed clay."
+ ],
+ "recognition": "Extremely low reflection and a dry-looking surface.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.3",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "matte",
+   "difference": "Matte may keep a faint even sheen; dry matte looks chalky, almost like bare clay.",
+   "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.2-3"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Dry matte - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.3)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "752463_2",
+   "model_p": 0.232,
+   "phrase": "dry matte glaze",
+   "dino": 0.276,
+   "caption": "database object 752463_2: Claude's label is dry matte; model probability 0.23; box = Grounding DINO phrase 'dry matte glaze'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "766943_8",
+   "model_p": 0.222,
+   "phrase": "dry matte glaze",
+   "dino": 0.251,
+   "caption": "database object 766943_8: Claude's label is dry matte; model probability 0.22; box = Grounding DINO phrase 'dry matte glaze'"
+  }
+ ],
+ "n_database_labels": 54
+}

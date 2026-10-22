@@ -1,0 +1,53 @@
+{
+ "attribute": "surface_finish",
+ "attribute_label": "surface finish",
+ "value": "satin-matte",
+ "title": "Satin-matte",
+ "vi": "Mờ mịn với ánh lụa",
+ "identify": [
+  "Soft, muted sheen.",
+  "Low reflectivity.",
+  "Fine, uniform-looking finish."
+ ],
+ "recognition": "Matte-dominant appearance with a delicate satin glow.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.3",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "satin",
+   "difference": "Satin, semi-matte and satin-matte overlap considerably; one photo may not separate them.",
+   "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.3"
+  },
+  {
+   "value": "semi-matte",
+   "difference": "Same overlap; judge the strength of the sheen, and abstain when unsure.",
+   "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.3"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Satin-matte - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.3)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "665428_1",
+   "model_p": 0.285,
+   "phrase": "satin-matte glaze",
+   "dino": 0.207,
+   "caption": "database object 665428_1: Claude's label is satin-matte; model probability 0.28; box = Grounding DINO phrase 'satin-matte glaze'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "145827_14",
+   "model_p": 0.272,
+   "phrase": "satin-matte glaze",
+   "dino": 0.214,
+   "caption": "database object 145827_14: Claude's label is satin-matte; model probability 0.27; box = Grounding DINO phrase 'satin-matte glaze'"
+  }
+ ],
+ "n_database_labels": 182
+}

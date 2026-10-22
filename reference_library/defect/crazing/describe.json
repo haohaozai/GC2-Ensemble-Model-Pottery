@@ -1,0 +1,47 @@
+{
+ "attribute": "defect",
+ "attribute_label": "possible defects",
+ "value": "crazing",
+ "title": "Crazing",
+ "vi": "Nứt chân chim",
+ "identify": [
+  "Fine interconnected cracks in the glaze.",
+  "Fine crack network attributed to glaze-body mismatch; the image alone rarely confirms the cause."
+ ],
+ "recognition": "Record the visible crack network; do not claim a glaze-body mismatch without corroboration.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.9 · Glaze_Effects_Defects_Surface_Transparency_Reference_v2.pdf p.1",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "visible crack network (crackle)",
+   "difference": "They can look almost identical; crackle is usually intended.",
+   "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.9 · Ceramic_Real_Photo_Comparison_Guide_V4.pdf §2"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Crazing - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.9)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "638943_2",
+   "model_p": 0.04,
+   "phrase": "fine cracks",
+   "dino": 0.297,
+   "caption": "database object 638943_2: Claude's label is crazing; model probability 0.04; box = Grounding DINO phrase 'fine cracks'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "504223_1",
+   "model_p": 0.041,
+   "phrase": "crazing",
+   "dino": 0.225,
+   "caption": "database object 504223_1: Claude's label is crazing; model probability 0.04; box = Grounding DINO phrase 'crazing'"
+  }
+ ],
+ "n_database_labels": 13
+}

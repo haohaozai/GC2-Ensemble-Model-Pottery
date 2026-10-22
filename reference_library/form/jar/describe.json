@@ -1,0 +1,41 @@
+{
+ "attribute": "form",
+ "attribute_label": "object form",
+ "value": "jar",
+ "title": "Jar",
+ "vi": "",
+ "identify": [
+  "Storage vessel with a wide mouth, often with a lid; body wider than the neck."
+ ],
+ "recognition": "Look for the wide opening and a lid or lid seat.",
+ "source": "general description - not defined in your reference manuals (your manual lists 'Jar' without a photo)",
+ "general": true,
+ "confused_with": [
+  {
+   "value": "vase",
+   "difference": "A vase has a narrow neck.",
+   "source": "general description - not defined in your reference manuals"
+  }
+ ],
+ "images": [
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "794711_1",
+   "model_p": 0.667,
+   "phrase": "lidded pot",
+   "dino": 0.361,
+   "caption": "database object 794711_1: Claude's label is jar; model probability 0.67"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "646829_1",
+   "model_p": 0.666,
+   "phrase": "jar",
+   "dino": 0.386,
+   "caption": "database object 646829_1: Claude's label is jar; model probability 0.67"
+  }
+ ],
+ "n_database_labels": 21
+}

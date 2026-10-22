@@ -1,0 +1,53 @@
+{
+ "attribute": "surface_finish",
+ "attribute_label": "surface finish",
+ "value": "semi-glossy",
+ "title": "Semi-glossy",
+ "vi": "Bóng vừa",
+ "identify": [
+  "Visible but softer highlights.",
+  "Less mirror-like than glossy.",
+  "Light reflections have less defined edges."
+ ],
+ "recognition": "Moderate shine without a strong mirror effect.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.2",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "glossy",
+   "difference": "Glossy: sharp bright reflections; semi-glossy: softer highlights.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §6"
+  },
+  {
+   "value": "satin",
+   "difference": "Satin: broad gentle sheen, no mirror-like reflection.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §6"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Semi-glossy - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.2)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "618527_1",
+   "model_p": 0.039,
+   "phrase": "",
+   "dino": null,
+   "caption": "database object 618527_1: Claude's label is semi-glossy; model probability 0.04; no box: the model does not propose this value in its top 3"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "205_1",
+   "model_p": 0.032,
+   "phrase": "",
+   "dino": null,
+   "caption": "database object 205_1: Claude's label is semi-glossy; model probability 0.03; no box: the model does not propose this value in its top 3"
+  }
+ ],
+ "n_database_labels": 88
+}

@@ -1,0 +1,47 @@
+{
+ "attribute": "defect",
+ "attribute_label": "possible defects",
+ "value": "blistering",
+ "title": "Blistering",
+ "vi": "Phồng rộp",
+ "identify": [
+  "Raised bubbles or burst blisters.",
+  "Raised bubbles, blisters or ruptured bubble features."
+ ],
+ "recognition": "Raised or ruptured bubbles (relief), not flat marks.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.8 · Glaze_Effects_Defects_Surface_Transparency_Reference_v2.pdf p.1",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "pinholes",
+   "difference": "Pinholes are tiny openings; blistering shows raised or ruptured bubbles.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §4"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Blistering - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.8)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "764284_1",
+   "model_p": 0.804,
+   "phrase": "blisters",
+   "dino": 0.26,
+   "caption": "database object 764284_1: Claude's label is blistering; model probability 0.80; box = Grounding DINO phrase 'blisters'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "259009_1",
+   "model_p": 0.729,
+   "phrase": "burst bubbles",
+   "dino": 0.274,
+   "caption": "database object 259009_1: Claude's label is blistering; model probability 0.73; box = Grounding DINO phrase 'burst bubbles'"
+  }
+ ],
+ "n_database_labels": 25
+}

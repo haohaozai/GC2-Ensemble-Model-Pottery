@@ -1,0 +1,47 @@
+{
+ "attribute": "form",
+ "attribute_label": "object form",
+ "value": "cup",
+ "title": "Cup / mug",
+ "vi": "",
+ "identify": [
+  "Small drinking vessel, about as tall as wide or taller.",
+  "A mug has a handle."
+ ],
+ "recognition": "Look for the handle, the size and the upright wall.",
+ "source": "general description - not defined in your reference manuals (your manual lists 'Cup'; photo 'Mug': Ceramic Attribute Taxonomy (craze documentaries.pdf) p.10)",
+ "general": true,
+ "confused_with": [
+  {
+   "value": "bowl",
+   "difference": "A bowl is wider than tall and has no handle.",
+   "source": "general description - not defined in your reference manuals"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Cup / mug - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.10)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "706725_1",
+   "model_p": 0.992,
+   "phrase": "mug with handle",
+   "dino": 0.353,
+   "caption": "database object 706725_1: Claude's label is cup; model probability 0.99"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "576325_1",
+   "model_p": 0.991,
+   "phrase": "mug with handle",
+   "dino": 0.433,
+   "caption": "database object 576325_1: Claude's label is cup; model probability 0.99"
+  }
+ ],
+ "n_database_labels": 220
+}

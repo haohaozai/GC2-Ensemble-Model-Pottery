@@ -1,0 +1,9440 @@
+{
+ "_source": "configs/manual_corrections_v2_src.py",
+ "900": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "purple cup (unchanged)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.34,
+       0.43,
+       0.65,
+       0.87
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.48,
+        0.62
+       ],
+       [
+        0.45,
+        0.78
+       ]
+      ],
+      "neg": [
+       [
+        0.75,
+        0.65
+       ],
+       [
+        0.25,
+        0.65
+       ],
+       [
+        0.6,
+        0.36
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "green cup (front middle)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.05,
+       0.4,
+       0.36,
+       0.86
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.2,
+        0.62
+       ],
+       [
+        0.2,
+        0.78
+       ]
+      ],
+      "neg": [
+       [
+        0.48,
+        0.62
+       ],
+       [
+        0.36,
+        0.35
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "pink cup (front left)"
+   }
+  ],
+  "verified": true
+ },
+ "2479": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.17,
+       0.0,
+       0.81,
+       0.64
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.45
+       ],
+       [
+        0.45,
+        0.15
+       ],
+       [
+        0.3,
+        0.55
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.8
+       ],
+       [
+        0.05,
+        0.4
+       ],
+       [
+        0.95,
+        0.4
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "middle tile only (page removed)"
+   }
+  ],
+  "verified": true
+ },
+ "8415": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.23,
+       0.0,
+       0.62,
+       0.79
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.42,
+        0.4
+       ],
+       [
+        0.45,
+        0.65
+       ],
+       [
+        0.42,
+        0.74
+       ]
+      ],
+      "neg": [
+       [
+        0.1,
+        0.4
+       ],
+       [
+        0.85,
+        0.4
+       ],
+       [
+        0.5,
+        0.9
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "blue tile, background removed"
+   }
+  ],
+  "verified": true
+ },
+ "20093": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6,
+       7
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "combined _6 + _7"
+   }
+  ],
+  "verified": true
+ },
+ "22420": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     },
+     {
+      "box": [
+       0.02,
+       0.02,
+       0.48,
+       0.92
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.25,
+        0.7
+       ],
+       [
+        0.15,
+        0.55
+       ]
+      ],
+      "neg": [
+       [
+        0.25,
+        0.97
+       ],
+       [
+        0.5,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "whole left tile with both stripes"
+   }
+  ],
+  "verified": true
+ },
+ "27803": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "clip": [
+     0.755,
+     0.4,
+     1.0,
+     0.6
+    ],
+    "fixed": true,
+    "label": "tile row 3 col 4 (split from _1)",
+    "fill_holes": true
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "clip": [
+     0.755,
+     0.6,
+     1.0,
+     0.8
+    ],
+    "fixed": true,
+    "label": "tile row 4 col 4 (split from _1)",
+    "fill_holes": true
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.5,
+       0.0,
+       0.75,
+       0.2
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.625,
+        0.1
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.5,
+     0.0,
+     0.75,
+     0.2
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile row 1 col 3"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.0,
+       0.2,
+       0.248,
+       0.4
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.124,
+        0.30000000000000004
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.0,
+     0.2,
+     0.248,
+     0.4
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile row 2 col 1"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.755,
+       0.2,
+       1.0,
+       0.4
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.8775,
+        0.30000000000000004
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.755,
+     0.2,
+     1.0,
+     0.4
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile row 2 col 4"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.0,
+       0.4,
+       0.248,
+       0.6
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.124,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.0,
+     0.4,
+     0.248,
+     0.6
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile row 3 col 1"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.252,
+       0.4,
+       0.497,
+       0.6
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.3745,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.252,
+     0.4,
+     0.497,
+     0.6
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile row 3 col 2"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.5,
+       0.4,
+       0.75,
+       0.6
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.625,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.5,
+     0.4,
+     0.75,
+     0.6
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile row 3 col 3"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.0,
+       0.6,
+       0.248,
+       0.8
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.124,
+        0.7
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.0,
+     0.6,
+     0.248,
+     0.8
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile row 4 col 1"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.252,
+       0.6,
+       0.497,
+       0.8
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.3745,
+        0.7
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.252,
+     0.6,
+     0.497,
+     0.8
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile row 4 col 2"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.5,
+       0.6,
+       0.75,
+       0.8
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.625,
+        0.7
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.5,
+     0.6,
+     0.75,
+     0.8
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile row 4 col 3"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.0,
+       0.8,
+       0.248,
+       1.0
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.124,
+        0.9
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.0,
+     0.8,
+     0.248,
+     1.0
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile row 5 col 1"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.252,
+       0.8,
+       0.497,
+       1.0
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.3745,
+        0.9
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.252,
+     0.8,
+     0.497,
+     1.0
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile row 5 col 2"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.5,
+       0.8,
+       0.75,
+       1.0
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.625,
+        0.9
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.5,
+     0.8,
+     0.75,
+     1.0
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile row 5 col 3"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.755,
+       0.8,
+       1.0,
+       1.0
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.8775,
+        0.9
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.755,
+     0.8,
+     1.0,
+     1.0
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile row 5 col 4"
+   }
+  ],
+  "verified": true
+ },
+ "30789": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.34,
+       0.35,
+       0.86,
+       0.98
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.62,
+        0.6
+       ],
+       [
+        0.65,
+        0.85
+       ],
+       [
+        0.75,
+        0.42
+       ]
+      ],
+      "neg": [
+       [
+        0.47,
+        0.45
+       ],
+       [
+        0.33,
+        0.52
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "outer (front) dark green pitcher"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "yellow pitcher (unchanged)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.22,
+       0.2,
+       0.6,
+       0.62
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.48,
+        0.24
+       ],
+       [
+        0.39,
+        0.35
+       ],
+       [
+        0.25,
+        0.47
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.42
+       ],
+       [
+        0.33,
+        0.2
+       ],
+       [
+        0.62,
+        0.7
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "sage green pitcher"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.16,
+       0.14,
+       0.5,
+       0.5
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.33,
+        0.2
+       ],
+       [
+        0.19,
+        0.36
+       ]
+      ],
+      "neg": [
+       [
+        0.46,
+        0.28
+       ],
+       [
+        0.3,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "purple pitcher (back)"
+   }
+  ],
+  "verified": true
+ },
+ "36071": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.76,
+       0.23,
+       0.96,
+       0.81
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.86,
+        0.5
+       ],
+       [
+        0.8,
+        0.35
+       ]
+      ],
+      "neg": [
+       [
+        0.7,
+        0.5
+       ],
+       [
+        0.98,
+        0.5
+       ],
+       [
+        0.86,
+        0.9
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "4th tile (added)"
+   }
+  ],
+  "verified": true
+ },
+ "67781": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "combined _2 + _3"
+   }
+  ],
+  "verified": true
+ },
+ "68637": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "clip": [
+     0.0,
+     0.0,
+     0.505,
+     1.0
+    ],
+    "fixed": true,
+    "label": "left tile",
+    "fill_holes": true
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "clip": [
+     0.505,
+     0.0,
+     1.0,
+     1.0
+    ],
+    "fixed": true,
+    "label": "right tile",
+    "fill_holes": true
+   }
+  ],
+  "verified": true
+ },
+ "80339": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.39,
+       0.11,
+       1.0,
+       0.76
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.65,
+        0.45
+       ],
+       [
+        0.5,
+        0.3
+       ]
+      ],
+      "neg": [
+       [
+        0.25,
+        0.45
+       ],
+       [
+        0.6,
+        0.85
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fixed": true,
+    "label": "mauve bowl"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.09,
+       0.11,
+       0.41,
+       0.79
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.25,
+        0.5
+       ],
+       [
+        0.2,
+        0.2
+       ]
+      ],
+      "neg": [
+       [
+        0.04,
+        0.5
+       ],
+       [
+        0.6,
+        0.45
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fixed": true,
+    "label": "speckled tile"
+   }
+  ],
+  "verified": true
+ },
+ "138162": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5,
+       9
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "combined _5 + _9"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged (its note asked to combine _5 and _9: done)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       7
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       8
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "141251": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "hull": true,
+    "fixed": true,
+    "label": "whole tile incl. the black stripe"
+   }
+  ],
+  "verified": true
+ },
+ "141252": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "hull": true,
+    "fixed": true,
+    "label": "whole tile incl. the black stripe"
+   }
+  ],
+  "verified": true
+ },
+ "200118": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.81,
+       0.1,
+       0.915,
+       0.28
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.8625,
+        0.19
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile only, grey background removed"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.105,
+       0.1,
+       0.215,
+       0.28
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.16,
+        0.19
+       ]
+      ]
+     }
+    ],
+    "within": [
+     2
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile only, grey background removed"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.57,
+       0.1,
+       0.685,
+       0.28
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.6275,
+        0.19
+       ]
+      ]
+     }
+    ],
+    "within": [
+     3
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile only, grey background removed"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.1,
+       0.39,
+       0.21,
+       0.565
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.155,
+        0.4775
+       ]
+      ]
+     }
+    ],
+    "within": [
+     4
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile only, grey background removed"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.33,
+       0.1,
+       0.445,
+       0.28
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.3875,
+        0.19
+       ]
+      ]
+     }
+    ],
+    "within": [
+     5
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile only, grey background removed"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.1,
+       0.67,
+       0.21,
+       0.855
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.155,
+        0.7625
+       ]
+      ]
+     }
+    ],
+    "within": [
+     6
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile only, grey background removed"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.575,
+       0.67,
+       0.685,
+       0.855
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.63,
+        0.7625
+       ]
+      ]
+     }
+    ],
+    "within": [
+     7
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile only, grey background removed"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.81,
+       0.38,
+       0.935,
+       0.565
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.8725,
+        0.4725
+       ]
+      ]
+     }
+    ],
+    "within": [
+     8
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile only, grey background removed"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.805,
+       0.67,
+       0.93,
+       0.86
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.8675,
+        0.765
+       ]
+      ]
+     }
+    ],
+    "within": [
+     9
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile only, grey background removed"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       10
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       11
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       12
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       13
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       14
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "210411": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "minus": [
+     {
+      "box": [
+       0.24,
+       0.325,
+       0.42,
+       0.61
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.33,
+        0.42
+       ],
+       [
+        0.34,
+        0.56
+       ]
+      ],
+      "neg": [
+       [
+        0.23,
+        0.45
+       ],
+       [
+        0.5,
+        0.45
+       ]
+      ]
+     },
+     {
+      "box": [
+       0.39,
+       0.29,
+       0.58,
+       0.57
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.48,
+        0.4
+       ],
+       [
+        0.52,
+        0.53
+       ]
+      ],
+      "neg": [
+       [
+        0.62,
+        0.38
+       ],
+       [
+        0.36,
+        0.45
+       ]
+      ]
+     },
+     {
+      "box": [
+       0.52,
+       0.27,
+       0.7,
+       0.54
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.62,
+        0.36
+       ],
+       [
+        0.63,
+        0.5
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.42
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "plate (tiles separated)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.24,
+       0.325,
+       0.42,
+       0.61
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.33,
+        0.42
+       ],
+       [
+        0.34,
+        0.56
+       ]
+      ],
+      "neg": [
+       [
+        0.23,
+        0.45
+       ],
+       [
+        0.5,
+        0.45
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "left tile on the plate"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.39,
+       0.29,
+       0.58,
+       0.57
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.48,
+        0.4
+       ],
+       [
+        0.52,
+        0.53
+       ]
+      ],
+      "neg": [
+       [
+        0.62,
+        0.38
+       ],
+       [
+        0.36,
+        0.45
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "middle tile on the plate"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.52,
+       0.27,
+       0.7,
+       0.54
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.62,
+        0.36
+       ],
+       [
+        0.63,
+        0.5
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.42
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "right tile on the plate"
+   }
+  ],
+  "verified": true
+ },
+ "229652": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.0,
+       0.24,
+       1.0,
+       1.0
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.7
+       ],
+       [
+        0.5,
+        0.33
+       ],
+       [
+        0.2,
+        0.6
+       ],
+       [
+        0.9,
+        0.36
+       ]
+      ],
+      "neg": [
+       [
+        0.7,
+        0.1
+       ],
+       [
+        0.9,
+        0.2
+       ],
+       [
+        0.55,
+        0.05
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "largest": true,
+    "fixed": true,
+    "label": "cup, grey background removed"
+   }
+  ],
+  "verified": true
+ },
+ "248684": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.24,
+       0.0,
+       0.7,
+       0.26
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.4,
+        0.1
+       ],
+       [
+        0.45,
+        0.2
+       ],
+       [
+        0.62,
+        0.04
+       ]
+      ],
+      "neg": [
+       [
+        0.15,
+        0.15
+       ],
+       [
+        0.76,
+        0.15
+       ],
+       [
+        0.63,
+        0.2
+       ],
+       [
+        0.2,
+        0.04
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fixed": true,
+    "label": "green cup, basket removed"
+   }
+  ],
+  "verified": true
+ },
+ "285462": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "right tile (unchanged)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.21,
+       0.07,
+       0.51,
+       0.87
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.35,
+        0.3
+       ],
+       [
+        0.36,
+        0.6
+       ],
+       [
+        0.4,
+        0.75
+       ]
+      ],
+      "neg": [
+       [
+        0.15,
+        0.5
+       ],
+       [
+        0.56,
+        0.5
+       ],
+       [
+        0.3,
+        0.92
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "tall left tile (added)"
+   }
+  ],
+  "verified": true
+ },
+ "311328": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "clip": [
+     0.0,
+     0.0,
+     0.502,
+     1.0
+    ],
+    "fixed": true,
+    "label": "left tile"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "clip": [
+     0.502,
+     0.0,
+     1.0,
+     1.0
+    ],
+    "fixed": true,
+    "label": "right tile"
+   }
+  ],
+  "verified": true
+ },
+ "320494": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       7
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       8
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       9
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.255,
+       0.67,
+       0.47,
+       0.765
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.36,
+        0.72
+       ]
+      ],
+      "neg": [
+       [
+        0.36,
+        0.64
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "small strip, left (added)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.505,
+       0.67,
+       0.7,
+       0.765
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.6,
+        0.72
+       ]
+      ],
+      "neg": [
+       [
+        0.6,
+        0.64
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "small strip, right (added)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.49,
+       0.77,
+       0.81,
+       0.97
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.65,
+        0.87
+       ],
+       [
+        0.55,
+        0.8
+       ]
+      ],
+      "neg": [
+       [
+        0.45,
+        0.87
+       ],
+       [
+        0.85,
+        0.87
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "yellow tile (added)"
+   }
+  ],
+  "verified": true
+ },
+ "360618": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "right blue tile (unchanged)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     },
+     {
+      "box": [
+       0.02,
+       0.15,
+       0.48,
+       0.87
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.25,
+        0.45
+       ],
+       [
+        0.25,
+        0.8
+       ],
+       [
+        0.25,
+        0.22
+       ]
+      ],
+      "neg": [
+       [
+        0.6,
+        0.5
+       ],
+       [
+        0.25,
+        0.95
+       ],
+       [
+        0.2,
+        0.08
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "whole left tile with the blue stripe"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "362096": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       2
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile (_1 + _2)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile (_3 + _4 + _5)"
+   }
+  ],
+  "verified": true
+ },
+ "392555": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the 3 centre tiles were rebuilt"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the 3 centre tiles were rebuilt"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       7,
+       3
+      ]
+     },
+     {
+      "box": [
+       0.235,
+       0.325,
+       0.428,
+       0.67
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.3315,
+        0.42
+       ],
+       [
+        0.3315,
+        0.6
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "centre tile (_7 + _3)",
+    "clip": [
+     0.235,
+     0.325,
+     0.428,
+     0.67
+    ]
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6,
+       8
+      ]
+     },
+     {
+      "box": [
+       0.425,
+       0.33,
+       0.61,
+       0.665
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5175,
+        0.42
+       ],
+       [
+        0.5175,
+        0.6
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "centre tile (_6 + _8)",
+    "clip": [
+     0.425,
+     0.33,
+     0.61,
+     0.665
+    ]
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5,
+       4
+      ]
+     },
+     {
+      "box": [
+       0.598,
+       0.33,
+       0.79,
+       0.67
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.694,
+        0.42
+       ],
+       [
+        0.694,
+        0.6
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "centre tile (_5 + _4)",
+    "clip": [
+     0.598,
+     0.33,
+     0.79,
+     0.67
+    ]
+   }
+  ],
+  "verified": true
+ },
+ "423649": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "combined _2 + _3"
+   }
+  ],
+  "verified": true
+ },
+ "424501": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5,
+       7
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "combined _5 + _7"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "429348": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3,
+       5,
+       6
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "combined _3 + _5 + _6"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "449044": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.21,
+       0.44,
+       0.78,
+       0.98
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.85
+       ],
+       [
+        0.5,
+        0.58
+       ],
+       [
+        0.27,
+        0.7
+       ],
+       [
+        0.7,
+        0.7
+       ]
+      ],
+      "neg": [
+       [
+        0.4,
+        0.25
+       ],
+       [
+        0.5,
+        0.42
+       ],
+       [
+        0.6,
+        0.38
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "clip": [
+     0.0,
+     0.452,
+     1.0,
+     1.0
+    ],
+    "largest": true,
+    "fixed": true,
+    "label": "vase, flowers removed"
+   }
+  ],
+  "verified": true
+ },
+ "465580": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.1,
+       0.31,
+       0.27,
+       0.84
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.18,
+        0.55
+       ],
+       [
+        0.18,
+        0.78
+       ]
+      ],
+      "neg": [
+       [
+        0.05,
+        0.6
+       ],
+       [
+        0.3,
+        0.55
+       ],
+       [
+        0.18,
+        0.9
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "white tile on the left (added)"
+   }
+  ],
+  "verified": true
+ },
+ "515280": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "plate incl. the black spots of the outer band"
+   }
+  ],
+  "verified": true
+ },
+ "577052": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       2
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "whole bowl (_1 + _2)",
+    "fill_holes": true
+   }
+  ],
+  "verified": true
+ },
+ "608842": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.225,
+       0.33,
+       0.5,
+       0.71
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.36,
+        0.5
+       ],
+       [
+        0.36,
+        0.67
+       ]
+      ],
+      "neg": [
+       [
+        0.62,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fixed": true,
+    "label": "left cup"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.49,
+       0.32,
+       0.795,
+       0.68
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.6,
+        0.56
+       ],
+       [
+        0.72,
+        0.36
+       ]
+      ],
+      "neg": [
+       [
+        0.4,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fixed": true,
+    "label": "right cup"
+   }
+  ],
+  "verified": true
+ },
+ "614728": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.13,
+       0.07,
+       0.92,
+       0.87
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.3,
+        0.7
+       ],
+       [
+        0.75,
+        0.35
+       ]
+      ],
+      "neg": [
+       [
+        0.42,
+        0.24
+       ],
+       [
+        0.05,
+        0.5
+       ],
+       [
+        0.96,
+        0.5
+       ],
+       [
+        0.5,
+        0.95
+       ],
+       [
+        0.9,
+        0.68
+       ]
+      ]
+     }
+    ],
+    "largest": true,
+    "fixed": true,
+    "label": "disc tile, brick background removed",
+    "from": [
+     1
+    ]
+   }
+  ],
+  "verified": true
+ },
+ "619078": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "middle tile (_3 + _4 + _5)"
+   }
+  ],
+  "verified": true
+ },
+ "621014": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4,
+       3
+      ]
+     },
+     {
+      "box": [
+       0.635,
+       0.1,
+       0.975,
+       0.865
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.8,
+        0.45
+       ],
+       [
+        0.8,
+        0.8
+       ],
+       [
+        0.7,
+        0.2
+       ]
+      ],
+      "neg": [
+       [
+        0.55,
+        0.45
+       ],
+       [
+        0.8,
+        0.95
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "whole right tile"
+   }
+  ],
+  "verified": true
+ },
+ "624285": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.23,
+       0.14,
+       0.56,
+       0.81
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.4,
+        0.3
+       ],
+       [
+        0.4,
+        0.7
+       ]
+      ],
+      "neg": [
+       [
+        0.63,
+        0.45
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fixed": true,
+    "label": "front white piece"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.5,
+       0.28,
+       0.73,
+       0.71
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.62,
+        0.45
+       ],
+       [
+        0.65,
+        0.62
+       ]
+      ],
+      "neg": [
+       [
+        0.45,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fixed": true,
+    "label": "back dark piece"
+   }
+  ],
+  "verified": true
+ },
+ "626759": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.34,
+       0.29,
+       0.62,
+       0.97
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.47,
+        0.5
+       ],
+       [
+        0.47,
+        0.85
+       ],
+       [
+        0.58,
+        0.45
+       ]
+      ],
+      "neg": [
+       [
+        0.31,
+        0.7
+       ],
+       [
+        0.66,
+        0.75
+       ],
+       [
+        0.47,
+        0.99
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "largest": true,
+    "fixed": true,
+    "label": "vase, grey background removed"
+   }
+  ],
+  "verified": true
+ },
+ "632730": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.02,
+       0.47,
+       0.995,
+       0.89
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.65
+       ],
+       [
+        0.2,
+        0.7
+       ],
+       [
+        0.85,
+        0.65
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.95
+       ],
+       [
+        0.3,
+        0.35
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "F brick (added)"
+   }
+  ],
+  "verified": true
+ },
+ "633192": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6,
+       8
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "tile BL5 (_6 + _8)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       7
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "634621": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.35,
+       0.33,
+       0.62,
+       0.9
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.7
+       ],
+       [
+        0.48,
+        0.45
+       ],
+       [
+        0.52,
+        0.37
+       ]
+      ],
+      "neg": [
+       [
+        0.47,
+        0.29
+       ],
+       [
+        0.5,
+        0.15
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "clip": [
+     0.0,
+     0.335,
+     1.0,
+     1.0
+    ],
+    "largest": true,
+    "fixed": true,
+    "label": "vase, flowers removed"
+   }
+  ],
+  "verified": true
+ },
+ "635771": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       2,
+       3,
+       4
+      ]
+     },
+     {
+      "box": [
+       0.01,
+       0.08,
+       0.98,
+       0.79
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.55
+       ],
+       [
+        0.5,
+        0.2
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.9
+       ]
+      ]
+     }
+    ],
+    "close": 10,
+    "clip": [
+     0.0,
+     0.07,
+     1.0,
+     0.8
+    ],
+    "fixed": true,
+    "label": "whole square tile"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "643412": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.34,
+       0.26,
+       0.69,
+       0.65
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.51,
+        0.5
+       ],
+       [
+        0.45,
+        0.4
+       ],
+       [
+        0.55,
+        0.6
+       ]
+      ],
+      "neg": [
+       [
+        0.37,
+        0.28
+       ],
+       [
+        0.2,
+        0.5
+       ],
+       [
+        0.8,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fixed": true,
+    "label": "oval pendant"
+   }
+  ],
+  "verified": true
+ },
+ "647666": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.18,
+       0.25,
+       0.8,
+       0.9
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.6
+       ],
+       [
+        0.45,
+        0.35
+       ],
+       [
+        0.3,
+        0.55
+       ],
+       [
+        0.7,
+        0.55
+       ]
+      ],
+      "neg": [
+       [
+        0.76,
+        0.33
+       ],
+       [
+        0.1,
+        0.4
+       ],
+       [
+        0.88,
+        0.45
+       ],
+       [
+        0.5,
+        0.2
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "largest": true,
+    "fixed": true,
+    "label": "vase, feather removed"
+   }
+  ],
+  "verified": true
+ },
+ "656336": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.3,
+       0.39,
+       0.81,
+       0.74
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.55,
+        0.56
+       ],
+       [
+        0.4,
+        0.65
+       ]
+      ],
+      "neg": [
+       [
+        0.2,
+        0.5
+       ],
+       [
+        0.55,
+        0.85
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "inner glazed disc"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "outer plate (without the inner disc)"
+   }
+  ],
+  "verified": true
+ },
+ "656393": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       2
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "whole bowl (_1 + _2)",
+    "fill_holes": true
+   }
+  ],
+  "verified": true
+ },
+ "661382": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.15,
+       0.46,
+       0.85,
+       0.97
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.8
+       ],
+       [
+        0.5,
+        0.55
+       ],
+       [
+        0.3,
+        0.75
+       ],
+       [
+        0.7,
+        0.75
+       ]
+      ],
+      "neg": [
+       [
+        0.2,
+        0.5
+       ],
+       [
+        0.8,
+        0.52
+       ],
+       [
+        0.5,
+        0.42
+       ],
+       [
+        0.86,
+        0.68
+       ],
+       [
+        0.5,
+        0.995
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.1,
+     0.46,
+     0.9,
+     1.0
+    ],
+    "largest": true,
+    "fixed": true,
+    "label": "bottle only",
+    "from": [
+     1
+    ]
+   }
+  ],
+  "verified": true
+ },
+ "664662": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.15,
+       0.11,
+       0.91,
+       0.945
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.5,
+        0.88
+       ],
+       [
+        0.3,
+        0.2
+       ]
+      ],
+      "neg": [
+       [
+        0.07,
+        0.5
+       ],
+       [
+        0.95,
+        0.5
+       ],
+       [
+        0.5,
+        0.04
+       ],
+       [
+        0.5,
+        0.98
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile, precise outline"
+   }
+  ],
+  "verified": true
+ },
+ "680711": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "whole piece (_4 + _5 + the middle _6)"
+   }
+  ],
+  "verified": true
+ },
+ "680717": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "whole piece (_4 + _5, inner bit _6)",
+    "fill_holes": true
+   }
+  ],
+  "verified": true
+ },
+ "680730": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3,
+       5
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "combined _3 + _5"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "680766": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       4
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "combined _2 + _4"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "687304": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     },
+     {
+      "box": [
+       0.04,
+       0.285,
+       0.505,
+       0.885
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.25,
+        0.5
+       ],
+       [
+        0.25,
+        0.8
+       ],
+       [
+        0.12,
+        0.5
+       ],
+       [
+        0.4,
+        0.5
+       ]
+      ],
+      "neg": [
+       [
+        0.25,
+        0.2
+       ],
+       [
+        0.53,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "whole left tile (_3 + middle + _2)",
+    "clip": [
+     0.03,
+     0.28,
+     0.51,
+     0.89
+    ]
+   }
+  ],
+  "verified": true
+ },
+ "695240": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       2
+      ]
+     },
+     {
+      "box": [
+       0.19,
+       0.14,
+       0.71,
+       0.85
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.45,
+        0.3
+       ],
+       [
+        0.45,
+        0.65
+       ],
+       [
+        0.65,
+        0.7
+       ]
+      ],
+      "neg": [
+       [
+        0.1,
+        0.5
+       ],
+       [
+        0.8,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "whole tile (_1 + _2)",
+    "clip": [
+     0.18,
+     0.13,
+     0.72,
+     0.86
+    ]
+   }
+  ],
+  "verified": true
+ },
+ "696154": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3,
+       12,
+       13,
+       20,
+       21,
+       24
+      ]
+     }
+    ],
+    "close": 10,
+    "fixed": true,
+    "label": "right tile (_2 + _3 + bumps _12 _13 _20 _21 _24)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       7
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       8
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       9
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       10
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       11
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       14
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       15
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       16
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       17
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       18
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       19
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       22
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       23
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       25
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       26
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       27
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       28
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "696741": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3,
+       4
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "combined _3 + _4"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "696983": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "combined _2 + _3"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "696984": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "combined _2 + _3"
+   }
+  ],
+  "verified": true
+ },
+ "702101": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "whole tile (_1 + _2, corner chip _3 included)"
+   }
+  ],
+  "verified": true
+ },
+ "702420": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       2
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile, glazed part (_1 + _2)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3,
+       4
+      ]
+     },
+     {
+      "box": [
+       0.115,
+       0.17,
+       0.48,
+       0.668
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.3,
+        0.25
+       ],
+       [
+        0.3,
+        0.44
+       ],
+       [
+        0.3,
+        0.6
+       ]
+      ],
+      "neg": [
+       [
+        0.3,
+        0.75
+       ],
+       [
+        0.05,
+        0.4
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile, glazed part (_3 + middle band + _4)",
+    "minus": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "clip": [
+     0.11,
+     0.16,
+     0.49,
+     0.668
+    ]
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "702425": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       2
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile, glazed part (_1 + _2)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3,
+       4
+      ]
+     },
+     {
+      "box": [
+       0.095,
+       0.18,
+       0.415,
+       0.655
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.25,
+        0.25
+       ],
+       [
+        0.25,
+        0.42
+       ],
+       [
+        0.25,
+        0.58
+       ]
+      ],
+      "neg": [
+       [
+        0.25,
+        0.75
+       ],
+       [
+        0.04,
+        0.4
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile, glazed part (_3 + middle band + _4)",
+    "minus": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "clip": [
+     0.09,
+     0.17,
+     0.42,
+     0.66
+    ]
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "702431": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       4
+      ]
+     },
+     {
+      "box": [
+       0.49,
+       0.15,
+       0.87,
+       0.72
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.7,
+        0.2
+       ],
+       [
+        0.7,
+        0.37
+       ],
+       [
+        0.7,
+        0.55
+       ]
+      ],
+      "neg": [
+       [
+        0.7,
+        0.8
+       ],
+       [
+        0.95,
+        0.4
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile, glazed part (_4 + middle band + _1)",
+    "minus": [
+     {
+      "keep": [
+       5
+      ]
+     },
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "clip": [
+     0.48,
+     0.14,
+     0.88,
+     0.725
+    ]
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3,
+       2
+      ]
+     },
+     {
+      "box": [
+       0.105,
+       0.13,
+       0.48,
+       0.74
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.3,
+        0.25
+       ],
+       [
+        0.3,
+        0.45
+       ],
+       [
+        0.3,
+        0.62
+       ]
+      ],
+      "neg": [
+       [
+        0.3,
+        0.8
+       ],
+       [
+        0.05,
+        0.4
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile, glazed part (_3 + middle band + _2)",
+    "clip": [
+     0.1,
+     0.12,
+     0.49,
+     0.745
+    ]
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "702434": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       4
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile, glazed part (_1 + _4)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     },
+     {
+      "box": [
+       0.11,
+       0.14,
+       0.445,
+       0.685
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.28,
+        0.25
+       ],
+       [
+        0.28,
+        0.42
+       ],
+       [
+        0.28,
+        0.6
+       ]
+      ],
+      "neg": [
+       [
+        0.28,
+        0.78
+       ],
+       [
+        0.05,
+        0.4
+       ]
+      ]
+     }
+    ],
+    "minus": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "clip": [
+     0.1,
+     0.13,
+     0.45,
+     0.69
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile, glazed part incl. its upper part"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "702441": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       4
+      ]
+     },
+     {
+      "box": [
+       0.095,
+       0.1,
+       0.455,
+       0.725
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.28,
+        0.2
+       ],
+       [
+        0.28,
+        0.36
+       ],
+       [
+        0.28,
+        0.55
+       ]
+      ],
+      "neg": [
+       [
+        0.28,
+        0.78
+       ],
+       [
+        0.05,
+        0.4
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile, glazed part (_4 + middle band + _1)",
+    "minus": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "clip": [
+     0.09,
+     0.09,
+     0.46,
+     0.725
+    ]
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile, glazed part (_3 + _2)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "702443": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile, glazed part (_2 + _3)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "702444": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       4
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile, glazed part (_2 + _4)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "702446": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile, glazed part (_1 + _3)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       4
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile, glazed part (_2 + _4)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "702447": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       2,
+       7
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile (_2 + _7 + _1)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3,
+       6,
+       4
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile, glazed part (_3 + _6 + _4)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "702449": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     },
+     {
+      "box": [
+       0.5,
+       0.12,
+       0.85,
+       0.72
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.68,
+        0.2
+       ],
+       [
+        0.68,
+        0.38
+       ],
+       [
+        0.68,
+        0.6
+       ]
+      ],
+      "neg": [
+       [
+        0.68,
+        0.78
+       ],
+       [
+        0.95,
+        0.4
+       ]
+      ]
+     }
+    ],
+    "minus": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "clip": [
+     0.48,
+     0.11,
+     0.86,
+     0.73
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile, glazed part incl. its upper part"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "702452": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       4
+      ]
+     },
+     {
+      "box": [
+       0.485,
+       0.12,
+       0.865,
+       0.675
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.68,
+        0.2
+       ],
+       [
+        0.68,
+        0.43
+       ],
+       [
+        0.68,
+        0.58
+       ]
+      ],
+      "neg": [
+       [
+        0.68,
+        0.75
+       ],
+       [
+        0.95,
+        0.4
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile, glazed part (_2 + middle part + _4)",
+    "minus": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "clip": [
+     0.48,
+     0.11,
+     0.87,
+     0.68
+    ]
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "702578": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "clip": [
+     0.395,
+     0.0,
+     1.0,
+     1.0
+    ],
+    "fixed": true,
+    "label": "LUCA tile (right)",
+    "fill_holes": true
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "clip": [
+     0.0,
+     0.0,
+     0.395,
+     1.0
+    ],
+    "fixed": true,
+    "label": "small tile (left)",
+    "fill_holes": true
+   }
+  ],
+  "verified": true
+ },
+ "702586": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.38,
+       0.045,
+       0.97,
+       0.97
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.65,
+        0.5
+       ],
+       [
+        0.7,
+        0.2
+       ],
+       [
+        0.6,
+        0.85
+       ]
+      ],
+      "neg": [
+       [
+        0.2,
+        0.4
+       ],
+       [
+        0.99,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "LUCA tile (added)"
+   }
+  ],
+  "verified": true
+ },
+ "702761": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.06,
+       0.435,
+       0.445,
+       0.945
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.25,
+        0.7
+       ],
+       [
+        0.25,
+        0.5
+       ],
+       [
+        0.25,
+        0.9
+       ]
+      ],
+      "neg": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.52,
+        0.7
+       ]
+      ]
+     }
+    ],
+    "minus": [
+     {
+      "keep": [
+       3,
+       4
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "left tile, green glazed part (added)"
+   }
+  ],
+  "verified": true
+ },
+ "703095": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       4
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile, glazed part (_4 + _2)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "703195": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.12,
+       0.05,
+       0.53,
+       0.85
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.35,
+        0.45
+       ],
+       [
+        0.16,
+        0.5
+       ]
+      ],
+      "neg": [
+       [
+        0.7,
+        0.45
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fixed": true,
+    "label": "left cup (blue rim)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.51,
+       0.07,
+       0.87,
+       0.85
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.7,
+        0.45
+       ]
+      ],
+      "neg": [
+       [
+        0.35,
+        0.45
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fixed": true,
+    "label": "right cup"
+   }
+  ],
+  "verified": true
+ },
+ "703627": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile (_2 + _3)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "703820": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.1,
+       0.22,
+       0.92,
+       0.61
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.45
+       ],
+       [
+        0.2,
+        0.42
+       ],
+       [
+        0.85,
+        0.42
+       ],
+       [
+        0.5,
+        0.25
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.7
+       ],
+       [
+        0.5,
+        0.1
+       ],
+       [
+        0.05,
+        0.42
+       ]
+      ]
+     }
+    ],
+    "fill_holes": true,
+    "largest": true,
+    "fixed": true,
+    "label": "black saucer with cup",
+    "from": [
+     1
+    ]
+   }
+  ],
+  "verified": true
+ },
+ "704195": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile (_3 + _2)"
+   }
+  ],
+  "verified": true
+ },
+ "704883": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     },
+     {
+      "box": [
+       0.46,
+       0.15,
+       0.84,
+       0.88
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.65,
+        0.25
+       ],
+       [
+        0.65,
+        0.6
+       ],
+       [
+        0.65,
+        0.8
+       ]
+      ],
+      "neg": [
+       [
+        0.4,
+        0.5
+       ],
+       [
+        0.9,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "whole right tile (_2 + upper part + down part _3)",
+    "clip": [
+     0.45,
+     0.14,
+     0.85,
+     0.89
+    ]
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "704884": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       3
+      ]
+     },
+     {
+      "box": [
+       0.09,
+       0.06,
+       0.45,
+       0.84
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.27,
+        0.12
+       ],
+       [
+        0.27,
+        0.27
+       ],
+       [
+        0.27,
+        0.5
+       ],
+       [
+        0.27,
+        0.75
+       ]
+      ],
+      "neg": [
+       [
+        0.27,
+        0.9
+       ],
+       [
+        0.5,
+        0.35
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile (_3 + middle + _1)",
+    "clip": [
+     0.08,
+     0.05,
+     0.46,
+     0.86
+    ]
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     },
+     {
+      "box": [
+       0.5,
+       0.1,
+       0.85,
+       0.84
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.67,
+        0.15
+       ],
+       [
+        0.67,
+        0.3
+       ],
+       [
+        0.67,
+        0.5
+       ],
+       [
+        0.67,
+        0.75
+       ]
+      ],
+      "neg": [
+       [
+        0.67,
+        0.9
+       ],
+       [
+        0.45,
+        0.3
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.49,
+     0.09,
+     0.86,
+     0.86
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile incl. its upper part"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "704885": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile (_3 + _1)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile (_5 + _6 + _4 + _2)",
+    "fill_holes": true
+   }
+  ],
+  "verified": true
+ },
+ "706345": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "full": true
+     }
+    ],
+    "fixed": true,
+    "label": "whole photo (close-up, no segmentation needed)",
+    "from": [
+     1
+    ]
+   }
+  ],
+  "verified": true
+ },
+ "706351": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "full": true
+     }
+    ],
+    "fixed": true,
+    "label": "whole photo (close-up, no segmentation needed)",
+    "from": [
+     1
+    ]
+   }
+  ],
+  "verified": true
+ },
+ "708085": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.0,
+       0.0,
+       0.5,
+       1.0
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.25,
+        0.4
+       ],
+       [
+        0.25,
+        0.9
+       ],
+       [
+        0.45,
+        0.7
+       ]
+      ],
+      "neg": [
+       [
+        0.75,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.0,
+     0.0,
+     0.499,
+     1.0
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "left tile",
+    "from": [
+     1
+    ]
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.5,
+       0.0,
+       1.0,
+       1.0
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.75,
+        0.4
+       ],
+       [
+        0.75,
+        0.9
+       ]
+      ],
+      "neg": [
+       [
+        0.25,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.499,
+     0.0,
+     1.0,
+     1.0
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "right tile",
+    "from": [
+     1
+    ]
+   }
+  ],
+  "verified": true
+ },
+ "708124": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile (_2 + _4 + _3 + _5)"
+   }
+  ],
+  "verified": true
+ },
+ "708135": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       7,
+       8
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left glazed piece (_1 + _7 + _8)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       5
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right glazed piece (_5 + _2)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       9
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       10
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       11
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "708147": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       7
+      ]
+     },
+     {
+      "box": [
+       0.0,
+       0.255,
+       0.52,
+       0.99
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.25,
+        0.4
+       ],
+       [
+        0.1,
+        0.6
+       ],
+       [
+        0.3,
+        0.75
+       ],
+       [
+        0.3,
+        0.95
+       ]
+      ],
+      "neg": [
+       [
+        0.75,
+        0.6
+       ],
+       [
+        0.25,
+        0.15
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "whole left slab (_2 .. _7)",
+    "clip": [
+     0.0,
+     0.25,
+     0.52,
+     0.99
+    ],
+    "fill_holes": true
+   }
+  ],
+  "verified": true
+ },
+ "709660": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3,
+       7
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile, glazed part (_7 + _3)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       8
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "710757": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.1,
+       0.17,
+       0.43,
+       0.46
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.3,
+        0.4
+       ]
+      ],
+      "neg": [
+       [
+        0.3,
+        0.55
+       ],
+       [
+        0.05,
+        0.3
+       ],
+       [
+        0.47,
+        0.3
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "left tile, black glazed part (added)"
+   }
+  ],
+  "verified": true
+ },
+ "714396": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.02,
+       0.07,
+       0.23,
+       0.81
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.125,
+        0.29200000000000004
+       ],
+       [
+        0.125,
+        0.5880000000000001
+       ]
+      ],
+      "neg": [
+       [
+        0.0,
+        0.44000000000000006
+       ],
+       [
+        0.25,
+        0.44000000000000006
+       ],
+       [
+        0.125,
+        0.8600000000000001
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.02,
+     0.07,
+     0.23,
+     0.81
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "'No Opacifier' tile (added)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.5,
+       0.07,
+       0.71,
+       0.81
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.605,
+        0.29200000000000004
+       ],
+       [
+        0.605,
+        0.5880000000000001
+       ]
+      ],
+      "neg": [
+       [
+        0.48,
+        0.44000000000000006
+       ],
+       [
+        0.73,
+        0.44000000000000006
+       ],
+       [
+        0.605,
+        0.8600000000000001
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.5,
+     0.07,
+     0.71,
+     0.81
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "'2 dips' tile (added)"
+   }
+  ],
+  "verified": true
+ },
+ "717790": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       8,
+       9,
+       10
+      ]
+     },
+     {
+      "box": [
+       0.06,
+       0.475,
+       0.8,
+       0.995
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.45,
+        0.52
+       ],
+       [
+        0.25,
+        0.75
+       ],
+       [
+        0.55,
+        0.95
+       ],
+       [
+        0.75,
+        0.6
+       ]
+      ],
+      "neg": [
+       [
+        0.45,
+        0.3
+       ],
+       [
+        0.9,
+        0.7
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.05,
+     0.47,
+     0.81,
+     1.0
+    ],
+    "close": 10,
+    "fill_holes": true,
+    "fixed": true,
+    "label": "second (lower) slab, added (incl. its cell fragments _2 .. _10)"
+   }
+  ],
+  "verified": true
+ },
+ "733186": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     },
+     {
+      "box": [
+       0.47,
+       0.09,
+       0.98,
+       0.79
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.7,
+        0.25
+       ],
+       [
+        0.7,
+        0.42
+       ],
+       [
+        0.7,
+        0.6
+       ]
+      ],
+      "neg": [
+       [
+        0.3,
+        0.5
+       ],
+       [
+        0.7,
+        0.9
+       ]
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile (_2 + _3)",
+    "clip": [
+     0.46,
+     0.08,
+     0.99,
+     0.8
+    ]
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "735165": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "set_status": "not_needed",
+    "label": "purple plate edge is not the target (reviewer note)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.22,
+       0.245,
+       0.77,
+       0.56
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.35
+       ],
+       [
+        0.35,
+        0.45
+       ],
+       [
+        0.65,
+        0.45
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.7
+       ],
+       [
+        0.15,
+        0.4
+       ],
+       [
+        0.85,
+        0.4
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "black glazed part of the tile (added)"
+   }
+  ],
+  "verified": true
+ },
+ "749139": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       7
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile, glazed part (_2 + _7)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3,
+       4
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile, glazed part (_3 + _4)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "754362": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.2,
+       0.06,
+       0.68,
+       0.92
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.45,
+        0.3
+       ],
+       [
+        0.45,
+        0.6
+       ],
+       [
+        0.45,
+        0.85
+       ],
+       [
+        0.3,
+        0.5
+       ],
+       [
+        0.62,
+        0.5
+       ]
+      ],
+      "neg": [
+       [
+        0.1,
+        0.5
+       ],
+       [
+        0.8,
+        0.5
+       ],
+       [
+        0.85,
+        0.35
+       ],
+       [
+        0.08,
+        0.9
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "fill_holes": true,
+    "largest": true,
+    "fixed": true,
+    "label": "green tile, glove removed"
+   }
+  ],
+  "verified": true
+ },
+ "757862": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    "close": 10,
+    "fixed": true,
+    "label": "whole leaf tile (_1 .. _5)",
+    "fill_holes": true
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "757934": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "set_status": "not_needed",
+    "label": "stand is not the target (reviewer note)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.0,
+       0.07,
+       0.36,
+       0.98
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.15,
+        0.4
+       ],
+       [
+        0.2,
+        0.7
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "left tile (added)"
+   }
+  ],
+  "verified": true
+ },
+ "758447": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.6,
+       0.17,
+       0.88,
+       0.86
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.75,
+        0.4
+       ],
+       [
+        0.75,
+        0.75
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.75,
+        0.95
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "right tube (added)"
+   }
+  ],
+  "verified": true
+ },
+ "758448": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.61,
+       0.09,
+       0.91,
+       0.77
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.75,
+        0.35
+       ],
+       [
+        0.75,
+        0.65
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.4
+       ],
+       [
+        0.75,
+        0.85
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "right tube (added)"
+   }
+  ],
+  "verified": true
+ },
+ "758457": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.0,
+       0.04,
+       0.35,
+       0.97
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.25,
+        0.3
+       ],
+       [
+        0.25,
+        0.6
+       ],
+       [
+        0.2,
+        0.85
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "left tube (added)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.65,
+       0.03,
+       0.99,
+       0.89
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.82,
+        0.3
+       ],
+       [
+        0.82,
+        0.6
+       ],
+       [
+        0.82,
+        0.8
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.5
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "right tube (added)"
+   }
+  ],
+  "verified": true
+ },
+ "759382": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4,
+       5
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "combined _4 + _5"
+   }
+  ],
+  "verified": true
+ },
+ "763565": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.0,
+       0.25,
+       0.12,
+       0.64
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.06,
+        0.367
+       ],
+       [
+        0.06,
+        0.5229999999999999
+       ]
+      ],
+      "neg": [
+       [
+        0.0,
+        0.445
+       ],
+       [
+        0.13999999999999999,
+        0.445
+       ],
+       [
+        0.06,
+        0.6900000000000001
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.0,
+     0.25,
+     0.12,
+     0.64
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile 1 from the left (added)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.22,
+       0.27,
+       0.32,
+       0.63
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.27,
+        0.378
+       ],
+       [
+        0.27,
+        0.522
+       ]
+      ],
+      "neg": [
+       [
+        0.2,
+        0.45
+       ],
+       [
+        0.34,
+        0.45
+       ],
+       [
+        0.27,
+        0.68
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.22,
+     0.27,
+     0.32,
+     0.63
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile 3 from the left (added)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.31,
+       0.27,
+       0.4,
+       0.62
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.355,
+        0.375
+       ],
+       [
+        0.355,
+        0.515
+       ]
+      ],
+      "neg": [
+       [
+        0.29,
+        0.445
+       ],
+       [
+        0.42000000000000004,
+        0.445
+       ],
+       [
+        0.355,
+        0.67
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.31,
+     0.27,
+     0.4,
+     0.62
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile 4 from the left (added)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.4,
+       0.25,
+       0.48,
+       0.63
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.44,
+        0.364
+       ],
+       [
+        0.44,
+        0.516
+       ]
+      ],
+      "neg": [
+       [
+        0.38,
+        0.44
+       ],
+       [
+        0.5,
+        0.44
+       ],
+       [
+        0.44,
+        0.68
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.4,
+     0.25,
+     0.48,
+     0.63
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile 5 from the left (added)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.48,
+       0.25,
+       0.56,
+       0.63
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.52,
+        0.364
+       ],
+       [
+        0.52,
+        0.516
+       ]
+      ],
+      "neg": [
+       [
+        0.45999999999999996,
+        0.44
+       ],
+       [
+        0.5800000000000001,
+        0.44
+       ],
+       [
+        0.52,
+        0.68
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.48,
+     0.25,
+     0.56,
+     0.63
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile 6 from the left (added)"
+   }
+  ],
+  "verified": true
+ },
+ "770414": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.06,
+       0.37,
+       0.17,
+       0.71
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.115,
+        0.472
+       ],
+       [
+        0.115,
+        0.608
+       ]
+      ],
+      "neg": [
+       [
+        0.039999999999999994,
+        0.54
+       ],
+       [
+        0.19,
+        0.54
+       ],
+       [
+        0.115,
+        0.76
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.06,
+     0.37,
+     0.17,
+     0.71
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile 1 from the left (added)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.64,
+       0.35,
+       0.73,
+       0.7
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.685,
+        0.45499999999999996
+       ],
+       [
+        0.685,
+        0.595
+       ]
+      ],
+      "neg": [
+       [
+        0.62,
+        0.5249999999999999
+       ],
+       [
+        0.75,
+        0.5249999999999999
+       ],
+       [
+        0.685,
+        0.75
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.64,
+     0.35,
+     0.73,
+     0.7
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile 6 from the left (added)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.745,
+       0.37,
+       0.84,
+       0.7
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.7925,
+        0.469
+       ],
+       [
+        0.7925,
+        0.601
+       ]
+      ],
+      "neg": [
+       [
+        0.725,
+        0.5349999999999999
+       ],
+       [
+        0.86,
+        0.5349999999999999
+       ],
+       [
+        0.7925,
+        0.75
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.745,
+     0.37,
+     0.84,
+     0.7
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile 7 from the left (added)"
+   }
+  ],
+  "verified": true
+ },
+ "770425": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.04,
+       0.35,
+       0.165,
+       0.69
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.10250000000000001,
+        0.45199999999999996
+       ],
+       [
+        0.10250000000000001,
+        0.588
+       ]
+      ],
+      "neg": [
+       [
+        0.02,
+        0.52
+       ],
+       [
+        0.185,
+        0.52
+       ],
+       [
+        0.10250000000000001,
+        0.74
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.04,
+     0.35,
+     0.165,
+     0.69
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile 1 from the left (added)"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.735,
+       0.35,
+       0.835,
+       0.69
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.7849999999999999,
+        0.45199999999999996
+       ],
+       [
+        0.7849999999999999,
+        0.588
+       ]
+      ],
+      "neg": [
+       [
+        0.715,
+        0.52
+       ],
+       [
+        0.855,
+        0.52
+       ],
+       [
+        0.7849999999999999,
+        0.74
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.735,
+     0.35,
+     0.835,
+     0.69
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile 7 from the left (added)"
+   }
+  ],
+  "verified": true
+ },
+ "770426": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       7
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.04,
+       0.35,
+       0.165,
+       0.69
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.10250000000000001,
+        0.45199999999999996
+       ],
+       [
+        0.10250000000000001,
+        0.588
+       ]
+      ],
+      "neg": [
+       [
+        0.02,
+        0.52
+       ],
+       [
+        0.185,
+        0.52
+       ],
+       [
+        0.10250000000000001,
+        0.74
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.04,
+     0.35,
+     0.165,
+     0.69
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile 1 from the left (added)"
+   }
+  ],
+  "verified": true
+ },
+ "773497": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       7
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       8
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       9
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.355,
+       0.185,
+       0.465,
+       0.46
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.41000000000000003,
+        0.2675
+       ],
+       [
+        0.41000000000000003,
+        0.3775
+       ]
+      ],
+      "neg": [
+       [
+        0.33499999999999996,
+        0.3225
+       ],
+       [
+        0.48500000000000004,
+        0.3225
+       ],
+       [
+        0.41000000000000003,
+        0.51
+       ]
+      ]
+     }
+    ],
+    "clip": [
+     0.355,
+     0.185,
+     0.465,
+     0.46
+    ],
+    "fill_holes": true,
+    "fixed": true,
+    "label": "tile '\u03941' (added)"
+   }
+  ],
+  "verified": true
+ },
+ "776403": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.06,
+       0.07,
+       0.96,
+       0.89
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.3
+       ],
+       [
+        0.5,
+        0.6
+       ],
+       [
+        0.3,
+        0.75
+       ],
+       [
+        0.15,
+        0.85
+       ]
+      ],
+      "neg": [
+       [
+        0.6,
+        0.92
+       ],
+       [
+        0.75,
+        0.85
+       ],
+       [
+        0.5,
+        0.97
+       ],
+       [
+        0.25,
+        0.95
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "minus": [
+     {
+      "box": [
+       0.42,
+       0.76,
+       0.97,
+       1.0
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.6,
+        0.92
+       ],
+       [
+        0.8,
+        0.85
+       ]
+      ]
+     }
+    ],
+    "largest": true,
+    "fixed": true,
+    "label": "tile, thumb removed"
+   }
+  ],
+  "verified": true
+ },
+ "777410": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       2
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "whole piece (_1 + _2)",
+    "fill_holes": true
+   }
+  ],
+  "verified": true
+ },
+ "786762": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.07,
+       0.22,
+       0.96,
+       0.56
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.5,
+        0.35
+       ],
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.15,
+        0.42
+       ],
+       [
+        0.85,
+        0.38
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.62
+       ],
+       [
+        0.03,
+        0.4
+       ],
+       [
+        0.5,
+        0.15
+       ],
+       [
+        0.98,
+        0.45
+       ]
+      ]
+     }
+    ],
+    "fill_holes": true,
+    "largest": true,
+    "fixed": true,
+    "label": "bowl only",
+    "from": [
+     1
+    ]
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "792674": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "fixed": true,
+    "exact": true,
+    "label": "unchanged; the photo's missing objects were added"
+   },
+   {
+    "parts": [
+     {
+      "box": [
+       0.06,
+       0.31,
+       0.41,
+       0.67
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.25,
+        0.4
+       ],
+       [
+        0.25,
+        0.58
+       ]
+      ],
+      "neg": [
+       [
+        0.5,
+        0.5
+       ],
+       [
+        0.25,
+        0.75
+       ]
+      ]
+     }
+    ],
+    "fixed": true,
+    "label": "left tile (added)"
+   }
+  ],
+  "verified": true
+ },
+ "798234": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.21,
+       0.02,
+       0.87,
+       0.75
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.6,
+        0.2
+       ],
+       [
+        0.55,
+        0.4
+       ],
+       [
+        0.4,
+        0.62
+       ],
+       [
+        0.3,
+        0.65
+       ]
+      ],
+      "neg": [
+       [
+        0.1,
+        0.5
+       ],
+       [
+        0.4,
+        0.9
+       ],
+       [
+        0.9,
+        0.5
+       ],
+       [
+        0.15,
+        0.15
+       ],
+       [
+        0.75,
+        0.7
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "largest": true,
+    "fixed": true,
+    "label": "tile, PF700 board removed"
+   }
+  ],
+  "verified": true
+ },
+ "798270": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.34,
+       0.05,
+       0.85,
+       0.73
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.6,
+        0.2
+       ],
+       [
+        0.55,
+        0.4
+       ],
+       [
+        0.45,
+        0.62
+       ]
+      ],
+      "neg": [
+       [
+        0.15,
+        0.5
+       ],
+       [
+        0.45,
+        0.85
+       ],
+       [
+        0.9,
+        0.5
+       ],
+       [
+        0.2,
+        0.25
+       ],
+       [
+        0.75,
+        0.68
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "largest": true,
+    "fixed": true,
+    "label": "tile, PF700 board removed"
+   }
+  ],
+  "verified": true
+ },
+ "803210": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    "close": 10,
+    "fixed": true,
+    "label": "brick with both hooks (_2 + _3 + _4)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "803211": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    "close": 10,
+    "fixed": true,
+    "label": "brick with both hooks (_2 + _3 + _4)"
+   }
+  ],
+  "verified": true
+ },
+ "803227": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4,
+       5,
+       6
+      ]
+     },
+     {
+      "box": [
+       0.51,
+       0.55,
+       0.81,
+       0.64
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.65,
+        0.6
+       ],
+       [
+        0.58,
+        0.615
+       ],
+       [
+        0.75,
+        0.6
+       ]
+      ],
+      "neg": [
+       [
+        0.65,
+        0.7
+       ]
+      ]
+     }
+    ],
+    "close": 10,
+    "fixed": true,
+    "label": "brick with the hooks (_4 + _5 + _6 + brick)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       7
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       8
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       9
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "803231": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3,
+       4
+      ]
+     },
+     {
+      "box": [
+       0.47,
+       0.575,
+       0.91,
+       0.655
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.6,
+        0.62
+       ],
+       [
+        0.75,
+        0.62
+       ],
+       [
+        0.85,
+        0.62
+       ]
+      ],
+      "neg": [
+       [
+        0.6,
+        0.72
+       ]
+      ]
+     }
+    ],
+    "close": 10,
+    "fixed": true,
+    "label": "brick with the hooks (_3 + _4 + brick)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       7
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "803983": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "box": [
+       0.28,
+       0.3,
+       0.81,
+       0.7
+      ],
+      "pick": "best",
+      "pos": [
+       [
+        0.45,
+        0.5
+       ],
+       [
+        0.75,
+        0.45
+       ]
+      ],
+      "neg": [
+       [
+        0.75,
+        0.75
+       ],
+       [
+        0.65,
+        0.78
+       ]
+      ]
+     }
+    ],
+    "within": [
+     1
+    ],
+    "largest": true,
+    "fixed": true,
+    "label": "tile in the hand (table part removed)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "804169": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       3,
+       5,
+       4
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile (_3 + _5 + _4)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       7
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       8
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "804172": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile (_2 + _3)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       4
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       5
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       7
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "804175": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile (_1 + _3)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       4,
+       5
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile (_2 + _5 + _4)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "804180": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       4,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile (_1 + _4 + _3)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       5,
+       6
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile (_2 + _5 + _6)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       7
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       8
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       9
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       10
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ },
+ "804182": {
+  "objects": [
+   {
+    "parts": [
+     {
+      "keep": [
+       1,
+       4
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "left tile (_1 + _4)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       2,
+       5,
+       3
+      ]
+     }
+    ],
+    "close": 15,
+    "fixed": true,
+    "label": "right tile (_2 + _5 + _3)"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       6
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   },
+   {
+    "parts": [
+     {
+      "keep": [
+       7
+      ]
+     }
+    ],
+    "exact": true,
+    "label": "unchanged"
+   }
+  ],
+  "verified": true
+ }
+}

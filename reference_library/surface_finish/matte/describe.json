@@ -1,0 +1,53 @@
+{
+ "attribute": "surface_finish",
+ "attribute_label": "surface finish",
+ "value": "matte",
+ "title": "Matte",
+ "vi": "Mờ, không bóng",
+ "identify": [
+  "Little or no sharp reflection.",
+  "Diffuse light scattering.",
+  "Usually an even, non-glossy appearance."
+ ],
+ "recognition": "Light spreads across the surface instead of forming sharp highlights.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.2",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "smooth matte",
+   "difference": "Smooth matte looks even and low-gloss; ordinary matte means low reflectivity without implying roughness.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §7"
+  },
+  {
+   "value": "stony matte",
+   "difference": "Stony matte appears granular / mineral. Do not equate matte with rough: texture is a separate attribute.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §7"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Matte - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.2)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "752464_5",
+   "model_p": 0.574,
+   "phrase": "flat matte finish",
+   "dino": 0.384,
+   "caption": "database object 752464_5: Claude's label is matte; model probability 0.57; box = Grounding DINO phrase 'flat matte finish'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "744724_2",
+   "model_p": 0.558,
+   "phrase": "flat matte finish",
+   "dino": 0.336,
+   "caption": "database object 744724_2: Claude's label is matte; model probability 0.56; box = Grounding DINO phrase 'flat matte finish'"
+  }
+ ],
+ "n_database_labels": 101
+}

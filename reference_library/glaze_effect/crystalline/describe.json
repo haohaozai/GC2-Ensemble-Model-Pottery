@@ -1,0 +1,48 @@
+{
+ "attribute": "glaze_effect",
+ "attribute_label": "glaze effects",
+ "value": "crystalline",
+ "title": "Crystalline",
+ "vi": "Men kết tinh",
+ "identify": [
+  "Flower-like or starburst crystalline structures.",
+  "Radiating, branching shapes.",
+  "Crystals contrast with surrounding glaze."
+ ],
+ "recognition": "Distinct crystal clusters with radial patterns.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.6",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "speckled",
+   "difference": "Speckled: small dispersed spots; crystalline: branching or flower / starburst clusters. Use the structure, not colour alone.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §1"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Crystalline - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.6)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "792777_1",
+   "model_p": 0.786,
+   "phrase": "starburst crystal clusters",
+   "dino": 0.381,
+   "caption": "database object 792777_1: Claude's label is crystalline; model probability 0.79; box = Grounding DINO phrase 'starburst crystal clusters'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "21383_1",
+   "model_p": 0.76,
+   "phrase": "starburst crystal clusters",
+   "dino": 0.392,
+   "caption": "database object 21383_1: Claude's label is crystalline; model probability 0.76; box = Grounding DINO phrase 'starburst crystal clusters'"
+  }
+ ],
+ "n_database_labels": 43
+}

@@ -1,0 +1,52 @@
+{
+ "attribute": "texture",
+ "attribute_label": "surface texture",
+ "value": "rough",
+ "title": "Rough",
+ "vi": "Thô",
+ "identify": [
+  "Visible grains, bumps, or uneven microstructure.",
+  "This project splits the manual's 'Rough / Granular': rough = uneven, bumpy relief."
+ ],
+ "recognition": "Irregular fine shadows and grain-like features.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.5 (value 'Rough / Granular')",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "granular",
+   "difference": "Granular = distinct small grains like sand (the split is this project's vocabulary).",
+   "source": "general description - not defined in your reference manuals"
+  },
+  {
+   "value": "stony matte",
+   "difference": "Stony matte is a finish (low sheen, stone-like); rough is texture - keep the two attributes separate.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §7"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Rough - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.5)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "792386_5",
+   "model_p": 0.7,
+   "phrase": "rough texture",
+   "dino": 0.176,
+   "caption": "database object 792386_5: Claude's label is rough; model probability 0.70; box = Grounding DINO phrase 'rough texture'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "565097_6",
+   "model_p": 0.685,
+   "phrase": "rough texture",
+   "dino": 0.187,
+   "caption": "database object 565097_6: Claude's label is rough; model probability 0.69; box = Grounding DINO phrase 'rough texture'"
+  }
+ ],
+ "n_database_labels": 236
+}

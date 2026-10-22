@@ -1,0 +1,42 @@
+{
+  "tag_version": "claude_v3.2-retag",
+  "created": "2026-10-14T01:04:48",
+  "surface": {
+    "visual": 1.01,
+    "agree": 0.34
+  },
+  "transparency": {
+    "visual": 1.01,
+    "agree": 0.57
+  },
+  "possible_quantile": 0.97,
+  "possible_thresholds": {
+    "effect": {
+      "Crystalline": 0.9791,
+      "Oil Spot": 0.9891,
+      "Speckled": 0.9842,
+      "Mottled": 0.9589,
+      "Dripping / Flowing": 0.9753,
+      "Crackle": 0.9716,
+      "Breaking": 0.9719,
+      "Metallic / Iridescent": 0.8742,
+      "Layered": 0.9241,
+      "Marbled": 0.7049
+    },
+    "defect": {
+      "Pinholes": 0.9362,
+      "Blistering": 0.9824,
+      "Crawling": 0.9644,
+      "Crazing": 0.9057,
+      "Pitting": 0.9872,
+      "Shivering": 0.8453,
+      "Uneven Coverage": 0.9216,
+      "Glaze Running": 0.7624
+    }
+  },
+  "target_precision": {
+    "surface": 0.8,
+    "transparency": 0.85
+  },
+  "note": "thresholds chosen on the dev half (md5(recipe_id) parity) with grouped CV; see evaluation/retag"
+}

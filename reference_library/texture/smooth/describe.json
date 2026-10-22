@@ -1,0 +1,46 @@
+{
+ "attribute": "texture",
+ "attribute_label": "surface texture",
+ "value": "smooth",
+ "title": "Smooth",
+ "vi": "Mịn",
+ "identify": [
+  "Uniform surface with no obvious bumps, ridges, or grains."
+ ],
+ "recognition": "Consistent texture across the ceramic body.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.5",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "rough",
+   "difference": "Rough / granular shows grains, bumps or uneven microstructure.",
+   "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.5"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Smooth - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.5)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "350331_1",
+   "model_p": 0.997,
+   "phrase": "smooth texture",
+   "dino": 0.282,
+   "caption": "database object 350331_1: Claude's label is smooth; model probability 1.00; box = Grounding DINO phrase 'smooth texture'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "126620_1",
+   "model_p": 0.988,
+   "phrase": "smooth texture",
+   "dino": 0.291,
+   "caption": "database object 126620_1: Claude's label is smooth; model probability 0.99; box = Grounding DINO phrase 'smooth texture'"
+  }
+ ],
+ "n_database_labels": 1670
+}

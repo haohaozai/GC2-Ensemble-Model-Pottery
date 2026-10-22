@@ -1,0 +1,48 @@
+{
+ "attribute": "glaze_effect",
+ "attribute_label": "glaze effects",
+ "value": "oil spot",
+ "title": "Oil spot",
+ "vi": "Men đốm dầu",
+ "identify": [
+  "Numerous round or oval metallic-looking spots.",
+  "Often a dark background.",
+  "Spots vary in size."
+ ],
+ "recognition": "Repeated circular dots resembling oil droplets.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.7",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "speckled",
+   "difference": "Speckled: small dispersed spots; oil spot: larger rounded, often metallic-looking spots.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §1"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Oil spot - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.7)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "541_1",
+   "model_p": 0.814,
+   "phrase": "round metallic spots",
+   "dino": 0.23,
+   "caption": "database object 541_1: Claude's label is oil spot; model probability 0.81; box = Grounding DINO phrase 'round metallic spots'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "295891_1",
+   "model_p": 0.764,
+   "phrase": "round metallic spots",
+   "dino": 0.243,
+   "caption": "database object 295891_1: Claude's label is oil spot; model probability 0.76; box = Grounding DINO phrase 'round metallic spots'"
+  }
+ ],
+ "n_database_labels": 9
+}

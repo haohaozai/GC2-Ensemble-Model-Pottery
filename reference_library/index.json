@@ -1,0 +1,459 @@
+{
+ "version": 1,
+ "built": "2026-10-21",
+ "attributes": {
+  "surface_finish": {
+   "glossy": {
+    "folder": "surface_finish/glossy",
+    "title": "Glossy",
+    "vi": "Bóng cao",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "semi-glossy": {
+    "folder": "surface_finish/semi_glossy",
+    "title": "Semi-glossy",
+    "vi": "Bóng vừa",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "satin": {
+    "folder": "surface_finish/satin",
+    "title": "Satin",
+    "vi": "Bóng mờ như lụa",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "satin-matte": {
+    "folder": "surface_finish/satin_matte",
+    "title": "Satin-matte",
+    "vi": "Mờ mịn với ánh lụa",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "semi-matte": {
+    "folder": "surface_finish/semi_matte",
+    "title": "Semi-matte",
+    "vi": "Gần mờ, hơi bóng",
+    "general": false,
+    "images": [
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "matte": {
+    "folder": "surface_finish/matte",
+    "title": "Matte",
+    "vi": "Mờ, không bóng",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "smooth matte": {
+    "folder": "surface_finish/smooth_matte",
+    "title": "Smooth matte",
+    "vi": "Mờ và mịn",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "stony matte": {
+    "folder": "surface_finish/stony_matte",
+    "title": "Stony matte",
+    "vi": "Mờ giống đá",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "dry matte": {
+    "folder": "surface_finish/dry_matte",
+    "title": "Dry matte",
+    "vi": "Mờ khô, phấn",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   }
+  },
+  "transparency": {
+   "transparent": {
+    "folder": "transparency/transparent",
+    "title": "Transparent",
+    "vi": "Trong suốt",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "translucent": {
+    "folder": "transparency/translucent",
+    "title": "Translucent",
+    "vi": "Bán trong",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "semi-opaque": {
+    "folder": "transparency/semi_opaque",
+    "title": "Semi-opaque",
+    "vi": "",
+    "general": true,
+    "images": [
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "opaque": {
+    "folder": "transparency/opaque",
+    "title": "Opaque",
+    "vi": "Đục",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   }
+  },
+  "texture": {
+   "smooth": {
+    "folder": "texture/smooth",
+    "title": "Smooth",
+    "vi": "Mịn",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "rough": {
+    "folder": "texture/rough",
+    "title": "Rough",
+    "vi": "Thô",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "granular": {
+    "folder": "texture/granular",
+    "title": "Granular",
+    "vi": "Sần hạt",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "dimpled": {
+    "folder": "texture/dimpled",
+    "title": "Dimpled / orange peel",
+    "vi": "Lõm li ti",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   }
+  },
+  "glaze_effect": {
+   "crystalline": {
+    "folder": "glaze_effect/crystalline",
+    "title": "Crystalline",
+    "vi": "Men kết tinh",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "oil spot": {
+    "folder": "glaze_effect/oil_spot",
+    "title": "Oil spot",
+    "vi": "Men đốm dầu",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "speckled": {
+    "folder": "glaze_effect/speckled",
+    "title": "Speckled",
+    "vi": "Men chấm li ti",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "mottled": {
+    "folder": "glaze_effect/mottled",
+    "title": "Mottled / variegated",
+    "vi": "Men loang màu",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "flowing": {
+    "folder": "glaze_effect/flowing",
+    "title": "Dripping / flowing",
+    "vi": "Men chảy",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "breaking at edges": {
+    "folder": "glaze_effect/breaking_at_edges",
+    "title": "Breaking at edges",
+    "vi": "Men đổi màu ở cạnh",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "metallic / iridescent": {
+    "folder": "glaze_effect/metallic_iridescent",
+    "title": "Metallic / iridescent",
+    "vi": "Men ánh kim",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "visible crack network (crackle)": {
+    "folder": "glaze_effect/visible_crack_network_crackle",
+    "title": "Crackle",
+    "vi": "Men rạn",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   }
+  },
+  "defect": {
+   "pinholes": {
+    "folder": "defect/pinholes",
+    "title": "Pinholes",
+    "vi": "Lỗ kim",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png"
+    ]
+   },
+   "blistering": {
+    "folder": "defect/blistering",
+    "title": "Blistering",
+    "vi": "Phồng rộp",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "crawling": {
+    "folder": "defect/crawling",
+    "title": "Crawling",
+    "vi": "Co men",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "crazing": {
+    "folder": "defect/crazing",
+    "title": "Crazing",
+    "vi": "Nứt chân chim",
+    "general": false,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "excessive glaze running": {
+    "folder": "defect/excessive_glaze_running",
+    "title": "Excessive glaze running",
+    "vi": "",
+    "general": false,
+    "images": [
+     "example_1.png",
+     "example_2.png"
+    ]
+   }
+  },
+  "form": {
+   "test tile": {
+    "folder": "form/test_tile",
+    "title": "Test tile",
+    "vi": "",
+    "general": true,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "bowl": {
+    "folder": "form/bowl",
+    "title": "Bowl",
+    "vi": "",
+    "general": true,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "plate": {
+    "folder": "form/plate",
+    "title": "Plate",
+    "vi": "",
+    "general": true,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "cup": {
+    "folder": "form/cup",
+    "title": "Cup / mug",
+    "vi": "",
+    "general": true,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "vase": {
+    "folder": "form/vase",
+    "title": "Vase",
+    "vi": "",
+    "general": true,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "jar": {
+    "folder": "form/jar",
+    "title": "Jar",
+    "vi": "",
+    "general": true,
+    "images": [
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "sculpture": {
+    "folder": "form/sculpture",
+    "title": "Sculpture",
+    "vi": "",
+    "general": true,
+    "images": [
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "figurine": {
+    "folder": "form/figurine",
+    "title": "Figurine",
+    "vi": "",
+    "general": true,
+    "images": [
+     "example_1.png"
+    ]
+   },
+   "abstract ceramic artwork": {
+    "folder": "form/abstract_ceramic_artwork",
+    "title": "Abstract ceramic artwork",
+    "vi": "",
+    "general": true,
+    "images": [
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "irregular ceramic form": {
+    "folder": "form/irregular_ceramic_form",
+    "title": "Irregular ceramic form",
+    "vi": "",
+    "general": true,
+    "images": [
+     "example_1.png",
+     "example_2.png"
+    ]
+   },
+   "other vessel": {
+    "folder": "form/other_vessel",
+    "title": "Other vessel",
+    "vi": "",
+    "general": true,
+    "images": [
+     "reference_1.png",
+     "example_1.png",
+     "example_2.png"
+    ]
+   }
+  }
+ }
+}

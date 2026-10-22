@@ -1,0 +1,1329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Glaze Search</title>
+<style>
+:root{--bg:#f6f5f2;--surface:#fff;--ink:#1d1d1b;--muted:#5f5e5a;--faint:#8a8984;--line:#e3e1db;--accent:#2a78d6;--accent-ink:#fff;
+--good:#137a52;--good-bg:#e3f4ec;--bad:#9b2c2c;--bad-bg:#f9e6e6;--chip:#f0efea;--shadow:0 1px 2px rgba(0,0,0,.05),0 2px 8px rgba(0,0,0,.04);
+--o1:#2a78d6;--o2:#eb6834;--o3:#1baf7a;--o4:#8a5cf6;--o5:#e0457b;--o6:#c9a227;--o7:#14a0be;--o8:#787878}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151514;--surface:#1f1f1d;--ink:#ecebe6;--muted:#aeada6;--faint:#85847e;
+--line:#34332f;--accent:#5b9be6;--accent-ink:#0d1a2a;--good:#5fd3a2;--good-bg:#173428;--bad:#f08c8c;--bad-bg:#3a1f1f;--chip:#2a2a27;--shadow:none}}
+:root[data-theme="dark"]{--bg:#151514;--surface:#1f1f1d;--ink:#ecebe6;--muted:#aeada6;--faint:#85847e;--line:#34332f;--accent:#5b9be6;
+--accent-ink:#0d1a2a;--good:#5fd3a2;--good-bg:#173428;--bad:#f08c8c;--bad-bg:#3a1f1f;--chip:#2a2a27;--shadow:none}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "Segoe UI",system-ui,-apple-system,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--surface)}
+header h1{font-size:18px;margin:0;font-weight:650;letter-spacing:-.01em}
+header .meta{color:var(--muted);font-size:12.5px}
+header .sp{flex:1}
+main{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;padding:16px 20px 40px;max-width:1500px;margin:0 auto}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow);min-width:0}
+.c-img{grid-column:span 5}.c-text{grid-column:span 3}.c-form{grid-column:span 4}.c-full{grid-column:1/-1}
+.colgrid{display:grid;grid-template-columns:1fr 1.25fr;gap:18px}
+@media (max-width:900px){.colgrid{grid-template-columns:1fr}}
+.cwords{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.cw{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:999px;padding:2px 9px 2px 4px;font-size:12px;background:var(--bg);cursor:pointer}
+.clist{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.crow{display:grid;grid-template-columns:22px 82px 1fr 1fr auto;gap:6px;align-items:center;font-size:12.5px}
+.crow select{padding:3px 4px;font-size:12px}
+.qr{display:grid;grid-template-columns:18px 1fr auto;gap:6px;align-items:center;font-size:12px;padding:3px 0;border-top:1px solid var(--line)}
+.qr .imp{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.qr .imp button{border:0;border-radius:0;padding:2px 7px;font-size:11.5px;background:transparent}
+.qr .imp button.on{background:var(--accent);color:var(--accent-ink)}
+.simt{display:grid;grid-template-columns:auto 1fr auto;gap:2px 6px;align-items:center;font-size:11.5px;color:var(--muted)}
+.simt .bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.simt .bar i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.conf{font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:4px;margin-top:2px}
+.conf b{color:var(--ink);font-weight:600}
+#overlay{cursor:crosshair}
+@media (max-width:1100px){.c-img,.c-text,.c-form{grid-column:1/-1}}
+h2{font-size:14px;margin:0 0 10px;font-weight:650;display:flex;gap:8px;align-items:center}
+h2 .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:12px}
+h2 .opt{font-weight:400;color:var(--faint);font-size:12px}
+label.f{display:block;font-size:12px;color:var(--muted);margin:8px 0 3px}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=text],input[type=number],input:not([type]),select,textarea{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+textarea{resize:vertical;min-height:54px}
+input:focus,select:focus,textarea:focus,button:focus-visible,#drop:focus{outline:2px solid var(--accent);outline-offset:1px}
+button{padding:7px 12px;border-radius:6px;border:1px solid var(--line);background:var(--chip);cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600;padding:9px 22px}
+button:disabled{opacity:.55;cursor:default}
+.row{display:flex;gap:8px;align-items:center}.row>*{min-width:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.small{font-size:12px;color:var(--muted)}
+#drop{border:2px dashed var(--line);border-radius:10px;padding:22px 14px;text-align:center;color:var(--muted);cursor:pointer;transition:background .15s,border-color .15s}
+#drop.over{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+#drop b{color:var(--ink)}
+#drop input{display:none}
+.busy{display:inline-block;width:14px;height:14px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+#overlay{width:100%;border-radius:8px;display:block;margin:0;background:var(--chip)}
+/* photo stage: two modes on the photo - select objects (hover + click) / pick a colour */
+.pmodes{display:flex;gap:8px;align-items:center;margin:10px 0 6px;flex-wrap:wrap}
+.pstage{position:relative;margin:0 0 6px;border-radius:8px;overflow:hidden}
+.pstage canvas{position:absolute;inset:0;width:100%;height:100%;cursor:pointer}
+.pstage.pick canvas{cursor:crosshair}
+.ptip{position:absolute;pointer-events:none;background:rgba(20,20,18,.86);color:#fff;font-size:12px;padding:3px 8px;border-radius:6px;white-space:nowrap;transform:translate(10px,10px)}
+.pickbox{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border:1px solid var(--line);border-radius:8px;padding:8px;margin:6px 0;background:var(--bg)}
+.pickbox .big{width:38px;height:38px;border-radius:6px;border:1px solid var(--line)}
+.pickbox input{width:110px;font-family:ui-monospace,Consolas,monospace}
+.actinfo{font-size:12.5px;margin:2px 0 6px}
+.actinfo b{color:var(--accent)}
+.obj.act{box-shadow:inset 0 0 0 2px #e0b400;border-color:#e0b400}
+details.od summary{cursor:pointer;font-size:12.5px;color:var(--muted);margin:4px 0}
+/* (!) / (i) buttons and the explanation window */
+.ib{display:inline-grid;place-items:center;width:18px;height:18px;padding:0;border-radius:50%;border:1.5px solid var(--accent);background:var(--surface);
+    color:var(--accent);font:700 11px/1 Georgia,serif;cursor:pointer;flex:none;vertical-align:middle}
+.ib.i{font-style:italic}
+.mdl{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:flex-start;justify-content:center;z-index:50;padding:40px 16px;overflow:auto}
+.mdl[hidden]{display:none}
+.mdlbox{background:var(--surface);color:var(--ink);border-radius:12px;max-width:760px;width:100%;padding:18px 22px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.mdlbox h3{margin:0 0 4px;font-size:18px}
+.mdlbox h4{margin:14px 0 4px;font-size:13.5px;color:var(--accent)}
+.mdlbox .x{float:right;margin:-6px -8px 0 0}
+.mdlbox table{width:100%;border-collapse:collapse;font-size:12.5px;margin:4px 0}
+.mdlbox td,.mdlbox th{border-bottom:1px solid var(--line);padding:4px 6px;text-align:left;vertical-align:top}
+.mdlbox .note{font-size:12px;color:var(--muted);border-left:3px solid var(--line);padding:4px 8px;margin:8px 0}
+.mdlbox .pend{border:1px dashed #c9a227;background:color-mix(in srgb,#c9a227 10%,transparent);border-radius:8px;padding:8px 10px;font-size:12.5px}
+.mdlbox .refx{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px}
+.mdlbox .refx ul{margin:2px 0 6px;padding-left:20px}
+.mdlbox .refh{font-size:15px;margin-bottom:4px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.mdlbox .reft{font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.mdlbox .gen{font-size:11px;border-radius:999px;padding:1px 8px;background:color-mix(in srgb,#c9a227 18%,transparent);color:#8a6a00}
+.mdlbox .refimgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin:8px 0}
+.mdlbox .refimgs figure{margin:0}
+.mdlbox .refimgs img{width:100%;max-height:240px;object-fit:contain;border:1px solid var(--line);border-radius:8px;background:#fff}
+.mdlbox .refimgs figcaption{font-size:11px;color:var(--muted);margin-top:2px}
+.mdlbox svg{width:100%;height:auto;display:block}
+/* priority sliders */
+.prio{display:grid;grid-template-columns:110px 1fr 46px;gap:2px 8px;align-items:center;font-size:12.5px;margin-top:8px;max-width:520px}
+.prio input[type=range]{width:100%;accent-color:var(--accent)}
+.prio .v{font-variant-numeric:tabular-nums;text-align:right;font-weight:600}
+.prio .sw3{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.priobar{display:flex;height:8px;border-radius:4px;overflow:hidden;margin:6px 0 2px;max-width:520px}
+.priobar i{display:block;height:100%}
+/* evaluation */
+.evt td.ok{color:var(--good);font-weight:600}.evt td.no{color:var(--bad)}
+.evc{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 2px}
+.evc span{font-size:11px;border-radius:999px;padding:1px 7px;border:1px solid var(--line)}
+.evc .y{background:var(--good-bg);color:var(--good);border-color:transparent}
+.evc .n{background:var(--bad-bg);color:var(--bad);border-color:transparent}
+.evc .u{background:var(--chip);color:var(--muted)}
+.ctb{display:grid;grid-template-columns:auto 1fr 40px;gap:2px 6px;align-items:center;font-size:11px;color:var(--muted)}
+.ctb .db{position:relative;height:8px;background:var(--line);border-radius:3px}
+.ctb .db i{position:absolute;top:0;height:100%;border-radius:3px}
+.ctb .db b{position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--faint)}
+.objs{display:flex;flex-wrap:wrap;gap:8px}
+.obj{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:6px 8px;cursor:pointer;user-select:none;background:var(--bg)}
+.obj.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.obj img{width:44px;height:44px;object-fit:contain;background:repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0 0/10px 10px;border-radius:4px}
+.obj .k{font-weight:650}
+.obj .d{border-left:4px solid var(--c);padding-left:6px;font-size:12px;line-height:1.3}
+.sw{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid rgba(0,0,0,.15);vertical-align:-3px}
+.atm{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12.5px}
+.atm label{display:flex;gap:4px;align-items:center}
+.oxgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px;margin-top:6px}
+.ox{display:flex;align-items:center;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden}
+.ox span{padding:0 6px;font-size:12px;color:var(--muted);min-width:44px}
+.ox input{border:0;border-left:1px solid var(--line);border-radius:0;padding:5px 6px;width:100%}
+.ox input:not(:placeholder-shown){background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{border:0;border-radius:0;background:transparent;padding:5px 12px}
+.seg button.on{background:var(--accent);color:var(--accent-ink)}
+.ctl{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:flex-end}
+.wt{display:grid;grid-template-columns:62px 130px 36px;align-items:center;gap:6px;font-size:12.5px}
+.wt input{width:130px;accent-color:var(--accent)}
+.note{font-size:12px;color:var(--faint);margin-top:6px}
+.msg{padding:8px 10px;border-radius:6px;background:var(--chip);font-size:12.5px;margin-top:8px}
+.msg.err{background:var(--bad-bg);color:var(--bad)}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.stat{border:1px solid var(--line);border-radius:8px;padding:8px 12px;min-width:150px;background:var(--bg)}
+.stat .l{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.stat .v{font-size:20px;font-weight:650;font-variant-numeric:tabular-nums}
+.stat .s{font-size:12px;color:var(--muted)}
+.yes{color:var(--good)}.no{color:var(--bad)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.rc{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column}
+.rc .im{position:relative;aspect-ratio:1;background:var(--chip)}
+.rc .im img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
+.rk{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.66);color:#fff;border-radius:12px;padding:1px 8px;font-size:12px;font-weight:650}
+.rc .b{padding:8px 10px;display:flex;flex-direction:column;gap:3px;font-size:12.5px;flex:1}
+.rc .nm{font-weight:650;font-size:13.5px;line-height:1.3}
+.rc a{color:var(--accent);text-decoration:none}.rc a:hover{text-decoration:underline}
+.tags{color:var(--muted)}
+.badge{display:inline-block;border-radius:4px;padding:1px 6px;font-size:11.5px;font-weight:600}
+.badge.ok{background:var(--good-bg);color:var(--good)}.badge.nok{background:var(--chip);color:var(--muted)}
+.mk{margin-top:auto;padding-top:6px;display:flex;gap:6px}
+.mk button{flex:1;padding:4px 6px;font-size:12px}
+.mk button.on.y{background:var(--good-bg);border-color:var(--good);color:var(--good);font-weight:650}
+.mk button.on.n{background:var(--bad-bg);border-color:var(--bad);color:var(--bad);font-weight:650}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto}
+.kv{font-size:12px;color:var(--muted);word-break:break-word}
+.kv b{color:var(--ink);font-weight:600}
+.empty{color:var(--faint);padding:20px;text-align:center}
+/* your object: Grounding DINO object -> colour regions + six attributes */
+.qgrid{display:grid;grid-template-columns:minmax(220px,1fr) minmax(240px,1fr) minmax(320px,1.4fr);gap:16px;align-items:start}
+@media (max-width:1100px){.qgrid{grid-template-columns:1fr}}
+.qcv{position:relative;background:var(--bg);border:1px solid var(--line);border-radius:8px;min-height:200px;display:flex;align-items:center;justify-content:center;padding:6px}
+.qcv canvas{max-width:100%;max-height:420px}
+#qcvOv{position:absolute;cursor:pointer}
+.fa{border-top:1px solid var(--line);padding:6px 0}
+.fa:first-child{border-top:0}
+.fa .h{display:flex;gap:8px;align-items:center;font-size:12.5px;font-weight:600;flex-wrap:wrap}
+.fa .h .st{font-weight:500;font-size:11.5px;color:var(--muted)}
+.fa .chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.fchip{font:inherit;font-size:11.5px;border:1px solid var(--line);border-radius:999px;padding:1px 8px;background:var(--surface);color:var(--ink);cursor:pointer}
+.fchip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.vb{display:inline-block;font-size:11px;border-radius:4px;padding:0 5px;background:var(--good-bg);color:var(--good)}
+.vb.u{background:var(--chip);color:var(--muted)}
+/* attributes v3: the three most likely candidates of the query object, click one to search with it */
+.cand3{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 2px;align-items:center}
+.cand3 .lbl{font-size:11px;color:var(--muted)}
+.cchip{font:inherit;font-size:12px;border:1.5px solid var(--accent);border-radius:8px;padding:2px 9px;background:var(--surface);color:var(--ink);cursor:pointer;display:inline-flex;gap:6px;align-items:baseline}
+.cchip .r{font-size:10.5px;color:var(--muted)}
+.cchip .p{font-size:10.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cchip.on{background:var(--accent);color:var(--accent-ink)}
+.cchip.on .r,.cchip.on .p{color:var(--accent-ink)}
+.fa details{margin-top:2px}
+.fa summary{font-size:11px;color:var(--muted);cursor:pointer}
+.fm{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px;font-size:11.5px}
+.fm span{border-radius:4px;padding:0 5px;background:var(--chip)}
+.fm span.y{background:var(--good-bg);color:var(--good)}.fm span.n{background:var(--bad-bg);color:var(--bad)}
+.evc em.lb,.fm em.lb{font-style:normal;font-size:10.5px;color:var(--muted);align-self:center}
+#ksel{padding:4px 8px}
+.crel{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Glaze Search</h1>
+  <span class="meta" id="hdr">connecting to the local model…</span>
+  <span class="sp"></span>
+  <a class="meta" id="manuals" href="https://fbiwarninggg-ceramic-review.static.hf.space/docs/index.html" target="_blank" rel="noopener" title="user manual, beginner guide and mind map (PDF)">Manuals (PDF)</a>
+  <button id="theme" title="Switch light / dark">Theme</button>
+</header>
+<main>
+  <section class="card c-img">
+    <h2><span class="n">1</span>Photo <span class="opt">drop · Ctrl+V · browse</span></h2>
+    <div id="drop" tabindex="0" role="button" aria-label="Add a photo">
+      <div><b>Drop a ceramic photo here</b>, press <b>Ctrl+V</b> to paste a copied image or screenshot,<br>or click to browse.</div>
+      <div class="small" style="margin-top:6px">It is segmented automatically (Grounding DINO + SAM 2.1 + CLIP, same settings as the 7k photos).</div>
+      <input type="file" id="file" accept="image/*">
+    </div>
+    <div class="row" style="margin-top:8px"><input id="url" placeholder="…or an image link (needs internet)"><button id="urlgo">Fetch</button></div>
+    <div id="segmsg"></div>
+    <div id="segview" hidden>
+      <div class="pmodes"><div class="seg" id="pmode"><button data-pm="select" class="on">Select objects</button><button data-pm="pick">Pick colour (HEX)</button></div>
+        <button class="ib" data-help="selection" title="How object selection works">!</button><span class="small" id="pmhint"></span></div>
+      <div class="pstage" id="pstage"><img id="overlay" alt="segmentation result"><canvas id="pcv" aria-label="photo: hover and click objects"></canvas><div class="ptip" id="ptip" hidden></div></div>
+      <div class="pickbox" id="pickbox" hidden><span class="big" id="pkswatch"></span>
+        <div><div class="small" id="pkfrom">picked colour</div><input id="pkhex" maxlength="7" spellcheck="false" aria-label="picked HEX colour"></div>
+        <button id="pkcopy">Copy</button><button id="pkadd" class="primary" style="padding:7px 14px">Add as search colour</button><span class="small" id="pkmsg"></span></div>
+      <div class="actinfo" id="actinfo"></div>
+      <details class="od" id="objdet"><summary>Object list (details)</summary>
+      <div class="small" style="margin-bottom:6px">Objects used for the search (click to switch on / off). Default: objects CLIP rates as ceramic (≥ 0.35), otherwise the first object. The yellow frame is the active object.</div>
+      <div class="objs" id="objs"></div></details>
+      <div class="row" style="margin-top:10px;justify-content:space-between"><span class="small" id="seginfo"></span><button id="clearimg">Remove photo</button></div>
+    </div>
+  </section>
+
+  <section class="card c-text">
+    <h2><span class="n">2</span>Text <span class="opt">narrows the type</span></h2>
+    <label class="f" for="subtype">Subtype</label>
+    <input id="subtype" list="subtypes" placeholder="e.g. glaze - iron - celadon"><datalist id="subtypes"></datalist>
+    <label class="f">Firing cone</label>
+    <div class="two"><select id="cone_lo"></select><select id="cone_hi"></select></div>
+    <div class="two">
+      <div><label class="f" for="surface">Surface</label><select id="surface"></select></div>
+      <div><label class="f" for="transparency">Transparency</label><select id="transparency"></select></div>
+    </div>
+    <label class="f">Atmosphere</label><div class="atm" id="atm"></div>
+    <label class="f" for="notes">Notes (free text)</label>
+    <textarea id="notes" placeholder="e.g. blue celadon with crackle, runs thick"></textarea>
+    <label class="f">Hard filters (only show recipes that match)</label>
+    <div class="atm">
+      <label><input type="checkbox" id="f_cone">cone</label><label><input type="checkbox" id="f_surface">surface</label>
+      <label><input type="checkbox" id="f_transparency">transparency</label><label><input type="checkbox" id="f_subtype">subtype</label>
+    </div>
+    <div class="kv" id="textused" style="margin-top:8px"></div>
+  </section>
+
+  <section class="card c-form">
+    <h2><span class="n">3</span>Formula <span class="opt">oxides, optional ingredients</span></h2>
+    <div class="row" style="justify-content:space-between">
+      <div class="seg" id="unit"><button data-u="wt" class="on">weight %</button><button data-u="umf">UMF</button></div>
+      <button id="oxclear">Clear</button>
+    </div>
+    <label class="f" for="oxpaste">Paste an analysis (e.g. copied from Glazy)</label>
+    <div class="row"><textarea id="oxpaste" style="min-height:38px" placeholder="SiO2 64.2  Al2O3 13.1  CaO 9.0  K2O 3.2 …"></textarea><button id="oxparse">Fill</button></div>
+    <div class="oxgrid" id="oxgrid"></div>
+    <label class="f" for="ings">Ingredients (optional - improves formula matching)</label>
+    <textarea id="ings" placeholder="Custer Feldspar 41&#10;Silica 17&#10;+ Red Iron Oxide 8   (+ = addition)"></textarea>
+    <div class="kv" id="formout" style="margin-top:8px"></div>
+  </section>
+
+  <section class="card c-full" id="qcard">
+    <h2><span class="n">1b</span>Your object <span class="opt">Grounding DINO finds the main object · its colour regions · the six attributes it detects (edit them, tick what must match)</span></h2>
+    <div class="qgrid">
+      <div>
+        <div class="qcv" id="qcv"><canvas id="qcvImg"></canvas><canvas id="qcvOv"></canvas><div class="empty" id="qcvEmpty">Drop or paste a photo (card 1): the selected object appears here with its colour regions.</div></div>
+        <label class="small" style="display:block;margin-top:4px"><input type="checkbox" id="qcvShow" checked> region outlines · click a region: auto → important → ignore</label>
+      </div>
+      <div>
+        <label class="small" style="display:block;margin-bottom:4px"><input type="checkbox" data-feat="colour" checked> <b>match colour</b> (regions you mark important count most)</label>
+        <div id="qregs"></div>
+      </div>
+      <div>
+        <div class="small" id="qattrMsg" style="margin-bottom:4px">Attributes: tick the ones the results should share. Without a photo you can still choose values and search by them.</div>
+        <div id="qattrs"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card c-full" id="colcard">
+    <h2><span class="n">4</span>Colours <span class="opt">Color Search Lab V3: words · HEX · photo picker (card 1) · phrases — region-aware, not just the biggest colour</span></h2>
+    <div class="colgrid">
+      <div>
+        <label class="f" for="cphrase" style="margin-top:0">Describe the colours and where they are</label>
+        <div class="row"><input id="cphrase" placeholder="e.g. beige tile with reddish-brown bottom"><button id="cparse">Read</button></div>
+        <div class="kv" id="cnotes"></div>
+        <label class="f" for="cword">Colour word, HEX or picker</label>
+        <div class="row"><input id="cword" placeholder="e.g. celadon, rust, sand"><input id="chex" placeholder="#RRGGBB" style="width:96px">
+          <input type="color" id="cpick" value="#a0be9e" title="pick a colour" style="width:42px;padding:0;height:32px"><button id="chexadd">Add</button></div>
+        <div class="cwords" id="cwords"></div>
+        <div class="small" style="margin-top:6px">From the photo: in card 1 switch to <b>Pick colour (HEX)</b>, click the object, then <b>Add as search colour</b>.</div>
+      </div>
+      <div>
+        <div class="row" style="justify-content:space-between;flex-wrap:wrap;gap:6px"><span class="small">Colours used by the colour component</span>
+          <span class="seg" id="csrc"><button data-c="photo" class="on">from the photo</button><button data-c="typed">typed / picked</button></span></div>
+        <div id="clist" class="clist"></div>
+        <label class="small" style="display:block;margin-top:8px"><input type="checkbox" id="cfam"> a colour of the same family counts as a colour match (Color Lab V3 families)</label>
+        <div id="crelBox"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card c-full">
+    <div class="ctl">
+      <div>
+        <div class="small" style="margin-bottom:4px">Search</div>
+        <div class="seg" id="stype"><button data-t="objects" class="on">Objects</button><button data-t="recipes">Recipes (previous model)</button></div>
+        <div class="seg" id="smode" style="margin-top:6px"><button data-m="balanced" class="on">Balanced</button><button data-m="shape">Shape</button><button data-m="glaze">Glaze / surface</button><button data-m="colour">Colour</button></div>
+        <div class="small" id="mweights" style="margin-top:4px;max-width:520px"></div>
+        <div id="priobox">
+          <div class="small" style="margin-top:8px;display:flex;gap:6px;align-items:center"><b style="color:var(--ink)">Priority of the photo part</b> (always adds up to 1)
+            <button class="ib" data-help="priority" title="How the priority works">!</button><span id="priotag"></span></div>
+          <div class="priobar" id="priobar"></div>
+          <div class="prio">
+            <span><span class="sw3" style="background:#E69F00"></span>Shape</span><input type="range" min="0" max="1" step="0.01" data-pr="shape" aria-label="shape priority"><span class="v" id="pv_shape"></span>
+            <span><span class="sw3" style="background:#0072B2"></span>Glaze / surface</span><input type="range" min="0" max="1" step="0.01" data-pr="glaze" aria-label="glaze / surface priority"><span class="v" id="pv_glaze"></span>
+            <span><span class="sw3" style="background:#CC79A7"></span>Colour</span><input type="range" min="0" max="1" step="0.01" data-pr="colour" aria-label="colour priority"><span class="v" id="pv_colour"></span>
+          </div>
+          <div class="small" id="priotxt" style="max-width:520px"></div>
+        </div>
+        <label class="small" style="display:block;margin-top:4px"><input type="checkbox" id="f_reviewed"> only reviewed tiles (review_tile category)</label>
+      </div>
+      <div id="rweights" hidden>
+        <div class="small" style="margin-bottom:4px">Weights (validated default: image 0.40 ≥ text 0.35 ≥ formula 0.25)</div>
+        <div class="wt"><span>Image</span><input type="range" id="w_image" min="0" max="1" step="0.05"><span id="v_image"></span></div>
+        <div class="wt"><span>Text</span><input type="range" id="w_text" min="0" max="1" step="0.05"><span id="v_text"></span></div>
+        <div class="wt"><span>Formula</span><input type="range" id="w_formula" min="0" max="1" step="0.05"><span id="v_formula"></span></div>
+        <button id="wreset" style="margin-top:4px;padding:3px 10px;font-size:12px">Reset weights</button>
+      </div>
+      <div>
+        <label class="small" for="ksel" style="display:block;margin-bottom:4px">Top K (Hit / Precision / Recall @K)</label>
+        <select id="ksel"><option>3</option><option>5</option><option selected>10</option><option>15</option><option>20</option></select>
+      </div>
+      <div style="width:210px">
+        <label class="f" for="trueid" style="margin-top:0">True Glazy recipe ID (optional)</label>
+        <input id="trueid" placeholder="e.g. 1201 - if you know it">
+      </div>
+      <div class="sp" style="flex:1"></div>
+      <div style="text-align:right">
+        <button class="primary" id="go">Search</button>
+        <div class="small" id="gomsg" style="margin-top:4px"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card c-full" id="rescard">
+    <h2>Results</h2>
+    <div class="stats" id="stats"></div>
+    <div id="results"><div class="empty">Add a photo, some tags or a formula, then press Search (or Enter).</div></div>
+    <div class="row" style="margin-top:12px;justify-content:space-between">
+      <span class="small">“Rule” = automatic relevance used in the report: colour within ΔE2000 20 of your photo and the cone / surface / transparency you entered match.
+        Your marks are your own judgement.</span>
+      <button id="savemarks" disabled>Save my marks to the log</button>
+    </div>
+  </section>
+
+  <section class="card c-full">
+    <h2>Session evaluation <span class="opt">all searches in work/queries/session_log.json</span> <button class="ib" data-help="metrics" title="What Hit Rate, Precision, Recall and nDCG mean">!</button></h2>
+    <div class="tw" id="sess"></div>
+    <div class="row" style="margin-top:10px;justify-content:space-between">
+      <span class="small"><b>Hit Rate@K</b> = share of searches with at least one relevant result in the top K (this was called "Recall@K" before).
+        <b>Precision@K</b> = share of the top K that is relevant. <b>Recall@K</b> = share of <i>all</i> relevant objects that reach the top K — shown only for the true recipe, whose objects are the complete relevant set.</span>
+      <a href="/api/log.csv" download><button>Export CSV</button></a>
+    </div>
+  </section>
+</main>
+<div class="mdl" id="mdl" hidden role="dialog" aria-modal="true" aria-labelledby="mdlt"><div class="mdlbox"><button class="x" id="mdlx" aria-label="close">✕</button><div id="mdlbody"></div></div></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const OC = ["var(--o1)","var(--o2)","var(--o3)","var(--o4)","var(--o5)","var(--o6)","var(--o7)","var(--o8)"];
+let META = null, QID = null, OBJS = [], SEL = new Set(), K = 10, UNIT = "wt", LAST = null, MARKS = {}, BUSY = false;
+
+// online (Hugging Face ZeroGPU): inside the huggingface.co page, ask the page for the visitor's ZeroGPU header (the same
+// handshake as Gradio's own page) so GPU time counts on the visitor's own daily allowance; no effect on this PC
+const HF_PARENT = location.hostname.endsWith(".hf.space") && window.parent !== window ? "https://huggingface.co" : null;
+let ZG_OK = false;
+if (HF_PARENT) {
+  addEventListener("message", e => { if (e.origin === HF_PARENT && e.data === "supports-zerogpu-headers") ZG_OK = true; });
+  window.parent.postMessage("supports-zerogpu-headers", HF_PARENT);
+}
+function zeroHeaders() {
+  return new Promise(res => {
+    if (!HF_PARENT || !ZG_OK) return res({});
+    const ch = new MessageChannel(), t = setTimeout(() => res({}), 2000);
+    ch.port1.onmessage = ({data}) => { clearTimeout(t); ch.port1.close(); res(data && typeof data === "object" ? data : {}); };
+    window.parent.postMessage("zerogpu-headers", HF_PARENT, [ch.port2]);
+  });
+}
+
+async function api(path, body) {
+  const zh = body ? await zeroHeaders() : {};
+  const r = await fetch(path, body ? {method: "POST", headers: {...zh, "Content-Type": "application/json"}, body: JSON.stringify(body)} : {});
+  const j = await r.json().catch(() => ({error: "bad response (" + r.status + ")"}));
+  if (!r.ok || j.error) throw new Error(j.error || ("HTTP " + r.status));
+  return j;
+}
+function fillSelect(el, vals, blank) {
+  el.innerHTML = `<option value="">${blank}</option>` + vals.map(v => `<option>${esc(v)}</option>`).join("");
+}
+function setWeights(w) { for (const m of ["image", "text", "formula"]) { $("w_" + m).value = w[m]; $("v_" + m).textContent = (+w[m]).toFixed(2); } }
+
+async function init() {
+  try { META = await api("/api/meta"); }
+  catch (e) { $("hdr").textContent = "The local server is not running - start RUN_GLAZE_SEARCH.bat"; return; }
+  const m = META.model, t = META.timings || {};
+  const os_ = META.object_search;
+  $("hdr").textContent = `${os_ ? os_.objects.toLocaleString() + " segmented objects · " : ""}${META.gallery.toLocaleString()} recipes · model: image ${m.image}, text ${m.text}, formula ${m.formula} (${m.dim}-d) · GPU ${t.gpu_GB ?? "?"} GB · runs offline`;
+  if (!/^(127\.0\.0\.1|localhost)$/.test(location.hostname))       // the online Space (Hugging Face ZeroGPU)
+    $("hdr").textContent = `${os_ ? os_.objects.toLocaleString() + " segmented objects · " : ""}${META.gallery.toLocaleString()} recipes · online demo on Hugging Face's free GPU: `
+      + `each visitor has a small daily GPU allowance (a new photo uses about 2 - 30 s of it; most searches use none)`
+      + (HF_PARENT ? "; log in to huggingface.co for a larger allowance" : "; open it on huggingface.co/spaces/FBIWarninggg/glaze_search and log in for a larger allowance")
+      + "; uploads and the session log are cleared when the Space restarts";
+  if (!os_) { STYPE = "recipes"; setType("recipes"); $("stype").querySelector('[data-t="objects"]').disabled = true; }
+  modeText(); setPrio(presetPrio()); renderColours();
+  $("subtypes").innerHTML = META.subtypes.map(s => `<option value="${esc(s)}">`).join("");
+  fillSelect($("cone_lo"), META.cones, "from (any)"); fillSelect($("cone_hi"), META.cones, "to (any)");
+  fillSelect($("surface"), META.surfaces, "any"); fillSelect($("transparency"), META.transparencies, "any");
+  $("atm").innerHTML = META.atmospheres.map(a => `<label><input type="checkbox" value="${esc(a)}">${esc(a)}</label>`).join("");
+  $("oxgrid").innerHTML = META.oxides.map(o => `<label class="ox"><span>${esc(o)}</span><input type="number" step="any" min="0" data-ox="${esc(o)}" placeholder=" "></label>`).join("");
+  setWeights(META.weights);
+  const oc = META.oxide_only || {};
+  if (oc.choice) {
+    const v = oc["validation_F->T+I"] || {};
+    $("formout").innerHTML = `<span class="small">Without ingredients the oxide-only head is used (validation formula→text+image Recall@5: ${pct(v["oxides only, oxide-only head"]?.["R@5"])} vs ${pct(v["oxides + ingredients (reference)"]?.["R@5"])} with ingredients).</span>`;
+  }
+  loadLog();
+}
+const pct = v => v == null ? "-" : (100 * v).toFixed(1) + "%";
+
+// ---------------------------------------------------------------- photo in
+const drop = $("drop");
+drop.addEventListener("click", () => $("file").click());
+drop.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("file").click(); } });
+$("file").addEventListener("change", e => { if (e.target.files[0]) sendFile(e.target.files[0], "file"); e.target.value = ""; });
+["dragenter", "dragover"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add("over"); }));
+["dragleave", "drop"].forEach(ev => drop.addEventListener(ev, () => drop.classList.remove("over")));
+document.addEventListener("dragover", e => e.preventDefault());
+document.addEventListener("drop", e => {
+  e.preventDefault();
+  const dt = e.dataTransfer;
+  const f = [...(dt.files || [])].find(f => f.type.startsWith("image/"));
+  if (f) return sendFile(f, "drop");
+  const html = dt.getData("text/html"), uri = dt.getData("text/uri-list") || dt.getData("text/plain");
+  const src = (html && (html.match(/<img[^>]+src="([^"]+)"/i) || [])[1]) || (uri || "").split("\n")[0].trim();
+  if (src && /^data:image\//.test(src)) return segment({image: src, source: "drop"});
+  if (src && /^https?:\/\//.test(src)) { $("url").value = src; return segment({url: src}); }
+  showSegMsg("No image found in what was dropped.", true);
+});
+document.addEventListener("paste", e => {
+  const items = [...(e.clipboardData?.items || [])];
+  const it = items.find(i => i.type.startsWith("image/"));
+  if (it) { e.preventDefault(); return sendFile(it.getAsFile(), "paste"); }
+  const tag = (document.activeElement?.tagName || "").toLowerCase();
+  if (tag === "input" || tag === "textarea") return;
+  const txt = e.clipboardData?.getData("text") || "";
+  if (/^https?:\/\/\S+$/.test(txt.trim())) { $("url").value = txt.trim(); segment({url: txt.trim()}); }
+});
+$("urlgo").addEventListener("click", () => { const u = $("url").value.trim(); if (u) segment({url: u}); });
+$("clearimg").addEventListener("click", () => { QID = null; OBJS = []; SEL.clear(); ACT = null; LBL = null; PICK = null; $("segview").hidden = true; $("segmsg").innerHTML = ""; QOBJ = null; QREG = null; QIMP = {}; renderQobj(); renderQregs(); });
+
+function sendFile(f, source) {
+  if (f.size > 30e6) return showSegMsg("Image larger than 30 MB.", true);
+  const rd = new FileReader();
+  rd.onload = () => segment({image: rd.result, source});
+  rd.readAsDataURL(f);
+}
+function showSegMsg(t, err) { $("segmsg").innerHTML = `<div class="msg${err ? " err" : ""}">${t}</div>`; }
+async function segment(body) {
+  showSegMsg(`<span class="busy"></span>Segmenting… (Grounding DINO + SAM 2.1 + CLIP on the GPU)`);
+  try {
+    const r = await api("/api/segment", body);
+    QID = r.qid; OBJS = r.objects; SEL = new Set(r.default_selection);
+    ACT = r.default_selection.length ? r.default_selection[0] : (r.objects[0] ? r.objects[0].index : null);
+    QREG = null; QIMP = {}; renderQregs();
+    $("overlay").src = r.overlay + "?t=" + Date.now();
+    loadLabels(r.labels);
+    renderObjs();
+    $("seginfo").textContent = `${r.objects.length} object(s) · ${r.mode.toLowerCase().replace(/_/g, " ")} · ${r.seconds_total} s · saved as ${r.qid}`;
+    $("segview").hidden = false;
+    loadQobj();
+    let msg = r.objects.length ? "" : `<div class="msg err">No ceramic object found - the search will use text / formula only.</div>`;
+    if (r.database_duplicate) msg += `<div class="msg">This photo is (almost) the same as the database photo of recipe
+      <a href="/photo/${esc(r.database_duplicate.recipe_id)}.jpg" target="_blank">#${esc(r.database_duplicate.recipe_id)}</a> (fingerprint distance ${r.database_duplicate.distance}${r.database_duplicate.pixel_corr != null ? `, pixels match ${r.database_duplicate.pixel_corr}` : ""}).
+      Its objects should rank near the top (unless text or ticked attributes pull them down), so this search does not test a new photo; it is left out of the session evaluation.</div>`;
+    $("segmsg").innerHTML = msg;
+  } catch (e) { showSegMsg("Could not process the image: " + esc(e.message), true); }
+}
+// ---------------------------------------------------------------- photo stage: select objects / pick a colour
+let ACT = null, PMODE = "select", LBL = null, HOV = 0, PICK = null;
+function activeObj() { return ACT != null && SEL.has(ACT) ? ACT : ([...SEL][0] ?? null); }
+function objOf(i) { return OBJS.find(o => o.index === i); }
+async function loadLabels(url) {
+  LBL = null; HOV = 0; $("ptip").hidden = true; $("pickbox").hidden = true;
+  if (url) {
+    try {
+      const im = new Image(); im.src = url + "?t=" + Date.now(); await im.decode();
+      const c = document.createElement("canvas"); c.width = im.naturalWidth; c.height = im.naturalHeight;
+      const x = c.getContext("2d", {willReadFrequently: true}); x.drawImage(im, 0, 0);
+      const px = x.getImageData(0, 0, c.width, c.height).data, L = new Uint8Array(c.width * c.height);
+      for (let i = 0; i < L.length; i++) L[i] = px[i * 4];
+      LBL = {w: c.width, h: c.height, L};
+    } catch (e) { LBL = null; }
+  }
+  const cv = $("pcv");
+  if (LBL) { cv.width = LBL.w; cv.height = LBL.h; } else { cv.width = cv.height = 1; }
+  $("objdet").open = !LBL;                       // photos without an object map (uploaded before 2026-10-20): use the list
+  setPMode(PMODE);
+  drawStage();
+}
+function setPMode(m) {
+  PMODE = m;
+  [...$("pmode").children].forEach(b => b.classList.toggle("on", b.dataset.pm === m));
+  $("pstage").classList.toggle("pick", m === "pick");
+  $("pickbox").hidden = m !== "pick" || !PICK;
+  $("pmhint").textContent = !LBL ? "This photo has no object map (uploaded earlier) - use the object list below."
+    : m === "select" ? "Hover to see an object · click = use it · Ctrl+click = add / remove more"
+    : "Click on the photo: the colour is averaged inside the object under the cursor";
+  HOV = 0; $("ptip").hidden = true; drawStage();
+}
+$("pmode").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setPMode(b.dataset.pm); });
+function labelAt(e) {
+  if (!LBL) return 0;
+  const r = $("pcv").getBoundingClientRect();
+  const x = Math.floor((e.clientX - r.left) / r.width * LBL.w), y = Math.floor((e.clientY - r.top) / r.height * LBL.h);
+  return x >= 0 && y >= 0 && x < LBL.w && y < LBL.h ? LBL.L[y * LBL.w + x] : 0;
+}
+function drawStage() {
+  const cv = $("pcv"), ctx = cv.getContext("2d");
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  if (!LBL) return;
+  const {w, h, L} = LBL, im = ctx.createImageData(w, h), d = im.data, act = activeObj();
+  // pixel i of object v lies within r pixels of the object's border (outline drawn inside the object)
+  const edge = (i, v, r) => { const x = i % w; for (let s = 1; s <= r; s++) if ((x + s < w && L[i + s] !== v) || (x >= s && L[i - s] !== v) ||
+    (i + s * w < L.length && L[i + s * w] !== v) || (i >= s * w && L[i - s * w] !== v)) return true; return false; };
+  for (let i = 0; i < L.length; i++) {
+    const v = L[i];
+    let c = null;
+    if (HOV) {
+      if (v === HOV) c = edge(i, v, 2) ? [255, 210, 0, 255] : [255, 210, 0, 60];
+      else c = [20, 20, 20, 110];                                  // dim everything else while hovering
+    } else if (v && v === act) c = edge(i, v, 3) ? [255, 210, 0, 255] : [255, 210, 0, 55];       // active: thick yellow outline
+    else if (v && SEL.has(v)) c = edge(i, v, 2) ? [255, 255, 255, 255] : [255, 255, 255, 40];   // other selected: white outline
+    if (c) d.set(c, i * 4);
+  }
+  ctx.putImageData(im, 0, 0);
+}
+$("pcv").addEventListener("mousemove", e => {
+  const v = labelAt(e), tip = $("ptip");
+  if (v !== HOV) { HOV = v; requestAnimationFrame(drawStage); }
+  if (!v) { tip.hidden = true; return; }
+  const o = objOf(v), r = $("pstage").getBoundingClientRect();
+  tip.hidden = false; tip.style.left = (e.clientX - r.left) + "px"; tip.style.top = (e.clientY - r.top) + "px";
+  tip.textContent = `#${v} · ceramic ${o && o.p_ceramic != null ? o.p_ceramic.toFixed(2) : "?"} · ${o ? (100 * o.area_frac).toFixed(1) : "?"}% of photo` +
+    (PMODE === "select" ? (SEL.has(v) ? (v === activeObj() ? " · active" : " · selected") : " · click to use") : " · click to pick its colour here");
+});
+$("pcv").addEventListener("mouseleave", () => { HOV = 0; $("ptip").hidden = true; drawStage(); });
+$("pcv").addEventListener("click", async e => {
+  const v = labelAt(e);
+  if (PMODE === "select") {
+    if (!v) return;
+    if (e.ctrlKey || e.metaKey) {
+      if (SEL.has(v)) { SEL.delete(v); if (ACT === v) ACT = [...SEL][0] ?? null; } else { SEL.add(v); ACT = v; }
+    } else { SEL = new Set([v]); ACT = v; }
+    renderObjs(); drawStage(); loadQobj(); if (LAST) search();
+    return;
+  }
+  await pickColour(e, v);
+});
+// colour picker: 7 x 7 average on the original photo, only pixels of the object under the cursor
+let ORIG = null;
+async function pickColour(e, v) {
+  if (!QID) return;
+  if (!ORIG || ORIG.qid !== QID) {
+    const o = new Image(); o.src = `/q/${QID}/original.jpg`; await o.decode();
+    const c = document.createElement("canvas"); c.width = o.naturalWidth; c.height = o.naturalHeight; c.getContext("2d").drawImage(o, 0, 0);
+    ORIG = {qid: QID, ctx: c.getContext("2d", {willReadFrequently: true}), w: c.width, h: c.height};
+  }
+  const r = $("pcv").getBoundingClientRect();
+  const fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
+  const x = Math.round(fx * ORIG.w), y = Math.round(fy * ORIG.h), R = 3;
+  const d = ORIG.ctx.getImageData(Math.max(0, x - R), Math.max(0, y - R), 2 * R + 1, 2 * R + 1).data;
+  let s = [0, 0, 0], n = 0, all = [0, 0, 0], na = 0;
+  for (let dy = -R; dy <= R; dy++) for (let dx = -R; dx <= R; dx++) {
+    const xx = x + dx, yy = y + dy;
+    if (xx < 0 || yy < 0 || xx >= ORIG.w || yy >= ORIG.h) continue;
+    const k = ((yy - Math.max(0, y - R)) * (2 * R + 1) + (xx - Math.max(0, x - R))) * 4;
+    if (k < 0 || k + 2 >= d.length) continue;
+    all[0] += d[k]; all[1] += d[k + 1]; all[2] += d[k + 2]; na++;
+    const lv = LBL ? LBL.L[Math.min(LBL.h - 1, Math.floor(yy / ORIG.h * LBL.h)) * LBL.w + Math.min(LBL.w - 1, Math.floor(xx / ORIG.w * LBL.w))] : 0;
+    if (v && lv === v) { s[0] += d[k]; s[1] += d[k + 1]; s[2] += d[k + 2]; n++; }
+  }
+  const use = n ? s : all, m = n || na;
+  if (!m) return;
+  const hex = "#" + use.map(c => Math.round(c / m).toString(16).padStart(2, "0")).join("").toUpperCase();
+  PICK = {hex, obj: v || null, n: m};
+  $("pkswatch").style.background = hex; $("pkhex").value = hex;
+  $("pkfrom").textContent = v ? `object #${v} · ${m} pixel(s) averaged inside its outline` : `outside every object · ${m} pixel(s) averaged`;
+  $("pkmsg").innerHTML = v ? "" : `<span class="no">not on a ceramic object — background colour?</span>`;
+  $("pickbox").hidden = false;
+}
+$("pkhex").addEventListener("input", e => {
+  let h = e.target.value.trim(); if (!h.startsWith("#")) h = "#" + h;
+  if (okHex(h)) { $("pkswatch").style.background = h; $("pkmsg").textContent = ""; } else $("pkmsg").textContent = "HEX must look like #A1B2C3";
+});
+$("pkcopy").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText($("pkhex").value.trim()); $("pkmsg").textContent = "copied"; } catch { $("pkhex").select(); $("pkmsg").textContent = "press Ctrl+C to copy"; }
+});
+$("pkadd").addEventListener("click", () => {
+  let h = $("pkhex").value.trim(); if (!h.startsWith("#")) h = "#" + h;
+  if (!okHex(h)) { $("pkmsg").textContent = "HEX must look like #A1B2C3"; return; }
+  addColour({hex: h.toUpperCase(), label: PICK && PICK.obj ? `picked on object #${PICK.obj}` : "picked on photo"});
+  $("pkmsg").innerHTML = `added to card 4 · it is used when card 4 is set to <b>typed / picked</b>`;
+});
+function renderActInfo() {
+  const a = activeObj();
+  $("actinfo").innerHTML = OBJS.length ? `Active object: <b>#${a ?? "-"}</b> (used by the object search and card 1b) · selected: ${[...SEL].sort((x, y) => x - y).map(i => "#" + i).join(", ") || "none"}` : "";
+}
+function renderObjs() {
+  renderActInfo();
+  $("objs").innerHTML = OBJS.map((o, k) => `<div class="obj${SEL.has(o.index) ? " on" : ""}${o.index === activeObj() ? " act" : ""}" data-i="${o.index}" role="checkbox" aria-checked="${SEL.has(o.index)}" tabindex="0">
+    <input type="checkbox" ${SEL.has(o.index) ? "checked" : ""} tabindex="-1"><img src="${o.thumb}" alt="">
+    <div class="d" style="--c:${OC[k % OC.length]}"><span class="k">#${o.index}</span> ceramic ${o.p_ceramic == null ? "?" : o.p_ceramic.toFixed(2)}<br>
+    ${(100 * o.area_frac).toFixed(1)}% of photo<br>${o.palette.map(p => `<span class="sw" style="background:${p[0]}" title="${p[0]} ${(100 * p[1]).toFixed(0)}%"></span>`).join(" ")}</div></div>`).join("");
+  document.querySelectorAll(".obj").forEach(el => {
+    const tog = () => {
+      const i = +el.dataset.i;
+      if (SEL.has(i)) { SEL.delete(i); if (ACT === i) ACT = [...SEL][0] ?? null; } else { SEL.add(i); ACT = i; }
+      renderObjs(); drawStage(); loadQobj(); if (LAST) search();
+    };
+    el.addEventListener("click", tog);
+    el.addEventListener("keydown", e => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); tog(); } });
+  });
+}
+
+// ---------------------------------------------------------------- formula
+$("unit").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; UNIT = b.dataset.u; [...$("unit").children].forEach(x => x.classList.toggle("on", x === b)); });
+$("oxclear").addEventListener("click", () => { document.querySelectorAll("[data-ox]").forEach(i => i.value = ""); $("oxpaste").value = ""; $("ings").value = ""; });
+$("oxparse").addEventListener("click", () => {
+  const txt = $("oxpaste").value, re = /\b([A-Z][a-z]?\d*(?:[A-Z][a-z]?\d*)*)\s*[:=]?\s*(\d+(?:[.,]\d+)?)/g;
+  let m, n = 0, extra = [];
+  while ((m = re.exec(txt))) {
+    const el = document.querySelector(`[data-ox="${m[1]}"]`);
+    if (el) { el.value = m[2].replace(",", "."); n++; } else if (/O/.test(m[1])) extra.push(m[1]);
+  }
+  $("formout").innerHTML = `<span class="small">Filled ${n} oxide(s).${extra.length ? " Not in the model's oxide list (ignored by the model's columns): " + esc(extra.join(", ")) : ""}</span>`;
+});
+function oxides() { const o = {}; document.querySelectorAll("[data-ox]").forEach(i => { if (i.value !== "" && +i.value > 0) o[i.dataset.ox] = +i.value; }); return o; }
+
+// ---------------------------------------------------------------- search
+for (const m of ["image", "text", "formula"]) $("w_" + m).addEventListener("input", e => $("v_" + m).textContent = (+e.target.value).toFixed(2));
+$("wreset").addEventListener("click", () => setWeights(META.weights));
+$("ksel").addEventListener("change", e => { K = +e.target.value; if (LAST) render(); });
+$("go").addEventListener("click", search);
+document.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && document.activeElement?.tagName !== "TEXTAREA" && !BUSY) { const t = document.activeElement?.tagName; if (t === "INPUT" || t === "SELECT" || t === "BODY") { e.preventDefault(); search(); } } });
+
+let AGAIN = false;          // a search asked for while another one runs is done right after it
+async function searchRecipes() {
+  if (BUSY) { AGAIN = true; return; }
+  const body = {
+    qid: QID, selected: [...SEL],
+    tags: {subtype: $("subtype").value.trim(), cone_lo: $("cone_lo").value, cone_hi: $("cone_hi").value, surface: $("surface").value,
+           transparency: $("transparency").value, atmospheres: [...document.querySelectorAll("#atm input:checked")].map(i => i.value)},
+    notes: $("notes").value, oxides: oxides(), oxide_unit: UNIT, ingredients: $("ings").value,
+    weights: {image: +$("w_image").value, text: +$("w_text").value, formula: +$("w_formula").value},
+    filters: {cone: $("f_cone").checked, surface: $("f_surface").checked, transparency: $("f_transparency").checked, subtype: $("f_subtype").checked},
+    true_id: $("trueid").value.trim()
+  };
+  BUSY = true; $("go").disabled = true; $("gomsg").innerHTML = `<span class="busy"></span>searching…`;
+  try {
+    LAST = await api("/api/search", body); LAST.kind = "recipes"; MARKS = {};
+    $("gomsg").textContent = `${LAST.seconds} s · logged`;
+    const q = LAST.query || {};
+    $("textused").innerHTML = (q.text_used ? `<b>Model reads:</b> ${esc(q.text_used)}` : "") +
+      (q.text_warning ? `<div class="no" style="margin-top:4px">⚠ ${esc(q.text_warning)}</div>` : "");
+    let f = "";
+    if (q.formula_path) f += `<b>Formula:</b> ${esc(q.formula_path)}<br>`;
+    if (q.formula_note) f += `<span class="no">${esc(q.formula_note)}</span><br>`;
+    if (q.umf) f += `<b>UMF:</b> ${Object.entries(q.umf).slice(0, 10).map(([k, v]) => `${esc(k)} ${v}`).join(" · ")}${q.si_al ? ` · <b>Si:Al</b> ${q.si_al}` : ""}`;
+    if (q.ingredients_parsed) f += `<br>${q.ingredients_parsed} ingredient line(s) read`;
+    if (f) $("formout").innerHTML = f;
+    render(); loadLog();
+  } catch (e) { $("gomsg").innerHTML = `<span class="no">${esc(e.message)}</span>`; }
+  BUSY = false; $("go").disabled = false;
+  if (AGAIN) { AGAIN = false; search(); }
+}
+
+function render() {
+  if (LAST && LAST.kind === "objects") return renderObjects();
+  const r = LAST, res = (r.results || []).slice(0, K);
+  const st = [];
+  st.push(stat("Searched", `${r.gallery.toLocaleString()}`, r.filters_applied.length ? "recipes after filters: " + r.filters_applied.join(", ") : "database recipes",));
+  st.push(stat("Query", (r.query_modalities || []).map(m => m[0].toUpperCase() + m.slice(1)).join(" + ") || "-",
+    Object.entries(r.weights_used || {}).map(([m, w]) => `${m} ${w.toFixed(2)}`).join(" · ")));
+  if (r.auto) st.push(stat(`Rule Hit@${K}`, yn(r.auto["Hit@" + K]), `P@${K} ${pct(r.auto["P@" + K])} · ${r.auto.relevant_in_gallery} relevant in gallery`));
+  else st.push(stat(`Rule Hit@${K}`, "n/a", "needs a photo colour + cone, surface or transparency"));
+  const mk = manual();
+  st.push(stat(`Your Hit@${K}`, mk ? yn(mk["Hit@" + K]) : "-", mk ? `P@${K} ${pct(mk["P@" + K])}` : "mark results ✓ / ✗ below"));
+  if (r.true_recipe) st.push(stat(`True recipe #${esc(r.true_recipe.id)}`, r.true_recipe.rank ? "rank " + r.true_recipe.rank : "-",
+    r.true_recipe.rank ? `Hit@${K}: ${r.true_recipe.rank <= K ? "yes" : "no"}` : esc(r.true_recipe.note || "")));
+  if (r.database_photo) st.push(stat("Note", "database photo", `same photo as recipe #${esc(r.database_photo.recipe_id)} - not counted in the session evaluation`));
+  if (r.palette?.length) st.push(stat("Photo colour", r.palette.map(p => `<span class="sw" style="background:${p[0]}" title="${p[0]}"></span>`).join(" "), "dominant colours of the selected objects"));
+  $("stats").innerHTML = st.join("");
+  if (!res.length) { $("results").innerHTML = `<div class="empty">${esc(r.message || "No results - add a photo, tags or a formula" + (r.filters_applied.length ? ", or switch off a hard filter" : "") + ".")}</div>`; $("savemarks").disabled = true; return; }
+  $("results").innerHTML = `<div class="grid">${res.map(x => card(x)).join("")}</div>`;
+  document.querySelectorAll(".mk button").forEach(b => b.addEventListener("click", () => {
+    const id = b.dataset.id, v = b.dataset.v === "1";
+    MARKS[id] === v ? delete MARKS[id] : (MARKS[id] = v); render();
+  }));
+  $("savemarks").disabled = !Object.keys(MARKS).length;
+}
+const yn = v => v ? `<span class="yes">✓ yes</span>` : `<span class="no">✗ no</span>`;
+const stat = (l, v, s) => `<div class="stat"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s || ""}</div></div>`;
+function manual() {
+  if (!Object.keys(MARKS).length) return null;
+  const ids = (LAST.results || []).map(x => x.id ?? x.object_id), rel = ids.map(i => MARKS[i] === true), o = {};
+  for (const k of [3, 5, 10]) { o["Hit@" + k] = rel.slice(0, k).some(Boolean); o["P@" + k] = rel.slice(0, k).filter(Boolean).length / k; }
+  return o;
+}
+function card(x) {
+  const cone = x.cone_lo ? (x.cone_hi && x.cone_hi !== x.cone_lo ? `cone ${x.cone_lo}–${x.cone_hi}` : `cone ${x.cone_lo}`) : "cone ?";
+  const rule = x.relevant == null ? "" : x.relevant ? `<span class="badge ok">rule: relevant</span>` : `<span class="badge nok">rule: not relevant</span>`;
+  const m = MARKS[x.id];
+  return `<div class="rc"><div class="im"><img src="/thumb/${x.id}.jpg" loading="lazy" alt="" onclick="window.open('/photo/${x.id}.jpg','_blank')"><span class="rk">${x.rank}</span></div>
+  <div class="b"><div class="nm">${esc(x.name)}</div>
+  <div><a href="${esc(x.url)}" target="_blank" rel="noopener">Glazy #${x.id}</a> · score ${x.score.toFixed(3)}</div>
+  <div class="tags">${esc(x.subtype || "?")}<br>${cone} · ${esc(x.surface || "surface ?")} · ${esc(x.transparency || "transparency ?")}${x.atmospheres ? "<br>" + esc(x.atmospheres.replace(/;/g, ", ")) : ""}</div>
+  <div>${(x.palette || []).map(p => `<span class="sw" style="background:${p[0]}" title="${p[0]}"></span>`).join(" ")} ${x.dE != null ? `ΔE ${x.dE}` : ""} ${rule}</div>
+  <div class="mk"><button class="y${m === true ? " on" : ""}" data-id="${x.id}" data-v="1">✓ relevant</button><button class="n${m === false ? " on" : ""}" data-id="${x.id}" data-v="0">✗ not</button></div></div></div>`;
+}
+$("savemarks").addEventListener("click", async () => {
+  if (!LAST) return;
+  try { await api("/api/mark", {entry: LAST.entry, marks: MARKS}); $("savemarks").textContent = "Saved ✓"; setTimeout(() => $("savemarks").textContent = "Save my marks to the log", 1500); loadLog(); }
+  catch (e) { alert(e.message); }
+});
+
+// ---------------------------------------------------------------- session log
+async function loadLog() {
+  let s; try { s = await api("/api/log"); } catch { return; }
+  const row = (name, d) => `<tr><td>${name}</td><td class="num">${d.n}</td>${[3, 5, 10].map(k => `<td class="num">${pct(d["HitRate@" + k])}</td>`).join("")}</tr>`;
+  let h = `<table><thead><tr><th>Relevance source</th><th class="num">searches</th><th class="num">Hit Rate@3</th><th class="num">Hit Rate@5</th><th class="num">Hit Rate@10</th></tr></thead><tbody>
+    ${row("Rule (colour ΔE ≤ 20 + your cone / surface / transparency)", s.auto)}${row("Your marks", s.manual)}${row("True recipe ID found", s.true)}</tbody></table>
+    ${s.excluded_db_photo ? `<div class="small" style="margin-top:4px">${s.excluded_db_photo} search(es) with a photo that is already in the database are not counted.</div>` : ""}`;
+  if (s.entries.length) {
+    h += `<div class="small" style="margin:12px 0 4px">Last searches (${s.n} in total)</div><table><thead><tr><th>time</th><th>query</th><th>text</th><th class="num">gallery</th><th>evaluated with (rules)</th><th>strict @3/10/20</th><th>true rank</th><th class="num">s</th></tr></thead><tbody>` +
+      s.entries.slice(0, 12).map(e => `<tr><td>${esc(e.time.slice(5))}</td><td>${esc(e.modalities.join("+"))}</td><td>${esc((e.text || "").slice(0, 70))}</td><td class="num">${e.gallery}</td>
+      <td class="small">${e.eval ? esc(Object.entries(e.eval.values || {}).map(([c, v]) => `${c} = ${v}`).join(" · ")) : "-"}</td><td>${e.eval && e.eval.metrics && e.eval.metrics.strict ? [3, 10, 20].map(k => e.eval.metrics.strict["Hit@" + k] ? "✓" : "✗").join(" ") : "-"}</td><td>${e.true?.rank ?? "-"}</td><td class="num">${e.seconds}</td></tr>`).join("") + `</tbody></table>`;
+  }
+  $("sess").innerHTML = h + sessionEval(s) + sessionFeatures(s.features);
+}
+const hits = a => a ? [3, 5, 10].map(k => a["Hit@" + k] ? "✓" : "✗").join(" ") : "-";
+
+$("theme").addEventListener("click", () => {
+  const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme = dark ? "light" : "dark";
+});
+// ---------------------------------------------------------------- object search (Balanced / Shape / Glaze / Colour)
+let STYPE = "objects", SMODE = "balanced", CSRC = "photo", COLOURS = [], QIMP = {}, QREG = null, TIMER = null;
+const POS = {anywhere: null, top: [0.5, 0.18], bottom: [0.5, 0.82], left: [0.18, 0.5], right: [0.82, 0.5], center: [0.5, 0.5], rim: [0.5, 0.08], foot: [0.5, 0.9]};
+function search() { return STYPE === "objects" ? searchObjects() : searchRecipes(); }
+function setType(t) {
+  STYPE = t;
+  [...$("stype").children].forEach(b => b.classList.toggle("on", b.dataset.t === t));
+  $("smode").hidden = $("mweights").hidden = t !== "objects";
+  $("rweights").hidden = t === "objects";
+  $("f_reviewed").parentElement.hidden = t !== "objects";
+}
+function modeText() {
+  const m = META && META.object_search && META.object_search.modes[SMODE];
+  $("mweights").textContent = m ? `${m.label} preset (validated weights, the sliders start here) — ` + Object.entries(m.weights).map(([c, w]) => `${c} ${(+w).toFixed(2)}`).join(" · ") +
+    ` (validation nDCG@10 ${m["val_nDCG@10"]}). Text / formula, when given, are added at 0.35 / 0.25 next to 0.40 for the image.` : "";
+}
+$("stype").addEventListener("click", e => { const b = e.target.closest("button"); if (!b || b.disabled) return; setType(b.dataset.t); $("priobox").hidden = b.dataset.t !== "objects"; if (LAST) search(); });
+$("smode").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  SMODE = b.dataset.m; [...$("smode").children].forEach(x => x.classList.toggle("on", x === b));
+  setPrio(presetPrio()); modeText(); if (LAST && STYPE === "objects") search();
+});
+// ---- priority sliders: shape / glaze-surface / colour always add up to 1; the mode buttons are presets
+const PCOL = {shape: "#E69F00", glaze: "#0072B2", colour: "#CC79A7"}, PNAME = {shape: "shape", glaze: "glaze / surface", colour: "colour"};
+let PRIO = {shape: 0.20, glaze: 0.45, colour: 0.35};
+function presetPrio() {
+  const m = META && META.object_search && META.object_search.modes[SMODE];
+  return m && m.priority ? {...m.priority} : {shape: 0.20, glaze: 0.45, colour: 0.35};
+}
+function isCustom() { const p = presetPrio(); return ["shape", "glaze", "colour"].some(k => Math.abs(p[k] - PRIO[k]) > 0.005); }
+function setPrio(p) {
+  PRIO = p;
+  for (const k of ["shape", "glaze", "colour"]) { document.querySelector(`[data-pr="${k}"]`).value = p[k]; $("pv_" + k).textContent = p[k].toFixed(2); }
+  $("priobar").innerHTML = ["shape", "glaze", "colour"].map(k => `<i style="width:${(100 * p[k]).toFixed(1)}%;background:${PCOL[k]}" title="${PNAME[k]} ${p[k].toFixed(2)}"></i>`).join("");
+  const m = META && META.object_search && META.object_search.modes[SMODE];
+  $("priotag").innerHTML = isCustom() ? `<span class="badge" style="background:#fff3d6;color:#8a5a00">custom (based on ${esc(m ? m.label : SMODE)})</span>` : "";
+  const w = META && META.object_search && META.object_search.modes[SMODE] ? META.object_search.modes[SMODE].weights : null;
+  const ra = w ? (w.appearance / ((w.appearance + w.surface) || 1)) : 2 / 3;
+  $("priotxt").innerHTML = `Ranking weights of the photo part: shape ${p.shape.toFixed(2)} · glaze appearance ${(p.glaze * ra).toFixed(2)} + surface / effects ${(p.glaze * (1 - ra)).toFixed(2)} · colour ${p.colour.toFixed(2)}.` +
+    (FEAT.has("colour") ? "" : ` <span class="no">Colour is off (untick of "match colour" in card 1b), so the other two share its part.</span>`);
+}
+document.querySelectorAll("[data-pr]").forEach(r => r.addEventListener("input", e => {
+  const k = e.target.dataset.pr, v = Math.min(1, Math.max(0, +e.target.value)), others = ["shape", "glaze", "colour"].filter(x => x !== k);
+  const rest = 1 - v, old = others.reduce((s, x) => s + PRIO[x], 0), p = {[k]: v};
+  for (const x of others) p[x] = old > 1e-6 ? PRIO[x] * rest / old : rest / 2;    // the others shrink / grow in proportion
+  setPrio(p); soon();
+}));
+$("f_reviewed").addEventListener("change", () => { if (LAST && STYPE === "objects") search(); });
+function soon() { clearTimeout(TIMER); TIMER = setTimeout(() => { if (LAST) search(); }, 350); }
+
+// ---- colours (Color Search Lab V3 integration)
+function hexLab(h) {
+  const lin = c => c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  const [r, g, b] = [1, 3, 5].map(i => lin(parseInt(h.slice(i, i + 2), 16) / 255));
+  const X = (r * 0.4124564 + g * 0.3575761 + b * 0.1804375) / 0.95047, Y = r * 0.2126729 + g * 0.7151522 + b * 0.0721750,
+        Z = (r * 0.0193339 + g * 0.1191920 + b * 0.9503041) / 1.08883;
+  const f = t => t > 0.008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116;
+  return [116 * f(Y) - 16, 500 * (f(X) - f(Y)), 200 * (f(Y) - f(Z))];
+}
+const okHex = h => /^#[0-9a-f]{6}$/i.test(h);
+function addColour(c) {
+  if (!okHex(c.hex)) return;
+  COLOURS.push({hex: c.hex.toUpperCase(), lab: c.lab || hexLab(c.hex), position: c.position || "anywhere", importance: c.importance || (COLOURS.length ? "high" : "normal"), label: c.label || ""});
+  setCsrc("typed"); renderColours(); soon();
+}
+function setCsrc(v) { CSRC = v; [...$("csrc").children].forEach(b => b.classList.toggle("on", b.dataset.c === v)); }
+function renderColours() {
+  $("clist").innerHTML = COLOURS.length ? COLOURS.map((c, i) => `<div class="crow"><span class="sw" style="background:${c.hex};width:20px;height:20px"></span>
+    <span><b>${esc(c.hex)}</b><br><span class="small">${esc(c.label)}</span></span>
+    <select data-cpos="${i}">${Object.keys(POS).map(p => `<option ${p === c.position ? "selected" : ""}>${p}</option>`).join("")}</select>
+    <select data-cimp="${i}">${["high", "normal"].map(p => `<option value="${p}" ${p === c.importance ? "selected" : ""}>${p === "high" ? "important" : "normal"}</option>`).join("")}</select>
+    <button data-cdel="${i}" style="padding:2px 8px">✕</button></div>`).join("")
+    : `<div class="small">No typed colours — the colour regions measured on your photo are used (set their importance below after a search).</div>`;
+}
+$("clist").addEventListener("change", e => {
+  const t = e.target;
+  if (t.dataset.cpos) COLOURS[+t.dataset.cpos].position = t.value;
+  if (t.dataset.cimp) COLOURS[+t.dataset.cimp].importance = t.value;
+  soon();
+});
+$("clist").addEventListener("click", e => { const b = e.target.closest("[data-cdel]"); if (!b) return; COLOURS.splice(+b.dataset.cdel, 1); if (!COLOURS.length) setCsrc("photo"); renderColours(); soon(); });
+$("csrc").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; setCsrc(b.dataset.c); soon(); });
+$("cparse").addEventListener("click", async () => {
+  try {
+    const r = await api("/api/parse_colours", {text: $("cphrase").value});
+    for (const c of r.regions) addColour({hex: c.hex, lab: c.lab, position: POS[c.position] !== undefined ? c.position : "anywhere", importance: c.importance, label: c.words});
+    $("cnotes").textContent = (r.notes || []).join(" · ") + (r.spots ? ` · speckles noted (${r.spots.hex}) — speckles are matched by the surface / effects component, not by colour` : "");
+  } catch (e) { $("cnotes").textContent = e.message; }
+});
+$("cphrase").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); e.stopPropagation(); $("cparse").click(); } });
+let WT = null;
+$("cword").addEventListener("input", () => {
+  clearTimeout(WT);
+  WT = setTimeout(async () => {
+    const q = $("cword").value.trim();
+    if (!q) { $("cwords").innerHTML = ""; return; }
+    const r = await api("/api/color_words?q=" + encodeURIComponent(q));
+    $("cwords").innerHTML = r.results.map(c => `<span class="cw" data-hex="${c.hex}" data-name="${esc(c.name)}" title="${esc(c.source)}"><span class="sw" style="background:${c.hex}"></span>${esc(c.name)}</span>`).join("");
+  }, 200);
+});
+$("cwords").addEventListener("click", e => { const c = e.target.closest("[data-hex]"); if (c) addColour({hex: c.dataset.hex, label: c.dataset.name}); });
+$("cpick").addEventListener("input", e => { $("chex").value = e.target.value.toUpperCase(); });
+$("chexadd").addEventListener("click", () => { const h = $("chex").value.trim(); addColour({hex: h.startsWith("#") ? h : "#" + h, label: "HEX / picker"}); });
+// (the photo's colour picker is the "Pick colour (HEX)" mode of card 1)
+
+// ---- query object regions (importance set by the user)
+function renderQregs() {
+  if (!QREG) { $("qregs").innerHTML = ""; return; }
+  const regs = QREG.regions.filter(r => r.meaningful);
+  $("qregs").innerHTML = `<div class="small" style="margin-bottom:4px"><b>Colour regions of your object #${QREG.index}</b> (measured on the mask; area is not importance — mark what matters):</div>` +
+    regs.map(r => {
+      const v = QIMP[r.id] || "";
+      return `<div class="qr"><span class="sw" style="background:${r.hex}"></span><span>${esc(r.name)} · ${(100 * r.area_frac).toFixed(0)}% · ${esc(r.position)} · ΔE ${r.distinctiveness_de00}${r.flags.length ? " · " + esc(r.flags.join(", ")) : ""}</span>
+        <span class="imp" data-rid="${r.id}"><button data-v="" class="${!v ? "on" : ""}" title="automatic importance ${r.auto_importance}">auto</button><button data-v="high" class="${v === "high" ? "on" : ""}">important</button><button data-v="ignore" class="${v === "ignore" ? "on" : ""}">ignore</button></span></div>`;
+    }).join("");
+}
+$("qregs").addEventListener("click", e => {
+  const b = e.target.closest("[data-v]"); if (!b) return;
+  const rid = b.closest("[data-rid]").dataset.rid;
+  if (b.dataset.v) QIMP[rid] = b.dataset.v; else delete QIMP[rid];
+  renderQregs(); setCsrc("photo"); soon();
+});
+
+async function searchObjects() {
+  if (BUSY) { AGAIN = true; return; }
+  const qobj = activeObj();
+  const body = {
+    qid: QID, object: qobj, use_photo: !!QID && qobj != null, mode: SMODE, region_importance: QIMP, colour_source: CSRC,
+    colours: COLOURS.map(c => ({hex: c.hex, lab: c.lab, centroid: POS[c.position] || [0.5, 0.5], use_position: !!POS[c.position], importance: c.importance})),
+    tags: {subtype: $("subtype").value.trim(), cone_lo: $("cone_lo").value, cone_hi: $("cone_hi").value, surface: $("surface").value,
+           transparency: $("transparency").value, atmospheres: [...document.querySelectorAll("#atm input:checked")].map(i => i.value)},
+    notes: $("notes").value, oxides: oxides(), oxide_unit: UNIT, ingredients: $("ings").value,
+    filters: {reviewed_tiles: $("f_reviewed").checked}, true_id: $("trueid").value.trim(), top: 20,
+    features: [...FEAT], query_attrs: Object.fromEntries([...FEAT].filter(f => f !== "colour" && QATTR[f] !== undefined).map(f => [f, QATTR[f]])),
+    colour_family: $("cfam").checked,
+    priority: PRIO,                                       // shape / glaze / colour, adding up to 1 (ranking of the photo part)
+    eval_values: {form: QATTR.form, surface_finish: QATTR.surface_finish, glaze_effect: QATTR.glaze_effect,   // evaluation only
+                  effects_user: QEDIT.has("glaze_effect")}
+  };
+  BUSY = true; $("go").disabled = true; $("gomsg").innerHTML = `<span class="busy"></span>searching objects…`;
+  try {
+    LAST = await api("/api/search_objects", body); LAST.kind = "objects"; MARKS = {};
+    if (LAST.query_object && (!QREG || QREG.index !== LAST.query_object.index || QREG.qid !== QID)) { QREG = {...LAST.query_object, qid: QID}; QIMP = {}; }
+    if (LAST.query_object && (!QOBJ || QOBJ.qid !== QID || QOBJ.index !== LAST.query_object.index)) loadQobj();
+    renderQregs();
+    $("gomsg").textContent = `${LAST.seconds} s · logged`;
+    const q = LAST.query || {};
+    $("textused").innerHTML = (q.text_used ? `<b>Model reads:</b> ${esc(q.text_used)}` : "") +
+      (q.text_warning ? `<div class="no" style="margin-top:4px">⚠ ${esc(q.text_warning)}</div>` : "");
+    render(); loadLog();
+  } catch (e) { $("gomsg").innerHTML = `<span class="no">${esc(e.message)}</span>`; }
+  BUSY = false; $("go").disabled = false;
+  if (AGAIN) { AGAIN = false; search(); }
+}
+function renderObjects() {
+  const r = LAST, res = (r.results || []).slice(0, K), st = [];
+  st.push(stat("Searched", r.gallery.toLocaleString(), "segmented objects" + (r.filters_applied && r.filters_applied.length ? " · " + r.filters_applied.join(", ") : "")));
+  st.push(stat("Mode", esc(r.mode_label || ""), Object.entries(r.weights_used || {}).map(([c, w]) => `${c} ${w.toFixed(2)}`).join(" · ")));
+  if (r.auto) st.push(stat(`Rule Hit@${K}`, yn(r.auto["Hit@" + K]), `P@${K} ${pct(r.auto["P@" + K])}`));
+  else st.push(stat(`Rule Hit@${K}`, "n/a", "needs a colour + cone, surface or transparency"));
+  const mk = manual();
+  st.push(stat(`Your Hit@${K}`, mk ? yn(mk["Hit@" + K]) : "-", mk ? `P@${K} ${pct(mk["P@" + K])}` : "mark results ✓ / ✗ below"));
+  if (r.true_recipe) st.push(stat(`True recipe #${esc(r.true_recipe.id)}`, r.true_recipe.rank ? "rank " + r.true_recipe.rank : "-",
+    r.true_recipe.rank ? `best object ${esc(r.true_recipe.object)}.jpg · Hit@${K}: ${r.true_recipe.rank <= K ? "yes" : "no"}` : esc(r.true_recipe.note || "")));
+  if (r.database_photo) st.push(stat("Note", "database photo", `same photo as recipe #${esc(r.database_photo.recipe_id)} — not counted in the session evaluation`));
+  if ((r.query || {}).text_warning) st.push(stat("Text", "too vague", `matches ${r.query.text_identical_recipes} recipes word for word — see card 2`));
+  if (r.priority && r.priority.used) st.push(stat("Priority used", ["shape", "glaze", "colour"].map(k => `${PNAME[k].split(" ")[0]} ${r.priority.used[k].toFixed(2)}`).join(" · "),
+    r.priority.custom ? "your sliders" : "the mode preset (validated)"));
+  $("stats").innerHTML = st.join("") + evalTable(r) + featureTable(r.features);
+  if (!res.length) { $("results").innerHTML = `<div class="empty">${esc(r.message || "No results.")}</div>`; $("savemarks").disabled = true; return; }
+  $("results").innerHTML = `<div class="grid">${res.map(objCard).join("")}</div>`;
+  document.querySelectorAll(".mk button").forEach(b => b.addEventListener("click", () => {
+    const id = b.dataset.id, v = b.dataset.v === "1";
+    MARKS[id] === v ? delete MARKS[id] : (MARKS[id] = v); render();
+  }));
+  $("savemarks").disabled = !Object.keys(MARKS).length;
+}
+function objCard(x) {
+  const cone = x.cone_lo ? (x.cone_hi && x.cone_hi !== x.cone_lo ? `cone ${x.cone_lo}–${x.cone_hi}` : `cone ${x.cone_lo}`) : "cone ?";
+  const rule = x.relevant == null ? "" : x.relevant ? `<span class="badge ok">rule: relevant</span>` : `<span class="badge nok">rule: not relevant</span>`;
+  const m = MARKS[x.object_id];
+  const sims = Object.entries(x.similarity || {});
+  const smax = Math.max(1e-6, ...sims.map(([, v]) => Math.abs(v)));
+  const simHtml = sims.map(([c, v]) => `<span>${esc(c)}</span><span class="bar"><i style="width:${Math.max(2, 100 * Math.max(0, v) / smax).toFixed(0)}%"></i></span><span>${v.toFixed(2)}</span>`).join("");
+  const A = x.attributes || {}, fin = f => A[f] && A[f].final ? (Array.isArray(A[f].final.value) ? A[f].final.value.join(", ") || "none" : A[f].final.value) : "";
+  const topP = f => A[f] && A[f].top && A[f].top[0] ? ` (${A[f].top[0][1].toFixed(2)})` : "";
+  const prov = f => A[f] && A[f].final ? A[f].final.provenance : "";
+  const conf = ["form", "surface_finish", "glaze_effect"].filter(f => A[f]).map(f => `<div><b>${{form: "form", surface_finish: "surface", glaze_effect: "effects"}[f]}:</b> ${esc(fin(f))}${prov(f).startsWith("model") || prov(f).startsWith("zero") ? esc(topP(f)) : ""} <span title="${esc(prov(f))}">· ${esc(prov(f).split(" (")[0])}</span></div>`).join("");
+  const cm = (x.colour_match || []).map(c => `<span title="query colour → closest region of this object, ΔE2000"><span class="sw" style="background:${c.query_hex}"></span>→<span class="sw" style="background:${c.object_hex}"></span> ΔE ${c.dE00}</span>`).join(" ");
+  const rev = x.review_category === "review_tile" ? `<span class="badge ok">tile${x.reviewed ? " ✓ reviewed" : ""}</span>` : "";
+  return `<div class="rc"><div class="im"><img src="/obj/${esc(x.object_id)}.jpg" loading="lazy" alt="${esc(x.object_id)}.jpg" onclick="window.open('/photo/${esc(x.recipe_id)}.jpg','_blank')" title="click: open the whole photo"><span class="rk">${x.rank}</span></div>
+  <div class="b"><div class="nm">${esc(x.name)}</div>
+  <div><b>${esc(x.object_id)}.jpg</b> <span class="small">(photo ${esc(x.parent || "")})</span> · <a href="${esc(x.url)}" target="_blank" rel="noopener">Glazy #${esc(x.recipe_id)}</a></div>
+  <div class="tags">${esc(x.subtype || "?")}<br>${cone} · ${esc(x.surface || "surface ?")} · ${esc(x.transparency || "transparency ?")}</div>
+  <div>${cm} ${rule} ${rev}</div>${evalChips(x)}${featMatches(x)}
+  <div class="small" style="margin-top:2px">Similarity per component (raw, not a probability) · final score ${x.score.toFixed(2)}:</div><div class="simt">${simHtml}</div>${contribBars(x)}
+  <div class="conf"><div class="small">Classifier confidence / provenance:</div>${conf || "-"}</div>
+  <div class="mk"><button class="y${m === true ? " on" : ""}" data-id="${esc(x.object_id)}" data-v="1">✓ relevant</button><button class="n${m === false ? " on" : ""}" data-id="${esc(x.object_id)}" data-v="0">✗ not</button></div></div></div>`;
+}
+
+// ---------------------------------------------------------------- your object: regions + six attributes (Grounding DINO)
+const FIELDS = ["form", "surface_finish", "transparency", "texture", "glaze_effect", "defect"];
+const MULTIF = new Set(["glaze_effect", "defect"]);
+const FLABEL = {colour: "colour", form: "object form", surface_finish: "surface finish", transparency: "transparency", texture: "surface texture",
+                glaze_effect: "glaze effects", defect: "possible defects", "all ticked": "all ticked together"};
+let FEAT = new Set(["colour"]), QATTR = {}, QEDIT = new Set(), QOBJ = null, QLAB = null;
+const vocab = f => ((META && META.object_search && META.object_search.attr_vocab) || {})[f] || [];
+const validation = f => ((META && META.object_search && META.object_search.validation) || {})[f] || {};
+
+async function loadQobj() {
+  const idx = activeObj();
+  if (!QID || idx == null || !META || !META.object_search) { QOBJ = null; renderQobj(); return; }
+  if (QOBJ && QOBJ.qid === QID && QOBJ.index === idx) return;
+  $("qattrMsg").innerHTML = `<span class="busy"></span>Grounding DINO is reading object #${idx} (regions + six attributes)…`;
+  try {
+    const r = await api("/api/query_object", {qid: QID, object: idx});
+    QOBJ = {...r, qid: QID};
+    QREG = {index: r.index, regions: r.regions, qid: QID}; QIMP = {};
+    QEDIT = new Set();
+    const det = r.dino && r.dino.attributes;
+    if (det) {
+      for (const f of FIELDS) {
+        const d = det[f];
+        QATTR[f] = MULTIF.has(f) ? [...(d.present || [])] : d.value;
+        const v = validation(f);
+        const confident = d.status === "answered" && v.meets_target && (!MULTIF.has(f) || (d.present || []).length);
+        if (confident) FEAT.add(f); else FEAT.delete(f);      // effects / defects: only a confirmed PRESENT effect is ticked
+      }
+    }
+    $("qattrMsg").innerHTML = det && r.dino.version === "attributes_v3" ? `Detected by Grounding DINO in ${r.dino.seconds} s (models trained on Claude's labels). Each attribute shows its <b>top 3 candidates</b> with the trained probability; #1 is pre-selected. Click a candidate to search with it, tick every attribute the results should share (combinations allowed); <b>validated</b> attributes (98 % on the held-out test) are ticked for you.`
+      : det ? `Detected by Grounding DINO in ${r.dino.seconds} s. <b>Validated</b> = the attribute reached the 98 % target against Claude's check and this answer is above its threshold; those are ticked. Edit any value, tick what the results should share.`
+      : `Grounding DINO attribute models are not ready (run <code>run_attributes_v2.py</code>); choose values yourself.`;
+    renderQobj(); renderQregs();
+  } catch (e) { $("qattrMsg").textContent = "Could not read the object: " + e.message; }
+}
+async function renderQobj() {
+  renderQattrs();
+  const ci = $("qcvImg"), co = $("qcvOv");
+  if (!QOBJ) { ci.width = co.width = 0; ci.height = co.height = 0; $("qcvEmpty").hidden = false; QLAB = null; return; }
+  $("qcvEmpty").hidden = true;
+  const img = new Image(), lab = new Image();
+  img.src = QOBJ.object_image; lab.src = QOBJ.labels + "?t=" + QOBJ.qid;
+  await Promise.all([img.decode().catch(() => null), lab.decode().catch(() => null)]);
+  const [W, H] = QOBJ.region_size || [lab.naturalWidth, lab.naturalHeight];
+  const k = Math.min(3, 420 / Math.max(W, H));
+  for (const c of [ci, co]) { c.width = Math.round(W * k); c.height = Math.round(H * k); }
+  const x = ci.getContext("2d"); x.imageSmoothingQuality = "high"; x.drawImage(img, 0, 0, ci.width, ci.height);
+  co.style.width = ci.getBoundingClientRect().width + "px"; co.style.height = ci.getBoundingClientRect().height + "px";
+  if (lab.naturalWidth) {
+    const off = document.createElement("canvas"); off.width = W; off.height = H;
+    const oc = off.getContext("2d"); oc.drawImage(lab, 0, 0, W, H);
+    const px = oc.getImageData(0, 0, W, H).data, L = new Uint8Array(W * H), acc = {};
+    for (let i = 0; i < W * H; i++) { const id = px[i * 4]; L[i] = id; if (id) { const a = acc[id] || (acc[id] = [0, 0, 0]); a[0] += i % W; a[1] += (i / W) | 0; a[2]++; } }
+    QLAB = {L, W, H, k, cent: Object.fromEntries(Object.entries(acc).map(([id, a]) => [id, [a[0] / a[2], a[1] / a[2]]]))};
+  }
+  paintQobj();
+}
+function paintQobj() {
+  const co = $("qcvOv"), ctx = co.getContext("2d");
+  ctx.clearRect(0, 0, co.width, co.height);
+  if (!QLAB || !$("qcvShow").checked || !QOBJ) return;
+  const {L, W, H, k, cent} = QLAB, im = new ImageData(W, H);
+  const col = Object.fromEntries(QOBJ.regions.map(r => [r.id, [1, 3, 5].map(i => parseInt(r.hex.slice(i, i + 2), 16))]));
+  for (let i = 0; i < W * H; i++) {
+    const id = L[i]; if (!id) continue;
+    const x = i % W, y = (i / W) | 0;
+    const edge = (x + 1 < W && L[i + 1] !== id) || (y + 1 < H && L[i + W] !== id);
+    const v = QIMP[id];
+    im.data.set(edge ? (v === "high" ? [255, 190, 0, 255] : [255, 255, 255, 230]) : v === "ignore" ? [90, 90, 90, 170] : v === "high" ? [...(col[id] || [0, 0, 0]), 90] : [0, 0, 0, 0], i * 4);
+  }
+  const off = document.createElement("canvas"); off.width = W; off.height = H; off.getContext("2d").putImageData(im, 0, 0);
+  ctx.imageSmoothingEnabled = false; ctx.drawImage(off, 0, 0, W * k, H * k);
+  ctx.font = `700 ${Math.max(13, 6 * k)}px Segoe UI, sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  for (const r of QOBJ.regions) {
+    const c = cent[r.id]; if (!c || !r.meaningful) continue;
+    ctx.lineWidth = 3; ctx.strokeStyle = "#000"; ctx.fillStyle = QIMP[r.id] === "high" ? "#ffc400" : "#fff";
+    ctx.strokeText("R" + r.id, c[0] * k, c[1] * k); ctx.fillText("R" + r.id, c[0] * k, c[1] * k);
+  }
+}
+$("qcvShow").addEventListener("change", paintQobj);
+$("qcvOv").addEventListener("click", e => {
+  if (!QLAB) return;
+  const b = e.target.getBoundingClientRect();
+  const x = Math.floor((e.clientX - b.left) / b.width * QLAB.W), y = Math.floor((e.clientY - b.top) / b.height * QLAB.H);
+  const id = QLAB.L[y * QLAB.W + x]; if (!id) return;
+  const nxt = {undefined: "high", high: "ignore", ignore: undefined}[QIMP[id]];
+  if (nxt) QIMP[id] = nxt; else delete QIMP[id];
+  setCsrc("photo"); renderQregs(); paintQobj(); soon();
+});
+function renderQattrs() {
+  const det = QOBJ && QOBJ.dino && QOBJ.dino.attributes;
+  $("qattrs").innerHTML = FIELDS.map(f => {
+    const d = det ? det[f] : null, v = validation(f), val = QATTR[f];
+    const vals = MULTIF.has(f) ? (val || []) : (val ? [val] : []);
+    let st = "";
+    if (QEDIT.has(f)) st = `<span class="vb u">set by you</span>`;
+    else if (d) {
+      const q = v.test_answered_precision != null ? ` · attribute ${(100 * v.test_answered_precision).toFixed(1)} % when answered` : "";
+      st = d.status === "answered" && v.meets_target ? `<span class="vb">validated · ${(+d.confidence).toFixed(2)}</span><span class="st">${q}</span>`
+        : d.status === "answered" ? `<span class="vb u">answered · ${(+d.confidence).toFixed(2)}</span><span class="st">attribute below the 98 % target${q}</span>`
+        : `<span class="vb u">uncertain · best guess</span><span class="st">${MULTIF.has(f) && (d.uncertain || []).length ? "unsure: " + esc(d.uncertain.join(", ")) : ""}</span>`;
+    }
+    const cs = d && d.candidates;
+    const ev = cs && cs.length
+      ? `<div class="cand3" data-fa="${f}"><span class="lbl">Top ${cs.length} by Grounding DINO:</span>${cs.map(c => `<button class="cchip ${vals.includes(c.label) ? "on" : ""}" data-fv="${esc(c.label)}" title="trained probability ${(+c.p).toFixed(2)} · DINO saw &quot;${esc(c.phrase || "")}&quot; ${c.dino != null ? (+c.dino).toFixed(2) : ""}"><span class="r">#${c.rank}</span>${esc(c.label)}<span class="p">${Math.round(100 * c.p)}%</span></button><button class="ib i" data-ai="${f}|${esc(c.label)}" title="what does '${esc(c.label)}' mean, and how sure is the model?" aria-label="explain ${esc(c.label)}">i</button>`).join("")}</div>`
+      : d && d.evidence && d.evidence.length ? `<div class="small">DINO saw: ${d.evidence.map(e => `${esc(e[0])} ${(+e[1]).toFixed(2)}`).join(" · ")}</div>` : "";
+    const opts = MULTIF.has(f) ? [...vocab(f), "none"] : vocab(f);
+    const all = `<div class="chips" data-fa="${f}">${opts.map(o => `<button class="fchip ${(o === "none" ? MULTIF.has(f) && val && !val.length : vals.includes(o)) ? "on" : ""}" data-fv="${esc(o)}">${esc(o)}</button>`).join("")}</div>`;
+    const extra = vals.filter(x => !(cs || []).some(c => c.label === x)).map(x => `<span class="small">${esc(x)}</span><button class="ib i" data-ai="${f}|${esc(x)}" aria-label="explain ${esc(x)}">i</button>`).join(" ");
+    return `<div class="fa"><div class="h"><label><input type="checkbox" data-feat="${f}" ${FEAT.has(f) ? "checked" : ""}> ${FLABEL[f]}</label>${st}${extra ? " · your value: " + extra : ""}</div>${ev}
+      ${cs && cs.length ? `<details><summary>other values (${opts.length})</summary>${all}</details>` : all}</div>`;
+  }).join("");
+}
+$("qattrs").addEventListener("click", e => {
+  const b = e.target.closest("[data-fv]"); if (!b) return;
+  const f = b.closest("[data-fa]").dataset.fa, v = b.dataset.fv;
+  if (MULTIF.has(f)) {
+    if (v === "none") QATTR[f] = [];
+    else { const s_ = new Set(QATTR[f] || []); s_.has(v) ? s_.delete(v) : s_.add(v); QATTR[f] = [...s_]; }
+  } else QATTR[f] = QATTR[f] === v ? undefined : v;
+  QEDIT.add(f); FEAT.add(f);
+  renderQattrs(); soon();
+});
+document.addEventListener("change", e => {
+  const t = e.target.closest && e.target.closest("[data-feat]"); if (!t) return;
+  const f = t.dataset.feat;
+  t.checked ? FEAT.add(f) : FEAT.delete(f);
+  document.querySelectorAll(`[data-feat="${f}"]`).forEach(x => x.checked = t.checked);
+  setPrio(PRIO); soon();
+});
+
+// ---- Recall@K per feature (this search) and in the session
+function featureTable(F) {
+  if (!F || !F.recall || !Object.keys(F.recall).length) return "";
+  const ks = [3, 5, 10, 15, 20];
+  const rows = Object.entries(F.recall).map(([f, r]) => `<tr><td>${esc(FLABEL[f] || f)}${f !== "all ticked" && F.query && F.query[f] !== undefined ? ` <span class="small">= ${esc(Array.isArray(F.query[f]) ? (F.query[f].join(", ") || "none") : F.query[f])}</span>` : ""}</td>
+    <td>${r["Hit@" + K] ? '<span class="yes">✓ yes</span>' : '<span class="no">✗ no</span>'}</td><td class="num">${pct(r["P@" + K])}</td>
+    <td class="small">${ks.map(k => `@${k} ${r["Hit@" + k] ? "✓" : "✗"}`).join(" · ")}</td></tr>`).join("");
+  return `<details class="od" style="margin:-4px 0 10px"><summary>Ticked attributes check (card 1b ticks; every ticked attribute separately)</summary><div class="tw"><table><thead><tr><th>Ticked feature (relevance rule)</th><th>Hit@${K}</th><th class="num">Precision@${K}</th><th>Hit@3 / 5 / 10 / 15 / 20</th></tr></thead><tbody>${rows}</tbody></table>
+    <div class="small" style="margin-top:4px">The object's best available label equals your value (human review &gt; Claude's check &gt; Grounding DINO &gt; earlier model; effects / defects: at least one in common). "all ticked" counts a result only when every ticked feature it has a label for matches.</div></div></details>`;
+}
+// ---- evaluation of this search (separate from the ranking): shape / glaze-surface / colour, strict, weighted nDCG
+const CRIT = {shape: "Shape (object form)", glaze: "Glaze / surface", colour: "Colour", strict: "Strict (all criteria)"};
+function evalTable(r) {
+  const E = r.evaluation; if (!E) return "";
+  if (!E.criteria.length) return `<div class="small" style="margin:-4px 0 10px">Evaluation: no criterion available (needs a photo object, picked colours or chosen attribute values).</div>`;
+  const ks = [3, 5, 10, 15, 20];
+  const rows = [...E.criteria, "strict"].filter(c => E.metrics[c]).map(c => {
+    const m = E.metrics[c], nrel = m.relevant_in_gallery, rk = m["Recall@" + K];
+    const maxR = nrel ? Math.min(1, K / nrel) : null;
+    const rec = nrel <= 20 ? (rk == null ? "-" : pct(rk)) : `<span class="small" title="${nrel} objects match - at most ${K} of them can be in the top ${K}">${pct(rk)} <i>(max ${pct(maxR)})</i></span>`;
+    return `<tr><td><b>${esc(CRIT[c])}</b> <span class="small">${esc(E.rules[c] || "")}</span></td>
+      <td class="${m["Hit@" + K] ? "ok" : "no"}">${m["Hit@" + K] ? "✓ yes" : "✗ no"}</td><td class="num">${pct(m["P@" + K])}</td>
+      <td class="small">${ks.map(k => `@${k} ${m["Hit@" + k] ? "✓" : "✗"}`).join(" · ")}</td>
+      <td class="num">${nrel.toLocaleString()}${m.unknown_in_gallery ? ` <span class="small">(+${m.unknown_in_gallery.toLocaleString()} ?)</span>` : ""}</td><td class="num">${rec}</td></tr>`;
+  }).join("");
+  const nd = E.ndcg || {}, w = E.weights || {};
+  const ndRow = `<tr><td><b>Weighted (your priority)</b> <span class="small">${Object.entries(w).map(([c, v]) => `${esc(PNAME[c])} ${v.toFixed(2)}`).join(" + ")}</span></td>
+    <td colspan="2">nDCG@${K} <b>${nd["nDCG@" + K] == null ? "-" : nd["nDCG@" + K].toFixed(3)}</b></td><td class="small">${ks.map(k => `@${k} ${nd["nDCG@" + k] == null ? "-" : nd["nDCG@" + k].toFixed(2)}`).join(" · ")}</td><td></td><td></td></tr>`;
+  const T = E.true_recall;
+  const tRow = T ? `<tr><td><b>True recipe #${esc(T.recipe)}</b> <span class="small">${T.objects} object(s) in the gallery, ranks ${T.ranks.slice(0, 6).join(", ")}${T.ranks.length > 6 ? "…" : ""}</span></td>
+    <td colspan="3" class="small">${ks.map(k => `Recall@${k} ${pct(T["Recall@" + k])}`).join(" · ")}</td><td class="num">${T.objects}</td><td class="num">${pct(T["Recall@" + K])}</td></tr>` : "";
+  return `<div class="tw evt" style="margin:-2px 0 12px"><div class="small" style="margin-bottom:4px;display:flex;gap:6px;align-items:center"><b style="color:var(--ink)">Evaluation of this search</b> (separate from the ranking: it never changes the order)
+    <button class="ib" data-help="evaluation" title="How the evaluation works">!</button></div>
+    <table><thead><tr><th>Criterion (rule)</th><th>Hit@${K}</th><th class="num">Precision@${K}</th><th>Hit@3 / 5 / 10 / 15 / 20</th><th class="num">matching in gallery</th><th class="num">Recall@${K}</th></tr></thead>
+    <tbody>${rows}${ndRow}${tRow}</tbody></table></div>`;
+}
+function evalChips(x) {
+  const e = x.evaluation; if (!e) return "";
+  const sym = {y: "✓", n: "✗", "?": "?"}, cls = {y: "y", n: "n", "?": "u"};
+  const items = ["shape", "glaze", "colour", "strict"].filter(c => e[c] != null).map(c => `<span class="${cls[e[c]]}" title="${esc(CRIT[c])}${e[c] === "?" ? ": label unknown - never counted as a match" : ""}">${sym[e[c]]} ${c}</span>`);
+  if (e.weighted != null) items.push(`<span class="u" title="weighted relevance = your priority × matches (0 - 1)">weighted ${e.weighted.toFixed(2)}</span>`);
+  return `<div class="evc" title="evaluation (does not change the order)"><em class="lb">evaluation:</em>${items.join("")}</div>`;
+}
+function contribBars(x) {
+  const c = Object.entries(x.contribution || {}); if (!c.length) return "";
+  const mx = Math.max(0.05, ...c.map(([, v]) => Math.abs(v)));
+  return `<div class="small" style="margin-top:4px">Contribution to the rank (weight share × how far above average; the sum is the score):</div><div class="ctb">${c.map(([k, v]) => {
+    const wv = 50 * Math.abs(v) / mx, left = v >= 0 ? 50 : 50 - wv;
+    return `<span>${esc(k)}</span><span class="db"><b></b><i style="left:${left}%;width:${wv}%;background:${v >= 0 ? "var(--good)" : "var(--bad)"}"></i></span><span>${v >= 0 ? "+" : ""}${v.toFixed(2)}</span>`;
+  }).join("")}</div>`;
+}
+function featMatches(x) {
+  const F = LAST && LAST.features; if (!F || !F.per_result) return "";
+  const i = x.rank - 1, out = [];
+  for (const [f, rel] of Object.entries(F.per_result)) {
+    if (f === "all ticked" || rel[i] == null) continue;
+    const lab = x.attr_labels && x.attr_labels[f];
+    const txt = lab ? `${FLABEL[f]}: ${Array.isArray(lab.value) ? (lab.value.join(", ") || "none") : (lab.value || "?")} (${lab.source})` : FLABEL[f];
+    out.push(`<span class="${rel[i] ? "y" : "n"}" title="${esc(txt)}">${rel[i] ? "✓" : "✗"} ${esc(txt)}</span>`);
+  }
+  return out.length ? `<div class="fm" title="the attributes you ticked in card 1b"><em class="lb">ticked:</em>${out.join("")}</div>` : "";
+}
+function sessionFeatures(fs) {
+  if (!fs || !Object.keys(fs).length) return "";
+  const ks = [3, 5, 10, 15, 20];
+  return `<details class="od" style="margin-top:14px"><summary>Earlier per-feature check (ticked attributes; Hit Rate, formerly called "Recall")</summary>
+    <table><thead><tr><th>Ticked feature</th><th class="num">searches</th>${ks.map(k => `<th class="num">Hit Rate@${k}</th>`).join("")}${ks.map(k => `<th class="num">P@${k}</th>`).join("")}</tr></thead><tbody>
+    ${Object.entries(fs).map(([f, d]) => `<tr><td>${esc(FLABEL[f] || f)}</td><td class="num">${d.n}</td>${ks.map(k => `<td class="num">${pct(d["HitRate@" + k])}</td>`).join("")}${ks.map(k => `<td class="num">${pct(d["P@" + k])}</td>`).join("")}</tr>`).join("")}</tbody></table></details>`;
+}
+function sessionEval(s) {
+  const E = s.eval || {}; if (!Object.keys(E).length) return `<div class="small" style="margin:14px 0 4px">Evaluation by criterion: no search since this version yet.</div>`;
+  const ks = [3, 5, 10, 15, 20];
+  const rows = ["shape", "glaze", "colour", "strict"].filter(c => E[c]).map(c => `<tr><td>${esc(CRIT[c])}</td><td class="num">${E[c].n}</td>${ks.map(k => `<td class="num">${pct(E[c]["HitRate@" + k])}</td>`).join("")}${ks.map(k => `<td class="num">${pct(E[c]["P@" + k])}</td>`).join("")}</tr>`).join("");
+  const nd = s.ndcg || {}, tr = s.true_recall || {};
+  return `<div class="small" style="margin:14px 0 4px"><b>Evaluation by criterion</b> (every search since 2026-10-20; database photos left out)</div>
+    <table><thead><tr><th>Criterion</th><th class="num">searches</th>${ks.map(k => `<th class="num">Hit Rate@${k}</th>`).join("")}${ks.map(k => `<th class="num">P@${k}</th>`).join("")}</tr></thead><tbody>${rows}
+    <tr><td>Weighted nDCG (your priority)</td><td class="num">${nd.n || 0}</td>${ks.map(k => `<td class="num">${nd["nDCG@" + k] == null ? "-" : nd["nDCG@" + k].toFixed(3)}</td>`).join("")}<td colspan="5" class="small">graded relevance; 1 = the best possible order</td></tr>
+    <tr><td>True recipe (real Recall@K)</td><td class="num">${tr.n || 0}</td>${ks.map(k => `<td class="num">${pct(tr["Recall@" + k])}</td>`).join("")}<td colspan="5" class="small">share of the recipe's objects in the top K</td></tr></tbody></table>`;
+}
+
+// ---- related colours (Color Lab V3)
+async function showRelated(hex) {
+  try {
+    const r = await api("/api/related_colours?hex=" + encodeURIComponent(hex.replace("#", "")));
+    $("crelBox").innerHTML = `<div class="small" style="margin-top:8px">Related colours of <span class="sw" style="background:${esc(r.hex)}"></span> <b>${esc(r.name.name)}</b> (${esc(r.name.family)} family) — click one to add it:</div>
+      <div class="crel">${r.related.map(c => `<span class="cw" data-hex="${esc(c.hex)}" data-name="${esc(c.name)}" title="${esc(c.family)} · ΔE00 ${c.dE00}"><span class="sw" style="background:${esc(c.hex)}"></span>${esc(c.name)}</span>`).join("")}</div>`;
+  } catch (e) { $("crelBox").textContent = ""; }
+}
+$("crelBox").addEventListener("click", e => { const c = e.target.closest("[data-hex]"); if (c) addColour({hex: c.dataset.hex, label: c.dataset.name + " (related)"}); });
+$("clist").addEventListener("click", e => { if (!e.target.classList.contains("sw")) return; const row = e.target.closest(".crow"), sel = row && row.querySelector("[data-cpos]"); if (sel) showRelated(COLOURS[+sel.dataset.cpos].hex); });
+$("cfam").addEventListener("change", soon);
+{
+  const _add = addColour;
+  addColour = function (c) { _add(c); if (okHex(c.hex)) showRelated(c.hex); };
+}
+// ---------------------------------------------------------------- (!) help and (i) attribute explanations
+function openModal(html) { $("mdlbody").innerHTML = html; $("mdl").hidden = false; $("mdlx").focus(); }
+function closeModal() { $("mdl").hidden = true; }
+$("mdlx").addEventListener("click", closeModal);
+$("mdl").addEventListener("click", e => { if (e.target === $("mdl")) closeModal(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("mdl").hidden) closeModal(); });
+function prioSvg(p) {
+  let x = 0; const W = 640;
+  const seg = ["shape", "glaze", "colour"].map(k => { const w = W * p[k], s = `<rect x="${x}" y="8" width="${w}" height="30" fill="${PCOL[k]}"/>` +
+    (w > 70 ? `<text x="${x + w / 2}" y="28" font-size="13" fill="#fff" text-anchor="middle">${PNAME[k]} ${p[k].toFixed(2)}</text>` : ""); x += w; return s; }).join("");
+  return `<svg viewBox="0 0 ${W} 46" role="img" aria-label="priority split">${seg}</svg>`;
+}
+const HELP = {
+  selection: () => `<h3 id="mdlt">How object selection works</h3>
+    <p>The photo can hold several ceramic objects. Each one has an outline from the segmentation (Grounding DINO finds it, SAM 2.1 traces it).</p>
+    <table><tr><th>You do</th><th>What happens</th></tr>
+    <tr><td><b>Hover</b> an object</td><td>it lights up (the rest dims) and a label shows its number, how sure CLIP is that it is ceramic, and its share of the photo</td></tr>
+    <tr><td><b>Click</b> an object</td><td>it becomes the <b>active object</b> (thick yellow outline) and the only selected one</td></tr>
+    <tr><td><b>Ctrl + click</b></td><td>adds the object to the selection (it becomes active), or removes it; the other selected objects keep a white outline</td></tr>
+    <tr><td>Object list (details)</td><td>the same choices as a list; the yellow frame is the active object</td></tr></table>
+    <h4>Several selected objects - what is used where</h4>
+    <table><tr><th>Part of the page</th><th>Uses</th></tr>
+    <tr><td><b>Objects</b> search (default)</td><td>only the <b>active</b> object: its look, shape, colour regions and attributes are compared with the 12,309 database objects</td></tr>
+    <tr><td>Card 1b (your object)</td><td>the active object</td></tr>
+    <tr><td><b>Recipes (previous model)</b> search</td><td><b>all selected</b> objects together (their image features are averaged by area)</td></tr></table>
+    <div class="note">To compare two objects of the same photo, click the first, search, then click the second and search again.</div>
+    <h4>Pick colour (HEX)</h4>
+    <p>Switch the photo to <b>Pick colour</b> and click: the colour is averaged over a 7 × 7 pixel square, using <b>only the pixels inside the object under the cursor</b>
+    (background is left out). You see the HEX value, can edit or copy it, and <b>Add as search colour</b> puts it in card 4 - it is used when card 4 is set to
+    <i>typed / picked</i>. Clicking outside every object still gives a colour, with a warning.</p>`,
+  priority: () => `<h3 id="mdlt">Priority of the photo part</h3>
+    <p>The photo part of the score compares four things, grouped into three topics you can prioritise:</p>
+    <table><tr><th>Topic</th><th>What is compared</th></tr>
+    <tr><td><b style="color:${PCOL.shape}">Shape</b></td><td>outline geometry and the silhouette of the cut-out</td></tr>
+    <tr><td><b style="color:${PCOL.glaze}">Glaze / surface</b></td><td>glaze appearance (image model) + surface / effects (attribute probabilities)</td></tr>
+    <tr><td><b style="color:${PCOL.colour}">Colour</b></td><td>the colour regions of the object (ΔE2000), only when "match colour" is ticked</td></tr></table>
+    <p>The three always add up to 1. Raising one shrinks the other two <b>in proportion</b>; the mode buttons set validated presets:</p>
+    ${prioSvg(PRIO)}<div class="small">Now: ${["shape", "glaze", "colour"].map(k => `${PNAME[k]} ${PRIO[k].toFixed(2)}`).join(" · ")}${isCustom() ? " (custom)" : " (preset)"}</div>
+    <table><tr><th>Preset</th><th>Shape</th><th>Glaze / surface</th><th>Colour</th></tr>${Object.entries((META && META.object_search && META.object_search.modes) || {}).map(([m, d]) =>
+      `<tr><td>${esc(d.label)}</td><td>${d.priority.shape.toFixed(2)}</td><td>${d.priority.glaze.toFixed(2)}</td><td>${d.priority.colour.toFixed(2)}</td></tr>`).join("")}</table>
+    <h4>How it enters the final score</h4>
+    <p>Each component's similarity is standardised over all searched objects (how far above average an object is) and multiplied by its weight. The photo part
+    has 0.40 in total; ticked attributes in card 1b take 40 % of it; text adds 0.35 and a formula 0.25. All weights are divided by their total. Each result card shows
+    the <b>contribution</b> of every component - their sum is the final score.</p>
+    <div class="note">Similarities are not probabilities. The sliders change the ranking only; the evaluation table never changes the order.</div>`,
+  evaluation: () => `<h3 id="mdlt">How each search is evaluated</h3>
+    <p>Every search is checked on three criteria, using your object's values (the #1 candidate, or the one you clicked in card 1b). The labels of the database
+    objects come from the best available source: your review &gt; Claude's check &gt; Grounding DINO &gt; the earlier model.</p>
+    <table><tr><th>Criterion</th><th>A result matches when</th></tr>
+    <tr><td><b>Shape</b></td><td>it has the same object form (e.g. cup)</td></tr>
+    <tr><td><b>Glaze / surface</b></td><td>its surface finish is in the same group (glossy / satin / matte); if you picked glaze effects, it also shares at least one of them</td></tr>
+    <tr><td><b>Colour</b></td><td>your most important colour is within ΔE2000 20 of one of its colour regions (or the same colour family, if ticked)</td></tr>
+    <tr><td><b>Strict</b></td><td>every criterion above matches (e.g. cup + glossy + brown). Cup + matte + brown is <i>not</i> fully relevant.</td></tr>
+    <tr><td><b>Weighted</b></td><td>your priority × matches, e.g. 0.20 × shape + 0.45 × glaze + 0.35 × colour (0 to 1)</td></tr></table>
+    <p><b>?</b> = the object has no label for that criterion: it is never counted as a match, and is shown apart.</p>
+    <div class="note">Evaluation never changes the ranking - the results are ordered by similarity; the evaluation only says how many of them are relevant.</div>`,
+  metrics: () => `<h3 id="mdlt">Hit Rate, Precision, Recall and nDCG</h3>
+    <table><tr><th>Metric</th><th>Question</th><th>Example (top 10 has 4 matching results)</th></tr>
+    <tr><td><b>Hit@K</b> (one search)</td><td>is there at least one relevant result in the top K?</td><td>yes</td></tr>
+    <tr><td><b>Hit Rate@K</b> (session)</td><td>in what share of my searches was Hit@K "yes"?</td><td>-</td></tr>
+    <tr><td><b>Precision@K</b></td><td>what share of the top K is relevant?</td><td>4 / 10 = 40 %</td></tr>
+    <tr><td><b>Recall@K</b></td><td>what share of <i>all</i> relevant objects reached the top K?</td><td>if 3,000 objects are cups: at most 10 / 3,000 = 0.3 % - not informative</td></tr>
+    <tr><td><b>nDCG@K</b></td><td>are the most relevant results (weighted by your priority) near the top? 1 = the best possible order</td><td>-</td></tr></table>
+    <div class="note">Before 2026-10-20 the session table called the hit rate "Recall@K". It is renamed; the log itself is unchanged. True Recall@K is reported for the
+    <b>True Glazy recipe ID</b>: that recipe's objects (usually 1 - 3) are the complete relevant set.</div>`,
+};
+document.addEventListener("click", e => {
+  const h = e.target.closest("[data-help]"); if (h && HELP[h.dataset.help]) { e.preventDefault(); openModal(HELP[h.dataset.help]()); return; }
+  const a = e.target.closest("[data-ai]"); if (a) { e.preventDefault(); e.stopPropagation(); attrModal(...a.dataset.ai.split("|")); }
+}, true);
+function attrModal(f, value) {
+  const det = QOBJ && QOBJ.dino && QOBJ.dino.attributes, d = det ? det[f] : null, v = validation(f);
+  const cs = (d && d.candidates) || [], c = cs.find(x => x.label === value);
+  let p = c ? c.p : null;
+  if (p == null && d && d.probs) {
+    if (Array.isArray(d.probs)) { const i = vocab(f).indexOf(value); if (i >= 0) p = d.probs[i]; } else if (d.probs[value] != null) p = d.probs[value];
+  }
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+  const chosen = MULTIF.has(f) ? (QATTR[f] || []).includes(value) : QATTR[f] === value;
+  const status = !d ? "-" : d.status === "answered" && v.meets_target ? "validated" : d.status === "answered" ? "answered (attribute below the 98 % target)" : "uncertain - best guess";
+  const rows = [
+    ["Predicted for your object", c ? `#${c.rank} of the top ${cs.length}` : (p != null ? "not in the top 3" : "-")],
+    ["Model probability", p != null ? `<b>${(100 * p).toFixed(0)} %</b> — trained probability of the attribute model (v3: a logistic layer on Grounding DINO evidence + the earlier image model, trained on 1,504 objects labelled by Claude). It is a model probability, not a human-verified calibration.` : "-"],
+    ["Grounding DINO score", c && c.dino != null ? `${c.dino.toFixed(2)} for the phrase "${esc(c.phrase || "")}" — a grounding (match) score between 0 and 1, <b>not</b> a probability` : "-"],
+    ["Status of this attribute", esc(status) + (v.test_answered_precision != null ? ` · validated answers were right ${(100 * v.test_answered_precision).toFixed(1)} % of the time on 240 held-out objects` : "")],
+    ["Accuracy of this attribute (held-out test)", v["R@1"] != null ? `right first ${(100 * v["R@1"]).toFixed(0)} % · in the top 3 ${(100 * v["R@3"]).toFixed(0)} % (reference: Claude's labels)` : "-"],
+    ["Used in your search", chosen ? (FEAT.has(f) ? "yes - selected and ticked (it changes the ranking)" : "selected (used for the evaluation); not ticked, so it does not change the ranking") : "no"],
+  ];
+  const others = cs.filter(x => x.label !== value);
+  openModal(`<h3 id="mdlt" data-key="${esc(f)}|${esc(value)}">${esc(cap(value))} <span class="small" style="font-weight:400">— ${esc(FLABEL[f])}</span></h3>
+    <h4>Your object (what the model says)</h4><table>${rows.map(r => `<tr><td style="width:34%">${r[0]}</td><td>${r[1]}</td></tr>`).join("")}</table>
+    ${others.length ? `<h4>What the model weighed against it</h4><div class="evc">${others.map(x => `<span class="u">#${x.rank} ${esc(x.label)} ${(100 * x.p).toFixed(0)} %</span>`).join("")}</div>` : ""}
+    <h4>How to recognise it · reference photos and examples</h4>
+    <div id="refbox" class="pend">Loading the reference library …</div>`);
+  fillRef(f, value);
+}
+// ---------------------------------------------------------------- reference library (code_project/reference_library, static)
+// one folder per attribute value: describe.json (identifying features, recognition rule, values not to confuse with, sources) +
+// reference_1.png (photo from the user's manual) + example_N.png (database objects whose value Claude confirmed, box = Grounding DINO)
+let LIBIDX = null;
+async function libEntry(f, value) {
+  if (!LIBIDX) { try { LIBIDX = await (await fetch("/lib/index.json")).json(); } catch (e) { LIBIDX = {attributes: {}}; } }
+  const e = ((LIBIDX.attributes || {})[f] || {})[value];
+  if (!e) return null;
+  try { const r = await fetch(`/lib/${e.folder}/describe.json`); return r.ok ? {folder: e.folder, ...(await r.json())} : null; }
+  catch (err) { return null; }
+}
+async function fillRef(f, value) {
+  const d = await libEntry(f, value);
+  const box = $("refbox"), t = $("mdlt");
+  if (!box || !t || t.dataset.key !== `${f}|${value}`) return;          // another window was opened meanwhile
+  if (!d) { box.innerHTML = `No reference entry for <b>${esc(value)}</b> in the library yet (code_project\\reference_library).`; return; }
+  const src = i => `/lib/${d.folder}/${i.file}`;
+  box.className = "refx";
+  box.innerHTML = `<div class="refh"><b>${esc(d.title)}</b>${d.vi ? ` <span class="small">· ${esc(d.vi)}</span>` : ""}
+      ${d.general ? '<span class="gen" title="not defined in your reference manuals">general description</span>' : ""}</div>
+    <div class="reft">Identifying features</div><ul>${(d.identify || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+    <p style="margin:4px 0"><b>Recognition:</b> ${esc(d.recognition || "")}</p>
+    ${(d.confused_with || []).length ? `<div class="reft">Do not confuse with</div><ul>${d.confused_with.map(c =>
+      `<li><b>${esc(c.value)}</b> - ${esc(c.difference)} <span class="small">(${esc(c.source)})</span></li>`).join("")}</ul>` : ""}
+    <div class="refimgs">${(d.images || []).map(i => `<figure><a href="${src(i)}" target="_blank" rel="noopener" title="open full size">
+      <img src="${src(i)}" alt="${esc(i.caption)}" loading="lazy"></a><figcaption><b>${i.kind === "manual" ? "Your manual" : "Database example"}</b> · ${esc(i.caption)}</figcaption></figure>`).join("")}</div>
+    <div class="small">Source: ${esc(d.source)} · folder <code>reference_library/${esc(d.folder)}</code></div>`;
+}
+
+renderQattrs();
+{
+  const _rq = renderQregs;
+  renderQregs = function () { _rq(); paintQobj(); };
+  const _init = init;
+  init = async function () { await _init(); renderQattrs(); };
+}
+
+init();
+</script>
+</body>
+</html>

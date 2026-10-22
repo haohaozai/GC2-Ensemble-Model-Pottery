@@ -1,0 +1,42 @@
+{
+ "attribute": "defect",
+ "attribute_label": "possible defects",
+ "value": "excessive glaze running",
+ "title": "Excessive glaze running",
+ "vi": "",
+ "identify": [
+  "Excessive glaze flow, potentially accumulating at the foot / base.",
+  "Not every drip is a defect."
+ ],
+ "recognition": "Classify as a defect only with convincing excessive / undesired accumulation.",
+ "source": "Glaze_Effects_Defects_Surface_Transparency_Reference_v2.pdf p.2-3",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "flowing",
+   "difference": "Flow is an effect; running is a defect only with excessive accumulation.",
+   "source": "Glaze_Effects_Defects_Surface_Transparency_Reference_v2.pdf §3"
+  }
+ ],
+ "images": [
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "59798_3",
+   "model_p": 0.451,
+   "phrase": "thick glaze pool",
+   "dino": 0.586,
+   "caption": "database object 59798_3: Claude's label is excessive glaze running; model probability 0.45; box = Grounding DINO phrase 'thick glaze pool'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "657754_1",
+   "model_p": 0.399,
+   "phrase": "thick glaze pool",
+   "dino": 0.554,
+   "caption": "database object 657754_1: Claude's label is excessive glaze running; model probability 0.40; box = Grounding DINO phrase 'thick glaze pool'"
+  }
+ ],
+ "n_database_labels": 13
+}

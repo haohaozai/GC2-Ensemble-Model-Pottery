@@ -1,0 +1,52 @@
+{
+ "attribute": "transparency",
+ "attribute_label": "transparency",
+ "value": "translucent",
+ "title": "Translucent",
+ "vi": "Bán trong",
+ "identify": [
+  "Some underlying details are softened or obscured.",
+  "Some light or underlying detail passes through, but details are diffuse."
+ ],
+ "recognition": "Partial, blurred visibility of what is under the glaze.",
+ "source": "Ceramic Attribute Taxonomy (craze documentaries.pdf) p.6 · Glaze_Effects_Defects_Surface_Transparency_Reference_v2.pdf p.3",
+ "general": false,
+ "confused_with": [
+  {
+   "value": "transparent",
+   "difference": "Transparent shows the details clearly; translucent only diffusely.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §8"
+  },
+  {
+   "value": "opaque",
+   "difference": "Opaque conceals the underlying material.",
+   "source": "Ceramic_Real_Photo_Comparison_Guide_V4.pdf §8"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Translucent - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.6)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "668053_2",
+   "model_p": 0.672,
+   "phrase": "translucent glaze",
+   "dino": 0.287,
+   "caption": "database object 668053_2: Claude's label is translucent; model probability 0.67; box = Grounding DINO phrase 'translucent glaze'"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "662228_13",
+   "model_p": 0.682,
+   "phrase": "milky glaze",
+   "dino": 0.276,
+   "caption": "database object 662228_13: Claude's label is translucent; model probability 0.68; box = Grounding DINO phrase 'milky glaze'"
+  }
+ ],
+ "n_database_labels": 486
+}

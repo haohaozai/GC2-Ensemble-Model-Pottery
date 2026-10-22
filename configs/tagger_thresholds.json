@@ -1,0 +1,18 @@
+{
+  "source": "scripts/11_eval_tagger_weak_labels.py (dev half, max F1 at population prevalence vs weak Subtype labels; defaults = median of calibrated thresholds)",
+  "thresholds": {
+    "effect_presence": 0.9985,
+    "defect_presence": 0.993,
+    "effect_presence_per_class": {
+      "Crystalline": 0.9985,
+      "Oil Spot": 0.9985,
+      "Crackle": 0.9985,
+      "Metallic / Iridescent": 0.985
+    },
+    "defect_presence_per_class": {
+      "Crawling": 0.99,
+      "Pitting": 0.995,
+      "Blistering": 0.993
+    }
+  }
+}

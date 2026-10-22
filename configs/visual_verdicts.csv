@@ -1,0 +1,277 @@
+filename,set,comparison,legacy,new,notes,tuned_after_first_look
+119557.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+138032.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+141251.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+145827.jpg,review_holdout,improved,bad,good,,False
+153502.jpg,review_holdout,improved,bad,good,,False
+16304.jpg,review_holdout,improved,bad,good,,False
+16305.jpg,review_holdout,improved,bad,good,,False
+163451.jpg,review_holdout,improved,bad,good,,False
+169245.jpg,review_holdout,improved,bad,good,,False
+19334.jpg,review_holdout,improved,bad,good,,False
+22885.jpg,review_holdout,improved,bad,good,,False
+27803.jpg,review_holdout,same,good,good,,False
+296055.jpg,review_holdout,improved,bad,good,,False
+296887.jpg,review_holdout,improved,bad,good,,False
+298425.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+3028.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+3035.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+3038.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+3047.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+3049.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+3054.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+3066.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+3131.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+3140.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+3142.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+3144.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+315.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+3163.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+32817.jpg,review_holdout,improved,bad,good,board / merged mass replaced by separate tiles,True
+341464.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+34633.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+37574.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+38371.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+38588.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+388285.jpg,review_holdout,both_bad,bad,bad,"pyramid of tiles: legacy merged, new separates 10 tiles but misses others",False
+398196.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+41757.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+41807.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+419932.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+4241.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+428984.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+432714.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+432716.jpg,review_holdout,improved,bad,minor,whole area recovered but split into 2 along a groove (may be one tile),False
+432717.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+432732.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+434153.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+436809.jpg,review_holdout,unclear,,,thumbnail too small to judge,False
+499146.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+499150.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+49976.jpg,review_holdout,unclear,,,thumbnail too small to judge,False
+529979.jpg,review_holdout,improved,bad,minor,whole bowl surface recovered; glaze drops exported as separate objects,False
+536813.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+551692.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+551739.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+552276.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+560308.jpg,review_holdout,improved,bad,good,sheet of paper: new exports no object,True
+561820.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+561889.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+564389.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+567629.jpg,review_holdout,improved,bad,minor,white tile recovered by the low-confidence close-up fallback (flagged),True
+56851.jpg,review_holdout,improved,bad,good,,False
+569486.jpg,review_holdout,same,minor,minor,similar masks,False
+569567.jpg,review_holdout,improved,bad,minor,white tile recovered by the low-confidence close-up fallback (flagged),True
+573623.jpg,review_holdout,improved,bad,good,board / merged mass replaced by separate tiles,False
+581524.jpg,review_holdout,both_bad,bad,bad,tiles separated but a table region is kept as an object,False
+594146.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+605147.jpg,review_holdout,both_bad,bad,bad,"~100 small cups: legacy includes the cloth, new finds only 16 cups",False
+611794.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+618480.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+619087.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+620541.jpg,review_holdout,improved,bad,good,board / merged mass replaced by separate tiles,False
+621913.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+621916.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+623517.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+623521.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+626294.jpg,review_holdout,improved,bad,good,missing outer part recovered,False
+626949.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+628958.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+631715.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+632649.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+634468.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+635576.jpg,review_holdout,improved,bad,good,missing outer part recovered,False
+636194.jpg,review_holdout,both_bad,bad,bad,close-up glaze surface; both keep only a small part,False
+640678.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+640680.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+641021.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+641024.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+642872.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+645091.jpg,review_holdout,same,good,good,,False
+646009.jpg,review_holdout,improved,minor,good,cup interior / tray handled better,False
+648343.jpg,review_holdout,same,good,good,,False
+650591.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+651399.jpg,review_holdout,improved,bad,minor,whole piece recovered; boundary partly uncertain,False
+655105.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+655572.jpg,review_holdout,same,minor,minor,legacy kept the recipe label; new excludes it but keeps a ledge strip,True
+657970.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+658941.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+663591.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+665004.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+676634.jpg,review_holdout,improved,bad,good,missing outer part recovered,False
+677106.jpg,review_holdout,improved,bad,good,missing outer part recovered,False
+677525.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+678649.jpg,review_holdout,improved,bad,minor,whole piece recovered; boundary partly uncertain,False
+682456.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+682788.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+683297.jpg,review_holdout,improved,minor,good,cup interior / tray handled better,False
+684651.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+684888.jpg,review_holdout,improved,bad,good,missing outer part recovered,False
+684945.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+686729.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+687539.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+687581.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+687583.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+687584.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+687587.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+687637.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+687715.jpg,review_holdout,improved,bad,good,missing interior / ridge / glaze zone recovered,False
+689166.jpg,review_holdout,worse,minor,bad,new includes the backdrop around a white sculpture,True
+690416.jpg,review_holdout,both_bad,bad,bad,close-up glaze surface; both keep only a small part,False
+693064.jpg,review_holdout,improved,bad,good,board / merged mass replaced by separate tiles,False
+695119.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+697743.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+697746.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+697748.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+699898.jpg,review_holdout,improved,bad,good,legacy kept a fragment of a frame-filling piece; new keeps the whole piece,False
+700912.jpg,review_holdout,improved,bad,good,missing outer part recovered,False
+700945.jpg,review_holdout,improved,bad,good,,False
+701254.jpg,review_holdout,improved,bad,good,,False
+702382.jpg,review_holdout,same,minor,minor,,False
+702386.jpg,review_holdout,same,minor,minor,,False
+702554.jpg,review_holdout,improved,bad,good,,False
+703685.jpg,review_holdout,improved,bad,good,,False
+703689.jpg,review_holdout,improved,bad,good,,False
+704116.jpg,review_holdout,worse,good,bad,white ribbed tile removed by CLIP as 'fabric',True
+704734.jpg,review_holdout,improved,bad,good,,False
+706261.jpg,review_holdout,improved,bad,good,,False
+706265.jpg,review_holdout,improved,bad,good,,False
+706275.jpg,review_holdout,improved,bad,good,,False
+706313.jpg,review_holdout,improved,bad,good,,True
+706327.jpg,review_holdout,improved,bad,good,,False
+706341.jpg,review_holdout,improved,bad,good,,False
+708706.jpg,review_holdout,improved,bad,good,,False
+716523.jpg,review_holdout,improved,bad,good,,False
+717792.jpg,review_holdout,both_bad,bad,bad,,False
+723978.jpg,review_holdout,improved,bad,good,,False
+730217.jpg,review_holdout,improved,bad,good,,False
+730218.jpg,review_holdout,improved,bad,good,,False
+741969.jpg,review_holdout,same,minor,minor,,False
+74556.jpg,review_holdout,improved,bad,good,,False
+754162.jpg,review_holdout,improved,bad,good,,False
+7610.jpg,review_holdout,improved,bad,good,,False
+768215.jpg,review_holdout,improved,bad,good,,False
+7722.jpg,review_holdout,improved,bad,good,,False
+775485.jpg,review_holdout,same,minor,minor,,False
+783210.jpg,review_holdout,improved,bad,good,,False
+7972.jpg,review_holdout,improved,bad,good,,False
+798944.jpg,review_holdout,improved,bad,good,,False
+803203.jpg,review_holdout,improved,bad,good,,False
+803205.jpg,review_holdout,improved,bad,good,,False
+803206.jpg,review_holdout,improved,bad,good,,False
+803207.jpg,review_holdout,improved,bad,good,,False
+803211.jpg,review_holdout,improved,bad,good,,False
+803227.jpg,review_holdout,improved,bad,good,,False
+803228.jpg,review_holdout,improved,bad,good,,False
+80968.jpg,review_holdout,improved,bad,good,,False
+811346.jpg,review_holdout,improved,bad,good,,False
+818537.jpg,review_holdout,both_bad,bad,bad,,False
+85496.jpg,review_holdout,improved,bad,good,,False
+111155.jpg,regression_holdout,same,good,good,,False
+168541.jpg,regression_holdout,same,good,good,,False
+658983.jpg,regression_holdout,same,good,good,,False
+82992.jpg,regression_holdout,same,good,good,,False
+30948.jpg,regression_holdout,improved,minor,good,two cups now separate instances,False
+605218.jpg,regression_holdout,same,good,good,,False
+658910.jpg,regression_holdout,same,good,good,,False
+751065.jpg,regression_holdout,same,good,good,,False
+508688.jpg,regression_holdout,improved,bad,good,legacy kept the shelf object behind the vase,False
+693340.jpg,regression_holdout,improved,minor,good,glazed and bare parts of two tiles separated by tile,False
+695136.jpg,regression_holdout,improved,minor,good,two tiles as separate instances,False
+711524.jpg,regression_holdout,same,good,minor,,False
+420744.jpg,regression_holdout,same,good,good,,False
+665249.jpg,regression_holdout,same,good,good,,False
+687453.jpg,regression_holdout,same,good,good,,False
+767811.jpg,regression_holdout,same,good,good,,False
+581971.jpg,regression_holdout,same,good,good,,False
+687649.jpg,regression_holdout,same,good,good,,False
+692297.jpg,regression_holdout,same,good,good,,False
+709747.jpg,regression_holdout,same,good,good,,False
+26390.jpg,regression_holdout,same,good,good,,False
+631249.jpg,regression_holdout,same,minor,minor,both include a background tile at the top,False
+691264.jpg,regression_holdout,improved,bad,minor,legacy kept the table; new keeps the tile and part of the stand,False
+911.jpg,regression_holdout,improved,minor,good,,False
+309516.jpg,regression_holdout,same,good,good,,False
+636595.jpg,regression_holdout,same,good,good,,False
+696223.jpg,regression_holdout,same,good,good,fixed after first hold-out look,True
+798214.jpg,regression_holdout,same,good,good,fixed after first hold-out look,True
+388291.jpg,regression_holdout,same,good,good,,False
+683363.jpg,regression_holdout,same,good,good,,False
+703025.jpg,regression_holdout,same,good,good,,False
+719436.jpg,regression_holdout,same,good,good,,False
+477954.jpg,regression_holdout,improved,minor,good,more of the dishes found,False
+625738.jpg,regression_holdout,same,good,good,,False
+647695.jpg,regression_holdout,same,minor,minor,,False
+679396.jpg,regression_holdout,same,good,good,,False
+3114.jpg,regression_holdout,same,good,good,,False
+652386.jpg,regression_holdout,same,good,good,,False
+690408.jpg,regression_holdout,same,good,good,,False
+7330.jpg,regression_holdout,same,good,good,,False
+41764.jpg,regression_holdout,same,good,good,,False
+687661.jpg,regression_holdout,same,good,good,,False
+739957.jpg,regression_holdout,improved,bad,good,legacy kept the whole frame; new keeps the bowl,False
+786715.jpg,regression_holdout,same,good,good,,False
+211587.jpg,regression_holdout,improved,bad,good,legacy kept the table; new: 4 bowls + a stray speck,False
+279993.jpg,regression_holdout,same,good,good,,False
+41622.jpg,regression_holdout,same,good,good,,False
+636657.jpg,regression_holdout,improved,minor,good,three tiles separated,False
+384321.jpg,regression_fresh,same,good,good,,False
+636027.jpg,regression_fresh,same,good,good,,False
+662228.jpg,regression_fresh,worse,good,bad,triangle tray of test cups: new keeps only the cups and drops the tray,False
+676906.jpg,regression_fresh,same,good,good,,False
+776675.jpg,regression_fresh,same,good,good,,False
+399182.jpg,regression_fresh,improved,minor,good,two tiles as separate instances,False
+655984.jpg,regression_fresh,same,good,good,,False
+659271.jpg,regression_fresh,same,good,minor,,False
+681306.jpg,regression_fresh,same,good,good,,False
+794705.jpg,regression_fresh,same,good,good,,False
+239065.jpg,regression_fresh,improved,minor,good,three vases as separate instances,False
+700568.jpg,regression_fresh,same,minor,minor,,False
+704879.jpg,regression_fresh,improved,minor,good,,False
+704885.jpg,regression_fresh,same,good,minor,,False
+752455.jpg,regression_fresh,same,good,good,,False
+152057.jpg,regression_fresh,same,good,good,,False
+29135.jpg,regression_fresh,same,good,good,,False
+646632.jpg,regression_fresh,same,good,good,,False
+687783.jpg,regression_fresh,same,good,good,,False
+765013.jpg,regression_fresh,same,good,good,,False
+433791.jpg,regression_fresh,same,good,good,,False
+687655.jpg,regression_fresh,same,good,good,,False
+714682.jpg,regression_fresh,improved,bad,good,legacy kept the whole frame; new keeps the tile,False
+715345.jpg,regression_fresh,improved,bad,good,legacy kept the whole frame; new keeps the tile,False
+754287.jpg,regression_fresh,same,good,good,,False
+281339.jpg,regression_fresh,improved,minor,good,five tiles separated,False
+347949.jpg,regression_fresh,improved,bad,good,legacy kept the table; new keeps the two bowls,False
+510567.jpg,regression_fresh,worse,good,bad,green figure on a terracotta pot: new keeps only the figure,False
+596677.jpg,regression_fresh,improved,minor,good,tiles separated,False
+718638.jpg,regression_fresh,same,good,good,,False
+408124.jpg,regression_fresh,same,good,good,,False
+6360.jpg,regression_fresh,same,good,good,,False
+636764.jpg,regression_fresh,same,good,good,,False
+658442.jpg,regression_fresh,same,good,good,,False
+778039.jpg,regression_fresh,same,good,good,,False
+504391.jpg,regression_fresh,improved,minor,good,,False
+662242.jpg,regression_fresh,same,good,good,,False
+673703.jpg,regression_fresh,same,good,good,,False
+683365.jpg,regression_fresh,same,good,good,,False
+696229.jpg,regression_fresh,same,good,good,,False
+698803.jpg,regression_fresh,improved,minor,good,,False
+703017.jpg,regression_fresh,same,good,minor,stray speck exported as a second object,False
+710654.jpg,regression_fresh,same,good,minor,one tile missed,False
+711456.jpg,regression_fresh,worse,good,minor,a table strip exported as an extra object,False
+778989.jpg,regression_fresh,same,minor,minor,a stone kept as an object in both,False
+3036.jpg,regression_fresh,same,good,good,,False
+3067.jpg,regression_fresh,same,good,good,,False
+687716.jpg,regression_fresh,same,good,good,,False
+687792.jpg,regression_fresh,same,good,good,,False
+717091.jpg,regression_fresh,same,good,good,,False
+1319.jpg,regression_fresh,same,good,good,,False
+39215.jpg,regression_fresh,same,good,good,,False
+407245.jpg,regression_fresh,same,good,good,,False
+495970.jpg,regression_fresh,same,good,good,,False
+684235.jpg,regression_fresh,same,good,good,,False
+192048.jpg,regression_fresh,same,minor,minor,both include the recipe sheet,False
+214140.jpg,regression_fresh,improved,bad,good,legacy kept the floor; new keeps the cup,False
+705822.jpg,regression_fresh,improved,bad,minor,legacy kept the table; new keeps the two tiles plus a speck,False
+757950.jpg,regression_fresh,improved,minor,good,three tiles separated,False
+806975.jpg,regression_fresh,improved,bad,good,legacy kept the floor; new keeps the tile,False

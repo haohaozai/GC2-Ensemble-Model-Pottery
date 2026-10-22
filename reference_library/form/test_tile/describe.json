@@ -1,0 +1,41 @@
+{
+ "attribute": "form",
+ "attribute_label": "object form",
+ "value": "test tile",
+ "title": "Test tile",
+ "vi": "",
+ "identify": [
+  "Small flat slab made to test a glaze, often rectangular, sometimes with a fold or ridge so it stands upright.",
+  "Often several on one board, sometimes with a hole or a label."
+ ],
+ "recognition": "Flat sample piece rather than a usable vessel.",
+ "source": "general description - not defined in your reference manuals (photo: Ceramic Attribute Taxonomy (craze documentaries.pdf) p.10)",
+ "general": true,
+ "confused_with": [],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Test tile - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.10)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "143157_3",
+   "model_p": 1.0,
+   "phrase": "flat rectangular tile",
+   "dino": 0.232,
+   "caption": "database object 143157_3: Claude's label is test tile; model probability 1.00"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "690100_3",
+   "model_p": 1.0,
+   "phrase": "flat rectangular tile",
+   "dino": 0.432,
+   "caption": "database object 690100_3: Claude's label is test tile; model probability 1.00"
+  }
+ ],
+ "n_database_labels": 1096
+}

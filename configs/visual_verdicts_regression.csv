@@ -1,0 +1,109 @@
+filename,set,comparison,legacy,new,notes
+111155.jpg,regression_holdout,same,good,good,
+168541.jpg,regression_holdout,same,good,good,
+658983.jpg,regression_holdout,same,good,good,
+82992.jpg,regression_holdout,same,good,good,
+30948.jpg,regression_holdout,improved,minor,good,two cups now separate instances
+605218.jpg,regression_holdout,same,good,good,
+658910.jpg,regression_holdout,same,good,good,
+751065.jpg,regression_holdout,same,good,good,
+508688.jpg,regression_holdout,improved,bad,good,legacy kept the shelf object behind the vase
+693340.jpg,regression_holdout,improved,minor,good,glazed and bare parts of two tiles separated by tile
+695136.jpg,regression_holdout,improved,minor,good,two tiles as separate instances
+711524.jpg,regression_holdout,same,good,minor,
+420744.jpg,regression_holdout,same,good,good,
+665249.jpg,regression_holdout,same,good,good,
+687453.jpg,regression_holdout,same,good,good,
+767811.jpg,regression_holdout,same,good,good,
+581971.jpg,regression_holdout,same,good,good,
+687649.jpg,regression_holdout,same,good,good,
+692297.jpg,regression_holdout,same,good,good,
+709747.jpg,regression_holdout,same,good,good,
+26390.jpg,regression_holdout,same,good,good,
+631249.jpg,regression_holdout,same,minor,minor,both include a background tile at the top
+691264.jpg,regression_holdout,improved,bad,minor,legacy kept the table; new keeps the tile and part of the stand
+911.jpg,regression_holdout,improved,minor,good,
+309516.jpg,regression_holdout,same,good,good,
+636595.jpg,regression_holdout,same,good,good,
+696223.jpg,regression_holdout,same,good,good,fixed after first hold-out look
+798214.jpg,regression_holdout,same,good,good,fixed after first hold-out look
+388291.jpg,regression_holdout,same,good,good,
+683363.jpg,regression_holdout,same,good,good,
+703025.jpg,regression_holdout,same,good,good,
+719436.jpg,regression_holdout,same,good,good,
+477954.jpg,regression_holdout,improved,minor,good,more of the dishes found
+625738.jpg,regression_holdout,same,good,good,
+647695.jpg,regression_holdout,same,minor,minor,
+679396.jpg,regression_holdout,same,good,good,
+3114.jpg,regression_holdout,same,good,good,
+652386.jpg,regression_holdout,same,good,good,
+690408.jpg,regression_holdout,same,good,good,
+7330.jpg,regression_holdout,same,good,good,
+41764.jpg,regression_holdout,same,good,good,
+687661.jpg,regression_holdout,same,good,good,
+739957.jpg,regression_holdout,improved,bad,good,legacy kept the whole frame; new keeps the bowl
+786715.jpg,regression_holdout,same,good,good,
+211587.jpg,regression_holdout,improved,bad,good,legacy kept the table; new: 4 bowls + a stray speck
+279993.jpg,regression_holdout,same,good,good,
+41622.jpg,regression_holdout,same,good,good,
+636657.jpg,regression_holdout,improved,minor,good,three tiles separated
+384321.jpg,regression_fresh,same,good,good,
+636027.jpg,regression_fresh,same,good,good,
+662228.jpg,regression_fresh,worse,good,bad,triangle tray of test cups: new keeps only the cups and drops the tray
+676906.jpg,regression_fresh,same,good,good,
+776675.jpg,regression_fresh,same,good,good,
+399182.jpg,regression_fresh,improved,minor,good,two tiles as separate instances
+655984.jpg,regression_fresh,same,good,good,
+659271.jpg,regression_fresh,same,good,minor,
+681306.jpg,regression_fresh,same,good,good,
+794705.jpg,regression_fresh,same,good,good,
+239065.jpg,regression_fresh,improved,minor,good,three vases as separate instances
+700568.jpg,regression_fresh,same,minor,minor,
+704879.jpg,regression_fresh,improved,minor,good,
+704885.jpg,regression_fresh,same,good,minor,
+752455.jpg,regression_fresh,same,good,good,
+152057.jpg,regression_fresh,same,good,good,
+29135.jpg,regression_fresh,same,good,good,
+646632.jpg,regression_fresh,same,good,good,
+687783.jpg,regression_fresh,same,good,good,
+765013.jpg,regression_fresh,same,good,good,
+433791.jpg,regression_fresh,same,good,good,
+687655.jpg,regression_fresh,same,good,good,
+714682.jpg,regression_fresh,improved,bad,good,legacy kept the whole frame; new keeps the tile
+715345.jpg,regression_fresh,improved,bad,good,legacy kept the whole frame; new keeps the tile
+754287.jpg,regression_fresh,same,good,good,
+281339.jpg,regression_fresh,improved,minor,good,five tiles separated
+347949.jpg,regression_fresh,improved,bad,good,legacy kept the table; new keeps the two bowls
+510567.jpg,regression_fresh,worse,good,bad,green figure on a terracotta pot: new keeps only the figure
+596677.jpg,regression_fresh,improved,minor,good,tiles separated
+718638.jpg,regression_fresh,same,good,good,
+408124.jpg,regression_fresh,same,good,good,
+6360.jpg,regression_fresh,same,good,good,
+636764.jpg,regression_fresh,same,good,good,
+658442.jpg,regression_fresh,same,good,good,
+778039.jpg,regression_fresh,same,good,good,
+504391.jpg,regression_fresh,improved,minor,good,
+662242.jpg,regression_fresh,same,good,good,
+673703.jpg,regression_fresh,same,good,good,
+683365.jpg,regression_fresh,same,good,good,
+696229.jpg,regression_fresh,same,good,good,
+698803.jpg,regression_fresh,improved,minor,good,
+703017.jpg,regression_fresh,same,good,minor,stray speck exported as a second object
+710654.jpg,regression_fresh,same,good,minor,one tile missed
+711456.jpg,regression_fresh,worse,good,minor,a table strip exported as an extra object
+778989.jpg,regression_fresh,same,minor,minor,a stone kept as an object in both
+3036.jpg,regression_fresh,same,good,good,
+3067.jpg,regression_fresh,same,good,good,
+687716.jpg,regression_fresh,same,good,good,
+687792.jpg,regression_fresh,same,good,good,
+717091.jpg,regression_fresh,same,good,good,
+1319.jpg,regression_fresh,same,good,good,
+39215.jpg,regression_fresh,same,good,good,
+407245.jpg,regression_fresh,same,good,good,
+495970.jpg,regression_fresh,same,good,good,
+684235.jpg,regression_fresh,same,good,good,
+192048.jpg,regression_fresh,same,minor,minor,both include the recipe sheet
+214140.jpg,regression_fresh,improved,bad,good,legacy kept the floor; new keeps the cup
+705822.jpg,regression_fresh,improved,bad,minor,legacy kept the table; new keeps the two tiles plus a speck
+757950.jpg,regression_fresh,improved,minor,good,three tiles separated
+806975.jpg,regression_fresh,improved,bad,good,legacy kept the floor; new keeps the tile

@@ -1,0 +1,52 @@
+{
+ "attribute": "form",
+ "attribute_label": "object form",
+ "value": "bowl",
+ "title": "Bowl",
+ "vi": "",
+ "identify": [
+  "Open, rounded vessel, usually wider than tall.",
+  "The inside is visible from above; rim, curved wall, small foot."
+ ],
+ "recognition": "Look at the silhouette, opening and proportions.",
+ "source": "general description - not defined in your reference manuals (photo: Ceramic Attribute Taxonomy (craze documentaries.pdf) p.10)",
+ "general": true,
+ "confused_with": [
+  {
+   "value": "plate",
+   "difference": "A plate is flat and shallow; a bowl has a deep curved wall.",
+   "source": "general description - not defined in your reference manuals"
+  },
+  {
+   "value": "cup",
+   "difference": "A cup is smaller and taller than wide, often with a handle.",
+   "source": "general description - not defined in your reference manuals"
+  }
+ ],
+ "images": [
+  {
+   "file": "reference_1.png",
+   "kind": "manual",
+   "caption": "Bowl - reference photo from your manual (Ceramic Attribute Taxonomy (craze documentaries.pdf) p.10)"
+  },
+  {
+   "file": "example_1.png",
+   "kind": "database",
+   "object_id": "372428_4",
+   "model_p": 0.978,
+   "phrase": "bowl",
+   "dino": 0.697,
+   "caption": "database object 372428_4: Claude's label is bowl; model probability 0.98"
+  },
+  {
+   "file": "example_2.png",
+   "kind": "database",
+   "object_id": "581088_1",
+   "model_p": 0.977,
+   "phrase": "bowl",
+   "dino": 0.683,
+   "caption": "database object 581088_1: Claude's label is bowl; model probability 0.98"
+  }
+ ],
+ "n_database_labels": 185
+}
