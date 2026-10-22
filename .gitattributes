@@ -1,6 +1,5 @@
-* text=auto
+# files arrive exactly as on the first PC (no line-ending conversion), except the .bat / .cmd launchers,
+# which cmd.exe needs with Windows line endings
+* -text
 *.bat text eol=crlf
 *.cmd text eol=crlf
-*.pdf binary
-*.png binary
-*.jpg binary
