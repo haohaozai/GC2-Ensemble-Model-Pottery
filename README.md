@@ -1,125 +1,341 @@
 # CG2 Ceramic Review and Glaze Search
 
-Two local web apps of the CG2 pottery project, built on **7,063 Glazy glaze recipes** whose photos were segmented
-into **12,309 ceramic objects** (Grounding DINO + SAM 2.1 + CLIP):
+A ceramic image review and glaze search system developed for the CG2 pottery project.
 
-| app | start with | what it does |
-|---|---|---|
-| **Review** | `OPEN_REVIEW_APP.bat` → http://127.0.0.1:8765 | browse every photo with its segmented objects, colours and six attributes; mark objects *Not needed* / *Needs review*; review the attributes of single objects (Tile panel); everything is saved in CSV / JSON files on your computer |
-| **Glaze Search** | `RUN_GLAZE_SEARCH.bat` → http://127.0.0.1:8770 | drop or paste a photo of a glaze: it finds the objects, describes them (colour regions + six attributes) and searches the database by shape, glaze / surface and colour (priority sliders), optionally with text and a glaze formula; every search is evaluated (Hit@K, Precision@K, Recall@K, nDCG) |
+Built using **7,063 Glazy glaze recipes** and **12,309 segmented ceramic objects**, processed with Grounding DINO, SAM 2.1, and CLIP.
 
-Online copies of the first PC: [review page](https://fbiwarninggg-ceramic-review.static.hf.space) ·
-[Glaze Search](https://huggingface.co/spaces/FBIWarninggg/glaze_search).
+This project provides two applications:
+
+- **Ceramic Review:** Browse ceramic images, inspect segmented objects, review attributes, and save review decisions.
+- **Glaze Search:** Upload a ceramic photo and search for visually similar objects based on shape, glaze, surface, and colour.
 
 ---
 
-## What you need
+## 1. Download the project from GitHub
 
-* Windows 10 or 11 (any drive and folder, e.g. `C:\CG2` or `D:\CG2`; keep the folder path short), internet for the
-  setup, **about 35 GB free disk**. Measured on a test install: 30.4 GB stay (images and processed data 21.2 GB of
-  which 12 GB are the rebuilt Tile cut-outs, models 3.8 GB, Python environment 5.0 GB, search files 0.3 GB); while
-  downloading, one archive (≤ 1.9 GB) is kept until it is unpacked, plus the package cache of `uv`.
-* About **17 GB to download** once: data 10.3 GB, models 3.7 GB, PyTorch and packages ~3 GB
-  (e.g. ~30 min at 10 MB/s, ~2.5 h at 2 MB/s). After that everything runs offline.
-* For Glaze Search an **NVIDIA GPU with ≥ 6 GB** memory is recommended (it uses ~4 GB). Without one it runs on the CPU:
-  a new photo then takes 1 - 3 minutes, searching stays fast. The Review app needs no GPU.
-* [uv](https://docs.astral.sh/uv/) (installs Python 3.11 for you). Install it once in PowerShell:
-  `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
+**Important: Use the `nghia_mike_ceramic` branch, not `main`.**
 
-## Install (once; the time is mostly downloading)
+Repository: [GC2-Ensemble-Model-Pottery](https://github.com/haohaozai/GC2-Ensemble-Model-Pottery/tree/nghia_mike_ceramic)
 
-1. Make a folder for the project, e.g. `D:\CG2`, and get this branch into it:
-   ```
-   cd /d D:\CG2
-   git clone -b nghia_ceramic_part https://github.com/nghialeduc268-a11y/nghia_ceramic.git
-   ```
-   (or on GitHub: branch `nghia_ceramic_part` → **Code → Download ZIP**, and unzip it into `D:\CG2`.)
-2. Double-click **`SETUP.bat`**: Python environment `.venv`, PyTorch (GPU or CPU build), the pinned packages and the
-   pretrained models (~3.7 GB, fixed versions).
-3. Double-click **`DOWNLOAD_DATA.bat`**: the data (10 archives, 10.3 GB) from the release
-   [data-v1](https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/tag/data-v1), checked and unpacked into the
-   right folders, then the Tile cut-outs are rebuilt. Interrupted? Run it again — it continues.
-4. Double-click **`CHECK_DATA.bat`**: every folder shows `OK` (or what is missing and how to fix it).
-5. Start **`OPEN_REVIEW_APP.bat`** or **`RUN_GLAZE_SEARCH.bat`**. Keep the black window open while you use the page;
-   close it to stop.
+### Step 1 — Choose a folder
 
-All `.bat` files can be run again safely; finished steps are skipped.
+You can install the project on any drive, for example:
 
-## Folder layout
+- `D:\CG2`
+- `C:\CG2`
+- `D:\NUS study\CG2`
 
-```
-D:\CG2\                          <- any folder (the "CG2 root")
-├── nghia_ceramic\               <- this repository (the folder name does not matter)
-│   ├── OPEN_REVIEW_APP.bat  RUN_GLAZE_SEARCH.bat  SETUP.bat  DOWNLOAD_DATA.bat  CHECK_DATA.bat  SYNC_ONLINE_REVIEWS.bat
-│   ├── review_app\              Review page          scripts\       Review server, setup / data / check scripts
-│   ├── multimodal_experiments\  Glaze Search: app\ (server + page), mm\ (search engine), vendor\ (text branch)
-│   │                            work\ + cache\ = search index and trained files (from the download)
-│   ├── glazeprep\               shared code: paths, segmentation, CLIP, Tile reviews
-│   ├── reference_library\       example images + definitions behind the (i) buttons
-│   ├── third_party\color_lab_v3\  colour vocabulary (Color Search Lab V3)
-│   ├── configs\  web\           thresholds · Supabase SQL for the online review page
-│   ├── docs\                    guides + manuals (PDF)
-│   └── data_manifest.json  requirements.txt  .env.example
-├── new image data\              <- made by DOWNLOAD_DATA.bat
-│   ├── 7k_matched_images\7k_matched_images\    original photos
-│   ├── full_segmentation_claude_process\       objects, previews, masks, annotations, review files
-│   ├── bonus_image_claude_process\             the 125 extra photos, same structure
-│   └── others_image\                           their original photos
-└── model_cache\                 <- made by SETUP.bat (pretrained models)
+A short folder path is recommended.
+
+Open **Windows CMD** and navigate to your chosen folder.
+
+Example:
+
+```cmd
+mkdir D:\CG2
+cd /d D:\CG2
 ```
 
-**Data somewhere else?** Copy `.env.example` to `.env` and set `CG2_DATA` (and / or `CG2_ROOT`,
-`CG2_MODEL_CACHE`). Nothing else needs to be edited: every path in the code is derived from these.
+### Step 2 — Clone the correct branch
 
-## Using the apps
+Copy this command into CMD:
 
-* **Review** — [docs/REVIEW_GUIDE.md](docs/REVIEW_GUIDE.md): filters, keys (`N` not needed, `R` needs review,
-  `I` ignore the rest, `T` review tile, `V` overview), the Tile panel, what *Save* changes.
-* **Glaze Search** — [docs/SEARCH_GUIDE.md](docs/SEARCH_GUIDE.md): photo, text, formula and colour inputs, presets
-  and priority sliders, results and evaluation.
-* **Data** — [docs/DATA_DOWNLOAD.md](docs/DATA_DOWNLOAD.md): the archives, manual download, how photos, objects,
-  boxes and recipes are linked.
-* Manuals with screenshots (PDF): [docs/manuals](docs/manuals) — manual v4, Glaze Search beginner guide, flow mind
-  map, attribute report.
+```cmd
+git clone -b nghia_mike_ceramic --single-branch https://github.com/haohaozai/GC2-Ensemble-Model-Pottery.git
+```
 
-### Where results are saved
+Once completed, open the downloaded project folder:
 
-| app | saved in |
+```cmd
+cd GC2-Ensemble-Model-Pottery
+```
+
+You should now be inside the folder containing the project files.
+
+**Alternative:** Open the GitHub branch link, click **Code → Download ZIP**, then extract the ZIP into your chosen folder.
+
+---
+
+## 2. Installation — Complete these 3 steps in order
+
+**Do not launch the applications before completing all three steps.**
+
+### STEP 1 — Run SETUP.bat
+
+From inside the downloaded project folder, double-click:
+
+`SETUP.bat`
+
+Or run it using CMD:
+
+```cmd
+SETUP.bat
+```
+
+**What happens:**
+
+- Creates the Python environment (`.venv`).
+- Installs Python 3.11 and the required packages.
+- Installs PyTorch for GPU or CPU execution.
+- Downloads pretrained AI models (approximately 3.7 GB).
+- Prepares the applications for execution.
+
+**Before running:** Install [uv](https://docs.astral.sh/uv/) if it is not already installed. In PowerShell, run:
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Then reopen CMD.
+
+**Wait until SETUP.bat finishes successfully before continuing.**
+
+### STEP 2 — Run DOWNLOAD_DATA.bat
+
+After setup completes, double-click:
+
+`DOWNLOAD_DATA.bat`
+
+Or run:
+
+```cmd
+DOWNLOAD_DATA.bat
+```
+
+**What happens:**
+
+- Downloads the ceramic datasets from the GitHub release.
+- Retrieves approximately 10.3 GB of compressed data across 10 archives.
+- Extracts the 7,063 original glaze photos.
+- Restores the segmented ceramic objects, annotations, masks, and review data.
+- Rebuilds Tile cut-out images.
+- Places everything in the expected project folders.
+
+The download source is:
+
+[GitHub Data Release — data-v1](https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/tag/data-v1)
+
+**Important:** This is the largest data download step. Do not close the CMD window while it is running.
+
+If the download is interrupted, run `DOWNLOAD_DATA.bat` again. The script is designed to continue and skip successfully completed downloads.
+
+### STEP 3 — Run CHECK_DATA.bat
+
+After downloading, double-click:
+
+`CHECK_DATA.bat`
+
+Or run:
+
+```cmd
+CHECK_DATA.bat
+```
+
+**What happens:**
+
+- Verifies the required folders and datasets.
+- Checks whether the project files are available.
+- Reports missing data.
+- Confirms whether the installation is ready.
+
+**Expected result:** All required checks should display `OK`.
+
+If a check displays `NO`, read its message and rerun `DOWNLOAD_DATA.bat` or `SETUP.bat` as appropriate.
+
+**Once all required checks pass, the installation is complete.**
+
+---
+
+## 3. Launch the applications
+
+After completing the installation, you can use either application.
+
+### Application A — Ceramic Review
+
+Double-click:
+
+`OPEN_REVIEW_APP.bat`
+
+Or run:
+
+```cmd
+OPEN_REVIEW_APP.bat
+```
+
+Open in your browser:
+
+http://127.0.0.1:8765
+
+**Features:**
+
+- Browse original ceramic photos and segmented objects.
+- Inspect colours and six ceramic attributes.
+- Mark objects as *Not needed* or *Needs review*.
+- Review individual objects in the Tile panel.
+- Save review decisions to local CSV and JSON files.
+
+### Application B — Glaze Search
+
+Double-click:
+
+`RUN_GLAZE_SEARCH.bat`
+
+Or run:
+
+```cmd
+RUN_GLAZE_SEARCH.bat
+```
+
+Open in your browser:
+
+http://127.0.0.1:8770
+
+**Features:**
+
+- Upload, drag, or paste ceramic photos.
+- Detect and describe ceramic objects.
+- Search by shape, glaze, surface, and colour.
+- Adjust search priorities using sliders.
+- Optionally search with text and glaze formulas.
+- Evaluate results using Hit@K, Precision@K, Recall@K, and nDCG.
+
+**Important:** Keep the CMD window open while using either application. Closing it stops the corresponding local server.
+
+---
+
+## 4. System requirements
+
+| Requirement | Details |
 |---|---|
-| Review | `new image data\full_segmentation_claude_process\review\object_review.csv` (master record), `full_auto_tags.csv`, `review\tile_review.json`; *Not needed* objects are moved to `does_not_needed\` |
-| Glaze Search | `multimodal_experiments\work\queries\` (uploads + searches), `work\queries\session_log.json`, `work\logs\app.log` |
+| Operating system | Windows 10 or Windows 11 |
+| Storage | Approximately 35 GB free |
+| Initial download | Approximately 17 GB |
+| Python | Python 3.11, installed through uv |
+| GPU | NVIDIA GPU with at least 6 GB VRAM recommended for Glaze Search |
+| CPU support | Both apps can run without an NVIDIA GPU |
+| Internet | Required for initial installation and downloads |
 
-Each computer keeps its own copy. To review together use the online review page (next section).
+Approximate download time:
 
-## Online review page (optional)
-
-The review page can also run online with a free [Supabase](https://supabase.com) database (anyone views; editors sign
-in with email + editor code). Setup: run `web/supabase_setup.sql` (put your email in the last lines first),
-`web/supabase_editor_codes.sql` and `web/supabase_tile_reviews.sql` in Supabase → SQL Editor; then copy
-`web/publish_settings.example.json` to `web/publish_settings.json` and fill in the project URL and the **anon /
-publishable** key. `SYNC_ONLINE_REVIEWS.bat` brings the online decisions to this computer (it shows them first and
-asks). **Never put the `service_role` / secret key in any file.**
-
-## Problems
-
-| problem | fix |
+| Internet speed | Estimated time for 17 GB |
 |---|---|
-| `uv was not found` | install uv (command above), open a **new** window, run `SETUP.bat` again |
-| `ERROR: Python environment not found` | run `SETUP.bat` |
-| a `CHECK_DATA.bat` line says `NO` | run `DOWNLOAD_DATA.bat` again (it only fetches what is missing); data in another folder → `.env` |
-| download stops / SHA-256 does not match | run `DOWNLOAD_DATA.bat` again (continues, damaged files are fetched again) |
-| GitHub download is slow or blocked | download the 10 `.tar` files in the browser from the release page, then `DOWNLOAD_DATA.bat --from-folder "<folder>"` |
-| Glaze Search: model not found / wants internet | run `SETUP.bat` again (models missing) |
-| Glaze Search: `CUDA out of memory` or `Another GPU job is running` | close other GPU programs; or CPU mode: `set CUDA_VISIBLE_DEVICES=-1` then `RUN_GLAZE_SEARCH.bat` in the same window |
-| Glaze Search: `already running` | the page is open already: http://127.0.0.1:8770 |
-| Review: Tile panel without cut-out | `.venv\Scripts\python.exe scripts\rebuild_tile_cutouts.py` |
-| port in use | Review picks the next free port (see the black window); Glaze Search: `RUN_GLAZE_SEARCH.bat --port 8771` |
+| 2 MB/s | 2.5 hours |
+| 5 MB/s | 1 hour |
+| 10 MB/s | 30 minutes |
 
-## What is (not) in this repository
+After setup, the local applications can operate offline.
 
-Included: everything both apps run (server code, pages, shared modules, configuration, colour vocabulary, reference
-library, Supabase SQL), setup / download / check scripts, guides and the current manuals. The data comes from the
-release; the models from their original publishers (`scripts/setup_models.py`, pinned versions).
+On CPU, processing a new photo for Glaze Search may take 1–3 minutes.
 
-Not included: the segmentation / training pipelines and their intermediate outputs (~26 GB), the Python environment,
-personal settings and keys, and uploaded photos.
+---
+
+## 5. Project structure
+
+```text
+CG2/
+├── GC2-Ensemble-Model-Pottery/
+│   ├── SETUP.bat
+│   ├── DOWNLOAD_DATA.bat
+│   ├── CHECK_DATA.bat
+│   ├── OPEN_REVIEW_APP.bat
+│   ├── RUN_GLAZE_SEARCH.bat
+│   ├── SYNC_ONLINE_REVIEWS.bat
+│   ├── review_app/
+│   ├── multimodal_experiments/
+│   ├── glazeprep/
+│   ├── reference_library/
+│   ├── third_party/
+│   ├── scripts/
+│   ├── configs/
+│   ├── web/
+│   ├── docs/
+│   └── data_manifest.json
+│
+├── new image data/
+│   ├── 7k_matched_images/
+│   ├── full_segmentation_claude_process/
+│   ├── bonus_image_claude_process/
+│   └── others_image/
+│
+└── model_cache/
+```
+
+The `new image data` and `model_cache` folders are created or populated during installation.
+
+If your data is stored elsewhere, copy `.env.example` to `.env` and configure `CG2_DATA`, `CG2_ROOT`, or `CG2_MODEL_CACHE`.
+
+---
+
+## 6. Online versions
+
+Online copies are also available:
+
+- [Ceramic Review Page](https://fbiwarninggg-ceramic-review.static.hf.space)
+- [Glaze Search on Hugging Face](https://huggingface.co/spaces/FBIWarninggg/glaze_search)
+
+The online Review page can use Supabase for shared review decisions. The local Review app saves data on your computer.
+
+For online review setup, refer to the Supabase SQL files in `web/`. Never commit secret keys or service-role credentials to GitHub.
+
+---
+
+## 7. Troubleshooting
+
+| Problem | Solution |
+|---|---|
+| `git` is not recognized | Install Git for Windows and reopen CMD |
+| `uv was not found` | Install uv and reopen CMD |
+| Python environment not found | Run `SETUP.bat` |
+| Required data missing | Run `DOWNLOAD_DATA.bat` again |
+| Download interrupted | Rerun `DOWNLOAD_DATA.bat` |
+| SHA-256 verification fails | Rerun the download to replace damaged files |
+| AI models are missing | Run `SETUP.bat` again |
+| CUDA out of memory | Close other GPU applications or use CPU mode |
+| Review app port is occupied | Check the CMD window for the selected port |
+| Glaze Search port is occupied | Run `RUN_GLAZE_SEARCH.bat --port 8771` |
+| Tile cut-outs missing | Run the Tile rebuilding script |
+
+For CPU-only Glaze Search, use CMD:
+
+```cmd
+set CUDA_VISIBLE_DEVICES=-1
+RUN_GLAZE_SEARCH.bat
+```
+
+For manually downloaded archives:
+
+```cmd
+DOWNLOAD_DATA.bat --from-folder "D:\YourDownloadFolder"
+```
+
+To rebuild missing Tile cut-outs:
+
+```cmd
+.venv\Scripts\python.exe scripts\rebuild_tile_cutouts.py
+```
+
+---
+
+## 8. Manuals and additional documentation
+
+Detailed instructions are available in the repository:
+
+- [Review Guide](docs/REVIEW_GUIDE.md) — Review interface, filters, keyboard shortcuts, Tile panel, and saving decisions.
+- [Glaze Search Guide](docs/SEARCH_GUIDE.md) — Search inputs, priority sliders, results, and evaluation.
+- [Data Download Guide](docs/DATA_DOWNLOAD.md) — Data archives, manual downloads, and dataset relationships.
+- [Manuals and Screenshots](docs/manuals) — Detailed PDF manuals, workflow diagrams, and attribute documentation.
+
+These documents are optional references. You do not need to read them before following the installation steps.
+
+---
+
+## 9. Quick-start checklist
+
+- [ ] Clone the `nghia_mike_ceramic` branch.
+- [ ] Install uv if needed.
+- [ ] Run `SETUP.bat` and wait for completion.
+- [ ] Run `DOWNLOAD_DATA.bat` and wait for completion.
+- [ ] Run `CHECK_DATA.bat` and confirm all required checks pass.
+- [ ] Launch `OPEN_REVIEW_APP.bat` or `RUN_GLAZE_SEARCH.bat`.
+
+**Installation order: SETUP → DOWNLOAD DATA → CHECK DATA → LAUNCH APP.**
