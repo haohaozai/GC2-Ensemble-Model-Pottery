@@ -1,7 +1,7 @@
-"""Check that everything the two apps need is in place (CHECK_DATA.bat runs this).
+"""Check that everything Glaze Search needs is in place (CHECK_DATA.bat runs this).
 
-Reads the "checks" of data_manifest.json (folder, file pattern, expected number of files, which app needs it), the
-rebuilt Tile cut-outs and the pretrained models of scripts/setup_models.py, and prints what is missing and how to fix it.
+Reads the "checks" of data_manifest.json (folder, file pattern, expected number of files) and the pretrained models of
+scripts/setup_models.py, and prints what is missing and how to fix it.
 Exit code 0 = all present, 1 = something is missing.
 usage: python scripts/check_data.py [--quick]   (--quick: count files only in folders, skip the model files)
 """
@@ -63,11 +63,11 @@ def main() -> int:
         missing.append(({"fix": "SETUP.bat"}, "Python environment .venv"))
     print()
     if not missing:
-        print("All data and models are in place: start OPEN_REVIEW_APP.bat or RUN_GLAZE_SEARCH.bat.")
+        print("All data and models are in place: start RUN_GLAZE_SEARCH.bat.")
         return 0
     print(f"MISSING: {len(missing)} item(s)")
     for c, line in missing:
-        print(f"  - {line.strip()}  ->  fix: {c.get('fix', 'DOWNLOAD_DATA.bat')}")
+        print(f"  - {line.strip()}  ->  fix: {c.get('fix', 'DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.bat')}")
     print("If your data is in another folder, copy .env.example to .env and set CG2_DATA / CG2_MODEL_CACHE.")
     return 1
 

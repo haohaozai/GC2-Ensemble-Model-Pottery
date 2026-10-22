@@ -82,6 +82,7 @@ class ObjectSearch:
             bpr = BONUS_SEG / "review" / "object_review.csv"
             if bpr.exists():
                 rev.update({r["object_id"]: r for r in read_csv(bpr)})
+        self.csv_colours = self._colours_from_review(rev)
         self.ids = self.I["ids"].tolist()
         self.pos = {o: k for k, o in enumerate(self.ids)}
         self.ok = self.I["m_app"] & self.I["reg_valid"].any(1)
@@ -91,6 +92,28 @@ class ObjectSearch:
         self._ga, self._ga_key, self._fam = None, None, {}
         self.cache = {}
         self.seconds_init = round(time.time() - t0, 1)
+
+    # ------------------------------------------------------------ segmentation colour labels
+    def _colours_from_review(self, rev: dict) -> int:
+        """ColorThief palette (color1-3 hex / pct of review/object_review.csv - the same values as full_auto_tags.csv and
+        tag_json) replaces the copy saved in the index (ct_lab / ct_pct), so the segmentation's colour labels are the
+        ones searched and shown; the index of 2026-10-18 had no colours for 316 objects recoloured later.
+        Returns the number of objects whose palette changed."""
+        from mm.colorlab import hex2lab
+        lab, pct = self.I["ct_lab"].copy(), self.I["ct_pct"].copy()
+        for k, oid in enumerate(self.I["ids"].tolist()):
+            r = rev.get(oid)
+            if r is None:
+                continue
+            lab[k], pct[k] = 0, 0
+            for j in range(3):
+                h = r.get(f"color{j + 1}_hex") or ""
+                if h.startswith("#") and len(h) == 7:
+                    lab[k, j] = hex2lab(h)
+                    pct[k, j] = float(r.get(f"color{j + 1}_pct") or 0) / 100
+        changed = int(((lab != self.I["ct_lab"]).any((1, 2)) | (pct != self.I["ct_pct"]).any(1)).sum())
+        self.I["ct_lab"], self.I["ct_pct"] = lab, pct
+        return changed
 
     # ------------------------------------------------------------ reviewed tiles (sidecar, reloaded when it changes)
     def tiles(self) -> dict:
@@ -207,7 +230,7 @@ class ObjectSearch:
                                                              "priority": {k: round(v, 4) for k, v in self.priority_of(m, None).items()},
                                                              "val_nDCG@10": self.W["modes"][m]["val"]["nDCG@10"]} for m in MODES},
                 "reviewed_tiles": sum(1 for r in self.tiles().values() if r.get("category") == "review_tile"),
-                "init_s": self.seconds_init}
+                "colours_updated_from_csv": self.csv_colours, "init_s": self.seconds_init}
 
     # ------------------------------------------------------------ query object
     def encode(self, key, rgba) -> dict:

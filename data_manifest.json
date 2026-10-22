@@ -1,428 +1,88 @@
 {
- "dataset": "CG2 ceramic Review + Glaze Search data",
- "version": "data-v1",
+ "dataset": "CG2 Glaze Search data (original photos + segmentation)",
+ "version": "data-v2",
  "created": "2026-10-22",
- "release": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/tag/data-v1",
+ "release": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/tag/data-v2",
  "extract_roots": {
   "data": "CG2_DATA (default <CG2_ROOT>/new image data)",
   "project": "the project folder (this repository)",
   "models": "CG2_MODEL_CACHE (default <CG2_ROOT>/model_cache)"
  },
- "total_size": 10277007360,
+ "total_size": 6152376320,
  "archives": [
   {
    "name": "cg2_photos_7k_part1of2.tar",
-   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v1/cg2_photos_7k_part1of2.tar",
+   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v2/cg2_photos_7k_part1of2.tar",
    "size": 1293219840,
    "sha256": "64cf3a88c459d049172be3630c3d2fe8fe631a4f171552572e0347b48a4a386c",
    "files": 3482,
    "extract_to": "data",
-   "needed_by": "both",
+   "needed_by": "search",
    "contents": {
     "7k_matched_images/7k_matched_images": 3482
    }
   },
   {
    "name": "cg2_photos_7k_part2of2.tar",
-   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v1/cg2_photos_7k_part2of2.tar",
+   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v2/cg2_photos_7k_part2of2.tar",
    "size": 1294018560,
    "sha256": "be49f6992501dc59a1819cc3662fae6198579318c827094cc3463c39d1ca2121",
    "files": 3581,
    "extract_to": "data",
-   "needed_by": "both",
+   "needed_by": "search",
    "contents": {
     "7k_matched_images/7k_matched_images": 3581
    }
   },
   {
    "name": "cg2_object_crops_part1of2.tar",
-   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v1/cg2_object_crops_part1of2.tar",
+   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v2/cg2_object_crops_part1of2.tar",
    "size": 1288540160,
    "sha256": "6cb6f71adb0d851d73ae18a0df19a5698c6d5d3705f36aecace00e470e2a79c8",
    "files": 6451,
    "extract_to": "data",
-   "needed_by": "both",
+   "needed_by": "search",
    "contents": {
     "full_segmentation_claude_process/smaller_object": 6451
    }
   },
   {
    "name": "cg2_object_crops_part2of2.tar",
-   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v1/cg2_object_crops_part2of2.tar",
+   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v2/cg2_object_crops_part2of2.tar",
    "size": 1287946240,
    "sha256": "dd5cb55ea5128b8bce123c70528d2ff816413d95fc8bfe2dd3309dc426cda4d5",
    "files": 5479,
    "extract_to": "data",
-   "needed_by": "both",
+   "needed_by": "search",
    "contents": {
     "full_segmentation_claude_process/smaller_object": 5479
    }
   },
   {
-   "name": "cg2_detailed_previews_part1of2.tar",
-   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v1/cg2_detailed_previews_part1of2.tar",
-   "size": 1420523520,
-   "sha256": "ed83b36cc87d7ba37d0d8432ca273f3118ec29b278699e7614b79782a201df44",
-   "files": 7305,
+   "name": "cg2_segmentation_labels.tar",
+   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v2/cg2_segmentation_labels.tar",
+   "size": 455393280,
+   "sha256": "b48e6c219f73207a727de4f5f80af8d5e85af0d1b66edf649dfadb54b6aeedb7",
+   "files": 37994,
    "extract_to": "data",
-   "needed_by": "review",
-   "contents": {
-    "full_segmentation_claude_process/detailed_preview": 7305
-   }
-  },
-  {
-   "name": "cg2_detailed_previews_part2of2.tar",
-   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v1/cg2_detailed_previews_part2of2.tar",
-   "size": 1420810240,
-   "sha256": "9186d66dc4d8be60698604f00d998df433b1a897453b6e71f0e3f09c868f6bfe",
-   "files": 7635,
-   "extract_to": "data",
-   "needed_by": "review",
-   "contents": {
-    "full_segmentation_claude_process/detailed_preview": 4625,
-    "full_segmentation_claude_process/does_not_needed/detailed_preview": 3010
-   }
-  },
-  {
-   "name": "cg2_review_core.tar",
-   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v1/cg2_review_core.tar",
-   "size": 1738690560,
-   "sha256": "fdb73c851cb0842f2ef9020209560b9d10945fe50d598d3b41fcc63def432698",
-   "files": 54398,
-   "extract_to": "data",
-   "needed_by": "review",
+   "needed_by": "search",
    "contents": {
     "full_segmentation_claude_process/smaller_object_masks_raw": 11930,
     "full_segmentation_claude_process/tag_json": 11930,
-    "full_segmentation_claude_process/preview": 7063,
     "full_segmentation_claude_process/instance_masks": 7063,
     "full_segmentation_claude_process/meta": 7063,
-    "full_segmentation_claude_process/does_not_needed/smaller_object": 3010,
-    "full_segmentation_claude_process/does_not_needed/smaller_object_masks_raw": 3010,
-    "full_segmentation_claude_process/does_not_needed/tag_json": 3010,
     "full_segmentation_claude_process/review": 5,
-    "full_segmentation_claude_process": 3,
-    "full_segmentation_claude_process/manual_corrections_backup/102766": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/108815": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/111576": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/114323": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/114928": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/1342": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/147183": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/171443": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/18344": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/19539": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/19734": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/19884": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/201167": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/218616": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/220305": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/240822": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/2602": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/266741": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/27838": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/27852": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/27888": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/285462": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/30789": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/30809": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/31640": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/32197": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/3244": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/338433": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/366495": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/371662": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/376617": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/388290": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/409689": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/430651": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/44327": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/467278": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/472313": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/476537": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/477053": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/486265": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/490823": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/492884": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/49972": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/510474": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/510475": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/51909": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/527654": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/529979": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/533349": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/536829": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/53961": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/54689": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/552676": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/553051": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/569486": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/577588": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/578763": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/596272": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/598424": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/599893": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/604442": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/6051": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/606562": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/607115": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/612338": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/613558": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/616520": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/619901": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/625765": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/626947": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/632586": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/635956": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/636194": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/6384": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/638784": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/639300": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/643417": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/645408": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/645412": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/645414": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/648344": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/651519": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/653002": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/655937": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/655962": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/656403": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/658949": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/658954": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/658960": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/658961": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/658967": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/658969": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/659271": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/659277": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/659279": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/659287": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/659297": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/659308": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/662430": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/665477": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/669320": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/669327": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/673339": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/67464": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/676705": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/677525": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/680726": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/681601": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/683928": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/684330": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/684411": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/686742": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/687000": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/687151": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/687183": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/687209": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/687210": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/687300": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/687302": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/687444": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/689166": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/690416": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/692422": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/696953": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/697727": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/698729": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/698730": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/698733": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/698735": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/698736": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/702315": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/702319": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/702320": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/702439": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/702585": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/702671": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/703110": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/703114": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/703677": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/704116": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/704132": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/704142": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/704204": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/705250": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/705270": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/705274": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/705275": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/705276": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/705277": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/705820": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/706221": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/706225": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/707671": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/707673": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/707674": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/707675": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/707676": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/707678": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/707679": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/707680": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/707681": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/707682": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/708172": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/708598": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/708663": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/708667": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/708683": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/709306": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/713742": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/715760": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/718747": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/718752": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/719314": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/72382": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/753848": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/766949": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/766952": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/77052": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/770522": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/777567": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/782345": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/787364": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/790690": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/794691": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/795189": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/802555": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/81407": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/85496": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/88786": 1,
-    "full_segmentation_claude_process/manual_corrections_backup/900": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/138162": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/141251": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/141252": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/200118": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/20093": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/210411": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/22420": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/229652": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/2479": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/248684": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/27803": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/285462": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/30789": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/311328": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/320494": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/360618": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/36071": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/362096": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/392555": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/423649": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/424501": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/429348": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/449044": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/465580": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/515280": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/577052": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/608842": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/614728": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/619078": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/621014": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/624285": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/626759": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/632730": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/633192": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/634621": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/635771": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/643412": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/647666": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/656336": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/656393": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/661382": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/664662": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/67781": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/680711": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/680717": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/680730": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/680766": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/68637": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/687304": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/695240": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/696154": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/696741": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/696983": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/696984": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702101": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702420": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702425": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702431": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702434": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702441": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702443": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702444": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702446": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702447": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702449": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702452": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702578": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702586": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/702761": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/703095": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/703195": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/703627": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/703820": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/704195": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/704883": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/704884": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/704885": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/706345": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/706351": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/708085": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/708124": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/708135": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/708147": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/709660": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/710757": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/714396": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/717790": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/733186": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/735165": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/749139": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/754362": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/757862": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/757934": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/758447": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/758448": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/758457": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/759382": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/763565": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/770414": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/770425": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/770426": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/773497": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/776403": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/777410": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/786762": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/792674": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/798234": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/798270": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/803210": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/803211": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/803227": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/803231": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/80339": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/803983": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/804169": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/804172": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/804175": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/804180": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/804182": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/8415": 1,
-    "full_segmentation_claude_process/manual_corrections_backup_v2/900": 1
+    "full_segmentation_claude_process": 3
    }
   },
   {
    "name": "cg2_bonus_set.tar",
-   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v1/cg2_bonus_set.tar",
+   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v2/cg2_bonus_set.tar",
    "size": 216166400,
    "sha256": "c342974499b1c0e4b29bdef67912f12d9d0a44a1385d3ff9760040464a6efaa3",
    "files": 2147,
    "extract_to": "data",
-   "needed_by": "both",
+   "needed_by": "search",
    "contents": {
     "bonus_image_claude_process/smaller_object": 379,
     "bonus_image_claude_process/smaller_object_masks_raw": 379,
@@ -442,7 +102,7 @@
   },
   {
    "name": "cg2_search_artifacts.tar",
-   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v1/cg2_search_artifacts.tar",
+   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v2/cg2_search_artifacts.tar",
    "size": 312954880,
    "sha256": "dc9d9a4859f980e8494133661ea27455ce47b537c1b663e9067283a9c67938b3",
    "files": 7213,
@@ -460,7 +120,7 @@
   },
   {
    "name": "cg2_model_dinov2_code.tar",
-   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v1/cg2_model_dinov2_code.tar",
+   "url": "https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/download/data-v2/cg2_model_dinov2_code.tar",
    "size": 4136960,
    "sha256": "8ee99046bfbc066277d5e2a3cf1472badd22ba96c0ea2f91579d77d2711f7f2a",
    "files": 203,
@@ -471,24 +131,24 @@
    }
   }
  ],
- "rebuilt_after_download": {
-  "smaller_object_rgba_raw": "Tile cut-outs, 15,351 PNG (~12 GB): photo cropped to meta box_xyxy + smaller_object_masks_raw as alpha (scripts/rebuild_tile_cutouts.py; identical to the originals for all objects, checked 2026-10-22)",
-  "review_thumbs": "thumbnail cache, made by the Review app when needed"
- },
+ "same_as_data_v1": [
+  "cg2_photos_7k_part1of2.tar",
+  "cg2_photos_7k_part2of2.tar",
+  "cg2_object_crops_part1of2.tar",
+  "cg2_object_crops_part2of2.tar",
+  "cg2_bonus_set.tar",
+  "cg2_search_artifacts.tar",
+  "cg2_model_dinov2_code.tar"
+ ],
  "models": "scripts/setup_models.py (Hugging Face + Meta, pinned revisions, ~3.7 GB)",
  "not_included": [
-  "rgba",
-  "white_background",
-  "masks",
-  "diagnostics",
-  "evaluation",
-  "logs",
-  "manual_corrections_backup* (except preview.jpg)",
-  "manual_corrections_sheets*",
-  "*_v3.1_backup*",
-  "review/history",
+  "detailed_preview",
+  "preview",
+  "does_not_needed (objects marked not needed in the review)",
+  "manual_corrections_backup*",
+  "smaller_object_rgba_raw (Tile cut-outs)",
   "review_thumbs",
-  "full_segmentation (earlier pipeline)"
+  "everything else only the Review app reads: see data-v1 and branch nghia_mike_ceramic"
  ],
  "checks": [
   {
@@ -496,175 +156,119 @@
    "path": "7k_matched_images/7k_matched_images",
    "pattern": "*.jpg",
    "count": 7063,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/detailed_preview",
    "pattern": "*.jpg",
    "count": 379,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/does_not_needed/detailed_preview",
    "pattern": "*.jpg",
    "count": 32,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/does_not_needed/smaller_object",
    "pattern": "*.jpg",
    "count": 32,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/does_not_needed/smaller_object_masks_raw",
    "pattern": "*.png",
    "count": 32,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/does_not_needed/tag_json",
    "pattern": "*.json",
    "count": 32,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/instance_masks",
    "pattern": "*.png",
    "count": 125,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/meta",
    "pattern": "*.json",
    "count": 125,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/preview",
    "pattern": "*.jpg",
    "count": 125,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/smaller_object",
    "pattern": "*.jpg",
    "count": 379,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/smaller_object_masks_raw",
    "pattern": "*.png",
    "count": 379,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/tag_json",
    "pattern": "*.json",
    "count": 379,
-   "needed_by": "both"
-  },
-  {
-   "root": "data",
-   "path": "full_segmentation_claude_process/detailed_preview",
-   "pattern": "*.jpg",
-   "count": 11930,
-   "needed_by": "review"
-  },
-  {
-   "root": "data",
-   "path": "full_segmentation_claude_process/does_not_needed/detailed_preview",
-   "pattern": "*.jpg",
-   "count": 3010,
-   "needed_by": "review"
-  },
-  {
-   "root": "data",
-   "path": "full_segmentation_claude_process/does_not_needed/smaller_object",
-   "pattern": "*.jpg",
-   "count": 3010,
-   "needed_by": "review"
-  },
-  {
-   "root": "data",
-   "path": "full_segmentation_claude_process/does_not_needed/smaller_object_masks_raw",
-   "pattern": "*.png",
-   "count": 3010,
-   "needed_by": "review"
-  },
-  {
-   "root": "data",
-   "path": "full_segmentation_claude_process/does_not_needed/tag_json",
-   "pattern": "*.json",
-   "count": 3010,
-   "needed_by": "review"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "full_segmentation_claude_process/instance_masks",
    "pattern": "*.png",
    "count": 7063,
-   "needed_by": "review"
-  },
-  {
-   "root": "data",
-   "path": "full_segmentation_claude_process/manual_corrections_backup",
-   "pattern": "*/preview.jpg",
-   "count": 190,
-   "needed_by": "review"
-  },
-  {
-   "root": "data",
-   "path": "full_segmentation_claude_process/manual_corrections_backup_v2",
-   "pattern": "*/preview.jpg",
-   "count": 121,
-   "needed_by": "review"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "full_segmentation_claude_process/meta",
    "pattern": "*.json",
    "count": 7063,
-   "needed_by": "review"
-  },
-  {
-   "root": "data",
-   "path": "full_segmentation_claude_process/preview",
-   "pattern": "*.jpg",
-   "count": 7063,
-   "needed_by": "review"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "full_segmentation_claude_process/smaller_object",
    "pattern": "*.jpg",
    "count": 11930,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "full_segmentation_claude_process/smaller_object_masks_raw",
    "pattern": "*.png",
    "count": 11930,
-   "needed_by": "review"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "full_segmentation_claude_process/tag_json",
    "pattern": "*.json",
    "count": 11930,
-   "needed_by": "review"
+   "needed_by": "search"
   },
   {
    "root": "project",
@@ -783,14 +387,14 @@
    "path": "others_image",
    "pattern": "*.png",
    "count": 58,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "others_image",
    "pattern": "*.jpg",
    "count": 67,
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "models",
@@ -802,89 +406,57 @@
   {
    "root": "data",
    "path": "full_segmentation_claude_process/full_auto_tags.csv",
-   "needed_by": "review"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "full_segmentation_claude_process/README.md",
-   "needed_by": "review"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "full_segmentation_claude_process/DESIGN_AND_EVALUATION.md",
-   "needed_by": "review"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "full_segmentation_claude_process/review/object_review.csv",
-   "needed_by": "review"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "full_segmentation_claude_process/review/move_log.csv",
-   "needed_by": "review"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "full_segmentation_claude_process/review/tile_review.json",
-   "needed_by": "review"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "full_segmentation_claude_process/review/tile_review_history.jsonl",
-   "needed_by": "review"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "full_segmentation_claude_process/review/correction_v2_id_map.csv",
-   "needed_by": "review"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/full_auto_tags.csv",
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/review/move_log.csv",
-   "needed_by": "both"
+   "needed_by": "search"
   },
   {
    "root": "data",
    "path": "bonus_image_claude_process/review/object_review.csv",
-   "needed_by": "both"
-  },
-  {
-   "root": "data",
-   "path": "full_segmentation_claude_process/smaller_object_rgba_raw",
-   "pattern": "*.png",
-   "count": 11930,
-   "needed_by": "review",
-   "fix": "DOWNLOAD_DATA.bat (rebuild step) or: .venv\\Scripts\\python.exe scripts\\rebuild_tile_cutouts.py"
-  },
-  {
-   "root": "data",
-   "path": "full_segmentation_claude_process/does_not_needed/smaller_object_rgba_raw",
-   "pattern": "*.png",
-   "count": 3010,
-   "needed_by": "review",
-   "fix": "DOWNLOAD_DATA.bat (rebuild step) or: .venv\\Scripts\\python.exe scripts\\rebuild_tile_cutouts.py"
-  },
-  {
-   "root": "data",
-   "path": "bonus_image_claude_process/smaller_object_rgba_raw",
-   "pattern": "*.png",
-   "count": 379,
-   "needed_by": "review",
-   "fix": "DOWNLOAD_DATA.bat (rebuild step) or: .venv\\Scripts\\python.exe scripts\\rebuild_tile_cutouts.py"
-  },
-  {
-   "root": "data",
-   "path": "bonus_image_claude_process/does_not_needed/smaller_object_rgba_raw",
-   "pattern": "*.png",
-   "count": 32,
-   "needed_by": "review",
-   "fix": "DOWNLOAD_DATA.bat (rebuild step) or: .venv\\Scripts\\python.exe scripts\\rebuild_tile_cutouts.py"
+   "needed_by": "search"
   }
  ]
 }

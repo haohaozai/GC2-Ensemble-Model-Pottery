@@ -1,4 +1,0 @@
-{
-  "supabase_url": "https://YOUR-PROJECT.supabase.co",
-  "supabase_anon_key": "YOUR anon / publishable key (Supabase > Project Settings > API) - NEVER the service_role / secret key"
-}

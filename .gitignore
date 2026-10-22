@@ -3,11 +3,10 @@
 __pycache__/
 *.pyc
 
-# local settings (copy .env.example to .env) and the Supabase settings of the online review page
+# local settings (copy .env.example to .env)
 .env
-web/publish_settings.json
 
-# data that comes from the release download (DOWNLOAD_DATA.bat) or is written by the apps
+# data that comes from the release download (DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.bat) or is written by the app
 multimodal_experiments/work/
 multimodal_experiments/cache/
 .cg2_data/

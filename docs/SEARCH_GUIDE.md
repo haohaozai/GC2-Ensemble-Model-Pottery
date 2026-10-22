@@ -63,6 +63,6 @@ Hugging Face for a larger daily GPU allowance).
 |---|---|
 | `Glaze search is already running` | it is open already: http://127.0.0.1:8770 (one server at a time: each one needs ~4 GB of GPU memory) |
 | `Another GPU job is running` | close the other GPU program (only one GPU job at a time) |
-| `ERROR: rebuilt embeddings differ …` / file not found in `work\` | data incomplete: `DOWNLOAD_DATA.bat`, then `CHECK_DATA.bat` |
+| `ERROR: rebuilt embeddings differ …` / file not found in `work\` | data incomplete: `DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.bat`, then `CHECK_DATA.bat` |
 | model not found / tries to go online | run `SETUP.bat` again (models are missing) |
 | CUDA out of memory | close other GPU programs; or run on the CPU: `set CUDA_VISIBLE_DEVICES=-1` before `RUN_GLAZE_SEARCH.bat` |

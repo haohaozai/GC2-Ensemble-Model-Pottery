@@ -6,7 +6,7 @@ REM   1. Python 3.11 environment in .venv (with uv)
 REM   2. PyTorch 2.11 (CUDA 12.8 build if an NVIDIA GPU is found, else CPU build)
 REM      + the pinned packages of requirements.txt
 REM   3. the pretrained models (~3.7 GB, pinned versions) -> ..\model_cache
-REM  Then: DOWNLOAD_DATA.bat (step 2), CHECK_DATA.bat (step 3).
+REM  Then: DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.bat (step 2), CHECK_DATA.bat (step 3).
 REM  Safe to run again: finished parts are skipped.
 REM ==========================================================================
 title CG2 - setup
@@ -42,7 +42,7 @@ echo [3/3] pretrained models ...
 ".venv\Scripts\python.exe" -u scripts\setup_models.py || goto :fail
 
 echo.
-echo Setup finished. Next: DOWNLOAD_DATA.bat
+echo Setup finished. Next: DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.bat
 pause
 exit /b 0
 
