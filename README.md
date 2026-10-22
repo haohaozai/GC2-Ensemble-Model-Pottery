@@ -15,14 +15,18 @@ Online copies of the first PC: [review page](https://fbiwarninggg-ceramic-review
 
 ## What you need
 
-* Windows 10 or 11, internet for the setup, **about 45 GB free disk** (35 GB stay: data 10 GB + rebuilt cut-outs 12 GB
-  + models 4 GB + Python environment 5 GB; the 10 GB of downloaded archives are deleted after unpacking).
+* Windows 10 or 11 (any drive and folder, e.g. `C:\CG2` or `D:\CG2`; keep the folder path short), internet for the
+  setup, **about 35 GB free disk**. Measured on a test install: 30.4 GB stay (images and processed data 21.2 GB of
+  which 12 GB are the rebuilt Tile cut-outs, models 3.8 GB, Python environment 5.0 GB, search files 0.3 GB); while
+  downloading, one archive (≤ 1.9 GB) is kept until it is unpacked, plus the package cache of `uv`.
+* About **17 GB to download** once: data 10.3 GB, models 3.7 GB, PyTorch and packages ~3 GB
+  (e.g. ~30 min at 10 MB/s, ~2.5 h at 2 MB/s). After that everything runs offline.
 * For Glaze Search an **NVIDIA GPU with ≥ 6 GB** memory is recommended (it uses ~4 GB). Without one it runs on the CPU:
   a new photo then takes 1 - 3 minutes, searching stays fast. The Review app needs no GPU.
 * [uv](https://docs.astral.sh/uv/) (installs Python 3.11 for you). Install it once in PowerShell:
   `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
 
-## Install (once, ~30 - 60 min, mostly downloading)
+## Install (once; the time is mostly downloading)
 
 1. Make a folder for the project, e.g. `D:\CG2`, and get this branch into it:
    ```
