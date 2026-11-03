@@ -41,7 +41,9 @@ PAGE = Path(__file__).resolve().parent / "index.html"
 LIBRARY = Path(__file__).resolve().parents[2] / "reference_library"
 LIB_TYPES = {".json": "application/json; charset=utf-8", ".png": "image/png", ".md": "text/markdown; charset=utf-8"}
 LOG_FILE = QDIR / "session_log.json"
+GLAZE_LOG = QDIR / "glaze_search_log.jsonl"   # card G (Claire's model); the session log above is not touched
 LOCK = threading.Lock()          # one GPU job at a time
+GLAZE_LOG_LOCK = threading.Lock()
 S: dict = {"queries": {}}        # engine, segmenter, per-upload objects
 COLOURS = [(42, 120, 214), (235, 104, 52), (27, 175, 122), (138, 92, 246), (224, 69, 123), (201, 162, 39),
            (20, 160, 190), (120, 120, 120)]
@@ -376,6 +378,20 @@ def run_object_search(p: dict) -> dict:
     return res
 
 
+def glaze_search(p: dict) -> dict:
+    """card G: colour + cone + surface -> Claire's model -> Best matches + Explore formulations (mm/glaze_retrieval.py).
+    CPU only, so it never waits for the GPU lock; each search is one line of work/queries/glaze_search_log.jsonl."""
+    res = S["glaze"].search(p)
+    entry = {"time": time.strftime("%Y-%m-%d %H:%M:%S"), "query": res["query"], "model": res["model_version"],
+             "cone_scoring": res["cone_scoring"], "best": [r["recipe_id"] for r in res["weighted_results"]],
+             "explore": [r["recipe_id"] for r in res["diverse_results"]], "ms": res["timings"]["total_ms"]}
+    with GLAZE_LOG_LOCK:
+        QDIR.mkdir(parents=True, exist_ok=True)
+        with open(GLAZE_LOG, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    return res
+
+
 def mark(p: dict) -> dict:
     marks = {str(k): bool(v) for k, v in (p.get("marks") or {}).items()}
     with LOCK:
@@ -478,6 +494,13 @@ class H(BaseHTTPRequestHandler):
             return self._send(404, b"not found", "text/plain")
         self._send(200, p.read_bytes(), ctype)
 
+    def _glaze_ready(self) -> bool:
+        if S.get("glaze"):
+            return True
+        self._json({"error": f"the glaze recipe model is not available ({S.get('glaze_error') or 'not loaded'}) - "
+                             "run INSTALL_GLAZE_MODEL.bat, then restart RUN_GLAZE_SEARCH.bat"}, 503)
+        return False
+
     def do_GET(self):
         path = self.path.split("?")[0]
         if path in ("/", "/index.html"):
@@ -492,6 +515,16 @@ class H(BaseHTTPRequestHandler):
             from mm.colorlab import search_words
             qs = parse_qs(urlparse(self.path).query).get("q", [""])[0]
             return self._json({"results": search_words(qs, 10) if qs.strip() else []})
+        if path == "/api/glaze/options":                    # card G: cone / surface choices, colour words, weights, model version
+            return self._json(S["glaze"].options()) if self._glaze_ready() else None
+        if path == "/api/glaze/color_name":                 # HEX -> nearest colour word of Claire's model
+            from urllib.parse import parse_qs, urlparse
+            if not self._glaze_ready():
+                return None
+            try:
+                return self._json(S["glaze"].color_name("#" + parse_qs(urlparse(self.path).query).get("hex", [""])[0].lstrip("#")))
+            except ValueError as e:
+                return self._json({"error": str(e)}, 400)
         m = re.fullmatch(r"/obj/(\d+_\d+)\.jpg", path)
         if m:
             from object_search import object_image
@@ -552,6 +585,8 @@ class H(BaseHTTPRequestHandler):
                 if not S.get("objects"):
                     return self._json({"error": "object search is not available (run run_attributes.py first)"}, 400)
                 return self._json(query_object(p.get("qid", ""), int(p.get("object", 0))))
+            if path == "/api/glaze/search":
+                return self._json(glaze_search(p)) if self._glaze_ready() else None
             if path == "/api/parse_colours":
                 from mm.colorlab import parse_phrase
                 return self._json(parse_phrase(p.get("text", "")))
@@ -636,8 +671,17 @@ def main():
             print("Grounding DINO attribute detection ready (six attributes, validated against Claude's check).", flush=True)
         except Exception as exc:  # noqa: BLE001
             print(f"Attribute detection not available ({type(exc).__name__}: {exc}).", flush=True)
+    t4 = time.time()
+    try:          # card G: Claire's glaze recipe model (colour + cone + surface -> recipes), on the CPU
+        from mm.glaze_retrieval import GlazeRetriever
+        print("Loading Claire's glaze recipe model (card G)...", flush=True)
+        S["glaze"] = GlazeRetriever.from_config()
+        print(f"Glaze recipe model ready: {S['glaze'].describe()}.", flush=True)
+    except Exception as exc:  # noqa: BLE001
+        S["glaze"], S["glaze_error"] = None, f"{type(exc).__name__}: {exc}"
+        print(f"Glaze recipe model not available ({S['glaze_error']}); run INSTALL_GLAZE_MODEL.bat. The rest of the page works.", flush=True)
     S["timings"] = {"engine_s": round(t1 - t0, 1), "segmenter_s": round(t2 - t1, 1), "warmup_s": round(t3 - t2, 1),
-                    "object_index_s": round(time.time() - t3, 1),
+                    "object_index_s": round(t4 - t3, 1), "glaze_s": round(time.time() - t4, 1),
                     "gpu_GB": round(torch.cuda.memory_allocated() / 1e9, 2) if torch.cuda.is_available() else 0}
     QDIR.mkdir(parents=True, exist_ok=True)
     srv = ThreadingHTTPServer((args.host, args.port), H)

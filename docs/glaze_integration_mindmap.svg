@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 1030" width="1300" height="1030" role="img" aria-label="Glaze search integration: seven stages in a clockwise cycle" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<title>Glaze search integration - seven stages</title>
+<defs>
+<marker id="a0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker>
+<marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker>
+<marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6D28D9"/></marker>
+<marker id="a3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#EA580C"/></marker>
+<marker id="a4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DB2777"/></marker>
+<marker id="a5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0D9488"/></marker>
+<marker id="a6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B5CF6"/></marker>
+</defs>
+<rect width="1300" height="1030" fill="#ffffff"/>
+<text x="650" y="44" text-anchor="middle" font-size="22" font-weight="700" fill="#1d1d1b">CG2 Glaze Search · Mike's UI + Claire's retrieval model</text>
+<text x="650" y="70" text-anchor="middle" font-size="14" fill="#5f5e5a">seven implementation stages, clockwise · card G of RUN_GLAZE_SEARCH.bat</text>
+<line x1="650.0" y1="360.0" x2="650.0" y2="190.0" stroke="#2563EB" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
+<line x1="806.4" y1="435.3" x2="939.3" y2="329.3" stroke="#16A34A" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
+<line x1="845.0" y1="604.5" x2="1010.7" y2="642.3" stroke="#6D28D9" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
+<line x1="736.8" y1="740.2" x2="810.5" y2="893.4" stroke="#EA580C" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
+<line x1="563.2" y1="740.2" x2="489.5" y2="893.4" stroke="#DB2777" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
+<line x1="455.0" y1="604.5" x2="289.3" y2="642.3" stroke="#0D9488" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
+<line x1="493.6" y1="435.3" x2="360.7" y2="329.3" stroke="#8B5CF6" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
+<path d="M677.8,361.9 A200,200 0 0 1 787.5,414.8" fill="none" stroke="#2563EB" stroke-width="5" stroke-linecap="round" marker-end="url(#a0)"/>
+<path d="M822.2,458.3 A200,200 0 0 1 849.3,576.9" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round" marker-end="url(#a1)"/>
+<path d="M836.9,631.2 A200,200 0 0 1 761.0,726.4" fill="none" stroke="#6D28D9" stroke-width="5" stroke-linecap="round" marker-end="url(#a2)"/>
+<path d="M710.9,750.5 A200,200 0 0 1 589.1,750.5" fill="none" stroke="#EA580C" stroke-width="5" stroke-linecap="round" marker-end="url(#a3)"/>
+<path d="M539.0,726.4 A200,200 0 0 1 463.1,631.2" fill="none" stroke="#DB2777" stroke-width="5" stroke-linecap="round" marker-end="url(#a4)"/>
+<path d="M450.7,576.9 A200,200 0 0 1 477.8,458.3" fill="none" stroke="#0D9488" stroke-width="5" stroke-linecap="round" marker-end="url(#a5)"/>
+<path d="M512.5,414.8 A200,200 0 0 1 622.2,361.9" fill="none" stroke="#8B5CF6" stroke-width="5" stroke-linecap="round" marker-end="url(#a6)"/>
+<circle cx="650.0" cy="360.0" r="7" fill="#2563EB"/>
+<circle cx="806.4" cy="435.3" r="7" fill="#16A34A"/>
+<circle cx="845.0" cy="604.5" r="7" fill="#6D28D9"/>
+<circle cx="736.8" cy="740.2" r="7" fill="#EA580C"/>
+<circle cx="563.2" cy="740.2" r="7" fill="#DB2777"/>
+<circle cx="455.0" cy="604.5" r="7" fill="#0D9488"/>
+<circle cx="493.6" cy="435.3" r="7" fill="#8B5CF6"/>
+<circle cx="650" cy="560" r="122" fill="#f6f5f2" stroke="#1d1d1b" stroke-width="2.5"/>
+<text x="650" y="548" text-anchor="middle" font-size="25" font-weight="800" fill="#1d1d1b">GLAZE SEARCH</text>
+<text x="650" y="580" text-anchor="middle" font-size="25" font-weight="800" fill="#1d1d1b">INTEGRATION</text>
+<text x="650" y="610" text-anchor="middle" font-size="13" fill="#5f5e5a">colour / photo → recipes</text>
+<g><rect x="522.0" y="119.0" width="256" height="142" rx="12" fill="#ffffff" stroke="#2563EB" stroke-width="2.5"/>
+<path d="M522.0,131.0 a12,12 0 0 1 12,-12 h232 a12,12 0 0 1 12,12 v28 h-256 z" fill="#2563EB"/>
+<circle cx="544.0" cy="139.0" r="13" fill="#ffffff"/><text x="544.0" y="144.0" text-anchor="middle" font-size="15" font-weight="800" fill="#2563EB">1</text>
+<text x="564.0" y="145.0" font-size="15" font-weight="700" fill="#ffffff">Audit Repository</text>
+<text x="536.0" y="183.0" font-size="13.5" fill="#1d1d1b">Live app: server.py + index.html</text>
+<text x="536.0" y="207.0" font-size="13.5" fill="#1d1d1b">SAM 2.1 objects + colour regions</text>
+<text x="536.0" y="231.0" font-size="13.5" fill="#1d1d1b">Claire&#x27;s ZIP, 7k CSVs, git state</text>
+</g>
+<g><rect x="811.3" y="258.3" width="256" height="142" rx="12" fill="#ffffff" stroke="#16A34A" stroke-width="2.5"/>
+<path d="M811.3,270.3 a12,12 0 0 1 12,-12 h232 a12,12 0 0 1 12,12 v28 h-256 z" fill="#16A34A"/>
+<circle cx="833.3" cy="278.3" r="13" fill="#ffffff"/><text x="833.3" y="283.3" text-anchor="middle" font-size="15" font-weight="800" fill="#16A34A">2</text>
+<text x="853.3" y="284.3" font-size="15" font-weight="700" fill="#ffffff">Validate Model + Data</text>
+<text x="825.3" y="322.3" font-size="13.5" fill="#1d1d1b">Notebook re-run: 10/10 lists match</text>
+<text x="825.3" y="346.3" font-size="13.5" fill="#1d1d1b">Cone defect found: 04 stored as 4</text>
+<text x="825.3" y="370.3" font-size="13.5" fill="#1d1d1b">Names, ingredients from 7k CSV</text>
+</g>
+<g><rect x="882.7" y="571.3" width="256" height="142" rx="12" fill="#ffffff" stroke="#6D28D9" stroke-width="2.5"/>
+<path d="M882.7,583.3 a12,12 0 0 1 12,-12 h232 a12,12 0 0 1 12,12 v28 h-256 z" fill="#6D28D9"/>
+<circle cx="904.7" cy="591.3" r="13" fill="#ffffff"/><text x="904.7" y="596.3" text-anchor="middle" font-size="15" font-weight="800" fill="#6D28D9">3</text>
+<text x="924.7" y="597.3" font-size="15" font-weight="700" fill="#ffffff">Build Retrieval API</text>
+<text x="896.7" y="635.3" font-size="13.5" fill="#1d1d1b">mm/glaze_retrieval.py (notebook)</text>
+<text x="896.7" y="659.3" font-size="13.5" fill="#1d1d1b">/api/glaze/ options, search, name</text>
+<text x="896.7" y="683.3" font-size="13.5" fill="#1d1d1b">Safe load, CPU, ~0.1 s a search</text>
+</g>
+<g><rect x="682.5" y="822.4" width="256" height="142" rx="12" fill="#ffffff" stroke="#EA580C" stroke-width="2.5"/>
+<path d="M682.5,834.4 a12,12 0 0 1 12,-12 h232 a12,12 0 0 1 12,12 v28 h-256 z" fill="#EA580C"/>
+<circle cx="704.5" cy="842.4" r="13" fill="#ffffff"/><text x="704.5" y="847.4" text-anchor="middle" font-size="15" font-weight="800" fill="#EA580C">4</text>
+<text x="724.5" y="848.4" font-size="15" font-weight="700" fill="#ffffff">Connect Color + SAM</text>
+<text x="696.5" y="886.4" font-size="13.5" fill="#1d1d1b">Colour word, HEX, colour picker</text>
+<text x="696.5" y="910.4" font-size="13.5" fill="#1d1d1b">Pick: 13x13 median in SAM mask</text>
+<text x="696.5" y="934.4" font-size="13.5" fill="#1d1d1b">Region &#x27;glaze&#x27; button, card 1b</text>
+</g>
+<g><rect x="361.5" y="822.4" width="256" height="142" rx="12" fill="#ffffff" stroke="#DB2777" stroke-width="2.5"/>
+<path d="M361.5,834.4 a12,12 0 0 1 12,-12 h232 a12,12 0 0 1 12,12 v28 h-256 z" fill="#DB2777"/>
+<circle cx="383.5" cy="842.4" r="13" fill="#ffffff"/><text x="383.5" y="847.4" text-anchor="middle" font-size="15" font-weight="800" fill="#DB2777">5</text>
+<text x="403.5" y="848.4" font-size="15" font-weight="700" fill="#ffffff">Display Two Result Sets</text>
+<text x="375.5" y="886.4" font-size="13.5" fill="#1d1d1b">Best matches + Explore tabs</text>
+<text x="375.5" y="910.4" font-size="13.5" fill="#1d1d1b">One search; tabs switch the view</text>
+<text x="375.5" y="934.4" font-size="13.5" fill="#1d1d1b">Glazy photo + View on Glazy</text>
+</g>
+<g><rect x="161.3" y="571.3" width="256" height="142" rx="12" fill="#ffffff" stroke="#0D9488" stroke-width="2.5"/>
+<path d="M161.3,583.3 a12,12 0 0 1 12,-12 h232 a12,12 0 0 1 12,12 v28 h-256 z" fill="#0D9488"/>
+<circle cx="183.3" cy="591.3" r="13" fill="#ffffff"/><text x="183.3" y="596.3" text-anchor="middle" font-size="15" font-weight="800" fill="#0D9488">6</text>
+<text x="203.3" y="597.3" font-size="15" font-weight="700" fill="#ffffff">Test and Verify</text>
+<text x="175.3" y="635.3" font-size="13.5" fill="#1d1d1b">27 unit + API tests, 19 live</text>
+<text x="175.3" y="659.3" font-size="13.5" fill="#1d1d1b">34 browser checks, 0 JS errors</text>
+<text x="175.3" y="683.3" font-size="13.5" fill="#1d1d1b">Notebook parity within 1e-5</text>
+</g>
+<g><rect x="232.7" y="258.3" width="256" height="142" rx="12" fill="#ffffff" stroke="#8B5CF6" stroke-width="2.5"/>
+<path d="M232.7,270.3 a12,12 0 0 1 12,-12 h232 a12,12 0 0 1 12,12 v28 h-256 z" fill="#8B5CF6"/>
+<circle cx="254.7" cy="278.3" r="13" fill="#ffffff"/><text x="254.7" y="283.3" text-anchor="middle" font-size="15" font-weight="800" fill="#8B5CF6">7</text>
+<text x="274.7" y="284.3" font-size="15" font-weight="700" fill="#ffffff">Review and Update</text>
+<text x="246.7" y="322.3" font-size="13.5" fill="#1d1d1b">Docs, API contract, run steps</text>
+<text x="246.7" y="346.3" font-size="13.5" fill="#1d1d1b">INSTALL_GLAZE_MODEL.bat updates</text>
+<text x="246.7" y="370.3" font-size="13.5" fill="#1d1d1b">Claire: keep cone text, retrain</text>
+</g>
+<text x="650" y="1006" text-anchor="middle" font-size="12" fill="#8a8984">docs/glaze_integration_architecture.md · 2026-11-03</text>
+</svg>

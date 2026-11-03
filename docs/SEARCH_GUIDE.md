@@ -18,14 +18,22 @@ searches stay fast). Everything works offline after `SETUP.bat`.
 1. **Card 1 · Photo**: drop a photo, paste it (`Ctrl+V`), browse, or paste a link. Grounding DINO + SAM 2.1 cut out
    the ceramic objects (same settings as the 7k database photos). Hover an object to see it, **click** = use it
    (yellow outline = active), `Ctrl`+click = add more. **Pick colour (HEX)**: click inside an object, then
-   **Add as search colour**.
+   **Add as search colour** (card 4) or **Use for glaze search** (card G).
 2. **Card 1b · Your object**: the colour regions of the active object and the six attributes Grounding DINO detects,
    each with its top-3 candidates; click the right one, **(i)** explains that value with example images
-   (`reference_library`). Tick the attributes the results must share.
-3. **Card 2 · Text**: subtype, firing cone, surface, transparency, atmosphere, free notes.
-4. **Card 3 · Formula**: oxides (weight % or UMF), optional ingredients.
-5. **Card 4 · Colours**: colour words (Color Lab V3: celadon, crimson, eggshell …), HEX codes or phrases.
-6. **Search bar**: search *objects* (the segmented database objects) or *recipes*; a preset or your own priority with
+   (`reference_library`). Tick the attributes the results must share. **glaze** next to a colour region sends that
+   colour to card G.
+3. **Card G · Glaze recipes** (Claire's model): one colour + firing cone + surface → the closest Glazy recipes.
+   *Search by colour*: a colour word, a HEX code or the colour picker. *Search by photo*: the colour picked on the photo
+   (median of 13 × 13 pixels inside the object, reflections and shadows left out) or a colour region of card 1b; correct
+   the HEX if the pick is off. Two tabs from one search: **Best matches** (0.40 latent + 0.40 CIEDE2000 colour + 0.10
+   surface + 0.10 cone) and **Explore formulations** (the same ranking, at most 2 recipes per K-Means chemistry cluster).
+   Each card shows the Glazy photo, the score parts and **View on Glazy**. Needs `INSTALL_GLAZE_MODEL.bat` once;
+   details: [glaze_integration_architecture.md](glaze_integration_architecture.md).
+4. **Card 2 · Text**: subtype, firing cone, surface, transparency, atmosphere, free notes.
+5. **Card 3 · Formula**: oxides (weight % or UMF), optional ingredients.
+6. **Card 4 · Colours**: colour words (Color Lab V3: celadon, crimson, eggshell …), HEX codes or phrases.
+7. **Search bar**: search *objects* (the segmented database objects) or *recipes*; a preset or your own priority with
    the sliders (shape / glaze / colour, always adding up to 1); Top K; the true Glazy recipe ID if you know it.
 
 | preset | use it for |
@@ -48,6 +56,7 @@ matching objects, **Recall@K** (true recipe) and a weighted **nDCG**. *Session e
 |---|---|
 | `work\queries\<upload id>\` | your uploaded photo, its objects, overlays and every search |
 | `work\queries\session_log.json` | the session evaluation |
+| `work\queries\glaze_search_log.jsonl` | every card G search (query, model version, result IDs) |
 | `work\logs\app.log` | the server log |
 
 Your uploads stay on your computer (they are not part of the repository).
@@ -66,3 +75,6 @@ Hugging Face for a larger daily GPU allowance).
 | `ERROR: rebuilt embeddings differ …` / file not found in `work\` | data incomplete: `DOWNLOAD_DATA.bat`, then `CHECK_DATA.bat` |
 | model not found / tries to go online | run `SETUP.bat` again (models are missing) |
 | CUDA out of memory | close other GPU programs; or run on the CPU: `set CUDA_VISIBLE_DEVICES=-1` before `RUN_GLAZE_SEARCH.bat` |
+| card G: `the glaze recipe model is not available` | run `INSTALL_GLAZE_MODEL.bat` (drag Claire's ZIP onto it), then restart `RUN_GLAZE_SEARCH.bat` |
+| card G: no recipe names, cones without the leading 0 | `7k_matched_all_data.csv` not found: put it in `<CG2>\` or `<CG2>\new image data\csv 7k data\`, or set `CG2_7K_CSV_DIR` |
+| card G: grey "photo unavailable" boxes | the photos come from Glazy's server: needs internet (the search itself works offline) |

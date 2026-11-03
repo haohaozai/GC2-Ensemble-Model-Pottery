@@ -144,6 +144,20 @@ If a check displays `NO`, read its message and rerun `DOWNLOAD_DATA.bat` or `SET
 
 **Once all required checks pass, the installation is complete.**
 
+### STEP 4 — Install Claire's glaze recipe model (for card G of Glaze Search)
+
+Drag Claire's ZIP (`test_similarity.zip`) onto `INSTALL_GLAZE_MODEL.bat`, or run:
+
+```cmd
+INSTALL_GLAZE_MODEL.bat "D:\path\to\test_similarity.zip"
+```
+
+Without a path it uses the newest `test_similarity*.zip` in the project folder or the folder above it.
+
+**What happens:** three model files (about 9 MB) are checked and copied to `multimodal_experiments\models\glaze_retrieval\` (not in git). If a check fails, the old model stays. When Claire sends a new model, run it again with the new ZIP.
+
+Card G also reads `7k_matched_all_data.csv` and `7k_matched_ingredients.csv` (recipe names, original cone values, ingredients) from the folder above the project (`D:\NUS study\CG2`), from `new image data\csv 7k data\`, or from the folder in the `CG2_7K_CSV_DIR` setting.
+
 ---
 
 ## 3. Launch the applications
@@ -198,6 +212,7 @@ http://127.0.0.1:8770
 - Adjust search priorities using sliders.
 - Optionally search with text and glaze formulas.
 - Evaluate results using Hit@K, Precision@K, Recall@K, and nDCG.
+- **Card G · Glaze recipes (Claire's model):** pick a colour (name, HEX, colour picker, or a colour picked on your photo), a firing cone and a surface, and get two lists of Glazy recipes: **Best matches** and **Explore formulations** (chemically different recipes). Each result shows the Glazy photo and a **View on Glazy** link. Needs STEP 4.
 
 **Important:** Keep the CMD window open while using either application. Closing it stops the corresponding local server.
 
@@ -239,6 +254,7 @@ CG2/
 │   ├── CHECK_DATA.bat
 │   ├── OPEN_REVIEW_APP.bat
 │   ├── RUN_GLAZE_SEARCH.bat
+│   ├── INSTALL_GLAZE_MODEL.bat
 │   ├── SYNC_ONLINE_REVIEWS.bat
 │   ├── review_app/
 │   ├── multimodal_experiments/
@@ -322,6 +338,7 @@ Detailed instructions are available in the repository:
 
 - [Review Guide](docs/REVIEW_GUIDE.md) — Review interface, filters, keyboard shortcuts, Tile panel, and saving decisions.
 - [Glaze Search Guide](docs/SEARCH_GUIDE.md) — Search inputs, priority sliders, results, and evaluation.
+- [Glaze recipe search (card G)](docs/glaze_integration_architecture.md) — Claire's model in the app: architecture, API, cone handling, tests, and how to update the model ([mind map](docs/glaze_integration_mindmap.svg)).
 - [Data Download Guide](docs/DATA_DOWNLOAD.md) — Data archives, manual downloads, and dataset relationships.
 - [Manuals and Screenshots](docs/manuals) — Detailed PDF manuals, workflow diagrams, and attribute documentation.
 
@@ -336,6 +353,7 @@ These documents are optional references. You do not need to read them before fol
 - [ ] Run `SETUP.bat` and wait for completion.
 - [ ] Run `DOWNLOAD_DATA.bat` and wait for completion.
 - [ ] Run `CHECK_DATA.bat` and confirm all required checks pass.
+- [ ] Run `INSTALL_GLAZE_MODEL.bat` with Claire's ZIP (for card G).
 - [ ] Launch `OPEN_REVIEW_APP.bat` or `RUN_GLAZE_SEARCH.bat`.
 
 **Installation order: SETUP → DOWNLOAD DATA → CHECK DATA → LAUNCH APP.**

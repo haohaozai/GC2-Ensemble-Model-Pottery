@@ -10,6 +10,7 @@ web/publish_settings.json
 # data that comes from the release download (DOWNLOAD_DATA.bat) or is written by the apps
 multimodal_experiments/work/
 multimodal_experiments/cache/
+multimodal_experiments/models/
 .cg2_data/
 _downloads/
 *.tar

@@ -28,7 +28,8 @@ main{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;padding:16px 20p
 .clist{display:flex;flex-direction:column;gap:6px;margin-top:6px}
 .crow{display:grid;grid-template-columns:22px 82px 1fr 1fr auto;gap:6px;align-items:center;font-size:12.5px}
 .crow select{padding:3px 4px;font-size:12px}
-.qr{display:grid;grid-template-columns:18px 1fr auto;gap:6px;align-items:center;font-size:12px;padding:3px 0;border-top:1px solid var(--line)}
+.qr{display:grid;grid-template-columns:18px 1fr auto auto;gap:6px;align-items:center;font-size:12px;padding:3px 0;border-top:1px solid var(--line)}
+.qr .gqr{padding:2px 8px;font-size:11.5px}
 .qr .imp{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
 .qr .imp button{border:0;border-radius:0;padding:2px 7px;font-size:11.5px;background:transparent}
 .qr .imp button.on{background:var(--accent);color:var(--accent-ink)}
@@ -198,6 +199,19 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 .evc em.lb,.fm em.lb{font-style:normal;font-size:10.5px;color:var(--muted);align-self:center}
 #ksel{padding:4px 8px}
 .crel{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+/* card G: glaze recipes with Claire's model */
+#gcard h2{flex-wrap:wrap}
+.ggrid{display:grid;grid-template-columns:minmax(240px,1.2fr) minmax(220px,1fr) minmax(220px,1fr);gap:18px;align-items:start}
+@media (max-width:1100px){.ggrid{grid-template-columns:1fr}}
+.gq{display:flex;gap:10px;align-items:flex-start}
+.gsw{flex:none;width:64px;height:64px;border-radius:8px;border:1px solid var(--line)}
+#ghex{font-family:ui-monospace,Consolas,monospace;width:110px}
+#gpick{width:42px;height:32px;padding:0;border:1px solid var(--line);border-radius:6px;background:var(--bg);flex:none}
+.gsteps{margin:10px 0 6px;padding-left:20px;font-size:12.5px;line-height:1.5}
+.gtabs{display:flex;gap:6px 12px;align-items:center;flex-wrap:wrap;margin:16px 0 8px}
+.rc .im .gph{position:absolute;inset:0;display:grid;place-items:center;font-size:12px;color:var(--faint)}
+.rc .im img.g{position:relative}
+.ging summary{font-size:11.5px;color:var(--muted);cursor:pointer}
 </style>
 </head>
 <body>
@@ -224,7 +238,8 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
       <div class="pstage" id="pstage"><img id="overlay" alt="segmentation result"><canvas id="pcv" aria-label="photo: hover and click objects"></canvas><div class="ptip" id="ptip" hidden></div></div>
       <div class="pickbox" id="pickbox" hidden><span class="big" id="pkswatch"></span>
         <div><div class="small" id="pkfrom">picked colour</div><input id="pkhex" maxlength="7" spellcheck="false" aria-label="picked HEX colour"></div>
-        <button id="pkcopy">Copy</button><button id="pkadd" class="primary" style="padding:7px 14px">Add as search colour</button><span class="small" id="pkmsg"></span></div>
+        <button id="pkcopy">Copy</button><button id="pkadd" class="primary" style="padding:7px 14px">Add as search colour</button>
+        <button id="pkglaze" title="search glaze recipes with this colour (card G, Claire's model)">Use for glaze search</button><span class="small" id="pkmsg"></span></div>
       <div class="actinfo" id="actinfo"></div>
       <details class="od" id="objdet"><summary>Object list (details)</summary>
       <div class="small" style="margin-bottom:6px">Objects used for the search (click to switch on / off). Default: objects CLIP rates as ceramic (≥ 0.35), otherwise the first object. The yellow frame is the active object.</div>
@@ -283,6 +298,53 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
         <div class="small" id="qattrMsg" style="margin-bottom:4px">Attributes: tick the ones the results should share. Without a photo you can still choose values and search by them.</div>
         <div id="qattrs"></div>
       </div>
+    </div>
+  </section>
+
+  <section class="card c-full" id="gcard">
+    <h2><span class="n">G</span>Glaze recipes <span class="opt">Claire's model · one colour + cone + surface → the closest Glazy recipes</span>
+      <button class="ib" data-help="glaze" title="How the glaze recipe search works">!</button><span style="flex:1"></span><span class="small" id="gmeta"></span></h2>
+    <div class="ggrid">
+      <div>
+        <div class="seg" id="gmode"><button data-g="color" class="on">Search by colour</button><button data-g="image">Search by photo</button></div>
+        <div id="gcolor">
+          <label class="f" for="gname">Find a colour by name</label>
+          <input id="gname" placeholder="e.g. cobalt blue, celadon, rust" autocomplete="off">
+          <div class="cwords" id="gnames"></div>
+        </div>
+        <div id="gimage" hidden>
+          <ol class="gsteps">
+            <li>Card 1: drop or paste a photo - SAM outlines every object.</li>
+            <li><b>Select objects</b>: click the pot you mean.</li>
+            <li><b>Pick colour (HEX)</b>: click on the glaze (not bare clay, a shadow or a reflection), then <b>Use for glaze search</b>.</li>
+            <li>Or in card 1b press <b>glaze</b> next to one of the object's colour regions.</li>
+          </ol>
+          <div class="small" id="gphoto"></div>
+        </div>
+      </div>
+      <div>
+        <div class="gq"><span class="gsw" id="gsw"></span>
+          <div style="flex:1;min-width:0"><label class="f" for="ghex" style="margin-top:0">Colour (HEX) - correct it if the pick is off</label>
+            <div class="row"><input id="ghex" maxlength="7" spellcheck="false" autocomplete="off"><input type="color" id="gpick" value="#3054a5" aria-label="colour picker" title="colour picker"></div>
+            <div class="small" id="gsrc"></div><div class="small" id="ghexmsg"></div></div></div>
+        <label class="f" for="gcname">Colour word the model reads</label>
+        <input id="gcname" maxlength="40" autocomplete="off">
+        <div class="small" id="gcnote"></div>
+      </div>
+      <div>
+        <label class="f" style="margin-top:0">Firing cone (Orton: 04 is low fire, 4 is mid fire) · from - to</label>
+        <div class="two"><select id="gcone_lo" aria-label="cone"></select><select id="gcone_hi" aria-label="end of a cone range (optional)"></select></div>
+        <label class="f" for="gsurface">Surface</label><select id="gsurface"></select>
+        <div class="small" id="gwts" style="margin-top:8px"></div>
+        <div class="row" style="margin-top:10px;justify-content:space-between;flex-wrap:wrap"><span class="small" id="gmsg"></span><button class="primary" id="ggo">Find recipes</button></div>
+      </div>
+    </div>
+    <div id="gres" hidden>
+      <div class="gtabs"><div class="seg" id="gtabs" role="tablist"><button data-t="weighted" class="on" role="tab">Best matches</button><button data-t="diverse" role="tab">Explore formulations</button></div>
+        <span class="small" id="gtabnote"></span></div>
+      <div class="kv" id="gquery" style="margin-bottom:8px"></div>
+      <div class="grid" id="ggrid"></div>
+      <div class="small" id="gimgmsg" style="margin-top:8px"></div>
     </div>
   </section>
 
@@ -577,7 +639,8 @@ $("pcv").addEventListener("click", async e => {
   }
   await pickColour(e, v);
 });
-// colour picker: 7 x 7 average on the original photo, only pixels of the object under the cursor
+// colour picker: 13 x 13 pixels of the original photo, only those of the object under the cursor; the brightest and darkest
+// 15 % (reflections, shadows, dark edges) are left out and the median of the rest is the colour - one highlight cannot shift it
 let ORIG = null;
 async function pickColour(e, v) {
   if (!QID) return;
@@ -588,24 +651,26 @@ async function pickColour(e, v) {
   }
   const r = $("pcv").getBoundingClientRect();
   const fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
-  const x = Math.round(fx * ORIG.w), y = Math.round(fy * ORIG.h), R = 3;
-  const d = ORIG.ctx.getImageData(Math.max(0, x - R), Math.max(0, y - R), 2 * R + 1, 2 * R + 1).data;
-  let s = [0, 0, 0], n = 0, all = [0, 0, 0], na = 0;
-  for (let dy = -R; dy <= R; dy++) for (let dx = -R; dx <= R; dx++) {
-    const xx = x + dx, yy = y + dy;
-    if (xx < 0 || yy < 0 || xx >= ORIG.w || yy >= ORIG.h) continue;
-    const k = ((yy - Math.max(0, y - R)) * (2 * R + 1) + (xx - Math.max(0, x - R))) * 4;
-    if (k < 0 || k + 2 >= d.length) continue;
-    all[0] += d[k]; all[1] += d[k + 1]; all[2] += d[k + 2]; na++;
+  const x = Math.round(fx * ORIG.w), y = Math.round(fy * ORIG.h), R = 6;
+  const x0 = Math.max(0, x - R), y0 = Math.max(0, y - R), x1 = Math.min(ORIG.w, x + R + 1), y1 = Math.min(ORIG.h, y + R + 1);
+  if (x1 <= x0 || y1 <= y0) return;
+  const d = ORIG.ctx.getImageData(x0, y0, x1 - x0, y1 - y0).data, inObj = [], all = [];
+  for (let yy = y0; yy < y1; yy++) for (let xx = x0; xx < x1; xx++) {
+    const k = ((yy - y0) * (x1 - x0) + (xx - x0)) * 4, p = [d[k], d[k + 1], d[k + 2]];
+    all.push(p);
     const lv = LBL ? LBL.L[Math.min(LBL.h - 1, Math.floor(yy / ORIG.h * LBL.h)) * LBL.w + Math.min(LBL.w - 1, Math.floor(xx / ORIG.w * LBL.w))] : 0;
-    if (v && lv === v) { s[0] += d[k]; s[1] += d[k + 1]; s[2] += d[k + 2]; n++; }
+    if (v && lv === v) inObj.push(p);
   }
-  const use = n ? s : all, m = n || na;
-  if (!m) return;
-  const hex = "#" + use.map(c => Math.round(c / m).toString(16).padStart(2, "0")).join("").toUpperCase();
-  PICK = {hex, obj: v || null, n: m};
+  const use = inObj.length ? inObj : all;
+  if (!use.length) return;
+  const lum = p => 0.2126 * p[0] + 0.7152 * p[1] + 0.0722 * p[2];
+  const srt = use.slice().sort((a, b) => lum(a) - lum(b)), cut = srt.length >= 10 ? Math.floor(srt.length * 0.15) : 0, keep = srt.slice(cut, srt.length - cut);
+  const med = c => { const a = keep.map(p => p[c]).sort((p, q) => p - q), h = a.length >> 1; return a.length % 2 ? a[h] : (a[h - 1] + a[h]) / 2; };
+  const hex = "#" + [0, 1, 2].map(c => Math.round(med(c)).toString(16).padStart(2, "0")).join("").toUpperCase();
+  PICK = {hex, obj: v || null, n: keep.length};
   $("pkswatch").style.background = hex; $("pkhex").value = hex;
-  $("pkfrom").textContent = v ? `object #${v} · ${m} pixel(s) averaged inside its outline` : `outside every object · ${m} pixel(s) averaged`;
+  $("pkfrom").textContent = (v ? `object #${v} · median of ${keep.length} pixel(s) inside its outline` : `outside every object · median of ${keep.length} pixel(s)`) +
+    (cut ? ` (brightest and darkest ${cut} left out)` : "");
   $("pkmsg").innerHTML = v ? "" : `<span class="no">not on a ceramic object — background colour?</span>`;
   $("pickbox").hidden = false;
 }
@@ -877,10 +942,13 @@ function renderQregs() {
     regs.map(r => {
       const v = QIMP[r.id] || "";
       return `<div class="qr"><span class="sw" style="background:${r.hex}"></span><span>${esc(r.name)} · ${(100 * r.area_frac).toFixed(0)}% · ${esc(r.position)} · ΔE ${r.distinctiveness_de00}${r.flags.length ? " · " + esc(r.flags.join(", ")) : ""}</span>
-        <span class="imp" data-rid="${r.id}"><button data-v="" class="${!v ? "on" : ""}" title="automatic importance ${r.auto_importance}">auto</button><button data-v="high" class="${v === "high" ? "on" : ""}">important</button><button data-v="ignore" class="${v === "ignore" ? "on" : ""}">ignore</button></span></div>`;
+        <span class="imp" data-rid="${r.id}"><button data-v="" class="${!v ? "on" : ""}" title="automatic importance ${r.auto_importance}">auto</button><button data-v="high" class="${v === "high" ? "on" : ""}">important</button><button data-v="ignore" class="${v === "ignore" ? "on" : ""}">ignore</button></span>
+        <button class="gqr" data-ghex="${esc(r.hex)}" data-greg="${r.id}" title="search glaze recipes with this region's colour (card G)">glaze</button></div>`;
     }).join("");
 }
 $("qregs").addEventListener("click", e => {
+  const g = e.target.closest("[data-ghex]");
+  if (g) { gUse(g.dataset.ghex.toUpperCase(), `the photo: region R${g.dataset.greg} of object #${QREG.index}`); return; }
   const b = e.target.closest("[data-v]"); if (!b) return;
   const rid = b.closest("[data-rid]").dataset.rid;
   if (b.dataset.v) QIMP[rid] = b.dataset.v; else delete QIMP[rid];
@@ -1190,6 +1258,160 @@ $("cfam").addEventListener("change", soon);
   const _add = addColour;
   addColour = function (c) { _add(c); if (okHex(c.hex)) showRelated(c.hex); };
 }
+// ---------------------------------------------------------------- G: glaze recipes with Claire's model (colour + cone + surface)
+// Both ways in (a colour, or a colour picked / a region chosen on the photo) make the same query: HEX + colour word + cone +
+// surface. One search returns both lists; the tabs only switch the view. Photos come straight from Glazy's server.
+let GOPT = null, GRES = null, GTAB = "weighted", GAUTO = true, GNT = null, GHT = null, GIMG = null;
+const GLBL = {latent: "latent", color: "colour", surface: "surface", cone: "cone"};
+async function gInit() {
+  try { GOPT = await api("/api/glaze/options"); }
+  catch (e) { $("gmsg").innerHTML = `<span class="no">${esc(e.message)}</span>`; $("ggo").disabled = true; return; }
+  const opt = c => `<option value="${esc(c.value)}">${esc(c.value)} · ${c.count.toLocaleString()} recipes</option>`;
+  $("gcone_lo").innerHTML = `<option value="">any cone</option>` + GOPT.cones.map(opt).join("");
+  $("gcone_hi").innerHTML = `<option value="">to (optional)</option>` + GOPT.cones.map(opt).join("");
+  $("gsurface").innerHTML = `<option value="">any surface</option>` + GOPT.surfaces.map(opt).join("");
+  const w = GOPT.weights;
+  $("gwts").textContent = `Score: latent ${w.latent.toFixed(2)} · CIEDE2000 colour ${w.color.toFixed(2)} · surface ${w.surface.toFixed(2)} · cone ${w.cone.toFixed(2)}`;
+  $("gmeta").textContent = `${GOPT.recipes.toLocaleString()} recipes · model ${GOPT.model_version} · cone scoring ${GOPT.cone_scoring === "orton" ? "Orton (04 ≠ 4)" : "as in the notebook"}`;
+  gNames("");
+  const h = new URLSearchParams(location.hash.slice(1));            // #glaze=3054A5&cone=6&surface=Glossy&tab=diverse opens with that search
+  if (h.get("glaze")) {
+    for (const [k, id] of [["cone", "gcone_lo"], ["cone_to", "gcone_hi"], ["surface", "gsurface"]]) if (h.get(k)) $(id).value = h.get(k);
+    if (h.get("tab") === "diverse") GTAB = "diverse";
+    gSetHex(h.get("glaze"), {src: "the page link"});
+    gSearch();
+  } else gSetHex("#3054A5", {src: "an example (cobalt blue)"});
+}
+function gHex(h) {
+  h = String(h || "").trim().toUpperCase(); if (!h.startsWith("#")) h = "#" + h;
+  if (/^#[0-9A-F]{3}$/.test(h)) h = "#" + [...h.slice(1)].map(c => c + c).join("");
+  return okHex(h) ? h : null;
+}
+function gSetHex(hex, o = {}) {
+  const h = gHex(hex);
+  if (!h) { $("ghexmsg").innerHTML = `<span class="no">HEX must look like #3054A5</span>`; return; }
+  $("ghex").value = h; $("gpick").value = h.toLowerCase(); $("gsw").style.background = h;
+  $("ghexmsg").textContent = ""; if (o.src) $("gsrc").textContent = "from " + o.src;
+  if (o.name) { $("gcname").value = o.name; GAUTO = true; $("gcnote").textContent = "one of the model's colour words"; return; }
+  if (!GAUTO) return;
+  clearTimeout(GHT);
+  GHT = setTimeout(async () => {                                     // the model's own colour word nearest to this HEX
+    try {
+      const r = await api("/api/glaze/color_name?hex=" + h.slice(1));
+      if ($("ghex").value !== h || !GAUTO) return;
+      $("gcname").value = r.name;
+      $("gcnote").innerHTML = `nearest of the model's colour words <span class="sw" style="background:${esc(r.swatch)}"></span> ΔE00 ${r.delta_e00} · type your own word to override`;
+    } catch (e) { $("gcnote").textContent = e.message; }
+  }, 120);
+}
+function gNames(q) {
+  const t = q.trim().toLowerCase(), all = (GOPT && GOPT.color_names) || [];
+  const hit = t ? all.filter(n => n.name.includes(t)) : all.slice(0, 16);
+  $("gnames").innerHTML = hit.slice(0, 18).map(n => `<span class="cw" data-ghex="${esc(n.hex)}" data-gname="${esc(n.name)}" title="${n.recipes} recipes with this colour word">
+    <span class="sw" style="background:${esc(n.hex)}"></span>${esc(n.name)}</span>`).join("") || (t ? `<span class="small">not one of the model's words - looking it up…</span>` : "");
+  if (t && hit.length < 4) gMoreWords(t);
+}
+async function gMoreWords(t) {         // not a word of the model: Color Lab V3's words give a HEX, the model word then follows from it
+  try {
+    const r = await api("/api/color_words?q=" + encodeURIComponent(t));
+    if ($("gname").value.trim().toLowerCase() !== t) return;
+    const known = new Set([...document.querySelectorAll("#gnames [data-gname]")].map(c => c.dataset.gname));
+    if (!known.size) $("gnames").innerHTML = "";
+    $("gnames").insertAdjacentHTML("beforeend", r.results.filter(c => !known.has(c.name)).slice(0, 8).map(c => `<span class="cw" data-ghex="${esc(c.hex)}"
+      data-glab="${esc(c.name)}" title="Color Lab V3 word (${esc(c.source)}) - the model reads the nearest of its own words"><span class="sw" style="background:${esc(c.hex)}"></span>${esc(c.name)} ≈</span>`).join(""));
+  } catch (e) { /* the word list is a convenience; HEX and picker still work */ }
+}
+function gMode(m) {
+  [...$("gmode").children].forEach(b => b.classList.toggle("on", b.dataset.g === m));
+  $("gcolor").hidden = m !== "color"; $("gimage").hidden = m !== "image";
+  $("gphoto").innerHTML = !QID ? "No photo yet - drop one in card 1." : `Photo ${esc(QID)} · ${OBJS.length} object(s) · active object #${activeObj() ?? "-"}`;
+}
+function gUse(hex, src) {             // a colour from the photo (picker or colour region) -> card G
+  gMode("image"); GAUTO = true; gSetHex(hex, {src});
+  $("gcard").scrollIntoView({behavior: "smooth", block: "start"});
+}
+async function gSearch() {
+  const hex = gHex($("ghex").value);
+  if (!hex) { $("ghexmsg").innerHTML = `<span class="no">HEX must look like #3054A5</span>`; return; }
+  const lo = $("gcone_lo").value, hi = $("gcone_hi").value;
+  const body = {hex, color_name: GAUTO ? "" : $("gcname").value.trim(), cone: lo && hi && hi !== lo ? `${lo} - ${hi}` : (lo || hi),
+                surface: $("gsurface").value, top_k: 10};
+  $("ggo").disabled = true; $("gmsg").innerHTML = `<span class="busy"></span>scoring ${GOPT ? GOPT.recipes.toLocaleString() : ""} recipes…`;
+  const t0 = performance.now();
+  try {
+    GRES = await api("/api/glaze/search", body);
+    $("gmsg").textContent = `search ${GRES.timings.retrieval_ms} ms in the model · ${Math.round(performance.now() - t0)} ms with the page`;
+    if (GAUTO) $("gcname").value = GRES.query.color_name;
+    gRender();
+  } catch (e) { $("gmsg").innerHTML = `<span class="no">${esc(e.message)}</span>`; }
+  $("ggo").disabled = false;
+}
+function gRender() {
+  if (!GRES) return;
+  $("gres").hidden = false;
+  const lst = GTAB === "diverse" ? GRES.diverse_results : GRES.weighted_results, q = GRES.query;
+  [...$("gtabs").children].forEach(b => { b.classList.toggle("on", b.dataset.t === GTAB); b.setAttribute("aria-selected", b.dataset.t === GTAB); });
+  $("gtabnote").innerHTML = GTAB === "diverse"
+    ? `The same scores as Best matches, but at most <b>${GRES.max_per_cluster}</b> recipes per K-Means chemistry cluster: different families of formulations for a similar result. Different chemistry is not safer or better.`
+    : `The highest weighted scores over all ${GRES.searched.toLocaleString()} recipes.`;
+  $("gquery").innerHTML = `<span class="sw" style="background:${esc(q.hex)}"></span> <b>${esc(q.hex)}</b> · cone ${esc(q.cone || "any")} · ${esc(q.surface || "any surface")} · the model reads <code>${esc(GRES.model_text)}</code>` +
+    `${GRES.cone_scoring === "orton" ? "" : " · cone scoring as in the notebook (04 = 4)"}` + GRES.warnings.map(w => `<div class="no">⚠ ${esc(w)}</div>`).join("");
+  if (!lst.length) { $("ggrid").innerHTML = `<div class="empty">No recipes found.</div>`; $("gimgmsg").textContent = ""; return; }
+  GIMG = {id: (GIMG ? GIMG.id : 0) + 1, t0: performance.now(), n: lst.filter(x => x.thumb_url || x.image_url).length, ok: 0, bad: 0};
+  $("gimgmsg").textContent = GIMG.n ? `photos: loading from Glazy (lazy - the ones below the window load when you scroll)` : "";
+  $("ggrid").innerHTML = lst.map(gCard).join("");
+}
+function gCard(x) {
+  const c = x.score_components, w = GRES.weights, ct = x.contributions, src = x.thumb_url || x.image_url;
+  const hx = /^#[0-9A-F]{6}$/i.test(x.hex || "") ? x.hex : null, name = x.recipe_name || `Glazy recipe #${x.recipe_id}`;
+  const val = {latent: c.latent_score, color: c.color_score, surface: c.surface_match, cone: c.cone_match};
+  const bars = ["latent", "color", "surface", "cone"].map(k => `<span title="weight ${w[k].toFixed(2)} × ${val[k] == null ? "no data (0)" : val[k].toFixed(2)}">${GLBL[k]}</span>
+    <span class="bar"><i style="width:${(100 * (val[k] || 0)).toFixed(0)}%"></i></span><span>${ct[k].toFixed(2)}</span>`).join("");
+  const ing = (x.ingredients || []).map(i => `${i.addition ? "+ " : ""}${esc(i.name || "?")} ${i.percent ?? ""}`).join(" · ");
+  return `<div class="rc"><div class="im"><span class="gph">${src ? "loading photo…" : "no photo"}</span>${src ? `<a href="${esc(x.image_url || src)}" target="_blank" rel="noopener" title="open the full-size photo">
+    <img class="g" src="${esc(src)}" data-full="${esc(x.image_url || "")}" data-r="${GIMG.id}" alt="${esc(name)}" loading="lazy" decoding="async" onload="gImg(this, 1)" onerror="gImg(this, 0)"></a>` : ""}<span class="rk">${x.rank}</span></div>
+  <div class="b"><div class="nm">${esc(name)}</div>
+  <div><a href="${esc(x.recipe_url)}" target="_blank" rel="noopener">View on Glazy ↗</a> <span class="small">#${x.recipe_id}</span></div>
+  <div class="tags">cone ${esc(x.cone || "?")} · ${esc(x.surface || "surface ?")}${x.transparency ? " · " + esc(x.transparency) : ""}</div>
+  <div>${hx ? `<span class="sw" style="background:${hx}"></span> ${hx}` : "no recipe colour"} ${esc(x.color_name || "")}${c.delta_e_2000 != null ? ` · ΔE00 ${c.delta_e_2000.toFixed(1)}` : ""}</div>
+  <div class="small">score <b>${x.similarity_score.toFixed(3)}</b> · K-Means cluster ${x.cluster_id}</div>
+  <div class="simt">${bars}</div>
+  ${ing ? `<details class="ging"><summary>Ingredients (${x.ingredients.length})</summary><div class="small">${ing}</div></details>` : `<div class="small">ingredients: not in the 7k CSV</div>`}</div></div>`;
+}
+function gImg(im, ok) {
+  if (!ok && im.dataset.full && im.src !== im.dataset.full) { im.src = im.dataset.full; return; }    // no m_ size: the catalog's own link
+  if (!ok) { const box = im.closest(".im"); im.closest("a").remove(); box.querySelector(".gph").textContent = "photo unavailable"; }
+  if (!GIMG || +im.dataset.r !== GIMG.id) return;
+  ok ? GIMG.ok++ : GIMG.bad++;
+  $("gimgmsg").textContent = `photos: ${GIMG.ok} of ${GIMG.n} loaded from Glazy in ${Math.round(performance.now() - GIMG.t0)} ms` +
+    (GIMG.bad ? ` · ${GIMG.bad} unavailable` : "") + (GIMG.ok + GIMG.bad < GIMG.n ? " (the rest load when you scroll to them)" : "");
+}
+$("gmode").addEventListener("click", e => { const b = e.target.closest("button"); if (b) gMode(b.dataset.g); });
+$("gname").addEventListener("input", () => { clearTimeout(GNT); GNT = setTimeout(() => gNames($("gname").value), 150); });
+$("gnames").addEventListener("click", e => {
+  const c = e.target.closest("[data-ghex]"); if (!c) return;
+  if (c.dataset.gname) gSetHex(c.dataset.ghex, {name: c.dataset.gname, src: `the colour word "${c.dataset.gname}"`});
+  else { GAUTO = true; gSetHex(c.dataset.ghex, {src: `the Color Lab word "${c.dataset.glab}"`}); }
+});
+$("ghex").addEventListener("input", () => { if (gHex($("ghex").value) && $("ghex").value.replace("#", "").length === 6) gSetHex($("ghex").value, {src: "the HEX you typed"}); });
+$("ghex").addEventListener("change", () => gSetHex($("ghex").value, {src: "the HEX you typed"}));
+$("gpick").addEventListener("input", e => gSetHex(e.target.value, {src: "the colour picker"}));
+$("gcname").addEventListener("input", () => {
+  GAUTO = !$("gcname").value.trim();
+  $("gcnote").textContent = GAUTO ? "" : "your word - the model reads it as typed (empty = follow the HEX again)";
+  if (GAUTO) gSetHex($("ghex").value);
+});
+$("ggo").addEventListener("click", gSearch);
+$("gcard").addEventListener("keydown", e => {              // Enter here searches recipes, not the object search below
+  if (e.key === "Enter" && e.target.tagName !== "BUTTON" && e.target.tagName !== "SUMMARY") { e.preventDefault(); e.stopPropagation(); gSearch(); }
+});
+$("gtabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { GTAB = b.dataset.t; gRender(); } });
+$("pkglaze").addEventListener("click", () => {
+  const h = gHex($("pkhex").value);
+  if (!h) { $("pkmsg").textContent = "HEX must look like #A1B2C3"; return; }
+  gUse(h, PICK && PICK.obj ? `the photo: picked on object #${PICK.obj}` : "the photo (picked outside every object)");
+});
+
 // ---------------------------------------------------------------- (!) help and (i) attribute explanations
 function openModal(html) { $("mdlbody").innerHTML = html; $("mdl").hidden = false; $("mdlx").focus(); }
 function closeModal() { $("mdl").hidden = true; }
@@ -1217,9 +1439,34 @@ const HELP = {
     <tr><td><b>Recipes (previous model)</b> search</td><td><b>all selected</b> objects together (their image features are averaged by area)</td></tr></table>
     <div class="note">To compare two objects of the same photo, click the first, search, then click the second and search again.</div>
     <h4>Pick colour (HEX)</h4>
-    <p>Switch the photo to <b>Pick colour</b> and click: the colour is averaged over a 7 × 7 pixel square, using <b>only the pixels inside the object under the cursor</b>
-    (background is left out). You see the HEX value, can edit or copy it, and <b>Add as search colour</b> puts it in card 4 - it is used when card 4 is set to
-    <i>typed / picked</i>. Clicking outside every object still gives a colour, with a warning.</p>`,
+    <p>Switch the photo to <b>Pick colour</b> and click: the colour is the median of a 13 × 13 pixel square, using <b>only the pixels inside the object under the cursor</b>
+    (background is left out); the brightest and darkest 15 % of them (reflections, shadows) are left out first. You see the HEX value, can edit or copy it,
+    <b>Add as search colour</b> puts it in card 4 - it is used when card 4 is set to <i>typed / picked</i> - and <b>Use for glaze search</b> sends it to card G.
+    Clicking outside every object still gives a colour, with a warning.</p>`,
+  glaze: () => {
+    const w = (GOPT && GOPT.weights) || {latent: 0.4, color: 0.4, surface: 0.1, cone: 0.1}, mpc = GOPT ? GOPT.max_per_cluster : 2;
+    return `<h3 id="mdlt">Glaze recipes (Claire's model)</h3>
+    <p>You give one colour, a firing cone and a surface. The model scores <b>every</b> recipe of its catalog${GOPT ? ` (${GOPT.recipes.toLocaleString()})` : ""} and shows the closest, with the
+    recipe's photo and a link to its page on Glazy.</p>
+    <table><tr><th>Part of the score</th><th>Weight</th><th>What is compared</th></tr>
+    <tr><td><b>Latent</b></td><td>${w.latent.toFixed(2)}</td><td>your words <i>"color: …, Cone …, surface"</i> (MiniLM + Claire's text head) against each recipe's <b>chemistry</b>
+      (oxides → PCA → chemistry head), in a shared space trained so that a recipe's text and its chemistry lie close together</td></tr>
+    <tr><td><b>Colour</b></td><td>${w.color.toFixed(2)}</td><td>CIEDE2000 between your HEX and the recipe's colour: exp(-ΔE / 20), 1 = the same colour</td></tr>
+    <tr><td><b>Surface</b></td><td>${w.surface.toFixed(2)}</td><td>1 when the recipe has exactly your surface (Glossy is not Semi-glossy)</td></tr>
+    <tr><td><b>Cone</b></td><td>${w.cone.toFixed(2)}</td><td>1 when the recipe's cone range overlaps yours</td></tr></table>
+    <p>"Any" cone or surface: that part gives 0 to every recipe, so it does not change the order. A recipe without that information also gets 0 for it.</p>
+    <h4>Best matches and Explore formulations</h4>
+    <p>Both lists come from the <b>same</b> scores. <b>Best matches</b> is the top of the ranking. <b>Explore formulations</b> walks the same ranking but takes at most
+    ${mpc} recipes from each K-Means chemistry cluster${GOPT ? ` (${GOPT.clusters} clusters of the oxide PCA)` : ""}, so you see recipes built in different ways.
+    Different chemistry does not mean safer or better - check every recipe before mixing it.</p>
+    <h4>Cone 04 is not cone 4</h4>
+    <p>Orton cones with a leading zero are low fire: 04 is earthenware, about 100 °C below the mid-fire cone 4. Claire's catalog lost those zeros (04 → 4), so the cone part
+    of the score uses the original cone text of the 7k recipes and reads 04 as low fire. The latent part was trained on the text without the zeros; only a retrained model fixes that part.</p>
+    <h4>Colour word</h4>
+    <p>The model was trained on ${GOPT ? GOPT.color_names.length : ""} colour words (cobalt blue, warm gray, …). The word is chosen from your HEX automatically (the nearest by CIEDE2000);
+    type your own and the model reads it as you wrote it.</p>
+    <div class="note">The photos load straight from Glazy's server in your browser (internet needed); the search itself runs on this PC.</div>`;
+  },
   priority: () => `<h3 id="mdlt">Priority of the photo part</h3>
     <p>The photo part of the score compares four things, grouped into three topics you can prioritise:</p>
     <table><tr><th>Topic</th><th>What is compared</th></tr>
@@ -1324,6 +1571,7 @@ renderQattrs();
 }
 
 init();
+gInit();
 </script>
 </body>
 </html>

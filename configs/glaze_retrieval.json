@@ -1,0 +1,15 @@
+{
+  "_about": "Glaze recipe search with Claire's model (card G, multimodal_experiments/mm/glaze_retrieval.py). Restart RUN_GLAZE_SEARCH.bat after a change.",
+  "_model_dir": "folder of glaze_retrieval_catalog.csv, glaze_retrieval_vectors.npz, shared_space_heads.pt (INSTALL_GLAZE_MODEL.bat fills it); relative = project folder",
+  "model_dir": "multimodal_experiments/models/glaze_retrieval",
+  "_weights": "Claire's ranking weights: latent similarity, CIEDE2000 colour, surface, cone - nonnegative, sum 1",
+  "weights": {"latent": 0.40, "color": 0.40, "surface": 0.10, "cone": 0.10},
+  "_max_per_cluster": "Explore formulations: at most this many recipes per K-Means chemistry cluster (notebook: 2)",
+  "max_per_cluster": 2,
+  "top_k": 10,
+  "_cone_scoring": "orton = 04 is low fire and the original 7k cone text is used (default); notebook = Claire's parser and catalog cones exactly (04 -> 4)",
+  "cone_scoring": "orton",
+  "_allowed_splits": "null = the whole catalog, as in the notebook demo; e.g. [\"test\"] for a held-out evaluation",
+  "allowed_splits": null,
+  "device": "cpu"
+}
