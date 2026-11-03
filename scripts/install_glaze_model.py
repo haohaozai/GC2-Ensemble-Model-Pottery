@@ -1,6 +1,6 @@
-"""Install (or update) Claire's glaze retrieval model for the glaze search page (INSTALL_GLAZE_MODEL.bat runs this).
+"""Install (or update) the glaze retrieval model for the glaze search page (INSTALL_GLAZE_MODEL.bat runs this).
 
-Copies the three runtime files out of her ZIP (test_similarity.zip) into the model folder of configs/glaze_retrieval.json
+Copies the three runtime files out of the model ZIP (test_similarity.zip) into the model folder of configs/glaze_retrieval.json
 (default multimodal_experiments/models/glaze_retrieval, not in git), after the same checks the app makes at start-up:
 catalog columns, catalog and vectors in the same recipe order, checkpoint readable with weights_only=True (no code is run).
 The old model stays in place when a check fails. Writes manifest.json (source, SHA-256 of every file, model version).
@@ -32,12 +32,12 @@ def find_zip() -> Path | None:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("zip", nargs="?", help="Claire's ZIP (default: newest test_similarity*.zip next to the project)")
+    ap.add_argument("zip", nargs="?", help="the model ZIP (default: newest test_similarity*.zip next to the project)")
     args = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     src = Path(args.zip) if args.zip else find_zip()
     if src is None or not src.is_file():
-        print("No ZIP found. Drag Claire's ZIP onto INSTALL_GLAZE_MODEL.bat, or give its path.")
+        print("No ZIP found. Drag the model ZIP onto INSTALL_GLAZE_MODEL.bat, or give its path.")
         return 1
     dest = resolve(read_config()["model_dir"])
     print(f"ZIP:    {src}\nfolder: {dest}")

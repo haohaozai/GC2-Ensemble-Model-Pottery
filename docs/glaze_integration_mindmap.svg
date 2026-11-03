@@ -10,7 +10,7 @@
 <marker id="a6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B5CF6"/></marker>
 </defs>
 <rect width="1300" height="1030" fill="#ffffff"/>
-<text x="650" y="44" text-anchor="middle" font-size="22" font-weight="700" fill="#1d1d1b">CG2 Glaze Search · Mike's UI + Claire's retrieval model</text>
+<text x="650" y="44" text-anchor="middle" font-size="22" font-weight="700" fill="#1d1d1b">CG2 Glaze Search · integrating the glaze retrieval model</text>
 <text x="650" y="70" text-anchor="middle" font-size="14" fill="#5f5e5a">seven implementation stages, clockwise · card G of RUN_GLAZE_SEARCH.bat</text>
 <line x1="650.0" y1="360.0" x2="650.0" y2="190.0" stroke="#2563EB" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
 <line x1="806.4" y1="435.3" x2="939.3" y2="329.3" stroke="#16A34A" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
@@ -43,7 +43,7 @@
 <text x="564.0" y="145.0" font-size="15" font-weight="700" fill="#ffffff">Audit Repository</text>
 <text x="536.0" y="183.0" font-size="13.5" fill="#1d1d1b">Live app: server.py + index.html</text>
 <text x="536.0" y="207.0" font-size="13.5" fill="#1d1d1b">SAM 2.1 objects + colour regions</text>
-<text x="536.0" y="231.0" font-size="13.5" fill="#1d1d1b">Claire&#x27;s ZIP, 7k CSVs, git state</text>
+<text x="536.0" y="231.0" font-size="13.5" fill="#1d1d1b">Model ZIP, 7k CSVs, git state</text>
 </g>
 <g><rect x="811.3" y="258.3" width="256" height="142" rx="12" fill="#ffffff" stroke="#16A34A" stroke-width="2.5"/>
 <path d="M811.3,270.3 a12,12 0 0 1 12,-12 h232 a12,12 0 0 1 12,12 v28 h-256 z" fill="#16A34A"/>
@@ -91,7 +91,7 @@
 <text x="274.7" y="284.3" font-size="15" font-weight="700" fill="#ffffff">Review and Update</text>
 <text x="246.7" y="322.3" font-size="13.5" fill="#1d1d1b">Docs, API contract, run steps</text>
 <text x="246.7" y="346.3" font-size="13.5" fill="#1d1d1b">INSTALL_GLAZE_MODEL.bat updates</text>
-<text x="246.7" y="370.3" font-size="13.5" fill="#1d1d1b">Claire: keep cone text, retrain</text>
+<text x="246.7" y="370.3" font-size="13.5" fill="#1d1d1b">Model: keep cone text, retrain</text>
 </g>
 <text x="650" y="1006" text-anchor="middle" font-size="12" fill="#8a8984">docs/glaze_integration_architecture.md · 2026-11-03</text>
 </svg>

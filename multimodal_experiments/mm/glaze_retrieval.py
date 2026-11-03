@@ -1,8 +1,8 @@
-"""Glaze recipe search with Claire's model (card G of the glaze search page, POST /api/glaze/search).
+"""Glaze recipe search, colour match: the text-chemistry retrieval model (card G of the glaze search page, POST /api/glaze/search).
 
-Port of the retrieval cell of glaze_kmeans_color_weighted_full_catalog.ipynb (Claire, test_similarity.zip): same artifacts,
+Port of the retrieval cell of glaze_kmeans_color_weighted_full_catalog.ipynb (test_similarity.zip): same artifacts,
 same preprocessing, same scoring - the notebook's results are reproduced (tests/test_glaze_retrieval.py).
-  query text "color: {name}, Cone {cone}, {surface}, unknown, unknown" -> frozen MiniLM (mean pooled) -> Claire's text head
+  query text "color: {name}, Cone {cone}, {surface}, unknown, unknown" -> frozen MiniLM (mean pooled) -> the trained text head
   -> cosine with the precomputed chemistry vectors of the catalog recipes (oxides -> PCA-16 -> chemistry head, same 256-d space)
   final = 0.40 latent (cos + 1) / 2 + 0.40 colour exp(-CIEDE2000 / 20) + 0.10 surface (same word) + 0.10 cone (ranges overlap)
 Both lists come from ONE scoring pass: "Best matches" = the top of the ranking; "Explore formulations" = the same ranking
@@ -11,9 +11,9 @@ walked in order with at most max_per_cluster recipes per K-Means chemistry clust
 One deliberate difference, configs/glaze_retrieval.json "cone_scoring":
   "orton" (default)  04 is LOW fire (-4, Orton: 022 ... 01, 1 ... 14) and the original 7k cone text is used - the catalog
                      lost the leading zeros (56 of its 60 "Cone 4" recipes are cone 04)
-  "notebook"         Claire's parser and catalog cones exactly (04 -> 4); the parity test uses it
+  "notebook"         the notebook's parser and catalog cones exactly (04 -> 4); the parity test uses it
 The latent part was trained on the zero-less text, so only a retrained model fixes that part.
-Weights, max_per_cluster, top_k and the model folder are in configs/glaze_retrieval.json; a new model from Claire is
+Weights, max_per_cluster, top_k and the model folder are in configs/glaze_retrieval.json; a new model is
 installed with INSTALL_GLAZE_MODEL.bat (scripts/install_glaze_model.py) - the page does not change.
 """
 from __future__ import annotations
@@ -46,7 +46,7 @@ GLAZY_RECIPE = "https://glazy.org/recipes/{}"
 MAX_TOP_K = 50
 
 
-# ---------------------------------------------------------------- Claire's notebook (same code, same results)
+# ---------------------------------------------------------------- the original notebook (same code, same results)
 def parse_hex(h):
     if not isinstance(h, str):
         return None
@@ -142,7 +142,7 @@ def resolve(p) -> Path:
 
 
 def load_heads(path: Path) -> dict:
-    """Claire's checkpoint with weights_only=True: only tensors, numpy arrays and plain containers are unpickled."""
+    """The checkpoint, loaded with weights_only=True: only tensors, numpy arrays and plain containers are unpickled."""
     try:
         from numpy._core.multiarray import _reconstruct
     except ImportError:                                                     # numpy < 2
@@ -255,7 +255,7 @@ class GlazeRetriever:
         self.name_lab = rgb2lab(np.stack([parse_hex(x["hex"]) for x in self.names]).reshape(-1, 1, 3)).reshape(-1, 3)
         self.choices = self.ref.choices(cat)
         self.surfaces = [s["value"] for s in self.choices["surfaces"]]
-        # MiniLM + Claire's text head on the CPU (a query is one short sentence; the GPU stays with the segmentation models)
+        # MiniLM + the trained text head on the CPU (a query is one short sentence; the GPU stays with the segmentation models)
         self.device = torch.device(self.cfg.get("device") or "cpu")
         name = ckpt.get("model_name", "sentence-transformers/all-MiniLM-L6-v2")
         self.tokenizer = AutoTokenizer.from_pretrained(name)
@@ -354,7 +354,7 @@ class GlazeRetriever:
                 "color_name_source": "you" if name else f"nearest model colour word (ΔE00 {auto['delta_e00']})",
                 "cone": cone, "surface": surface, "top_k": top_k, "max_per_cluster": mpc,
                 "weights": check_weights(p["weights"]) if p.get("weights") else self.weights,
-                # text for the model: Claire's spelling (5 1/2 -> 5.5); 'unknown' is her word for a missing field
+                # text for the model: the training spelling (5 1/2 -> 5.5); 'unknown' is the training word for a missing field
                 "cone_text": cone.replace(" 1/2", ".5") if cone else "unknown", "surface_text": surface or "unknown"}
 
     def search(self, p: dict) -> dict:
@@ -370,7 +370,7 @@ class GlazeRetriever:
                "model_version": self.version, "weights": q["weights"], "max_per_cluster": q["max_per_cluster"],
                "cone_scoring": self.cone_scoring, "searched": len(ranked), "warnings": []}
         if not self.ref.recipes_path:
-            out["warnings"].append("7k_matched_all_data.csv not found: no recipe names, cones are Claire's catalog values")
+            out["warnings"].append("7k_matched_all_data.csv not found: no recipe names, cones are the catalog's values")
         out["timings"] = {"retrieval_ms": round(1000 * (t1 - t0), 1), "total_ms": round(1000 * (time.perf_counter() - t0), 1)}
         return out
 

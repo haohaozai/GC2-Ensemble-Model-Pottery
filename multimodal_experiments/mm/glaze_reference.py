@@ -1,7 +1,7 @@
-"""7k reference data for the glaze recipe search (card G, Claire's model in mm/glaze_retrieval.py).
+"""7k reference data for the glaze recipe search (card G; the retrieval model is in mm/glaze_retrieval.py).
 
 Kept apart from the model: recipe names, the ORIGINAL cone text, ingredients and the cone / surface choices of the page.
-Nothing here changes a score except the original cone text, which the corrected cone scoring reads (Claire's catalog lost
+Nothing here changes a score except the original cone text, which the corrected cone scoring reads (the catalog lost
 the leading zero of the low-fire Orton cones: 04 -> 4, 05 1/2 - 03 -> 5.5 - 3).
 
 Reads 7k_matched_all_data*.csv and 7k_matched_ingredients*.csv (read-only) from the first folder that has them:
@@ -111,7 +111,7 @@ class Reference:
                      "addition": str(add).strip().lower() == "yes"})
 
     def choices(self, catalog: pd.DataFrame) -> dict:
-        """dropdown values: from the 7k recipes when the CSV is there, else from Claire's catalog (its cones lack the zeros)."""
+        """dropdown values: from the 7k recipes when the CSV is there, else from the catalog (its cones lack the zeros)."""
         surf, cones, src = self.surface_counts, self.cone_counts, "7k_matched_all_data.csv"
         if not self.recipes_path:
             surf = Counter(catalog["Surface"].dropna().astype(str).str.strip())

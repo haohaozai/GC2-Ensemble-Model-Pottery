@@ -1,4 +1,4 @@
-"""Tests of card G (Claire's glaze recipe model): parity with her notebook, cone / surface / HEX handling, the two result
+"""Tests of card G (colour match model): parity with the original notebook, cone / surface / HEX handling, the two result
 lists, the result fields, missing or broken model files and the three HTTP endpoints (real request handler of app/server.py).
 run (from multimodal_experiments):  ..\\.venv\\Scripts\\python.exe -m unittest tests.test_glaze_retrieval -v
 Needs the installed model (INSTALL_GLAZE_MODEL.bat). Tests of names / original cones are skipped without the 7k CSVs.
@@ -88,7 +88,7 @@ class ParityWithNotebook(unittest.TestCase):
                 np.testing.assert_allclose([x["similarity_score"] for x in res["weighted_results"]], g["best"]["final_score"], atol=1e-5)
 
     def test_notebook_parser_is_kept_for_this_mode(self):
-        self.assertEqual(G.cone_overlap("04", "4"), 1.0)          # Claire's parser: the leading zero is lost
+        self.assertEqual(G.cone_overlap("04", "4"), 1.0)          # the notebook's parser: the leading zero is lost
         self.assertEqual(G.cone_overlap("5 1/2", "5.5 - 6"), 1.0)
         self.assertEqual(G.cone_overlap("6", "8 - 10"), 0.0)
 

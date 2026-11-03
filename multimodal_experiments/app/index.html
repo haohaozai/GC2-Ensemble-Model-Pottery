@@ -199,8 +199,15 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 .evc em.lb,.fm em.lb{font-style:normal;font-size:10.5px;color:var(--muted);align-self:center}
 #ksel{padding:4px 8px}
 .crel{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
-/* card G: glaze recipes with Claire's model */
+/* card G: glaze recipes (smart search + colour match) */
 #gcard h2{flex-wrap:wrap}
+.gdesc{margin-bottom:14px}
+#gtext{min-height:42px}
+.gund{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;font-size:12px}
+.gu{display:inline-flex;gap:5px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:2px 9px;background:var(--bg)}
+.gu i{font-style:normal;color:var(--muted)}
+.gu.inf{border-style:dashed;cursor:pointer}
+.gu.fix{color:var(--muted)}
 .ggrid{display:grid;grid-template-columns:minmax(240px,1.2fr) minmax(220px,1fr) minmax(220px,1fr);gap:18px;align-items:start}
 @media (max-width:1100px){.ggrid{grid-template-columns:1fr}}
 .gq{display:flex;gap:10px;align-items:flex-start}
@@ -239,7 +246,7 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
       <div class="pickbox" id="pickbox" hidden><span class="big" id="pkswatch"></span>
         <div><div class="small" id="pkfrom">picked colour</div><input id="pkhex" maxlength="7" spellcheck="false" aria-label="picked HEX colour"></div>
         <button id="pkcopy">Copy</button><button id="pkadd" class="primary" style="padding:7px 14px">Add as search colour</button>
-        <button id="pkglaze" title="search glaze recipes with this colour (card G, Claire's model)">Use for glaze search</button><span class="small" id="pkmsg"></span></div>
+        <button id="pkglaze" title="search glaze recipes with this colour (card G)">Use for glaze search</button><span class="small" id="pkmsg"></span></div>
       <div class="actinfo" id="actinfo"></div>
       <details class="od" id="objdet"><summary>Object list (details)</summary>
       <div class="small" style="margin-bottom:6px">Objects used for the search (click to switch on / off). Default: objects CLIP rates as ceramic (≥ 0.35), otherwise the first object. The yellow frame is the active object.</div>
@@ -302,8 +309,13 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
   </section>
 
   <section class="card c-full" id="gcard">
-    <h2><span class="n">G</span>Glaze recipes <span class="opt">Claire's model · one colour + cone + surface → the closest Glazy recipes</span>
+    <h2><span class="n">G</span>Glaze recipes <span class="opt">describe it, pick a colour on a photo or give a formula → the closest Glazy recipes</span>
       <button class="ib" data-help="glaze" title="How the glaze recipe search works">!</button><span style="flex:1"></span><span class="small" id="gmeta"></span></h2>
+    <div class="gdesc">
+      <label class="f" for="gtext" style="margin-top:0">Describe it - any words, typos and shorthand are fine (e.g. <i>shinyy cobolt blu ^6 ox, kinda runny</i>)</label>
+      <div class="row"><textarea id="gtext" placeholder="glossy cobalt blue, cone 6, oxidation, a bit runny"></textarea><button id="gread">Read it</button></div>
+      <div class="gund" id="gund"></div>
+    </div>
     <div class="ggrid">
       <div>
         <div class="seg" id="gmode"><button data-g="color" class="on">Search by colour</button><button data-g="image">Search by photo</button></div>
@@ -335,7 +347,10 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
         <label class="f" style="margin-top:0">Firing cone (Orton: 04 is low fire, 4 is mid fire) · from - to</label>
         <div class="two"><select id="gcone_lo" aria-label="cone"></select><select id="gcone_hi" aria-label="end of a cone range (optional)"></select></div>
         <label class="f" for="gsurface">Surface</label><select id="gsurface"></select>
-        <div class="small" id="gwts" style="margin-top:8px"></div>
+        <div class="seg" id="gengine" style="margin-top:12px"><button data-e="smart" class="on" title="joint model: text + photo + formula + colour + cone + surface">Smart search</button><button data-e="colour" title="text-chemistry model: colour + cone + surface">Colour match</button></div>
+        <div class="atm" id="guse" style="margin-top:6px"><label><input type="checkbox" id="gusetext" checked>text</label><label><input type="checkbox" id="gusecol" checked>colour</label>
+          <label><input type="checkbox" id="guseimg">photo object (card 1)</label><label><input type="checkbox" id="guseform">formula (card 3)</label></div>
+        <div class="small" id="gwts" style="margin-top:6px"></div>
         <div class="row" style="margin-top:10px;justify-content:space-between;flex-wrap:wrap"><span class="small" id="gmsg"></span><button class="primary" id="ggo">Find recipes</button></div>
       </div>
     </div>
@@ -1047,7 +1062,8 @@ async function loadQobj() {
   if (QOBJ && QOBJ.qid === QID && QOBJ.index === idx) return;
   $("qattrMsg").innerHTML = `<span class="busy"></span>Grounding DINO is reading object #${idx} (regions + six attributes)…`;
   try {
-    const r = await api("/api/query_object", {qid: QID, object: idx});
+    const qid = QID, r = await api("/api/query_object", {qid, object: idx});
+    if (QID !== qid || activeObj() !== idx) return;            // another photo / object was chosen meanwhile: its own request fills card 1b
     QOBJ = {...r, qid: QID};
     QREG = {index: r.index, regions: r.regions, qid: QID}; QIMP = {};
     QEDIT = new Set();
@@ -1258,11 +1274,12 @@ $("cfam").addEventListener("change", soon);
   const _add = addColour;
   addColour = function (c) { _add(c); if (okHex(c.hex)) showRelated(c.hex); };
 }
-// ---------------------------------------------------------------- G: glaze recipes with Claire's model (colour + cone + surface)
+// ---------------------------------------------------------------- G: glaze recipes (smart search: text + photo + formula; colour match)
 // Both ways in (a colour, or a colour picked / a region chosen on the photo) make the same query: HEX + colour word + cone +
 // surface. One search returns both lists; the tabs only switch the view. Photos come straight from Glazy's server.
-let GOPT = null, GRES = null, GTAB = "weighted", GAUTO = true, GNT = null, GHT = null, GIMG = null;
-const GLBL = {latent: "latent", color: "colour", surface: "surface", cone: "cone"};
+let GOPT = null, GRES = null, GTAB = "weighted", GAUTO = true, GNT = null, GHT = null, GIMG = null, GENG = "smart", GUND = null, GREAD = "";
+const GLBL = {latent: "latent", color: "colour", surface: "surface", cone: "cone", text: "text", photo: "photo", formula: "formula",
+              colour: "colour", transparency: "transp.", atmosphere: "atmos."};
 async function gInit() {
   try { GOPT = await api("/api/glaze/options"); }
   catch (e) { $("gmsg").innerHTML = `<span class="no">${esc(e.message)}</span>`; $("ggo").disabled = true; return; }
@@ -1270,9 +1287,9 @@ async function gInit() {
   $("gcone_lo").innerHTML = `<option value="">any cone</option>` + GOPT.cones.map(opt).join("");
   $("gcone_hi").innerHTML = `<option value="">to (optional)</option>` + GOPT.cones.map(opt).join("");
   $("gsurface").innerHTML = `<option value="">any surface</option>` + GOPT.surfaces.map(opt).join("");
-  const w = GOPT.weights;
-  $("gwts").textContent = `Score: latent ${w.latent.toFixed(2)} · CIEDE2000 colour ${w.color.toFixed(2)} · surface ${w.surface.toFixed(2)} · cone ${w.cone.toFixed(2)}`;
-  $("gmeta").textContent = `${GOPT.recipes.toLocaleString()} recipes · model ${GOPT.model_version} · cone scoring ${GOPT.cone_scoring === "orton" ? "Orton (04 ≠ 4)" : "as in the notebook"}`;
+  if (!GOPT.smart) { GENG = "colour"; const b = document.querySelector('#gengine [data-e="smart"]'); b.disabled = true; b.title = GOPT.smart_error || "not installed"; }
+  gEngine(GENG);
+  $("gmeta").textContent = `${(GOPT.smart ? GOPT.smart.recipes : GOPT.recipes).toLocaleString()} recipes · smart ${GOPT.smart ? GOPT.smart.model_version : "-"} · colour match ${GOPT.model_version} · cone scoring ${GOPT.cone_scoring === "orton" ? "Orton (04 ≠ 4)" : "as in the notebook"}`;
   gNames("");
   const h = new URLSearchParams(location.hash.slice(1));            // #glaze=3054A5&cone=6&surface=Glossy&tab=diverse opens with that search
   if (h.get("glaze")) {
@@ -1281,6 +1298,42 @@ async function gInit() {
     gSetHex(h.get("glaze"), {src: "the page link"});
     gSearch();
   } else gSetHex("#3054A5", {src: "an example (cobalt blue)"});
+}
+function gEngine(e) {
+  GENG = e;
+  [...$("gengine").children].forEach(b => b.classList.toggle("on", b.dataset.e === e));
+  $("guse").hidden = e !== "smart";
+  const w = e === "smart" && GOPT.smart ? GOPT.smart.weights : GOPT.weights;
+  $("gwts").textContent = e === "smart"
+    ? `Smart search: text ${w.text} · photo ${w.photo} · formula ${w.formula} · colour ${w.colour} · cone ${w.cone} · surface ${w.surface} (only the parts you give count, renormalised)`
+    : `Colour match: latent ${w.latent.toFixed(2)} · CIEDE2000 colour ${w.color.toFixed(2)} · surface ${w.surface.toFixed(2)} · cone ${w.cone.toFixed(2)}`;
+}
+async function gRead() {
+  const t = $("gtext").value.trim();
+  if (!t) { GUND = null; GREAD = ""; $("gund").innerHTML = ""; return null; }
+  try { GUND = await api("/api/glaze/understand", {text: t}); GREAD = t; } catch (e) { $("gund").innerHTML = `<span class="no">${esc(e.message)}</span>`; return null; }
+  const u = GUND, chip = (k, v, ev, cls = "") => `<span class="gu ${cls}"><i>${k}</i> <b>${v}</b>${ev ? ` <i>← "${esc(ev)}"</i>` : ""}</span>`;
+  let h = "";
+  if (u.colour) h += chip("colour", `<span class="sw" style="background:${esc(u.colour.hex)}"></span> ${esc(u.colour.words)} ${esc(u.colour.hex)}${u.colour.model_word ? " → " + esc(u.colour.model_word) : ""}`, "");
+  if (u.cone) h += chip("cone", esc(u.cone.value), u.cone.evidence);
+  for (const k of ["surface", "transparency"]) if (u[k]) h += chip(k, esc(u[k].value), u[k].evidence);
+  for (const a of u.atmospheres) h += chip("atmosphere", esc(a.value), a.evidence);
+  for (const a of u.effects) h += chip("effect", esc(a.value), a.evidence);
+  for (const c of u.colourants) h += chip("colourant", `${esc(c.name)} ${c.percent} %`, "");
+  if (Object.keys(u.oxides || {}).length) h += chip("formula", Object.entries(u.oxides).map(([k, v]) => `${esc(k)} ${v}`).join(" · "), "");
+  if (u.corrections.length) h += `<span class="gu fix"><i>typos fixed:</i> ${u.corrections.map(([a, b]) => `${esc(a)}→${esc(b)}`).join(", ")}</span>`;
+  if (u.unused.length) h += `<span class="gu fix"><i>other words (read by the text model):</i> ${esc(u.unused.join(", "))}</span>`;
+  const said = {surface: !!u.surface, transparency: !!u.transparency, atmosphere: u.atmospheres.length > 0, family: !!u.colour};
+  for (const [f, top] of Object.entries(u.inferred || {})) {
+    if (f === "family" || said[f] || !top.length || top[0][1] < 0.45) continue;      // colour family: not better than chance on held-out text
+    h += `<span class="gu inf" data-gf="${esc(f)}" data-gv="${esc(top[0][0])}" title="implied by the words (trained on Glazy descriptions); click to use it">
+      <i>suggested ${esc(f)}:</i> ${esc(top[0][0])} ${Math.round(100 * top[0][1])} %</span>`;
+  }
+  $("gund").innerHTML = h || `<span class="small">no keyword or value found - the text model still reads the words</span>`;
+  if (u.colour) { GAUTO = true; gSetHex(u.colour.hex, {name: u.colour.model_word, src: `the text "${u.colour.words}"`}); }
+  if (u.cone) { const [lo, hi] = u.cone.value.split(" - "); $("gcone_lo").value = lo; $("gcone_hi").value = hi || ""; }
+  if (u.surface) $("gsurface").value = u.surface.value;
+  return u;
 }
 function gHex(h) {
   h = String(h || "").trim().toUpperCase(); if (!h.startsWith("#")) h = "#" + h;
@@ -1327,10 +1380,14 @@ function gMode(m) {
   $("gphoto").innerHTML = !QID ? "No photo yet - drop one in card 1." : `Photo ${esc(QID)} · ${OBJS.length} object(s) · active object #${activeObj() ?? "-"}`;
 }
 function gUse(hex, src) {             // a colour from the photo (picker or colour region) -> card G
-  gMode("image"); GAUTO = true; gSetHex(hex, {src});
+  gMode("image"); GAUTO = true; gSetHex(hex, {src}); $("guseimg").checked = true; $("gusecol").checked = true;
   $("gcard").scrollIntoView({behavior: "smooth", block: "start"});
 }
 async function gSearch() {
+  if (GENG === "smart" && $("gusetext").checked) {           // read new text first: it can set the colour, cone and surface below
+    const t = $("gtext").value.trim();
+    if (t && t !== GREAD) await gRead();
+  }
   const hex = gHex($("ghex").value);
   if (!hex) { $("ghexmsg").innerHTML = `<span class="no">HEX must look like #3054A5</span>`; return; }
   const lo = $("gcone_lo").value, hi = $("gcone_hi").value;
@@ -1339,9 +1396,17 @@ async function gSearch() {
   $("ggo").disabled = true; $("gmsg").innerHTML = `<span class="busy"></span>scoring ${GOPT ? GOPT.recipes.toLocaleString() : ""} recipes…`;
   const t0 = performance.now();
   try {
-    GRES = await api("/api/glaze/search", body);
+    if (GENG === "smart") {
+      const text = $("gusetext").checked ? $("gtext").value.trim() : "";
+      const u = text ? GUND : null, ox = oxides();
+      const photo = $("guseimg").checked && QID && activeObj() != null;
+      Object.assign(body, {text, hex: $("gusecol").checked ? hex : "", transparency: u && u.transparency ? u.transparency.value : "",
+        atmospheres: u ? u.atmospheres.map(a => a.value) : [], use_photo: !!photo, qid: photo ? QID : null, object: photo ? activeObj() : null,
+        oxides: $("guseform").checked && Object.keys(ox).length >= 3 ? ox : null, oxide_unit: UNIT});
+      GRES = await api("/api/glaze/smart_search", body); GRES.engine = "smart";
+    } else { GRES = await api("/api/glaze/search", body); GRES.engine = "colour"; }
     $("gmsg").textContent = `search ${GRES.timings.retrieval_ms} ms in the model · ${Math.round(performance.now() - t0)} ms with the page`;
-    if (GAUTO) $("gcname").value = GRES.query.color_name;
+    if (GAUTO && GRES.query.color_name) $("gcname").value = GRES.query.color_name;
     gRender();
   } catch (e) { $("gmsg").innerHTML = `<span class="no">${esc(e.message)}</span>`; }
   $("ggo").disabled = false;
@@ -1352,10 +1417,15 @@ function gRender() {
   const lst = GTAB === "diverse" ? GRES.diverse_results : GRES.weighted_results, q = GRES.query;
   [...$("gtabs").children].forEach(b => { b.classList.toggle("on", b.dataset.t === GTAB); b.setAttribute("aria-selected", b.dataset.t === GTAB); });
   $("gtabnote").innerHTML = GTAB === "diverse"
-    ? `The same scores as Best matches, but at most <b>${GRES.max_per_cluster}</b> recipes per K-Means chemistry cluster: different families of formulations for a similar result. Different chemistry is not safer or better.`
+    ? `The same scores as Best matches, but at most <b>${GRES.max_per_cluster}</b> recipes per K-Means ${GRES.engine === "smart" ? "family of the joint model" : "chemistry cluster"}: different families of formulations for a similar result. Different chemistry is not safer or better.`
     : `The highest weighted scores over all ${GRES.searched.toLocaleString()} recipes.`;
-  $("gquery").innerHTML = `<span class="sw" style="background:${esc(q.hex)}"></span> <b>${esc(q.hex)}</b> · cone ${esc(q.cone || "any")} · ${esc(q.surface || "any surface")} · the model reads <code>${esc(GRES.model_text)}</code>` +
-    `${GRES.cone_scoring === "orton" ? "" : " · cone scoring as in the notebook (04 = 4)"}` + GRES.warnings.map(w => `<div class="no">⚠ ${esc(w)}</div>`).join("");
+  const sw = q.hex ? `<span class="sw" style="background:${esc(q.hex)}"></span> <b>${esc(q.hex)}</b> · ` : "";
+  $("gquery").innerHTML = (GRES.engine === "smart"
+    ? `${sw}cone ${esc(q.cone || "any")} · ${esc(q.surface || "any surface")}${q.transparency ? " · " + esc(q.transparency) : ""}${(q.atmospheres || []).length ? " · " + esc(q.atmospheres.join(", ")) : ""}` +
+      `${q.photo_object ? " · photo object " + esc(q.photo_object) : ""}${q.oxides ? " · formula " + Object.keys(q.oxides).length + " oxides" : ""}${q.text ? ` · text <code>${esc(q.text)}</code>` : ""}` +
+      `<br>parts of the score: ${Object.entries(GRES.parts).map(([k, v]) => `${GLBL[k] || k} ${v.toFixed(2)}`).join(" · ")}`
+    : `${sw}cone ${esc(q.cone || "any")} · ${esc(q.surface || "any surface")} · the model reads <code>${esc(GRES.model_text)}</code>` +
+      `${GRES.cone_scoring === "orton" ? "" : " · cone scoring as in the notebook (04 = 4)"}`) + GRES.warnings.map(w => `<div class="no">⚠ ${esc(w)}</div>`).join("");
   if (!lst.length) { $("ggrid").innerHTML = `<div class="empty">No recipes found.</div>`; $("gimgmsg").textContent = ""; return; }
   GIMG = {id: (GIMG ? GIMG.id : 0) + 1, t0: performance.now(), n: lst.filter(x => x.thumb_url || x.image_url).length, ok: 0, bad: 0};
   $("gimgmsg").textContent = GIMG.n ? `photos: loading from Glazy (lazy - the ones below the window load when you scroll)` : "";
@@ -1364,8 +1434,9 @@ function gRender() {
 function gCard(x) {
   const c = x.score_components, w = GRES.weights, ct = x.contributions, src = x.thumb_url || x.image_url;
   const hx = /^#[0-9A-F]{6}$/i.test(x.hex || "") ? x.hex : null, name = x.recipe_name || `Glazy recipe #${x.recipe_id}`;
-  const val = {latent: c.latent_score, color: c.color_score, surface: c.surface_match, cone: c.cone_match};
-  const bars = ["latent", "color", "surface", "cone"].map(k => `<span title="weight ${w[k].toFixed(2)} × ${val[k] == null ? "no data (0)" : val[k].toFixed(2)}">${GLBL[k]}</span>
+  const sm = GRES.engine === "smart", keys = sm ? Object.keys(ct) : ["latent", "color", "surface", "cone"], wt = k => sm ? GRES.parts[k] : w[k];
+  const val = sm ? c : {latent: c.latent_score, color: c.color_score, surface: c.surface_match, cone: c.cone_match};
+  const bars = keys.map(k => `<span title="weight ${wt(k).toFixed(2)} × ${val[k] == null ? "no data (0)" : val[k].toFixed(2)}">${GLBL[k] || k}</span>
     <span class="bar"><i style="width:${(100 * (val[k] || 0)).toFixed(0)}%"></i></span><span>${ct[k].toFixed(2)}</span>`).join("");
   const ing = (x.ingredients || []).map(i => `${i.addition ? "+ " : ""}${esc(i.name || "?")} ${i.percent ?? ""}`).join(" · ");
   return `<div class="rc"><div class="im"><span class="gph">${src ? "loading photo…" : "no photo"}</span>${src ? `<a href="${esc(x.image_url || src)}" target="_blank" rel="noopener" title="open the full-size photo">
@@ -1374,7 +1445,7 @@ function gCard(x) {
   <div><a href="${esc(x.recipe_url)}" target="_blank" rel="noopener">View on Glazy ↗</a> <span class="small">#${x.recipe_id}</span></div>
   <div class="tags">cone ${esc(x.cone || "?")} · ${esc(x.surface || "surface ?")}${x.transparency ? " · " + esc(x.transparency) : ""}</div>
   <div>${hx ? `<span class="sw" style="background:${hx}"></span> ${hx}` : "no recipe colour"} ${esc(x.color_name || "")}${c.delta_e_2000 != null ? ` · ΔE00 ${c.delta_e_2000.toFixed(1)}` : ""}</div>
-  <div class="small">score <b>${x.similarity_score.toFixed(3)}</b> · K-Means cluster ${x.cluster_id}</div>
+  <div class="small">score <b>${x.similarity_score.toFixed(3)}</b> · ${sm ? "family" : "K-Means cluster"} ${x.cluster_id}</div>
   <div class="simt">${bars}</div>
   ${ing ? `<details class="ging"><summary>Ingredients (${x.ingredients.length})</summary><div class="small">${ing}</div></details>` : `<div class="small">ingredients: not in the 7k CSV</div>`}</div></div>`;
 }
@@ -1402,8 +1473,21 @@ $("gcname").addEventListener("input", () => {
   if (GAUTO) gSetHex($("ghex").value);
 });
 $("ggo").addEventListener("click", gSearch);
+$("gread").addEventListener("click", gRead);
+$("gengine").addEventListener("click", e => { const b = e.target.closest("button"); if (b && !b.disabled) gEngine(b.dataset.e); });
+$("gund").addEventListener("click", e => {                 // a suggested tag: use it
+  const s = e.target.closest("[data-gf]"); if (!s || !GUND) return;
+  const f = s.dataset.gf, v = s.dataset.gv, cap = v.charAt(0).toUpperCase() + v.slice(1);
+  if (f === "surface") { const o = [...$("gsurface").options].find(x => x.value.toLowerCase() === v.toLowerCase()); if (o) $("gsurface").value = o.value; }
+  else if (f === "transparency") GUND.transparency = {value: cap, evidence: "suggested"};
+  else if (f === "atmosphere") GUND.atmospheres.push({value: cap, evidence: "suggested"});
+  else return;
+  s.classList.remove("inf"); s.innerHTML = `<i>${esc(f)}:</i> <b>${esc(cap)}</b> <i>(suggestion used)</i>`;
+});
 $("gcard").addEventListener("keydown", e => {              // Enter here searches recipes, not the object search below
-  if (e.key === "Enter" && e.target.tagName !== "BUTTON" && e.target.tagName !== "SUMMARY") { e.preventDefault(); e.stopPropagation(); gSearch(); }
+  if (e.key === "Enter" && !(e.target.tagName === "TEXTAREA" && e.shiftKey) && e.target.tagName !== "BUTTON" && e.target.tagName !== "SUMMARY") {
+    e.preventDefault(); e.stopPropagation(); gSearch();
+  }
 });
 $("gtabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { GTAB = b.dataset.t; gRender(); } });
 $("pkglaze").addEventListener("click", () => {
@@ -1445,11 +1529,26 @@ const HELP = {
     Clicking outside every object still gives a colour, with a warning.</p>`,
   glaze: () => {
     const w = (GOPT && GOPT.weights) || {latent: 0.4, color: 0.4, surface: 0.1, cone: 0.1}, mpc = GOPT ? GOPT.max_per_cluster : 2;
-    return `<h3 id="mdlt">Glaze recipes (Claire's model)</h3>
-    <p>You give one colour, a firing cone and a surface. The model scores <b>every</b> recipe of its catalog${GOPT ? ` (${GOPT.recipes.toLocaleString()})` : ""} and shows the closest, with the
-    recipe's photo and a link to its page on Glazy.</p>
+    const sw = (GOPT && GOPT.smart && GOPT.smart.weights) || {}, ev = (GOPT && GOPT.smart && GOPT.smart.eval) || {};
+    const r10 = t => ev[t] ? `${(100 * ev[t]["R@10"]).toFixed(0)} %` : "-";
+    return `<h3 id="mdlt">Glaze recipes</h3>
+    <p>Two ways to search. <b>Smart search</b> (default) takes any mix of free text, a colour, a photo object and a formula. <b>Colour match</b> takes one colour,
+    a cone and a surface. Both score <b>every</b> recipe and show the closest, with the recipe's photo and a link to its page on Glazy.</p>
+    <h4>Describe it: free text → keywords and values</h4>
+    <p><b>Read it</b> finds the colour (colour words, light / dark, -ish → HEX), the Orton cone (cone 6, ^6, c6, 04, mid fire), surface, transparency, atmosphere,
+    glaze effects, colourant amounts (2 % red iron oxide) and an oxide analysis. Typos are matched to the nearest keyword (cobolt → cobalt). Dashed chips are
+    <i>suggestions</i>: tags the words imply, from a model trained on the recipes' own descriptions; click one to use it.</p>
+    <h4>Smart search (joint model)</h4>
+    <table><tr><th>Part</th><th>Weight</th><th>What is compared</th></tr>
+    <tr><td><b>Text</b></td><td>${sw.text ?? ""}</td><td>your words (MiniLM → text head) against each recipe in one space shared with photos and formulas (held-out test: the right recipe in the top 10 for ${r10("noisy text -> recipe")} of noisy sentences)</td></tr>
+    <tr><td><b>Photo</b></td><td>${sw.photo ?? ""}</td><td>the selected object of card 1 (DINOv2 → photo head) (photo → recipe top 10: ${r10("photo -> recipe")})</td></tr>
+    <tr><td><b>Formula</b></td><td>${sw.formula ?? ""}</td><td>the oxides of card 3, or written in the text (26 oxides → formula head) (formula → recipe top 10: ${r10("formula -> recipe")})</td></tr>
+    <tr><td><b>Colour</b></td><td>${sw.colour ?? ""}</td><td>CIEDE2000 to the closest of the recipe's photo colours (two-colour tiles count): exp(-ΔE / 20)</td></tr>
+    <tr><td><b>Cone · surface · transparency · atmosphere</b></td><td>${sw.cone ?? ""} · ${sw.surface ?? ""} · ${sw.transparency ?? ""} · ${sw.atmosphere ?? ""}</td><td>1 when they match what you gave (Orton cone ranges overlap)</td></tr></table>
+    <p>Only the parts you give count; their weights are scaled to add up to 1.</p>
+    <h4>Colour match (text-chemistry model)</h4>
     <table><tr><th>Part of the score</th><th>Weight</th><th>What is compared</th></tr>
-    <tr><td><b>Latent</b></td><td>${w.latent.toFixed(2)}</td><td>your words <i>"color: …, Cone …, surface"</i> (MiniLM + Claire's text head) against each recipe's <b>chemistry</b>
+    <tr><td><b>Latent</b></td><td>${w.latent.toFixed(2)}</td><td>your words <i>"color: …, Cone …, surface"</i> (MiniLM + text head) against each recipe's <b>chemistry</b>
       (oxides → PCA → chemistry head), in a shared space trained so that a recipe's text and its chemistry lie close together</td></tr>
     <tr><td><b>Colour</b></td><td>${w.color.toFixed(2)}</td><td>CIEDE2000 between your HEX and the recipe's colour: exp(-ΔE / 20), 1 = the same colour</td></tr>
     <tr><td><b>Surface</b></td><td>${w.surface.toFixed(2)}</td><td>1 when the recipe has exactly your surface (Glossy is not Semi-glossy)</td></tr>
@@ -1457,11 +1556,12 @@ const HELP = {
     <p>"Any" cone or surface: that part gives 0 to every recipe, so it does not change the order. A recipe without that information also gets 0 for it.</p>
     <h4>Best matches and Explore formulations</h4>
     <p>Both lists come from the <b>same</b> scores. <b>Best matches</b> is the top of the ranking. <b>Explore formulations</b> walks the same ranking but takes at most
-    ${mpc} recipes from each K-Means chemistry cluster${GOPT ? ` (${GOPT.clusters} clusters of the oxide PCA)` : ""}, so you see recipes built in different ways.
-    Different chemistry does not mean safer or better - check every recipe before mixing it.</p>
+    ${mpc} recipes from each K-Means family (colour match: ${GOPT ? GOPT.clusters : ""} clusters of the oxide PCA; smart search: ${GOPT && GOPT.smart ? GOPT.smart.families : ""} families of the joint space),
+    so you see recipes built in different ways. Different chemistry does not mean safer or better - check every recipe before mixing it.</p>
     <h4>Cone 04 is not cone 4</h4>
-    <p>Orton cones with a leading zero are low fire: 04 is earthenware, about 100 °C below the mid-fire cone 4. Claire's catalog lost those zeros (04 → 4), so the cone part
-    of the score uses the original cone text of the 7k recipes and reads 04 as low fire. The latent part was trained on the text without the zeros; only a retrained model fixes that part.</p>
+    <p>Orton cones with a leading zero are low fire: 04 is earthenware, about 100 °C below the mid-fire cone 4. Both searches keep the zero. The colour-match catalog
+    lost those zeros (04 → 4), so its cone part uses the original cone text of the 7k recipes; its latent part was trained on the text without the zeros.
+    The smart search model was trained on the cleaned tags, which keep them.</p>
     <h4>Colour word</h4>
     <p>The model was trained on ${GOPT ? GOPT.color_names.length : ""} colour words (cobalt blue, warm gray, …). The word is chosen from your HEX automatically (the nearest by CIEDE2000);
     type your own and the model reads it as you wrote it.</p>

@@ -1,5 +1,5 @@
 {
- "_about": "Claire's notebook (glaze_kmeans_color_weighted_full_catalog.ipynb, retrieval cells unmodified) run on the artifacts of test_similarity (2).zip by scripts/build_glaze_golden.py. Regenerate when Claire sends a new model.",
+ "_about": "The original notebook (glaze_kmeans_color_weighted_full_catalog.ipynb, retrieval cells unmodified) run on the artifacts of test_similarity (2).zip by scripts/build_glaze_golden.py. Regenerate when a new model arrives.",
  "model_version": "70cd01c0c673",
  "top_k": 10,
  "max_per_cluster": 2,

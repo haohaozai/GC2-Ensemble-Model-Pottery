@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-label="Glaze Search usage mind map with the smart search upgrade">
+<title>Glaze Search - how to use (card G)</title>
+<rect width="1600" height="900" fill="#ffffff"/>
+<text x="800.0" y="44" font-size="26" font-weight="800" fill="#1d1d1b" text-anchor="middle">Glaze Search · how to use card G (with the smart-search upgrade)</text>
+<text x="800.0" y="70" font-size="14.5" font-weight="400" fill="#5f5e5a" text-anchor="middle">Follow the branches 1 → 6 · NEW = added by the upgrade</text>
+<path d="M600,470 C540.0,470 540.0,121 480,121" fill="none" stroke="#475569" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M600,470 C540.0,470 540.0,325 480,325" fill="none" stroke="#2563EB" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M600,470 C540.0,470 540.0,591 480,591" fill="none" stroke="#7C3AED" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M1000,470 C1060.0,470 1060.0,121 1120,121" fill="none" stroke="#9A4A26" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M1000,470 C1060.0,470 1060.0,355 1120,355" fill="none" stroke="#0D9488" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M1000,470 C1060.0,470 1060.0,591 1120,591" fill="none" stroke="#DB2777" stroke-width="3.5" stroke-linecap="round"/>
+<rect x="40" y="96" width="440" height="160" rx="14" fill="#ffffff" stroke="#475569" stroke-width="2.5"/>
+<path d="M40,110 a14,14 0 0 1 14,-14 h412 a14,14 0 0 1 14,14 v36 h-440 z" fill="#475569"/>
+<text x="58" y="128" font-size="17" font-weight="800" fill="#ffffff" text-anchor="start">1 · START</text>
+<circle cx="62" cy="163" r="4.5" fill="#475569"/>
+<text x="76" y="168" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">RUN_GLAZE_SEARCH.bat → 127.0.0.1:8770</text>
+<circle cx="62" cy="195" r="4.5" fill="#475569"/>
+<text x="76" y="200" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">INSTALL_GLAZE_MODEL.bat once (both models)</text>
+<rect x="428" y="184" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="448" y="197.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<circle cx="62" cy="227" r="4.5" fill="#475569"/>
+<text x="76" y="232" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">card G is below card 1b</text>
+<rect x="40" y="300" width="440" height="224" rx="14" fill="#ffffff" stroke="#2563EB" stroke-width="2.5"/>
+<path d="M40,314 a14,14 0 0 1 14,-14 h412 a14,14 0 0 1 14,14 v36 h-440 z" fill="#2563EB"/>
+<text x="58" y="332" font-size="17" font-weight="800" fill="#ffffff" text-anchor="start">2 · GIVE WHAT YOU HAVE</text>
+<circle cx="62" cy="367" r="4.5" fill="#2563EB"/>
+<text x="76" y="372" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">Describe it: free text, typos are fine</text>
+<rect x="428" y="356" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="448" y="369.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<circle cx="62" cy="399" r="4.5" fill="#2563EB"/>
+<text x="76" y="404" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">Photo → SAM object → pick or colour region</text>
+<circle cx="62" cy="431" r="4.5" fill="#2563EB"/>
+<text x="76" y="436" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">Colour word · HEX · colour picker</text>
+<circle cx="62" cy="463" r="4.5" fill="#2563EB"/>
+<text x="76" y="468" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">Formula: card 3 or written in the text</text>
+<rect x="428" y="452" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="448" y="465.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<circle cx="62" cy="495" r="4.5" fill="#2563EB"/>
+<text x="76" y="500" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">Cone (Orton, from - to) · surface</text>
+<rect x="40" y="566" width="440" height="256" rx="14" fill="#ffffff" stroke="#7C3AED" stroke-width="2.5"/>
+<path d="M40,580 a14,14 0 0 1 14,-14 h412 a14,14 0 0 1 14,14 v36 h-440 z" fill="#7C3AED"/>
+<text x="58" y="598" font-size="17" font-weight="800" fill="#ffffff" text-anchor="start">3 · READ IT (text → values)</text>
+<circle cx="62" cy="633" r="4.5" fill="#7C3AED"/>
+<text x="76" y="638" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">colour words, light / dark, -ish → HEX</text>
+<rect x="428" y="622" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="448" y="635.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<circle cx="62" cy="665" r="4.5" fill="#7C3AED"/>
+<text x="76" y="670" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">cone 6 · ^6 · c6 · 04 · mid fire → Orton</text>
+<rect x="428" y="654" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="448" y="667.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<circle cx="62" cy="697" r="4.5" fill="#7C3AED"/>
+<text x="76" y="702" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">surface · transparency · atmosphere</text>
+<rect x="428" y="686" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="448" y="699.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<circle cx="62" cy="729" r="4.5" fill="#7C3AED"/>
+<text x="76" y="734" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">effects · colourant % · oxide analysis</text>
+<rect x="428" y="718" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="448" y="731.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<circle cx="62" cy="761" r="4.5" fill="#7C3AED"/>
+<text x="76" y="766" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">typos fixed: cobolt → cobalt</text>
+<rect x="428" y="750" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="448" y="763.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<circle cx="62" cy="793" r="4.5" fill="#7C3AED"/>
+<text x="76" y="798" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">suggestions learnt from Glazy descriptions</text>
+<rect x="428" y="782" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="448" y="795.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<rect x="1120" y="96" width="440" height="192" rx="14" fill="#ffffff" stroke="#9A4A26" stroke-width="2.5"/>
+<path d="M1120,110 a14,14 0 0 1 14,-14 h412 a14,14 0 0 1 14,14 v36 h-440 z" fill="#9A4A26"/>
+<text x="1138" y="128" font-size="17" font-weight="800" fill="#ffffff" text-anchor="start">4 · CHOOSE THE ENGINE</text>
+<circle cx="1142" cy="163" r="4.5" fill="#9A4A26"/>
+<text x="1156" y="168" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">Smart search: one joint model</text>
+<rect x="1508" y="152" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="1528" y="165.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<circle cx="1142" cy="195" r="4.5" fill="#9A4A26"/>
+<text x="1156" y="200" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">text + photo + formula + colour + cone + surface</text>
+<rect x="1508" y="184" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="1528" y="197.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<circle cx="1142" cy="227" r="4.5" fill="#9A4A26"/>
+<text x="1156" y="232" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">Colour match: text-chemistry model</text>
+<circle cx="1142" cy="259" r="4.5" fill="#9A4A26"/>
+<text x="1156" y="264" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">colour + cone + surface (40 / 40 / 10 / 10)</text>
+<rect x="1120" y="330" width="440" height="192" rx="14" fill="#ffffff" stroke="#0D9488" stroke-width="2.5"/>
+<path d="M1120,344 a14,14 0 0 1 14,-14 h412 a14,14 0 0 1 14,14 v36 h-440 z" fill="#0D9488"/>
+<text x="1138" y="362" font-size="17" font-weight="800" fill="#ffffff" text-anchor="start">5 · SCORE EVERY RECIPE</text>
+<circle cx="1142" cy="397" r="4.5" fill="#0D9488"/>
+<text x="1156" y="402" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">only the parts you give count</text>
+<rect x="1508" y="386" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="1528" y="399.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<circle cx="1142" cy="429" r="4.5" fill="#0D9488"/>
+<text x="1156" y="434" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">their weights are rescaled to add up to 1</text>
+<rect x="1508" y="418" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="1528" y="431.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<circle cx="1142" cy="461" r="4.5" fill="#0D9488"/>
+<text x="1156" y="466" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">colour: CIEDE2000 to the recipe&#x27;s palette</text>
+<rect x="1508" y="450" width="40" height="19" rx="9.5" fill="#E11D48"/>
+<text x="1528" y="463.5" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle">NEW</text>
+<circle cx="1142" cy="493" r="4.5" fill="#0D9488"/>
+<text x="1156" y="498" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">Orton cone overlap: 04 ≠ 4</text>
+<rect x="1120" y="566" width="440" height="192" rx="14" fill="#ffffff" stroke="#DB2777" stroke-width="2.5"/>
+<path d="M1120,580 a14,14 0 0 1 14,-14 h412 a14,14 0 0 1 14,14 v36 h-440 z" fill="#DB2777"/>
+<text x="1138" y="598" font-size="17" font-weight="800" fill="#ffffff" text-anchor="start">6 · READ THE RESULTS</text>
+<circle cx="1142" cy="633" r="4.5" fill="#DB2777"/>
+<text x="1156" y="638" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">Best matches: top 10 by score</text>
+<circle cx="1142" cy="665" r="4.5" fill="#DB2777"/>
+<text x="1156" y="670" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">Explore formulations: ≤ 2 per family</text>
+<circle cx="1142" cy="697" r="4.5" fill="#DB2777"/>
+<text x="1156" y="702" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">Glazy photo · View on Glazy</text>
+<circle cx="1142" cy="729" r="4.5" fill="#DB2777"/>
+<text x="1156" y="734" font-size="14.5" font-weight="400" fill="#1d1d1b" text-anchor="start">score parts · ingredients</text>
+<ellipse cx="800" cy="470" rx="200" ry="92" fill="#1E2A4A"/>
+<text x="800" y="456" font-size="30" font-weight="800" fill="#ffffff" text-anchor="middle">GLAZE SEARCH</text>
+<text x="800" y="488" font-size="16" font-weight="400" fill="#d6dbe8" text-anchor="middle">card G · glaze recipes</text>
+<text x="800" y="512" font-size="14" font-weight="400" fill="#d6dbe8" text-anchor="middle">text · photo · formula · colour</text>
+<text x="800.0" y="876" font-size="12" font-weight="400" fill="#8a8984" text-anchor="middle">docs/glaze_search_usage_mindmap.svg · step-by-step guide: docs/manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf</text>
+</svg>

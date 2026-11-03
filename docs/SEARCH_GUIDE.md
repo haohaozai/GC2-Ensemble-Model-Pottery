@@ -23,12 +23,17 @@ searches stay fast). Everything works offline after `SETUP.bat`.
    each with its top-3 candidates; click the right one, **(i)** explains that value with example images
    (`reference_library`). Tick the attributes the results must share. **glaze** next to a colour region sends that
    colour to card G.
-3. **Card G · Glaze recipes** (Claire's model): one colour + firing cone + surface → the closest Glazy recipes.
-   *Search by colour*: a colour word, a HEX code or the colour picker. *Search by photo*: the colour picked on the photo
-   (median of 13 × 13 pixels inside the object, reflections and shadows left out) or a colour region of card 1b; correct
-   the HEX if the pick is off. Two tabs from one search: **Best matches** (0.40 latent + 0.40 CIEDE2000 colour + 0.10
-   surface + 0.10 cone) and **Explore formulations** (the same ranking, at most 2 recipes per K-Means chemistry cluster).
-   Each card shows the Glazy photo, the score parts and **View on Glazy**. Needs `INSTALL_GLAZE_MODEL.bat` once;
+3. **Card G · Glaze recipes**: your words, a colour, a photo object or a formula → the closest Glazy recipes.
+   **Describe it**: type freely (typos and shorthand like `^6`, `c10`, `ox` are fine) and press **Read it**: chips show
+   the colour (→ HEX), Orton cone (`04` ≠ `4`), surface, transparency, atmosphere, effects, colourant % and oxides it
+   understood, the typos it fixed and suggestions learnt from Glazy descriptions. *Search by colour*: a colour word, a HEX
+   code or the colour picker. *Search by photo*: the colour picked on the photo (median of 13 × 13 pixels inside the
+   object, reflections and shadows left out) or a colour region of card 1b; correct the HEX if the pick is off.
+   **Smart search** (one joint model: text + photo object + formula, plus colour, cone and surface; only the parts you
+   give count) or **Colour match** (colour + cone + surface: 0.40 latent + 0.40 CIEDE2000 + 0.10 surface + 0.10 cone).
+   Two tabs from one search: **Best matches** and **Explore formulations** (the same ranking, at most 2 recipes per
+   family). Each card shows the Glazy photo, the score parts and **View on Glazy**. Needs `INSTALL_GLAZE_MODEL.bat` once;
+   step by step with screenshots: [manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf](manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf);
    details: [glaze_integration_architecture.md](glaze_integration_architecture.md).
 4. **Card 2 · Text**: subtype, firing cone, surface, transparency, atmosphere, free notes.
 5. **Card 3 · Formula**: oxides (weight % or UMF), optional ingredients.
@@ -75,6 +80,6 @@ Hugging Face for a larger daily GPU allowance).
 | `ERROR: rebuilt embeddings differ …` / file not found in `work\` | data incomplete: `DOWNLOAD_DATA.bat`, then `CHECK_DATA.bat` |
 | model not found / tries to go online | run `SETUP.bat` again (models are missing) |
 | CUDA out of memory | close other GPU programs; or run on the CPU: `set CUDA_VISIBLE_DEVICES=-1` before `RUN_GLAZE_SEARCH.bat` |
-| card G: `the glaze recipe model is not available` | run `INSTALL_GLAZE_MODEL.bat` (drag Claire's ZIP onto it), then restart `RUN_GLAZE_SEARCH.bat` |
+| card G: `the glaze recipe model is not available` / `smart search is not available` | run `INSTALL_GLAZE_MODEL.bat` (drag the model ZIP onto it), then restart `RUN_GLAZE_SEARCH.bat` |
 | card G: no recipe names, cones without the leading 0 | `7k_matched_all_data.csv` not found: put it in `<CG2>\` or `<CG2>\new image data\csv 7k data\`, or set `CG2_7K_CSV_DIR` |
 | card G: grey "photo unavailable" boxes | the photos come from Glazy's server: needs internet (the search itself works offline) |

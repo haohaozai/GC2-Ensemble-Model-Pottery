@@ -1,10 +1,10 @@
-"""Rebuild the golden results of the glaze parity test from Claire's own notebook (after she sends a new model).
+"""Rebuild the golden results of the glaze parity test from the original notebook (after a new model arrives).
 
-Runs the retrieval cells of her notebook - the code cells up to the one defining retrieve_glazes, without the matplotlib
-gallery and refusing any cell that would start training (a top-level main() call) - on the artifacts of her ZIP, for the
-example queries of her notebook (query_args = dict(...)), and writes
+Runs the retrieval cells of the notebook - the code cells up to the one defining retrieve_glazes, without the matplotlib
+gallery and refusing any cell that would start training (a top-level main() call) - on the artifacts of the model ZIP, for the
+example queries of the notebook (query_args = dict(...)), and writes
 multimodal_experiments/tests/fixtures/glaze_notebook_golden.json. Then:  python -m unittest tests.test_glaze_retrieval
-This executes Claire's notebook code (her retrieval cells only): use it with a ZIP from the team, not from elsewhere.
+This executes the notebook's code (its retrieval cells only): use it with a ZIP from the team, not from elsewhere.
 usage: python scripts/build_glaze_golden.py "path\\to\\test_similarity.zip"
 """
 from __future__ import annotations
@@ -55,17 +55,17 @@ def main() -> int:
         cwd = os.getcwd()
         os.chdir(tmp)
         try:
-            ns: dict = {"__name__": "claire_notebook"}
+            ns: dict = {"__name__": "retrieval_notebook"}
             for i, src in enumerate(cells[:upto + 1]):
                 if re.search(r"^\s*main\(\)", src, re.M):
                     print(f"ERROR: code cell {i} calls main() (training) - not run")
                     return 1
                 if i == upto:
                     src = src.split(GALLERY)[0]
-                exec(compile(src, f"{nbs[0].name}:cell{i}", "exec"), ns)  # noqa: S102  (Claire's retrieval cells)
+                exec(compile(src, f"{nbs[0].name}:cell{i}", "exec"), ns)  # noqa: S102  (the notebook's retrieval cells)
             out = []
             for qs in queries:
-                q = eval(qs, {"dict": dict})  # noqa: S307  (a dict(...) literal of keyword constants from her notebook)
+                q = eval(qs, {"dict": dict})  # noqa: S307  (a dict(...) literal of keyword constants from the notebook)
                 q = {k: v for k, v in q.items() if k in ("color", "surface", "cone", "query_hex")}
                 best = ns["retrieve_glazes"](**q, top_k=args.top_k, diversify=False)
                 expl = ns["retrieve_glazes"](**q, top_k=args.top_k, diversify=True, max_per_cluster=args.max_per_cluster)
@@ -81,8 +81,8 @@ def main() -> int:
             if hasattr(ns.get("vectors"), "close"):            # the notebook keeps its .npz open (Windows cannot delete it)
                 ns["vectors"].close()
         ver = model_version(Path(tmp))
-    OUT.write_text(json.dumps({"_about": f"Claire's notebook ({nbs[0].name}, retrieval cells unmodified) run on the artifacts of "
-                                         f"{Path(args.zip).name} by scripts/build_glaze_golden.py. Regenerate when Claire sends a new model.",
+    OUT.write_text(json.dumps({"_about": f"The original notebook ({nbs[0].name}, retrieval cells unmodified) run on the artifacts of "
+                                         f"{Path(args.zip).name} by scripts/build_glaze_golden.py. Regenerate when a new model arrives.",
                                "model_version": ver, "top_k": args.top_k, "max_per_cluster": args.max_per_cluster, "queries": out}, indent=1),
                    encoding="utf-8")
     print(f"{len(out)} queries, model {ver} -> {OUT}")

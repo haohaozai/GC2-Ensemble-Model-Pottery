@@ -144,9 +144,9 @@ If a check displays `NO`, read its message and rerun `DOWNLOAD_DATA.bat` or `SET
 
 **Once all required checks pass, the installation is complete.**
 
-### STEP 4 — Install Claire's glaze recipe model (for card G of Glaze Search)
+### STEP 4 — Install the glaze recipe models (for card G of Glaze Search)
 
-Drag Claire's ZIP (`test_similarity.zip`) onto `INSTALL_GLAZE_MODEL.bat`, or run:
+Drag the model ZIP (`test_similarity.zip`) onto `INSTALL_GLAZE_MODEL.bat`, or run:
 
 ```cmd
 INSTALL_GLAZE_MODEL.bat "D:\path\to\test_similarity.zip"
@@ -154,7 +154,12 @@ INSTALL_GLAZE_MODEL.bat "D:\path\to\test_similarity.zip"
 
 Without a path it uses the newest `test_similarity*.zip` in the project folder or the folder above it.
 
-**What happens:** three model files (about 9 MB) are checked and copied to `multimodal_experiments\models\glaze_retrieval\` (not in git). If a check fails, the old model stays. When Claire sends a new model, run it again with the new ZIP.
+**What happens (about 2 minutes with an NVIDIA GPU):**
+
+1. **Colour match model:** three files (about 9 MB) are checked and copied to `multimodal_experiments\models\glaze_retrieval\`. If a check fails, the old model stays.
+2. **Smart search model:** the joint text + photo + formula model is trained on this PC from the downloaded data (STEP 2) and tested on held-out recipes. It goes to `multimodal_experiments\models\glaze_joint\`.
+
+Both folders are not in git. Run the BAT again when a new model ZIP arrives.
 
 Card G also reads `7k_matched_all_data.csv` and `7k_matched_ingredients.csv` (recipe names, original cone values, ingredients) from the folder above the project (`D:\NUS study\CG2`), from `new image data\csv 7k data\`, or from the folder in the `CG2_7K_CSV_DIR` setting.
 
@@ -212,7 +217,22 @@ http://127.0.0.1:8770
 - Adjust search priorities using sliders.
 - Optionally search with text and glaze formulas.
 - Evaluate results using Hit@K, Precision@K, Recall@K, and nDCG.
-- **Card G · Glaze recipes (Claire's model):** pick a colour (name, HEX, colour picker, or a colour picked on your photo), a firing cone and a surface, and get two lists of Glazy recipes: **Best matches** and **Explore formulations** (chemically different recipes). Each result shows the Glazy photo and a **View on Glazy** link. Needs STEP 4.
+- **Card G · Glaze recipes:** find Glazy recipes from your own words, a colour, a photo object or a glaze formula. Needs STEP 4. See [How to use card G](#how-to-use-card-g-glaze-recipes) below.
+
+#### How to use card G (glaze recipes)
+
+| Step | What you do | What happens |
+|---|---|---|
+| 1 | Card 1: drop or paste a photo (optional) | SAM 2.1 outlines every ceramic object |
+| 2 | Click the object you mean | It becomes the active object (yellow outline) |
+| 3 | **Pick colour (HEX)** → click the glaze → **Use for glaze search**, or press **glaze** next to a colour region in card 1b | The colour (median of 13 × 13 pixels inside the object, highlights and shadows left out) goes to card G; correct the HEX by hand if needed |
+| 4 | Card G · **Describe it**: type freely, e.g. `shinyy cobolt blu ^6 ox, kinda runny` → **Read it** | Keywords and values are read and shown as chips: colour → HEX, Orton cone (`04` ≠ `4`), surface, transparency, atmosphere, effects, colourant %, oxides; typos are fixed; suggestions come from Glazy descriptions |
+| 5 | Choose **Smart search** (text + colour + photo object + formula + cone + surface) or **Colour match** (colour + cone + surface), then **Find recipes** | Every recipe is scored, about 0.1 s |
+| 6 | Read **Best matches** and **Explore formulations** (≤ 2 per family) | Each card: Glazy photo, score parts, ingredients, **View on Glazy** |
+
+Step-by-step guide with screenshots: [CG2_Glaze_Search_Step_by_Step_Guide.pdf](docs/manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf) · process, models and parameters: [CG2_Glaze_Search_Process_Models_MindMap.pdf](docs/manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) · [usage mind map](docs/glaze_search_usage_mindmap.png).
+
+Held-out test results of the smart search model (recipes it never saw): a noisy sentence finds the right recipe in the top 10 for 74 % of the test recipes (pretrained text model alone: 62 %); a photo object for 45 %; a formula for 33 % (random: 1 %). Read values are right for 93 % (colour) to 100 % (atmosphere) of noisy sentences.
 
 **Important:** Keep the CMD window open while using either application. Closing it stops the corresponding local server.
 
@@ -338,7 +358,8 @@ Detailed instructions are available in the repository:
 
 - [Review Guide](docs/REVIEW_GUIDE.md) — Review interface, filters, keyboard shortcuts, Tile panel, and saving decisions.
 - [Glaze Search Guide](docs/SEARCH_GUIDE.md) — Search inputs, priority sliders, results, and evaluation.
-- [Glaze recipe search (card G)](docs/glaze_integration_architecture.md) — Claire's model in the app: architecture, API, cone handling, tests, and how to update the model ([mind map](docs/glaze_integration_mindmap.svg)).
+- [Glaze recipe search (card G)](docs/glaze_integration_architecture.md) — smart search and colour match: architecture, API, cone handling, tests, and how to update the models ([system diagram](docs/glaze_search_full_flow.png)).
+- [Step-by-step guide (PDF)](docs/manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf) and [process, models and parameters (PDF)](docs/manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) for card G.
 - [Data Download Guide](docs/DATA_DOWNLOAD.md) — Data archives, manual downloads, and dataset relationships.
 - [Manuals and Screenshots](docs/manuals) — Detailed PDF manuals, workflow diagrams, and attribute documentation.
 
@@ -353,7 +374,7 @@ These documents are optional references. You do not need to read them before fol
 - [ ] Run `SETUP.bat` and wait for completion.
 - [ ] Run `DOWNLOAD_DATA.bat` and wait for completion.
 - [ ] Run `CHECK_DATA.bat` and confirm all required checks pass.
-- [ ] Run `INSTALL_GLAZE_MODEL.bat` with Claire's ZIP (for card G).
+- [ ] Run `INSTALL_GLAZE_MODEL.bat` with the model ZIP (for card G).
 - [ ] Launch `OPEN_REVIEW_APP.bat` or `RUN_GLAZE_SEARCH.bat`.
 
 **Installation order: SETUP → DOWNLOAD DATA → CHECK DATA → LAUNCH APP.**
