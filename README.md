@@ -159,7 +159,7 @@ Without a path it uses the newest `test_similarity*.zip` in the project folder o
 1. **Colour match model:** three files (about 9 MB) are checked and copied to `multimodal_experiments\models\glaze_retrieval\`. If a check fails, the old model stays.
 2. **Smart search model:** the joint text + photo + formula model is trained on this PC from the downloaded data (STEP 2) and tested on held-out recipes. It goes to `multimodal_experiments\models\glaze_joint\`.
 
-Both folders are not in git. Run the BAT again when a new model ZIP arrives.
+Both folders are not in git. Run the BAT again when a new model ZIP arrives: a smart search model that is already trained is kept (its test numbers stay valid). To train it again: `.venv\Scripts\python.exe scripts\train_glaze_joint.py --retrain`.
 
 Card G also reads `7k_matched_all_data.csv` and `7k_matched_ingredients.csv` (recipe names, original cone values, ingredients) from the folder above the project (`D:\NUS study\CG2`), from `new image data\csv 7k data\`, or from the folder in the `CG2_7K_CSV_DIR` setting.
 
@@ -231,6 +231,8 @@ http://127.0.0.1:8770
 | 6 | Read **Best matches** and **Explore formulations** (≤ 2 per family) | Each card: Glazy photo, score parts, ingredients, **View on Glazy** |
 
 Step-by-step guide with screenshots: [CG2_Glaze_Search_Step_by_Step_Guide.pdf](docs/manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf) · process, models and parameters: [CG2_Glaze_Search_Process_Models_MindMap.pdf](docs/manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) · [usage mind map](docs/glaze_search_usage_mindmap.png).
+
+The whole pipeline, data → preprocessing → training → evaluation: [glaze_search_ml_pipeline.png](docs/glaze_search_ml_pipeline.png). No pretrained model is fine-tuned: MiniLM and DINOv2 stay frozen and three small heads are trained on top of them (InfoNCE); "Explore formulations" uses K-Means families (k-means++ initialisation) because density clustering (DBSCAN / HDBSCAN) found no useful groups.
 
 Held-out test results of the smart search model (recipes it never saw): a noisy sentence finds the right recipe in the top 10 for 74 % of the test recipes (pretrained text model alone: 62 %); a photo object for 45 %; a formula for 33 % (random: 1 %). Read values are right for 93 % (colour) to 100 % (atmosphere) of noisy sentences.
 

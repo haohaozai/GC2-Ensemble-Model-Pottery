@@ -278,13 +278,15 @@ def families(F_all: np.ndarray, train_rows: np.ndarray, seed: int = 0, log=print
     X = F_all[train_rows]
     smp = rng.choice(len(X), min(2000, len(X)), replace=False)
     diag = []
+    km_args = {"init": "k-means++", "n_init": 10, "algorithm": "lloyd", "random_state": seed}   # = scikit-learn's defaults, written out
     for k in (8, 10, 12, 15, 20):
-        km = KMeans(n_clusters=k, random_state=seed, n_init=10).fit(X)
+        km = KMeans(n_clusters=k, **km_args).fit(X)
         diag.append({"k": k, "silhouette": round(float(silhouette_score(X[smp], km.labels_[smp])), 4)})
     k = max(diag, key=lambda d: (d["silhouette"], -d["k"]))["k"]
-    km = KMeans(n_clusters=k, random_state=seed, n_init=10).fit(X)
+    km = KMeans(n_clusters=k, **km_args).fit(X)
     hd = HDBSCAN(min_cluster_size=15, algorithm="brute").fit(X)            # tree search is very slow in 256-d
-    info = {"kmeans_k": k, "kmeans_candidates": diag, "hdbscan_min_cluster_size": 15,
+    info = {"kmeans_k": k, "kmeans": "k-means++ initialisation, 10 restarts (best inertia), Lloyd iterations", "kmeans_candidates": diag,
+            "hdbscan_min_cluster_size": 15,
             "hdbscan_clusters": int(len(set(hd.labels_)) - (1 if -1 in hd.labels_ else 0)), "hdbscan_noise": round(float(np.mean(hd.labels_ == -1)), 4)}
     log(f"[joint] families: K-Means k={k} (silhouette {max(d['silhouette'] for d in diag)}); HDBSCAN for comparison: "
         f"{info['hdbscan_clusters']} clusters, {info['hdbscan_noise']:.0%} noise")

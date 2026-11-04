@@ -6,7 +6,8 @@ with an NVIDIA GPU. Writes multimodal_experiments\\models\\glaze_joint\\ (not in
   heads.pt          the three trained projection heads (weights_only)      gallery.npz   recipe embeddings, families
   text_tags.joblib  free text -> implied tags (logistic regression)        meta.json     settings + every test result
 Every number in meta.json is measured on the TEST split, which training and model selection never see.
-usage: python scripts/train_glaze_joint.py [--device cuda|cpu] [--seed 1]
+A trained model is kept (INSTALL_GLAZE_MODEL.bat can be run again safely); --retrain trains a new one.
+usage: python scripts/train_glaze_joint.py [--device cuda|cpu] [--seed 1] [--retrain]
 """
 from __future__ import annotations
 
@@ -130,12 +131,18 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     ap.add_argument("--seed", type=int, default=1)
+    ap.add_argument("--retrain", action="store_true", help="train again although a trained model exists (its test numbers change slightly)")
     args = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     log = lambda m: print(m, flush=True)  # noqa: E731
     t0 = time.time()
     cfg = {**HYPER, "seed": args.seed}
     out = J.CODE / J.read_config()["model_dir"]
+    if (out / "meta.json").is_file() and (out / "heads.pt").is_file() and not args.retrain:
+        m = json.loads((out / "meta.json").read_text(encoding="utf-8"))
+        log(f"[joint] already trained: model {m.get('model_version')} ({m.get('created')}) in {out} - kept. "
+            "Train again with: .venv\\Scripts\\python.exe scripts\\train_glaze_joint.py --retrain")
+        return 0
     out.mkdir(parents=True, exist_ok=True)
     enc = J.TextEncoder(args.device)
     D = J.build_data(enc, cfg["n_noisy"], args.seed, log)

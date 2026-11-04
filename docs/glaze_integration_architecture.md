@@ -15,6 +15,7 @@ search, cards 1 – 4, session evaluation) is unchanged.
 | [manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf](manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf) | users: every step with screenshots, noisy text → values |
 | [manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf](manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) | the process, the model and parameters of each step, test results |
 | [glaze_search_usage_mindmap.png](glaze_search_usage_mindmap.png) · [glaze_search_full_flow.png](glaze_search_full_flow.png) | usage mind map · the three flows of the whole system |
+| [glaze_search_ml_pipeline.png](glaze_search_ml_pipeline.png) | data → preprocessing → training → evaluation, as one hierarchy |
 | [glaze_integration_mindmap.svg](glaze_integration_mindmap.svg) | the seven stages of the first integration (colour match) |
 
 ![How to use card G](glaze_search_usage_mindmap.png)
@@ -85,7 +86,8 @@ reduction 81 %, translucent 70 %); shown when p ≥ 0.45 and the value was not w
 | loss | symmetric InfoNCE, temperature 0.07, for text–photo, text–formula, photo–formula; recipes of the same composition group are not negatives |
 | optimiser | AdamW, learning rate 1e-3, weight decay 1e-4, batch 256, early stop (patience 12) on the validation split: best epoch 58 of 70 |
 | data | 7,063 recipes (7,052 with photo objects, 7,049 with a formula, 4,766 with a description); split 4,945 / 1,059 / 1,059 by composition group |
-| families | K-Means on the fused 256-d embeddings, k by silhouette → 10. HDBSCAN found only 2 clusters with 35 % noise (no clear density groups), so it is not used |
+| families | K-Means (k-means++ initialisation, 10 restarts, Lloyd iterations) on the fused 256-d embeddings, k from 8 / 10 / 12 / 15 / 20 by silhouette → 10 (silhouette 0.10: a practical partition for Explore, not natural groups). HDBSCAN found only 2 clusters with 35 % noise and DBSCAN on the object-search embeddings put 98.7 % of recipes in one cluster, so density clustering is not used |
+| fine-tuning | none of the pretrained encoders (MiniLM, DINOv2, Grounding DINO, SAM, CLIP) is fine-tuned; only the three new heads, the suggestion model and K-Means are trained here |
 
 **Score** (smart search): only the parts a query has count; their weights are rescaled to add up to 1.
 
@@ -166,7 +168,8 @@ query; `503` with "run INSTALL_GLAZE_MODEL.bat" when a model is not installed. E
 
 1. Once: drag the model ZIP onto **`INSTALL_GLAZE_MODEL.bat`**. It installs the colour-match files (after the same checks as
    at start-up; the old model stays if one fails), then trains and tests the smart search model (`scripts\train_glaze_joint.py`,
-   about 2 minutes with an NVIDIA GPU).
+   about 2 minutes with an NVIDIA GPU). Run again, it keeps a trained smart model; `train_glaze_joint.py --retrain` trains a new
+   one (each training gives slightly different test numbers; they are in `meta.json`).
 2. **`RUN_GLAZE_SEARCH.bat`** as before; the window prints `Glaze recipe model ready` and `Smart search model ready`.
 3. Tests: `cd multimodal_experiments`, then `..\.venv\Scripts\python.exe -m unittest tests.test_glaze_retrieval tests.test_glaze_smart -v`.
 
