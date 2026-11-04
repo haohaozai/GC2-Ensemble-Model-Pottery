@@ -285,6 +285,7 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
     <label class="f" for="oxpaste">Paste an analysis (e.g. copied from Glazy)</label>
     <div class="row"><textarea id="oxpaste" style="min-height:38px" placeholder="SiO2 64.2  Al2O3 13.1  CaO 9.0  K2O 3.2 …"></textarea><button id="oxparse">Fill</button></div>
     <div class="oxgrid" id="oxgrid"></div>
+    <div class="small" id="formchk" style="margin-top:6px"></div>
     <label class="f" for="ings">Ingredients (optional - improves formula matching)</label>
     <textarea id="ings" placeholder="Custer Feldspar 41&#10;Silica 17&#10;+ Red Iron Oxide 8   (+ = addition)"></textarea>
     <div class="kv" id="formout" style="margin-top:8px"></div>
@@ -725,7 +726,17 @@ function renderObjs() {
 
 // ---------------------------------------------------------------- formula
 $("unit").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; UNIT = b.dataset.u; [...$("unit").children].forEach(x => x.classList.toggle("on", x === b)); });
-$("oxclear").addEventListener("click", () => { document.querySelectorAll("[data-ox]").forEach(i => i.value = ""); $("oxpaste").value = ""; $("ings").value = ""; });
+$("oxclear").addEventListener("click", () => { document.querySelectorAll("[data-ox]").forEach(i => i.value = ""); $("oxpaste").value = ""; $("ings").value = ""; formCheck(); });
+// a formula is used only with >= 3 oxides including a flux: the UMF divides by the flux total (mm/formula.py R2O + RO)
+const FLUX = ["Li2O", "Na2O", "K2O", "Cu2O", "Ag2O", "BeO", "MgO", "CaO", "SrO", "BaO", "ZnO", "PbO", "CdO", "FeO", "MnO", "NiO", "CuO", "CoO"];
+function formCheck() {
+  const o = oxides(), n = Object.keys(o).length, fl = Object.keys(o).filter(k => FLUX.includes(k));
+  $("formchk").innerHTML = !n ? "" : n >= 3 && fl.length
+    ? `<span class="yes">✓ ${n} oxides including the flux ${esc(fl.join(", "))}: the formula is used in the search</span>`
+    : `<span class="no">⚠ ${n} oxide${n > 1 ? "s" : ""}${fl.length ? "" : ", no flux"}: a formula needs at least 3 oxides including a flux
+       (Na2O, K2O, Li2O, CaO, MgO, ZnO, BaO, SrO …) - until then it is ignored</span>`;
+}
+$("oxgrid").addEventListener("input", formCheck);
 $("oxparse").addEventListener("click", () => {
   const txt = $("oxpaste").value, re = /\b([A-Z][a-z]?\d*(?:[A-Z][a-z]?\d*)*)\s*[:=]?\s*(\d+(?:[.,]\d+)?)/g;
   let m, n = 0, extra = [];
@@ -734,6 +745,7 @@ $("oxparse").addEventListener("click", () => {
     if (el) { el.value = m[2].replace(",", "."); n++; } else if (/O/.test(m[1])) extra.push(m[1]);
   }
   $("formout").innerHTML = `<span class="small">Filled ${n} oxide(s).${extra.length ? " Not in the model's oxide list (ignored by the model's columns): " + esc(extra.join(", ")) : ""}</span>`;
+  formCheck();
 });
 function oxides() { const o = {}; document.querySelectorAll("[data-ox]").forEach(i => { if (i.value !== "" && +i.value > 0) o[i.dataset.ox] = +i.value; }); return o; }
 
@@ -994,6 +1006,7 @@ async function searchObjects() {
     renderQregs();
     $("gomsg").textContent = `${LAST.seconds} s · logged`;
     const q = LAST.query || {};
+    if (q.formula_note) $("formchk").innerHTML = `<span class="no">⚠ ${esc(q.formula_note)}</span>`;   // the object search said why the formula was not used
     $("textused").innerHTML = (q.text_used ? `<b>Model reads:</b> ${esc(q.text_used)}` : "") +
       (q.text_warning ? `<div class="no" style="margin-top:4px">⚠ ${esc(q.text_warning)}</div>` : "");
     render(); loadLog();
@@ -1016,7 +1029,7 @@ function renderObjects() {
   if (r.priority && r.priority.used) st.push(stat("Priority used", ["shape", "glaze", "colour"].map(k => `${PNAME[k].split(" ")[0]} ${r.priority.used[k].toFixed(2)}`).join(" · "),
     r.priority.custom ? "your sliders" : "the mode preset (validated)"));
   $("stats").innerHTML = st.join("") + evalTable(r) + featureTable(r.features);
-  if (!res.length) { $("results").innerHTML = `<div class="empty">${esc(r.message || "No results.")}</div>`; $("savemarks").disabled = true; return; }
+  if (!res.length) { $("results").innerHTML = `<div class="empty">${esc(r.message || "No results.")}${(r.query || {}).formula_note ? `<br><span class="no">${esc(r.query.formula_note)} - see card 3</span>` : ""}</div>`; $("savemarks").disabled = true; return; }
   $("results").innerHTML = `<div class="grid">${res.map(objCard).join("")}</div>`;
   document.querySelectorAll(".mk button").forEach(b => b.addEventListener("click", () => {
     const id = b.dataset.id, v = b.dataset.v === "1";
@@ -1402,7 +1415,7 @@ async function gSearch() {
       const photo = $("guseimg").checked && QID && activeObj() != null;
       Object.assign(body, {text, hex: $("gusecol").checked ? hex : "", transparency: u && u.transparency ? u.transparency.value : "",
         atmospheres: u ? u.atmospheres.map(a => a.value) : [], use_photo: !!photo, qid: photo ? QID : null, object: photo ? activeObj() : null,
-        oxides: $("guseform").checked && Object.keys(ox).length >= 3 ? ox : null, oxide_unit: UNIT});
+        oxides: $("guseform").checked && Object.keys(ox).length ? ox : null, oxide_unit: UNIT});   // the server says when it cannot use it
       GRES = await api("/api/glaze/smart_search", body); GRES.engine = "smart";
     } else { GRES = await api("/api/glaze/search", body); GRES.engine = "colour"; }
     $("gmsg").textContent = `search ${GRES.timings.retrieval_ms} ms in the model · ${Math.round(performance.now() - t0)} ms with the page`;

@@ -127,6 +127,19 @@ class JointModel(unittest.TestCase):
         with self.assertRaises(ValueError):
             js.search({"cone": "99"})
 
+    def test_formula_needs_a_flux(self):
+        js = joint()
+        with self.assertRaisesRegex(ValueError, "flux"):                 # SiO2 + Al2O3 only: no flux, cannot be used
+            js.search({"oxides": {"SiO2": 64.2, "Al2O3": 13.1}})
+        r = js.search({"text": "glossy white cone 6", "oxides": {"SiO2": 64.2, "Al2O3": 13.1}})
+        self.assertNotIn("formula", r["parts"])
+        self.assertTrue(any("formula ignored" in w and "no flux" in w for w in r["warnings"]), r["warnings"])
+        r = js.search({"text": "glossy white cone 6", "oxides": {"SiO2": 64.2, "Al2O3": 13.1, "Fe2O3": 2.0}})
+        self.assertNotIn("formula", r["parts"])                         # 3 oxides but still no flux
+        r = js.search({"oxides": {"SiO2": 64.2, "Al2O3": 13.1, "CaO": 9.0}})
+        self.assertEqual(set(r["parts"]), {"formula"})
+        self.assertEqual(r["warnings"], [])
+
     def test_photo_part(self):
         js = joint()
         q = np.random.default_rng(0).normal(size=js.heads["photo"].net[0].in_features).astype(np.float32)

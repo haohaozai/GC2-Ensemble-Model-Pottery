@@ -349,14 +349,19 @@ class JointSearch:
         w = {**self.cfg["weights"], **{k: float(v) for k, v in (p.get("weights") or {}).items() if k in PARTS}}
         text = re.sub(r"\s+", " ", str(p.get("text") or "")).strip()[:500]
         u = GT.extract(text) if text else None
-        S, used, q = {}, {}, {"text": text or None}
+        S, used, q, warn = {}, {}, {"text": text or None}, []
         G = self.g["fused"]
         if text:
             S["text"] = (G @ self._q("text", self.text([text])[0]) + 1) / 2
         if photo_vec is not None:
             S["photo"] = (G @ self._q("photo", photo_vec) + 1) / 2
         ox = p.get("oxides") or (u["oxides"] if u and u["oxides"] else None)
-        cv = chem_input(ox) if ox else None
+        from .formula import R2O, RO
+        has_flux = bool(ox) and any(float(ox.get(k) or 0) > 0 for k in R2O | RO)
+        cv = chem_input(ox) if ox and has_flux else None
+        if ox and cv is None:                     # same rule as the object search: >= 3 oxides including a flux
+            warn.append(f"formula ignored: {sum(1 for v in ox.values() if float(v or 0) > 0)} oxide(s){'' if has_flux else ', no flux'} - "
+                        "a formula needs at least 3 oxides including a flux (Na2O, K2O, Li2O, CaO, MgO, ZnO, BaO, SrO …)")
         if cv is not None:
             S["formula"] = (G @ self._q("formula", cv) + 1) / 2
             q["oxides"] = {k: v for k, v in ox.items() if float(v or 0) > 0}
@@ -389,7 +394,7 @@ class JointSearch:
             S["atmosphere"] = np.array([float(bool(al & set(x.split(";")))) for x in np.char.lower(self.g["atmospheres"].astype(str))])
             q["atmospheres"] = atms
         if not S:
-            raise ValueError("give at least a text, a colour, a photo object or a formula")
+            raise ValueError(warn[0] if warn else "give at least a text, a colour, a photo object or a formula")
         tot = sum(w[k] for k in S)
         if tot <= 0:
             raise ValueError("no part of this query has a weight above 0")
@@ -408,7 +413,7 @@ class JointSearch:
         card = lambda i, r: self._card(i, r, S, w, tot, score, used)  # noqa: E731
         return {"query": q, "understood": u, "parts": {k2: round(w[k2] / tot, 4) for k2 in S}, "model_version": self.version,
                 "weighted_results": [card(i, r) for r, i in enumerate(best, 1)], "diverse_results": [card(i, r) for r, i in enumerate(chosen, 1)],
-                "max_per_cluster": mpf, "searched": self.n, "warnings": [],
+                "max_per_cluster": mpf, "searched": self.n, "warnings": warn,
                 "timings": {"retrieval_ms": round(1000 * (time.perf_counter() - t0), 1), "total_ms": round(1000 * (time.perf_counter() - t0), 1)}}
 
     def _card(self, i, rank, S, w, tot, score, used) -> dict:
