@@ -10,7 +10,7 @@ This branch contains **only Glaze Search**, with original photos and segmentatio
 
 | You want to see | Open | What is in it |
 |---|---|---|
-| **New here? Install, then one full example** | [**Quick Start (PDF, 8 pages)**](docs/manuals/CG2_Glaze_Search_Quick_Start.pdf) | The five install steps (Windows and Mac), then a photo of a blue bowl + a typed sentence followed screen by screen to the final recipe list, with the real results |
+| **New here? Install, then one full example** | [**Quick Start (PDF, 11 pages)**](docs/manuals/CG2_Glaze_Search_Quick_Start.pdf) | The five install steps (Windows and Mac), then one example click by click: a photo of a blue bowl + a typed sentence to the final recipe list. Every screenshot is the real app doing exactly these steps |
 | The full process of a search | [Process, models and parameters (PDF, 8 pages)](docs/manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) · [mind map page](https://claude.ai/artifact/B1zswhT3kHGYnZYYvYgaa5) | Data → preprocessing → training → evaluation, and the 10 steps of a search with their settings |
 | Which pretrained model does what, with diagrams | [Pretrained models, illustrated (PDF, 16 pages)](docs/manuals/CG2_Glaze_Search_Pretrained_Models.pdf) | Grounding DINO, SAM 2.1, OpenCLIP, DINOv2 and MiniLM: zero-shot, frozen or with a trained head; an activity diagram and 13 figures from one real photo and sentence |
 | Metrics and evaluation results | [Evaluation (PDF, 14 pages)](docs/manuals/CG2_Glaze_Search_Evaluation.pdf) · [evaluation page](https://claude.ai/artifact/BVYzi6cWhbLpf6x1N8qQTh) | Every metric (R@K, P@10, MAD@K, accuracy, AUROC …) stage by stage, from the data and self-made labels to the final ranking, and the limits to state |
