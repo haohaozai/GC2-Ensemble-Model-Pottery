@@ -9,6 +9,7 @@ __pycache__/
 # data that comes from the release download (DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.bat) or is written by the app
 multimodal_experiments/work/
 multimodal_experiments/cache/
+multimodal_experiments/models/
 .cg2_data/
 _downloads/
 *.tar

@@ -210,3 +210,176 @@ def related(hx: str, mode: str = "both", common: float = 0.35, n: int = 18) -> d
     item = lambda i: {"name": voc[i]["name"], "hex": voc[i]["hex"], "family": voc[i]["family"], "dE00": round(float(d[i]), 1),
                       "common": bool(pop[i] >= 9)}
     return {"hex": hx.upper(), "name": item(best), "literal": item(lit), "related": [item(i) for i in keep[:n]]}
+
+
+# ---------------------------------------------------------------- the photo page's colour box: a HEX code, a colour word or a typo
+HEX_RE = re.compile(r"#?([0-9A-Fa-f]{6})")
+
+
+@lru_cache(1)
+def thief_vocabulary():
+    """The ColorThief naming standard first: the reference shades of glazeprep/appearance.py, the names (and values) the
+    ColorThief palettes and 'What the app found' use; then the Color Lab V3 names it does not have (red, navy, celadon ...),
+    with their aliases. 'family' is always one of the 12 ColorThief families (that of the nearest shade, CIEDE2000)."""
+    v3 = [it for it in vocabulary() if it["source"] == "Color Lab V3"]       # vocabulary() makes glazeprep importable
+    from glazeprep.appearance import _REFERENCES
+    from .balanced import de2000
+    alias = {text_norm(it["name"]): it["phrases"][1:] for it in v3}
+    items = [{"name": n, "hex": h.upper(), "family": f, "commonness": 8, "source": "ColorThief name",
+              "phrases": [n] + alias.get(text_norm(n), [])} for f, n, h in _REFERENCES]
+    have = {text_norm(i["name"]) for i in items}
+    items += [{**it, "source": "Color Lab V3"} for it in v3 if text_norm(it["name"]) not in have]
+    shades = np.stack([hex2lab(h) for _, _, h in _REFERENCES])
+    for it in items[len(_REFERENCES):]:
+        it["family"] = _REFERENCES[int(de2000(hex2lab(it["hex"])[None, :], shades).argmin())][0]
+    return items
+
+
+@lru_cache(1)
+def _thief_index():
+    voc = thief_vocabulary()
+    names, aliases = {}, {}
+    for i, it in enumerate(voc):
+        names.setdefault(text_norm(it["name"]), i)
+    for i in sorted(range(len(voc)), key=lambda i: -voc[i]["commonness"]):
+        for a in voc[i]["phrases"][1:]:
+            if text_norm(a) not in names:
+                aliases.setdefault(text_norm(a), i)
+    for i, it in enumerate(voc):                                  # a family word with no name of its own: black -> jet black
+        if it["source"] == "ColorThief name":
+            names.setdefault(text_norm(it["family"]), i)
+    tokens = Counter(t for it in voc for t in set(text_norm(it["name"]).split()))
+    return voc, np.stack([hex2lab(it["hex"]) for it in voc]), names, aliases, tokens
+
+
+def _word(w: str):
+    """index of the colour a word / phrase names: exact name, alias, ColorThief family (black -> jet black), '-ish' form
+    (reddish, bluish), or a word only one name contains ('cobalt' -> cobalt blue); None if unknown."""
+    voc, _, names, aliases, tokens = _thief_index()
+    w = text_norm(w)
+    for c in (w, *([w[:-3], w[:-4], w[:-3] + "e"] if w.endswith("ish") else [])):
+        if c in names or c in aliases:
+            return names.get(c, aliases.get(c))
+    if " " not in w and tokens.get(w) == 1 and w not in MODIFIERS:
+        return next(i for i, it in enumerate(voc) if w in text_norm(it["name"]).split())
+    return None
+
+
+def _item(i: int, d=None) -> dict:
+    it = thief_vocabulary()[i]
+    return {"name": it["name"], "hex": it["hex"], "family": it["family"], "source": it["source"],
+            **({"dE00": round(float(d), 1)} if d is not None else {})}
+
+
+def strong_related(hx: str, family: str, skip=(), n: int = 10, family_bonus: float = 8.0) -> dict:
+    """the n most related named colours: CIEDE2000 distance, a colour of the same ColorThief family counting as
+    family_bonus closer (8; 100 = the whole family first, for a family word like 'red'); near-duplicates (dE00 < 3 to one
+    already chosen) left out, other names of the same colour (dE00 < 2) listed as 'same'."""
+    from .balanced import de2000
+    voc, L, *_ = _thief_index()
+    d = de2000(hex2lab(hx)[None, :], L)
+    fam = np.array([it["family"] == family for it in voc])
+    chosen, same = [], []
+    for i in np.argsort(d - family_bonus * fam, kind="stable"):
+        if i in skip:
+            continue
+        if d[i] < 2:
+            same.append(voc[i]["name"])
+            continue
+        if chosen and de2000(L[i][None, :], L[chosen]).min() < 3:
+            continue
+        chosen.append(int(i))
+        if len(chosen) == n:
+            break
+    return {"same": same, "related": [_item(i, d[i]) for i in chosen]}
+
+
+def guesses(q: str, k: int = 5, one_word: bool = False) -> list[dict]:
+    """'blu' -> Blue, Blush ... : the k names that look most like the typed word (difflib ratio on the whole name or on
+    one of its words, a small bonus when the name starts with it, Color Lab V3's 2-4-gram TF-IDF as a tie-breaker);
+    one_word: one-word names only (the guess goes next to other words: 'dark blu' -> dark blue)."""
+    from difflib import SequenceMatcher
+    voc, *_ = _thief_index()
+    qn = text_norm(q)
+    if not qn:
+        return []
+    tf = {text_norm(r["name"]): r["score"] for r in search_words(qn, 30)}
+    sim = lambda a, b: SequenceMatcher(None, a, b).ratio()
+    scored = []
+    for i, it in enumerate(voc):
+        if one_word and " " in text_norm(it["name"]):
+            continue
+        best = 0.0
+        for p in map(text_norm, it["phrases"]):
+            s = sim(qn, p)
+            if " " not in qn and " " in p:
+                s = max(s, 0.9 * max(sim(qn, t) for t in p.split()))
+            best = max(best, s + (0.05 if p.startswith(qn) else 0))
+        scored.append((best + 0.1 * min(tf.get(text_norm(it["name"]), 0), 1) + 0.002 * it["commonness"], i))
+    scored.sort(reverse=True)
+    out, seen = [], set()
+    for s, i in scored:
+        if s < 0.6 or len(out) == k:
+            break
+        if voc[i]["hex"] not in seen:
+            seen.add(voc[i]["hex"])
+            out.append({**_item(i), "score": round(s, 3)})
+    return out
+
+
+def colour_lookup(q: str, n_related: int = 10, n_guess: int = 5) -> dict:
+    """What the photo page's colour box does with what was typed:
+      '#1D325B' (# + 6 HEX characters)            -> kind 'hex': that colour and its nearest name
+      'red', 'sand', 'dark sand', 'reddish brown' -> kind 'word': its colour (modifiers and two-word mixes in CIELAB, the
+                                                    same rule as parse_phrase) + n_related strongly related colours
+      'blu', 'dark blu'                           -> kind 'guess': n_guess names it may mean ('say' = what to look up next)
+      anything else                               -> kind 'none' with a message"""
+    from .balanced import de2000
+    q = (q or "").strip()[:60]
+    voc, L, *_ = _thief_index()
+    m = HEX_RE.fullmatch(q)
+    if m:
+        hx = "#" + m.group(1).upper()
+        d = de2000(hex2lab(hx)[None, :], L)
+        return {"kind": "hex", "query": q, "hex": hx, "name": _item(int(d.argmin()), d.min())}
+    if q.startswith("#") or not text_norm(q):
+        return {"kind": "none", "query": q, "message": "a HEX code is # and 6 characters 0-9 / A-F, like #1D325B"}
+    words = text_norm(q).split()
+    i = _word(" ".join(words))                                   # a whole name first: 'light blue', 'navy blue'
+    mods = [] if i is not None else [w for w in words if w in MODIFIERS]
+    base = [w for w in words if w not in mods]
+    if i is None and base:
+        i = _word(" ".join(base))                                # 'dark' + 'sky blue'
+    parts = [i] if i is not None else [_word(w) for w in base]
+    if not base:
+        return {"kind": "none", "query": q, "message": f"add a colour word: {words[0]} red, {words[0]} sand ..."}
+    if None not in parts:
+        if len(parts) > 2:
+            return {"kind": "none", "query": q, "message": "use one or two colour words, like 'reddish brown'"}
+        lab = L[parts[0]].copy() if len(parts) == 1 else (L[parts[0]] + 2 * L[parts[1]]) / 3
+        for w in mods:
+            dl, cf = MODIFIERS[w]
+            lab[0] = float(np.clip(lab[0] + dl, 0, 100))
+            lab[1:] = lab[1:] * cf
+        plain = len(parts) == 1 and not mods
+        named = [voc[p]["name"] for p in parts]
+        how = f"{named[0]} ({voc[parts[0]]['source']})" if len(parts) == 1 else f"1/3 {named[0]} + 2/3 {named[1]} (CIELAB mix)"
+        if mods:
+            how += ", made " + " + ".join(mods) + " in CIELAB (lightness / colourfulness)"
+        fam = voc[parts[-1]]["family"]
+        hx = voc[parts[0]]["hex"] if plain else lab2hex(lab)
+        colour = {"name": named[0] if plain else " ".join(words), "hex": hx, "family": fam,
+                  "source": voc[parts[-1]]["source"], "how": how}
+        family_word = plain and bool({text_norm(" ".join(base)), text_norm(named[0])} & {it["family"] for it in voc})
+        return {"kind": "word", "query": q, "colour": colour,
+                **strong_related(hx, fam, skip={parts[0]} if plain else (), n=n_related, family_bonus=100.0 if family_word else 8.0)}
+    unknown = [w for w in base if _word(w) is None]
+    g = guesses(" ".join(base), n_guess) if len(base) > 1 else []
+    if g and (g[0]["score"] >= 0.85 or len(unknown) > 1):        # 'sky blu' -> sky blue: guess the whole name
+        g = [{**x, "say": " ".join(mods + [x["name"].lower()])} for x in g]
+    else:                                                        # 'dark blu', 'reddish brwn': guess that word, keep the rest
+        g = [{**x, "say": " ".join(mods + [x["name"].lower() if w == unknown[0] else w for w in base])}
+             for x in guesses(unknown[0], n_guess, one_word=len(words) > 1)]
+    if not g:
+        return {"kind": "none", "query": q, "message": f"no colour name looks like '{q}'. Try red, sand, celadon, navy blue or a HEX code"}
+    return {"kind": "guess", "query": q, "unknown": " ".join(unknown), "guesses": g}

@@ -1,0 +1,11 @@
+{
+  "_about": "Smart search (card G): one joint model for free text + photo + glaze formula (multimodal_experiments/mm/glaze_joint.py). Restart RUN_GLAZE_SEARCH.bat after a change.",
+  "_model_dir": "written by scripts/train_glaze_joint.py (INSTALL_GLAZE_MODEL.bat runs it); relative = project folder",
+  "model_dir": "multimodal_experiments/models/glaze_joint",
+  "_weights": "weight of each part of a query; only the parts a query has are used, then renormalised to sum 1",
+  "weights": {"text": 0.35, "photo": 0.35, "formula": 0.25, "colour": 0.30, "cone": 0.10, "surface": 0.10, "transparency": 0.05, "atmosphere": 0.05},
+  "_max_per_family": "Explore formulations: at most this many recipes per K-Means family of the joint space",
+  "max_per_family": 2,
+  "top_k": 10,
+  "device": "cpu"
+}
