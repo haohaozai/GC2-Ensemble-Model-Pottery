@@ -354,6 +354,76 @@ class Http(unittest.TestCase):
         self.assertIn('id="gcard"', page)
         self.assertTrue(re.search(r"<title>Glaze Search</title>", page))
 
+    def test_pages_and_manual(self):
+        page = urllib.request.urlopen(self.base + "/", timeout=10).read().decode("utf-8")
+        for p in ("home", "photo", "recipes", "pottery", "scores", "guide"):           # the nav bar and its pages
+            self.assertIn(f'href="#{p}" data-p="{p}"', page)
+            self.assertIn(f'class="page" data-page="{p}"', page)
+        self.assertIn('<select id="gk"', page)                                           # card G: how many recipes to show
+        if (self.srv.MANUALS / "CG2_Glaze_Search_Manual.html").is_file():
+            r = urllib.request.urlopen(self.base + "/manual/CG2_Glaze_Search_Manual.html", timeout=10)
+            self.assertEqual((r.status, r.headers["Content-Type"]), (200, "text/html; charset=utf-8"))
+        for bad in ("/manual/../README.md", "/manual/x.exe", "/manual/nothing.pdf"):
+            with self.assertRaises(urllib.error.HTTPError) as e:
+                urllib.request.urlopen(self.base + bad, timeout=10)
+            self.assertEqual(e.exception.code, 404)
+
+    def test_colour_box_route(self):
+        st, r = self.call("/api/colour_lookup?q=blu")
+        self.assertEqual((st, r["kind"], r["guesses"][0]["say"]), (200, "guess", "blue"))
+        self.assertIn('id="pksug"', urllib.request.urlopen(self.base + "/", timeout=10).read().decode("utf-8"))
+
+
+class ColourBox(unittest.TestCase):
+    """the photo page's colour box (mm/colorlab.py colour_lookup): HEX, colour word, typo"""
+
+    @classmethod
+    def setUpClass(cls):
+        from mm.colorlab import colour_lookup
+        cls.look = staticmethod(colour_lookup)
+
+    def test_hex(self):
+        for q in ("#1d325b", "1D325B"):
+            r = self.look(q)
+            self.assertEqual((r["kind"], r["hex"], r["name"]["name"]), ("hex", "#1D325B", "navy blue"))
+        for q in ("#1D3", "#1D325G", "#"):
+            self.assertEqual(self.look(q)["kind"], "none")
+
+    def test_word_gives_ten_related(self):
+        r = self.look("sand")
+        self.assertEqual((r["kind"], r["colour"]["hex"], r["colour"]["source"]), ("word", "#CDB58B", "ColorThief name"))
+        self.assertEqual(len(r["related"]), 10)
+        self.assertTrue({"Tan", "Khaki", "buff"} <= {x["name"] for x in r["related"]})
+        d = [x["dE00"] for x in r["related"]]
+        self.assertEqual(len({x["hex"] for x in r["related"]}), 10)
+        self.assertLess(max(d), 20)
+
+    def test_family_word_keeps_its_family(self):
+        for q, fam, n in (("red", "red", 8), ("blue", "blue", 8), ("black", "black", 5), ("grey", "gray", 8)):
+            r = self.look(q)
+            same = [x["family"] == fam for x in r["related"]]
+            self.assertEqual(r["kind"], "word", q)
+            self.assertEqual(same, sorted(same, reverse=True), q)          # the whole family first, then the nearest others
+            self.assertGreaterEqual(sum(same), n, q)
+
+    def test_modifiers_and_mixes(self):
+        sand, dark = self.look("sand")["colour"]["hex"], self.look("dark sand")["colour"]
+        self.assertEqual(dark["name"], "dark sand")
+        self.assertLess(sum(int(dark["hex"][i:i + 2], 16) for i in (1, 3, 5)), sum(int(sand[i:i + 2], 16) for i in (1, 3, 5)))
+        self.assertIn("CIELAB mix", self.look("reddish brown")["colour"]["how"])
+        self.assertEqual(self.look("cobalt")["colour"]["name"], "cobalt blue")
+
+    def test_typos_give_five_guesses(self):
+        for q, first in (("blu", "blue"), ("brwn", "brown"), ("whte", "white"), ("seladon", "celadon"),
+                         ("dark blu", "dark blue"), ("sky blu", "sky blue")):
+            r = self.look(q)
+            self.assertEqual((r["kind"], r["guesses"][0]["say"]), ("guess", first), q)
+            self.assertLessEqual(len(r["guesses"]), 5)
+        self.assertEqual(len(self.look("blu")["guesses"]), 5)
+        self.assertEqual(self.look(self.look("blu")["guesses"][0]["say"])["kind"], "word")    # a guess clicked = a word
+        for q in ("zzz", "tenmoku", "dark", ""):
+            self.assertEqual(self.look(q)["kind"], "none", q)
+
 
 if __name__ == "__main__":
     unittest.main()

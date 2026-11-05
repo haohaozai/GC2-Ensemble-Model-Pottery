@@ -40,6 +40,9 @@ PAGE = Path(__file__).resolve().parent / "index.html"
 # static reference of every attribute value (build_reference_library.py): /lib/<attribute>/<value>/describe.json + PNGs
 LIBRARY = Path(__file__).resolve().parents[2] / "reference_library"
 LIB_TYPES = {".json": "application/json; charset=utf-8", ".png": "image/png", ".md": "text/markdown; charset=utf-8"}
+# the user manual in docs/manuals (web page + PDF): /manual/<file>, shown in the page's "How to use" tab
+MANUALS = Path(__file__).resolve().parents[2] / "docs" / "manuals"
+MANUAL_TYPES = {"html": "text/html; charset=utf-8", "pdf": "application/pdf", "png": "image/png", "jpg": "image/jpeg"}
 LOG_FILE = QDIR / "session_log.json"
 GLAZE_LOG = QDIR / "glaze_search_log.jsonl"   # card G searches; the session log above is not touched
 LOCK = threading.Lock()          # one GPU job at a time
@@ -557,6 +560,10 @@ class H(BaseHTTPRequestHandler):
             from mm.colorlab import search_words
             qs = parse_qs(urlparse(self.path).query).get("q", [""])[0]
             return self._json({"results": search_words(qs, 10) if qs.strip() else []})
+        if path == "/api/colour_lookup":                    # photo page colour box: HEX / colour word / typo (mm/colorlab.py)
+            from urllib.parse import parse_qs, urlparse
+            from mm.colorlab import colour_lookup
+            return self._json(colour_lookup(parse_qs(urlparse(self.path).query).get("q", [""])[0]))
         if path == "/api/glaze/options":                    # card G: cone / surface choices, colour words, weights, model versions
             return self._json({**S["glaze"].options(), "smart": S["joint"].options() if S.get("joint") else None,
                                "smart_error": S.get("joint_error")}) if self._glaze_ready() else None
@@ -596,6 +603,9 @@ class H(BaseHTTPRequestHandler):
         m = re.fullmatch(r"/q/([0-9a-f-]{20,24})/([a-z0-9_]+\.(?:jpg|png))", path)
         if m:
             return self._file(QDIR / m.group(1) / m.group(2), "image/png" if m.group(2).endswith(".png") else "image/jpeg")
+        m = re.fullmatch(r"/manual/([A-Za-z0-9_.-]+)\.(html|pdf|png|jpg)", path)
+        if m:
+            return self._file(MANUALS / f"{m.group(1)}.{m.group(2)}", MANUAL_TYPES[m.group(2)])
         if path.startswith("/lib/"):                       # static reference library (read-only, files inside it only)
             from urllib.parse import unquote
             p = (LIBRARY / unquote(path[5:])).resolve()

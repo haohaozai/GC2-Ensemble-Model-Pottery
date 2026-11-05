@@ -7,7 +7,17 @@ Built using **7,063 Glazy glaze recipes** and **12,309 segmented ceramic objects
 This project provides two applications:
 
 - **Ceramic Review:** Browse ceramic images, inspect segmented objects, review attributes, and save review decisions.
-- **Glaze Search:** Upload a ceramic photo and search for visually similar objects based on shape, glaze, surface, and colour.
+- **Glaze Search:** Upload a ceramic photo and search for visually similar objects based on shape, glaze, surface, and colour, or find glaze recipes from a photo, words or a chemical formula (card G).
+
+### Glaze Search documents at a glance
+
+| You want to see | Open | What is in it |
+|---|---|---|
+| The full process of a search | [Process, models and parameters (PDF, 8 pages)](docs/manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) · [mind map page](https://claude.ai/artifact/B1zswhT3kHGYnZYYvYgaa5) | Data → preprocessing → training → evaluation, and the 10 steps of a search with their settings |
+| Which pretrained model does what, with diagrams | [Pretrained models, illustrated (PDF, 16 pages)](docs/manuals/CG2_Glaze_Search_Pretrained_Models.pdf) | Grounding DINO, SAM 2.1, OpenCLIP, DINOv2 and MiniLM: zero-shot, frozen or with a trained head; an activity diagram and 13 figures from one real photo and sentence |
+| Metrics and evaluation results | [Evaluation (PDF, 14 pages)](docs/manuals/CG2_Glaze_Search_Evaluation.pdf) · [evaluation page](https://claude.ai/artifact/BVYzi6cWhbLpf6x1N8qQTh) | Every metric (R@K, P@10, MAD@K, accuracy, AUROC …) stage by stage, from the data and self-made labels to the final ranking, and the limits to state |
+| How to use the app | [Manual (HTML)](docs/manuals/CG2_Glaze_Search_Manual.html) / [PDF](docs/manuals/CG2_Glaze_Search_Manual.pdf) · [manual page](https://claude.ai/artifact/7rmiKzN17dk2Fhb4AGeJhz) · [step-by-step guide (PDF)](docs/manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf) | The pages of the app and six worked examples (photo, words with typos, a formula) |
+| Try it without installing | [Glaze Search on Hugging Face](https://huggingface.co/spaces/FBIWarninggg/glaze_search) | The same page and models, on Hugging Face's free GPU |
 
 ---
 
@@ -230,6 +240,8 @@ http://127.0.0.1:8770
 | 5 | Choose **Smart search** (text + colour + photo object + formula + cone + surface) or **Colour match** (colour + cone + surface), then **Find recipes** | Every recipe is scored, about 0.1 s |
 | 6 | Read **Best matches** and **Explore formulations** (≤ 2 per family) | Each card: Glazy photo, score parts, ingredients, **View on Glazy** |
 
+The page has a nav bar: 🏠 Start · 📷 My photo · 🧪 Glaze recipes · 🏺 Similar pottery · 📊 Scores · 📖 How to use. Manual with worked examples: [CG2_Glaze_Search_Manual.html](docs/manuals/CG2_Glaze_Search_Manual.html) / [PDF](docs/manuals/CG2_Glaze_Search_Manual.pdf) (also the app's 📖 How to use page).
+
 Step-by-step guide with screenshots: [CG2_Glaze_Search_Step_by_Step_Guide.pdf](docs/manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf) · process, models and parameters: [CG2_Glaze_Search_Process_Models_MindMap.pdf](docs/manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) · [usage mind map](docs/glaze_search_usage_mindmap.png).
 
 The whole pipeline, data → preprocessing → training → evaluation: [glaze_search_ml_pipeline.png](docs/glaze_search_ml_pipeline.png). No pretrained model is fine-tuned: MiniLM and DINOv2 stay frozen and three small heads are trained on top of them (InfoNCE); "Explore formulations" uses K-Means families (k-means++ initialisation) because density clustering (DBSCAN / HDBSCAN) found no useful groups.
@@ -310,6 +322,7 @@ Online copies are also available:
 
 - [Ceramic Review Page](https://fbiwarninggg-ceramic-review.static.hf.space)
 - [Glaze Search on Hugging Face](https://huggingface.co/spaces/FBIWarninggg/glaze_search)
+- Web pages: [Glaze Search Mind Map](https://claude.ai/artifact/B1zswhT3kHGYnZYYvYgaa5) · [Glaze Search Evaluation](https://claude.ai/artifact/BVYzi6cWhbLpf6x1N8qQTh) · [Glaze Search Manual](https://claude.ai/artifact/7rmiKzN17dk2Fhb4AGeJhz)
 
 The online Review page can use Supabase for shared review decisions. The local Review app saves data on your computer.
 
@@ -359,9 +372,12 @@ To rebuild missing Tile cut-outs:
 Detailed instructions are available in the repository:
 
 - [Review Guide](docs/REVIEW_GUIDE.md) — Review interface, filters, keyboard shortcuts, Tile panel, and saving decisions.
+- [Glaze Search manual](docs/manuals/CG2_Glaze_Search_Manual.html) ([PDF](docs/manuals/CG2_Glaze_Search_Manual.pdf)) — the pages, six worked examples and what every number means.
 - [Glaze Search Guide](docs/SEARCH_GUIDE.md) — Search inputs, priority sliders, results, and evaluation.
 - [Glaze recipe search (card G)](docs/glaze_integration_architecture.md) — smart search and colour match: architecture, API, cone handling, tests, and how to update the models ([system diagram](docs/glaze_search_full_flow.png)).
 - [Step-by-step guide (PDF)](docs/manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf) and [process, models and parameters (PDF)](docs/manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) for card G.
+- [Pretrained models, illustrated (PDF)](docs/manuals/CG2_Glaze_Search_Pretrained_Models.pdf) — how each pretrained model works on a real example, with an activity diagram.
+- [Evaluation (PDF)](docs/manuals/CG2_Glaze_Search_Evaluation.pdf) — every metric and test result, stage by stage.
 - [Data Download Guide](docs/DATA_DOWNLOAD.md) — Data archives, manual downloads, and dataset relationships.
 - [Manuals and Screenshots](docs/manuals) — Detailed PDF manuals, workflow diagrams, and attribute documentation.
 

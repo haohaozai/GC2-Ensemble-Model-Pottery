@@ -42,16 +42,18 @@ def main() -> int:
             base = n.rsplit("/", 1)[-1]
             if base in FILES.values() or base.endswith(".ipynb"):
                 (Path(tmp) / base).write_bytes(z.read(n))
-        nbs = list(Path(tmp).glob("*.ipynb"))
+        nbs = sorted(Path(tmp).glob("*.ipynb"))
+        if len(nbs) > 1:                                    # e.g. training.ipynb + retrieval.ipynb: use the inference-only one
+            nbs = [p for p in nbs if "retrieval" in p.stem.lower()] or nbs
         if len(nbs) != 1 or not all((Path(tmp) / f).is_file() for f in FILES.values()):
-            print(f"ERROR: the ZIP needs one notebook and {', '.join(FILES.values())} (looked for {wanted})")
+            print(f"ERROR: the ZIP needs one notebook (or one named retrieval*.ipynb) and {', '.join(FILES.values())} (looked for {wanted})")
             return 1
         cells = [("".join(c["source"])) for c in json.loads(nbs[0].read_text(encoding="utf-8"))["cells"] if c["cell_type"] == "code"]
         upto = next((i for i, s in enumerate(cells) if "def retrieve_glazes" in s), None)
         if upto is None:
             print("ERROR: no cell defines retrieve_glazes")
             return 1
-        queries = [m.group(1) for s in cells[upto + 1:] for m in re.finditer(r"query_args\s*=\s*(dict\(.*?\))", s)]
+        queries = [m.group(1) for s in cells[upto + 1:] for m in re.finditer(r"query_args\s*=\s*(dict\(.*?\))", s, re.S)]
         cwd = os.getcwd()
         os.chdir(tmp)
         try:

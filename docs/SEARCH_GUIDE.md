@@ -3,8 +3,26 @@
 Find glaze recipes and ceramic objects that look like your photo, match your words or your glaze formula. The search
 runs on your computer: http://127.0.0.1:8770 (opens by itself). Keep the black window open while you search.
 
-Step-by-step guide with screenshots: [manuals/CG2_Glaze_Search_Beginner_Guide.pdf](manuals/CG2_Glaze_Search_Beginner_Guide.pdf);
-how everything fits together: [manuals/CG2_Flow_MindMap.pdf](manuals/CG2_Flow_MindMap.pdf).
+**Manual with worked examples** (what the app found for real photos, the top recipes and pots, every number explained):
+[manuals/CG2_Glaze_Search_Manual.html](manuals/CG2_Glaze_Search_Manual.html) (opens offline in any browser) and
+[manuals/CG2_Glaze_Search_Manual.pdf](manuals/CG2_Glaze_Search_Manual.pdf); in the app it is the **📖 How to use** page
+(http://127.0.0.1:8770/manual/CG2_Glaze_Search_Manual.html). Step-by-step guide with screenshots of the earlier one-page layout:
+[manuals/CG2_Glaze_Search_Beginner_Guide.pdf](manuals/CG2_Glaze_Search_Beginner_Guide.pdf); how everything fits together:
+[manuals/CG2_Flow_MindMap.pdf](manuals/CG2_Flow_MindMap.pdf).
+
+## The pages (nav bar at the top)
+
+| Button | Holds | Address |
+|---|---|---|
+| 🏠 Start | five big buttons and four example photos (one click loads one) | `#home` |
+| 📷 My photo | card 1 (photo), **What the app found** (glaze colour, shape, surface top 3 with %), card 1b | `#photo` |
+| 🧪 Glaze recipes | card G (words, colour, cone and surface, engine, **Show 3 / 5 / 10 / 15 / 20**), optional formula, results | `#recipes` |
+| 🏺 Similar pottery | the photo strip, card 2 (words), card 3 (formula), card 4 (colours), the search bar, results | `#pottery` |
+| 📊 Scores | plain-words help and the session evaluation | `#scores` |
+| 📖 How to use | quick start, the example photos and the manual | `#guide` |
+
+All cards keep their values when you switch pages; the formula card moves to the page that uses it. Old links such as
+`#glaze=3054A5&cone=6` still open the recipes page with that search. The cards are described below.
 
 ## What happens when it starts (about 30 - 60 s)
 
@@ -18,7 +36,12 @@ searches stay fast). Everything works offline after `SETUP.bat`.
 1. **Card 1 · Photo**: drop a photo, paste it (`Ctrl+V`), browse, or paste a link. Grounding DINO + SAM 2.1 cut out
    the ceramic objects (same settings as the 7k database photos). Hover an object to see it, **click** = use it
    (yellow outline = active), `Ctrl`+click = add more. **Pick colour (HEX)**: click inside an object, then
-   **Add as search colour** (card 4) or **Use for glaze search** (card G).
+   **Add as search colour** (card 4) or **Use for glaze search** (card G). Or **type the colour** in the same box:
+   `#` + 6 characters (`#1D325B`) is used as it is; a colour word (`red`, `sand`, `celadon`, `dark sand`,
+   `reddish brown`) gives its colour plus **10 related colours** to click (nearest in CIELAB by CIEDE2000; the ColorThief
+   names that *What the app found* uses, then Color Lab V3; a family word like `red` keeps its family first); a typo
+   (`blu`, `brwn`, `dark blu`) gives **5 guesses**, and clicking one works like a colour word (`/api/colour_lookup`,
+   `mm/colorlab.py`).
 2. **Card 1b · Your object**: the colour regions of the active object and the six attributes Grounding DINO detects,
    each with its top-3 candidates; click the right one, **(i)** explains that value with example images
    (`reference_library`). Tick the attributes the results must share. **glaze** next to a colour region sends that

@@ -12,15 +12,91 @@
 --line:#34332f;--accent:#5b9be6;--accent-ink:#0d1a2a;--good:#5fd3a2;--good-bg:#173428;--bad:#f08c8c;--bad-bg:#3a1f1f;--chip:#2a2a27;--shadow:none}}
 :root[data-theme="dark"]{--bg:#151514;--surface:#1f1f1d;--ink:#ecebe6;--muted:#aeada6;--faint:#85847e;--line:#34332f;--accent:#5b9be6;
 --accent-ink:#0d1a2a;--good:#5fd3a2;--good-bg:#173428;--bad:#f08c8c;--bad-bg:#3a1f1f;--chip:#2a2a27;--shadow:none}
+/* one colour per page (calm, not glaring); every accent-coloured control on a page follows it */
+:root{--p-home:#2468c4;--p-photo:#0b7d70;--p-recipes:#6d48c9;--p-pottery:#b85424;--p-scores:#23824b;--p-guide:#946112;--bg:#faf7f2}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--p-home:#6ea6ef;--p-photo:#45c2b1;--p-recipes:#a990f2;--p-pottery:#f0955f;--p-scores:#66cf92;--p-guide:#e2ad52}}
+:root[data-theme="dark"]{--p-home:#6ea6ef;--p-photo:#45c2b1;--p-recipes:#a990f2;--p-pottery:#f0955f;--p-scores:#66cf92;--p-guide:#e2ad52}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "Segoe UI",system-ui,-apple-system,sans-serif}
-header{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--surface)}
-header h1{font-size:18px;margin:0;font-weight:650;letter-spacing:-.01em}
-header .meta{color:var(--muted);font-size:12.5px}
-header .sp{flex:1}
-main{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;padding:16px 20px 40px;max-width:1500px;margin:0 auto}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow);min-width:0}
-.c-img{grid-column:span 5}.c-text{grid-column:span 3}.c-form{grid-column:span 4}.c-full{grid-column:1/-1}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif}
+header.top{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;padding:10px 20px;border-bottom:1px solid var(--line);background:var(--surface)}
+.brand{display:flex;gap:10px;align-items:center;color:var(--ink);text-decoration:none;min-width:0}
+.brand .logo{font-size:28px;line-height:1}
+.brand b{display:block;font-size:18px;letter-spacing:-.01em}
+.brand .meta{display:block;color:var(--muted);font-size:11.5px;max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav{display:flex;flex-wrap:wrap;gap:5px;flex:1;justify-content:center}
+.nav a{--accent:var(--p-home);display:inline-flex;gap:6px;align-items:center;padding:7px 12px;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14px;
+  border:1.5px solid transparent;background:color-mix(in srgb,var(--accent) 9%,transparent)}
+.nav a:hover{border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.nav a.on{background:var(--accent);color:var(--accent-ink)}
+.nav a[data-p=photo]{--accent:var(--p-photo)}.nav a[data-p=recipes]{--accent:var(--p-recipes)}.nav a[data-p=pottery]{--accent:var(--p-pottery)}
+.nav a[data-p=scores]{--accent:var(--p-scores)}.nav a[data-p=guide]{--accent:var(--p-guide)}
+.tools{display:flex;gap:10px;align-items:center}
+.tools .meta{color:var(--muted);font-size:13px}
+main{padding:18px 20px 48px;max-width:1500px;margin:0 auto}
+.page{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.page[hidden]{display:none}
+.page[data-page=home]{--accent:var(--p-home)}.page[data-page=photo]{--accent:var(--p-photo)}.page[data-page=recipes]{--accent:var(--p-recipes)}
+.page[data-page=pottery]{--accent:var(--p-pottery)}.page[data-page=scores]{--accent:var(--p-scores)}.page[data-page=guide]{--accent:var(--p-guide)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);min-width:0}
+.c-img{grid-column:span 6}.c-found{grid-column:span 6}.c-text{grid-column:span 5}.c-form{grid-column:span 7}.c-full{grid-column:1/-1}
+.c-form>.card{height:100%}
+@media (max-width:1100px){.c-found{grid-column:1/-1}}
+/* page intro, start page tiles, examples, quick start */
+.intro{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-radius:14px;font-size:15px;
+  background:color-mix(in srgb,var(--accent) 10%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 28%,transparent)}
+.intro .ii{font-size:26px;line-height:1.1}
+.intro a,.quick a,.gsteps a,#found a,#potphoto a{color:var(--accent);font-weight:600}
+.hero{padding:22px 24px;border-radius:18px;background:linear-gradient(120deg,color-mix(in srgb,var(--p-photo) 14%,var(--surface)),color-mix(in srgb,var(--p-recipes) 14%,var(--surface)) 55%,color-mix(in srgb,var(--p-pottery) 14%,var(--surface)))}
+.hero h2.big{font-size:26px;margin:0 0 6px;display:block}
+.hero p{margin:0;font-size:16px;max-width:860px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.tile{display:flex;flex-direction:column;gap:4px;padding:16px;border-radius:16px;text-decoration:none;color:var(--ink);border:1.5px solid color-mix(in srgb,var(--accent) 30%,transparent);
+  background:color-mix(in srgb,var(--accent) 9%,var(--surface));transition:transform .12s,box-shadow .12s}
+.tile:hover{transform:translateY(-2px);box-shadow:0 6px 18px color-mix(in srgb,var(--accent) 22%,transparent)}
+.tile .ti{font-size:34px;line-height:1}
+.tile b{font-size:17px;color:var(--accent)}
+.tile span:last-child{font-size:13.5px;color:var(--muted)}
+.examples{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-top:6px}
+.ex{display:flex;flex-direction:column;border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg);cursor:pointer;text-align:left;padding:0;font:inherit;color:inherit}
+.ex:hover,.ex:focus-visible{border-color:var(--accent)}
+.ex img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--chip)}
+.ex span{padding:8px 10px 2px;font-weight:650;font-size:14px}
+.ex small{padding:0 10px 10px;color:var(--muted);font-size:12px}
+.quick{margin:4px 0 12px;padding-left:22px;font-size:15px;line-height:1.7}
+.explain{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.explain div{border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--accent) 7%,var(--surface));border:1px solid var(--line)}
+.explain b{display:block;color:var(--accent);margin-bottom:2px}
+.explain span{font-size:13.5px}
+#manframe{width:100%;height:78vh;border:1px solid var(--line);border-radius:12px;background:#fff}
+a>button{color:var(--ink);font-weight:600}
+details.fold>summary{cursor:pointer;font-weight:650;display:flex;gap:8px;align-items:center;list-style:none}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::after{content:"▸ show";margin-left:auto;font-weight:400;font-size:13px;color:var(--muted)}
+details.fold[open]>summary::after{content:"▾ hide"}
+details.fold #formcard{border:0;box-shadow:none;padding:12px 0 0}
+.step{display:flex;gap:8px;align-items:center;font-weight:650;color:var(--ink);font-size:14px;margin:12px 0 6px}
+.sn{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:color-mix(in srgb,var(--accent) 16%,var(--surface));color:var(--accent);font-size:12.5px;font-weight:700;flex:none}
+.gogo{margin-top:14px;flex-wrap:wrap}
+#gk{width:auto;padding:6px 8px}
+.dropbig{font-size:30px;line-height:1;margin-bottom:6px}
+/* what the app found (photo page) */
+.found{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:start}
+.found .thumb{width:120px;height:120px;object-fit:contain;border-radius:12px;border:1px solid var(--line);background:repeating-conic-gradient(#e7e5e0 0 25%,#fff 0 50%) 0 0/12px 12px}
+.fbox{display:grid;gap:10px}
+.frow{border-radius:12px;padding:8px 12px;background:var(--bg);border:1px solid var(--line)}
+.frow .fh{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.02em}
+.frow .fv{font-size:18px;font-weight:700;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.frow .fv .bigsw{width:34px;height:34px;border-radius:8px;border:1px solid rgba(0,0,0,.15)}
+.pbar{display:grid;grid-template-columns:minmax(90px,auto) 1fr 44px;gap:3px 8px;align-items:center;font-size:13.5px;margin-top:4px}
+.pbar .bar{height:9px;border-radius:5px;background:var(--line);overflow:hidden}
+.pbar .bar i{display:block;height:100%;border-radius:5px;background:var(--accent)}
+.pbar .pv{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.next{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.next button{font-size:15px;padding:11px 18px;border-radius:12px;font-weight:650}
+.next .b-rec{background:var(--p-recipes);border-color:var(--p-recipes);color:var(--accent-ink)}
+.next .b-pot{background:var(--p-pottery);border-color:var(--p-pottery);color:var(--accent-ink)}
+.potstrip{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.potstrip img{width:84px;height:84px;object-fit:contain;border-radius:10px;border:1px solid var(--line);background:repeating-conic-gradient(#e7e5e0 0 25%,#fff 0 50%) 0 0/10px 10px}
 .colgrid{display:grid;grid-template-columns:1fr 1.25fr;gap:18px}
 @media (max-width:900px){.colgrid{grid-template-columns:1fr}}
 .cwords{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
@@ -40,21 +116,22 @@ main{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;padding:16px 20p
 .conf b{color:var(--ink);font-weight:600}
 #overlay{cursor:crosshair}
 @media (max-width:1100px){.c-img,.c-text,.c-form{grid-column:1/-1}}
-h2{font-size:14px;margin:0 0 10px;font-weight:650;display:flex;gap:8px;align-items:center}
-h2 .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:12px}
-h2 .opt{font-weight:400;color:var(--faint);font-size:12px}
-label.f{display:block;font-size:12px;color:var(--muted);margin:8px 0 3px}
+h2{font-size:16.5px;margin:0 0 12px;font-weight:700;display:flex;gap:8px;align-items:center}
+h2 .n,summary .n{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 4px;border-radius:13px;background:var(--accent);color:var(--accent-ink);font-size:13px;flex:none}
+h2 .opt{font-weight:400;color:var(--muted);font-size:12.5px}
+label.f{display:block;font-size:13px;color:var(--muted);margin:8px 0 3px}
 input,select,textarea,button{font:inherit;color:inherit}
-input[type=text],input[type=number],input:not([type]),select,textarea{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+input[type=text],input[type=number],input:not([type]),select,textarea{width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:9px;background:var(--bg)}
 textarea{resize:vertical;min-height:54px}
 input:focus,select:focus,textarea:focus,button:focus-visible,#drop:focus{outline:2px solid var(--accent);outline-offset:1px}
-button{padding:7px 12px;border-radius:6px;border:1px solid var(--line);background:var(--chip);cursor:pointer}
-button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600;padding:9px 22px}
+button{padding:7px 13px;border-radius:9px;border:1px solid var(--line);background:var(--chip);cursor:pointer}
+button:hover:not(:disabled){border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:650;padding:10px 24px;font-size:15px;border-radius:11px}
 button:disabled{opacity:.55;cursor:default}
 .row{display:flex;gap:8px;align-items:center}.row>*{min-width:0}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.small{font-size:12px;color:var(--muted)}
-#drop{border:2px dashed var(--line);border-radius:10px;padding:22px 14px;text-align:center;color:var(--muted);cursor:pointer;transition:background .15s,border-color .15s}
+.small{font-size:12.5px;color:var(--muted)}
+#drop{border:2.5px dashed color-mix(in srgb,var(--accent) 45%,var(--line));border-radius:14px;padding:22px 14px;background:color-mix(in srgb,var(--accent) 5%,transparent);text-align:center;color:var(--muted);cursor:pointer;transition:background .15s,border-color .15s}
 #drop.over{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
 #drop b{color:var(--ink)}
 #drop input{display:none}
@@ -69,7 +146,16 @@ button:disabled{opacity:.55;cursor:default}
 .ptip{position:absolute;pointer-events:none;background:rgba(20,20,18,.86);color:#fff;font-size:12px;padding:3px 8px;border-radius:6px;white-space:nowrap;transform:translate(10px,10px)}
 .pickbox{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border:1px solid var(--line);border-radius:8px;padding:8px;margin:6px 0;background:var(--bg)}
 .pickbox .big{width:38px;height:38px;border-radius:6px;border:1px solid var(--line)}
-.pickbox input{width:110px;font-family:ui-monospace,Consolas,monospace}
+.pickbox input{width:190px;font-family:ui-monospace,Consolas,monospace}
+.pksug{flex-basis:100%;border-top:1px dashed var(--line);padding-top:8px}
+.pksug .lead{font-size:13px;margin:2px 0 6px}
+.pksug .lead+.pkchips{margin-bottom:8px}
+.pkchips{display:flex;flex-wrap:wrap;gap:6px}
+.pkc{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:12.5px;font-weight:500;border:1px solid var(--line);border-radius:999px;padding:3px 10px 3px 3px;background:var(--surface);color:var(--ink);cursor:pointer}
+.pkc:hover{border-color:var(--accent)}
+.pkc i{width:22px;height:22px;border-radius:50%;border:1px solid rgba(128,128,128,.4);flex:none}
+.pkc small{color:var(--muted);font-size:11px}
+.pkc.on{border-color:var(--accent);box-shadow:inset 0 0 0 2px var(--accent);font-weight:700}
 .actinfo{font-size:12.5px;margin:2px 0 6px}
 .actinfo b{color:var(--accent)}
 .obj.act{box-shadow:inset 0 0 0 2px #e0b400;border-color:#e0b400}
@@ -130,8 +216,8 @@ details.od summary{cursor:pointer;font-size:12.5px;color:var(--muted);margin:4px
 .ox span{padding:0 6px;font-size:12px;color:var(--muted);min-width:44px}
 .ox input{border:0;border-left:1px solid var(--line);border-radius:0;padding:5px 6px;width:100%}
 .ox input:not(:placeholder-shown){background:color-mix(in srgb,var(--accent) 10%,transparent)}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
-.seg button{border:0;border-radius:0;background:transparent;padding:5px 12px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{border:0;border-radius:0;background:transparent;padding:6px 13px}
 .seg button.on{background:var(--accent);color:var(--accent-ink)}
 .ctl{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:flex-end}
 .wt{display:grid;grid-template-columns:62px 130px 36px;align-items:center;gap:6px;font-size:12.5px}
@@ -146,7 +232,7 @@ details.od summary{cursor:pointer;font-size:12.5px;color:var(--muted);margin:4px
 .stat .s{font-size:12px;color:var(--muted)}
 .yes{color:var(--good)}.no{color:var(--bad)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
-.rc{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column}
+.rc{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column}
 .rc .im{position:relative;aspect-ratio:1;background:var(--chip)}
 .rc .im img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
 .rk{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.66);color:#fff;border-radius:12px;padding:1px 8px;font-size:12px;font-weight:650}
@@ -222,31 +308,63 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
-<header>
-  <h1>Glaze Search</h1>
-  <span class="meta" id="hdr">connecting to the local model…</span>
-  <span class="sp"></span>
-  <a class="meta" id="manuals" href="https://fbiwarninggg-ceramic-review.static.hf.space/docs/index.html" target="_blank" rel="noopener" title="user manual, beginner guide and mind map (PDF)">Manuals (PDF)</a>
-  <button id="theme" title="Switch light / dark">Theme</button>
+<header class="top">
+  <a class="brand" href="#home" title="start page"><span class="logo" aria-hidden="true">🏺</span><span><b>Glaze Search</b><span class="meta" id="hdr">connecting to the local model…</span></span></a>
+  <nav class="nav" id="nav" aria-label="pages">
+    <a href="#home" data-p="home"><span aria-hidden="true">🏠</span>Start</a>
+    <a href="#photo" data-p="photo"><span aria-hidden="true">📷</span>My photo</a>
+    <a href="#recipes" data-p="recipes"><span aria-hidden="true">🧪</span>Glaze recipes</a>
+    <a href="#pottery" data-p="pottery"><span aria-hidden="true">🏺</span>Similar pottery</a>
+    <a href="#scores" data-p="scores"><span aria-hidden="true">📊</span>Scores</a>
+    <a href="#guide" data-p="guide"><span aria-hidden="true">📖</span>How to use</a>
+  </nav>
+  <span class="tools"><a class="meta" id="manuals" href="https://fbiwarninggg-ceramic-review.static.hf.space/docs/index.html" target="_blank" rel="noopener" title="user manual (web page and PDF)">Manual</a>
+  <button id="theme" title="Switch light / dark">Theme</button></span>
 </header>
 <main>
+<!-- ============================================================ start -->
+<section class="page" data-page="home" id="pg-home">
+  <div class="hero c-full">
+    <h2 class="big">Find the glaze recipe behind a pot</h2>
+    <p>Show the app a <b>photo</b> of a pot, a few <b>words</b> or a glaze <b>formula</b>. It tells you the glaze colour, the surface and the shape,
+      and finds <b>real recipes on Glazy</b> that make a similar glaze. Everything runs on this computer.</p>
+  </div>
+  <div class="tiles c-full">
+    <a class="tile" href="#photo" style="--accent:var(--p-photo)"><span class="ti" aria-hidden="true">📷</span><b>1 · My photo</b><span>Drop a photo. The app cuts out each pot and tells you its colour, surface and shape.</span></a>
+    <a class="tile" href="#recipes" style="--accent:var(--p-recipes)"><span class="ti" aria-hidden="true">🧪</span><b>2 · Glaze recipes</b><span>Words, a colour, your photo or a formula → the closest of 7,000 Glazy recipes.</span></a>
+    <a class="tile" href="#pottery" style="--accent:var(--p-pottery)"><span class="ti" aria-hidden="true">🏺</span><b>3 · Similar pottery</b><span>Pots in the database that look like yours: same shape, glaze and colour.</span></a>
+    <a class="tile" href="#scores" style="--accent:var(--p-scores)"><span class="ti" aria-hidden="true">📊</span><b>Scores</b><span>How well the searches worked, added up.</span></a>
+    <a class="tile" href="#guide" style="--accent:var(--p-guide)"><span class="ti" aria-hidden="true">📖</span><b>How to use</b><span>Step by step, with real examples and the manual.</span></a>
+  </div>
+  <section class="card c-full">
+    <h2><span class="n">✨</span>Try an example photo <span class="opt">one click: the photo is loaded and cut out, then you see what the app found</span></h2>
+    <div class="examples" id="exhome"></div>
+  </section>
+</section>
+
+<!-- ============================================================ my photo -->
+<section class="page" data-page="photo" id="pg-photo" hidden>
+  <div class="intro c-full"><span class="ii" aria-hidden="true">📷</span><div><b>Step 1 · Your photo.</b> Drop or paste a photo of a pot (or try an example on the Start page).
+    The app finds every ceramic object, cuts it out and measures it. Click the pot you mean. Then go on to <a href="#recipes">🧪 glaze recipes</a> or <a href="#pottery">🏺 similar pottery</a>.</div></div>
   <section class="card c-img">
     <h2><span class="n">1</span>Photo <span class="opt">drop · Ctrl+V · browse</span></h2>
     <div id="drop" tabindex="0" role="button" aria-label="Add a photo">
+      <div class="dropbig" aria-hidden="true">⬇️</div>
       <div><b>Drop a ceramic photo here</b>, press <b>Ctrl+V</b> to paste a copied image or screenshot,<br>or click to browse.</div>
-      <div class="small" style="margin-top:6px">It is segmented automatically (Grounding DINO + SAM 2.1 + CLIP, same settings as the 7k photos).</div>
+      <div class="small" style="margin-top:6px">It is cut out automatically (Grounding DINO + SAM 2.1 + CLIP, the same settings as the 7k database photos).</div>
       <input type="file" id="file" accept="image/*">
     </div>
     <div class="row" style="margin-top:8px"><input id="url" placeholder="…or an image link (needs internet)"><button id="urlgo">Fetch</button></div>
     <div id="segmsg"></div>
     <div id="segview" hidden>
-      <div class="pmodes"><div class="seg" id="pmode"><button data-pm="select" class="on">Select objects</button><button data-pm="pick">Pick colour (HEX)</button></div>
+      <div class="pmodes"><div class="seg" id="pmode"><button data-pm="select" class="on">👆 Select objects</button><button data-pm="pick">🎨 Pick colour (HEX)</button></div>
         <button class="ib" data-help="selection" title="How object selection works">!</button><span class="small" id="pmhint"></span></div>
       <div class="pstage" id="pstage"><img id="overlay" alt="segmentation result"><canvas id="pcv" aria-label="photo: hover and click objects"></canvas><div class="ptip" id="ptip" hidden></div></div>
-      <div class="pickbox" id="pickbox" hidden><span class="big" id="pkswatch"></span>
-        <div><div class="small" id="pkfrom">picked colour</div><input id="pkhex" maxlength="7" spellcheck="false" aria-label="picked HEX colour"></div>
-        <button id="pkcopy">Copy</button><button id="pkadd" class="primary" style="padding:7px 14px">Add as search colour</button>
-        <button id="pkglaze" title="search glaze recipes with this colour (card G)">Use for glaze search</button><span class="small" id="pkmsg"></span></div>
+      <div class="pickbox" id="pickbox"><span class="big" id="pkswatch"></span>
+        <div><div class="small" id="pkfrom">your colour: pick it on the photo or type it</div><input id="pkhex" maxlength="40" spellcheck="false" autocomplete="off" placeholder="#1D325B or a word: red, sand…" aria-label="colour: a HEX code like #1D325B or a colour word"></div>
+        <button id="pkcopy">Copy</button><button id="pkglaze" class="primary" style="padding:8px 14px" title="search glaze recipes with this colour">🧪 Use for glaze search</button>
+        <button id="pkadd" title="use this colour in the similar pottery search (Colours card)">🏺 Add as pottery search colour</button><span class="small" id="pkmsg"></span>
+        <div class="pksug" id="pksug" hidden aria-live="polite"></div></div>
       <div class="actinfo" id="actinfo"></div>
       <details class="od" id="objdet"><summary>Object list (details)</summary>
       <div class="small" style="margin-bottom:6px">Objects used for the search (click to switch on / off). Default: objects CLIP rates as ceramic (≥ 0.35), otherwise the first object. The yellow frame is the active object.</div>
@@ -255,8 +373,108 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
     </div>
   </section>
 
+  <section class="card c-found" id="foundcard">
+    <h2><span class="n">★</span>What the app found <button class="ib" data-help="found" title="Where these answers come from">!</button></h2>
+    <div id="found"></div>
+  </section>
+
+  <section class="card c-full" id="qcard">
+    <h2><span class="n">1b</span>Your object up close <span class="opt">its colour regions and the six features the AI detects · click a candidate to change it, tick what the similar pots must share</span></h2>
+    <div class="qgrid">
+      <div>
+        <div class="qcv" id="qcv"><canvas id="qcvImg"></canvas><canvas id="qcvOv"></canvas><div class="empty" id="qcvEmpty">Drop or paste a photo above: the selected object appears here with its colour regions.</div></div>
+        <label class="small" style="display:block;margin-top:4px"><input type="checkbox" id="qcvShow" checked> region outlines · click a region: auto → important → ignore</label>
+      </div>
+      <div>
+        <label class="small" style="display:block;margin-bottom:4px"><input type="checkbox" data-feat="colour" checked> <b>match colour</b> (regions you mark important count most)</label>
+        <div id="qregs"></div>
+      </div>
+      <div>
+        <div class="small" id="qattrMsg" style="margin-bottom:4px">Attributes: tick the ones the results should share. Without a photo you can still choose values and search by them.</div>
+        <div id="qattrs"></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ glaze recipes -->
+<section class="page" data-page="recipes" id="pg-recipes" hidden>
+  <div class="intro c-full"><span class="ii" aria-hidden="true">🧪</span><div><b>Glaze recipes.</b> Tell the app what glaze you want: in <b>words</b>, as a <b>colour</b>,
+    from <b>your photo</b> or as a <b>formula</b>. It scores all 7,063 Glazy recipes and shows the closest, with their photos and links.
+    <span class="small">This page finds <b>recipes</b>. <a href="#pottery">🏺 Similar pottery</a> finds <b>pots</b> that look like yours, and has its own text card for that.</span></div></div>
+  <section class="card c-full" id="gcard">
+    <h2><span class="n">G</span>What glaze do you want? <span class="opt">fill in what you know: the rest can stay empty</span>
+      <button class="ib" data-help="glaze" title="How the glaze recipe search works">!</button><span style="flex:1"></span><span class="small" id="gmeta"></span></h2>
+    <div class="gdesc">
+      <label class="f step" for="gtext" style="margin-top:0"><span class="sn">1</span>Describe it in your own words <span class="small">(typos and shorthand are fine, e.g. <i>shinyy cobolt blu ^6 ox, kinda runny</i>)</span></label>
+      <div class="row"><textarea id="gtext" placeholder="glossy cobalt blue, cone 6, oxidation, a bit runny"></textarea><button id="gread">Read it</button></div>
+      <div class="gund" id="gund"></div>
+    </div>
+    <div class="ggrid">
+      <div>
+        <div class="f step" style="margin-top:0"><span class="sn">2</span>Choose a colour</div>
+        <div class="seg" id="gmode"><button data-g="color" class="on">🎨 By name or picker</button><button data-g="image">📷 From my photo</button></div>
+        <div id="gcolor">
+          <label class="f" for="gname">Find a colour by name</label>
+          <input id="gname" placeholder="e.g. cobalt blue, celadon, rust" autocomplete="off">
+          <div class="cwords" id="gnames"></div>
+        </div>
+        <div id="gimage" hidden>
+          <ol class="gsteps">
+            <li>On <a href="#photo">📷 My photo</a>: drop or paste a photo, and click the pot you mean.</li>
+            <li>Switch to <b>🎨 Pick colour</b> and click on the glaze (not bare clay, a shadow or a reflection), then <b>Use for glaze search</b>.</li>
+            <li>Or under <b>Your object up close</b> press <b>glaze</b> next to one of its colour regions.</li>
+          </ol>
+          <div class="small" id="gphoto"></div>
+        </div>
+      </div>
+      <div>
+        <div class="gq"><span class="gsw" id="gsw"></span>
+          <div style="flex:1;min-width:0"><label class="f" for="ghex" style="margin-top:0">Colour (HEX) - correct it if the pick is off</label>
+            <div class="row"><input id="ghex" maxlength="7" spellcheck="false" autocomplete="off"><input type="color" id="gpick" value="#3054a5" aria-label="colour picker" title="colour picker"></div>
+            <div class="small" id="gsrc"></div><div class="small" id="ghexmsg"></div></div></div>
+        <label class="f" for="gcname">Colour word the model reads</label>
+        <input id="gcname" maxlength="40" autocomplete="off">
+        <div class="small" id="gcnote"></div>
+      </div>
+      <div>
+        <div class="f step" style="margin-top:0"><span class="sn">3</span>Firing and surface</div>
+        <label class="f" style="margin-top:2px">Firing cone (Orton: 04 is low fire, 4 is mid fire) · from - to</label>
+        <div class="two"><select id="gcone_lo" aria-label="cone"></select><select id="gcone_hi" aria-label="end of a cone range (optional)"></select></div>
+        <label class="f" for="gsurface">Surface</label><select id="gsurface"></select>
+        <div class="f step"><span class="sn">4</span>How to search</div>
+        <div class="seg" id="gengine"><button data-e="smart" class="on" title="joint model: text + photo + formula + colour + cone + surface">Smart search</button><button data-e="colour" title="text-chemistry model: colour + cone + surface">Colour match</button></div>
+        <div class="atm" id="guse" style="margin-top:6px"><label><input type="checkbox" id="gusetext" checked>text</label><label><input type="checkbox" id="gusecol" checked>colour</label>
+          <label><input type="checkbox" id="guseimg">photo object (My photo)</label><label><input type="checkbox" id="guseform">formula (below)</label></div>
+        <div class="small" id="gwts" style="margin-top:6px"></div>
+        <div class="row gogo"><label class="small" for="gk">Show</label><select id="gk" aria-label="number of recipes to show"><option>3</option><option>5</option><option selected>10</option><option>15</option><option>20</option></select>
+          <span class="small">recipes</span><span style="flex:1"></span><button class="primary" id="ggo">🔍 Find recipes</button></div>
+        <div class="small" id="gmsg" style="text-align:right;margin-top:4px"></div>
+      </div>
+    </div>
+  </section>
+  <details class="card c-full fold" id="gformdet"><summary><span class="n">🧮</span>Add a glaze formula (optional, for experts): oxides in weight % or UMF</summary><div id="formslot-recipes"></div></details>
+  <section class="card c-full" id="gresCard">
+    <h2><span class="n">✓</span>Recipes found <span class="opt">click a photo to open it · <b>View on Glazy</b> opens the recipe</span></h2>
+    <div class="empty" id="gempty">Fill in what you know above and press <b>🔍 Find recipes</b>.</div>
+    <div id="gres" hidden>
+      <div class="gtabs"><div class="seg" id="gtabs" role="tablist"><button data-t="weighted" class="on" role="tab">Best matches</button><button data-t="diverse" role="tab">Explore formulations</button></div>
+        <span class="small" id="gtabnote"></span></div>
+      <div class="kv" id="gquery" style="margin-bottom:8px"></div>
+      <div class="grid" id="ggrid"></div>
+      <div class="small" id="gimgmsg" style="margin-top:8px"></div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ similar pottery -->
+<section class="page" data-page="pottery" id="pg-pottery" hidden>
+  <div class="intro c-full"><span class="ii" aria-hidden="true">🏺</span><div><b>Similar pottery.</b> Finds pots among 12,309 objects cut out of Glazy photos that look like yours,
+    by <b>shape</b>, <b>glaze / surface</b> and <b>colour</b>. Words, a formula and colours below are optional extras.
+    <span class="small">To find <b>recipes</b> for a colour, use <a href="#recipes">🧪 Glaze recipes</a>.</span></div></div>
+  <section class="card c-full" id="potphoto"></section>
   <section class="card c-text">
-    <h2><span class="n">2</span>Text <span class="opt">narrows the type</span></h2>
+    <h2><span class="n">2</span>Words about the pot <span class="opt">optional · narrows the type</span></h2>
     <label class="f" for="subtype">Subtype</label>
     <input id="subtype" list="subtypes" placeholder="e.g. glaze - iron - celadon"><datalist id="subtypes"></datalist>
     <label class="f">Firing cone</label>
@@ -275,9 +493,9 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
     </div>
     <div class="kv" id="textused" style="margin-top:8px"></div>
   </section>
-
-  <section class="card c-form">
-    <h2><span class="n">3</span>Formula <span class="opt">oxides, optional ingredients</span></h2>
+  <div class="c-form" id="formslot-pottery">
+  <section class="card" id="formcard">
+    <h2><span class="n">3</span>Formula <span class="opt">optional · oxides, optional ingredients</span></h2>
     <div class="row" style="justify-content:space-between">
       <div class="seg" id="unit"><button data-u="wt" class="on">weight %</button><button data-u="umf">UMF</button></div>
       <button id="oxclear">Clear</button>
@@ -290,82 +508,10 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
     <textarea id="ings" placeholder="Custer Feldspar 41&#10;Silica 17&#10;+ Red Iron Oxide 8   (+ = addition)"></textarea>
     <div class="kv" id="formout" style="margin-top:8px"></div>
   </section>
-
-  <section class="card c-full" id="qcard">
-    <h2><span class="n">1b</span>Your object <span class="opt">Grounding DINO finds the main object · its colour regions · the six attributes it detects (edit them, tick what must match)</span></h2>
-    <div class="qgrid">
-      <div>
-        <div class="qcv" id="qcv"><canvas id="qcvImg"></canvas><canvas id="qcvOv"></canvas><div class="empty" id="qcvEmpty">Drop or paste a photo (card 1): the selected object appears here with its colour regions.</div></div>
-        <label class="small" style="display:block;margin-top:4px"><input type="checkbox" id="qcvShow" checked> region outlines · click a region: auto → important → ignore</label>
-      </div>
-      <div>
-        <label class="small" style="display:block;margin-bottom:4px"><input type="checkbox" data-feat="colour" checked> <b>match colour</b> (regions you mark important count most)</label>
-        <div id="qregs"></div>
-      </div>
-      <div>
-        <div class="small" id="qattrMsg" style="margin-bottom:4px">Attributes: tick the ones the results should share. Without a photo you can still choose values and search by them.</div>
-        <div id="qattrs"></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="card c-full" id="gcard">
-    <h2><span class="n">G</span>Glaze recipes <span class="opt">describe it, pick a colour on a photo or give a formula → the closest Glazy recipes</span>
-      <button class="ib" data-help="glaze" title="How the glaze recipe search works">!</button><span style="flex:1"></span><span class="small" id="gmeta"></span></h2>
-    <div class="gdesc">
-      <label class="f" for="gtext" style="margin-top:0">Describe it - any words, typos and shorthand are fine (e.g. <i>shinyy cobolt blu ^6 ox, kinda runny</i>)</label>
-      <div class="row"><textarea id="gtext" placeholder="glossy cobalt blue, cone 6, oxidation, a bit runny"></textarea><button id="gread">Read it</button></div>
-      <div class="gund" id="gund"></div>
-    </div>
-    <div class="ggrid">
-      <div>
-        <div class="seg" id="gmode"><button data-g="color" class="on">Search by colour</button><button data-g="image">Search by photo</button></div>
-        <div id="gcolor">
-          <label class="f" for="gname">Find a colour by name</label>
-          <input id="gname" placeholder="e.g. cobalt blue, celadon, rust" autocomplete="off">
-          <div class="cwords" id="gnames"></div>
-        </div>
-        <div id="gimage" hidden>
-          <ol class="gsteps">
-            <li>Card 1: drop or paste a photo - SAM outlines every object.</li>
-            <li><b>Select objects</b>: click the pot you mean.</li>
-            <li><b>Pick colour (HEX)</b>: click on the glaze (not bare clay, a shadow or a reflection), then <b>Use for glaze search</b>.</li>
-            <li>Or in card 1b press <b>glaze</b> next to one of the object's colour regions.</li>
-          </ol>
-          <div class="small" id="gphoto"></div>
-        </div>
-      </div>
-      <div>
-        <div class="gq"><span class="gsw" id="gsw"></span>
-          <div style="flex:1;min-width:0"><label class="f" for="ghex" style="margin-top:0">Colour (HEX) - correct it if the pick is off</label>
-            <div class="row"><input id="ghex" maxlength="7" spellcheck="false" autocomplete="off"><input type="color" id="gpick" value="#3054a5" aria-label="colour picker" title="colour picker"></div>
-            <div class="small" id="gsrc"></div><div class="small" id="ghexmsg"></div></div></div>
-        <label class="f" for="gcname">Colour word the model reads</label>
-        <input id="gcname" maxlength="40" autocomplete="off">
-        <div class="small" id="gcnote"></div>
-      </div>
-      <div>
-        <label class="f" style="margin-top:0">Firing cone (Orton: 04 is low fire, 4 is mid fire) · from - to</label>
-        <div class="two"><select id="gcone_lo" aria-label="cone"></select><select id="gcone_hi" aria-label="end of a cone range (optional)"></select></div>
-        <label class="f" for="gsurface">Surface</label><select id="gsurface"></select>
-        <div class="seg" id="gengine" style="margin-top:12px"><button data-e="smart" class="on" title="joint model: text + photo + formula + colour + cone + surface">Smart search</button><button data-e="colour" title="text-chemistry model: colour + cone + surface">Colour match</button></div>
-        <div class="atm" id="guse" style="margin-top:6px"><label><input type="checkbox" id="gusetext" checked>text</label><label><input type="checkbox" id="gusecol" checked>colour</label>
-          <label><input type="checkbox" id="guseimg">photo object (card 1)</label><label><input type="checkbox" id="guseform">formula (card 3)</label></div>
-        <div class="small" id="gwts" style="margin-top:6px"></div>
-        <div class="row" style="margin-top:10px;justify-content:space-between;flex-wrap:wrap"><span class="small" id="gmsg"></span><button class="primary" id="ggo">Find recipes</button></div>
-      </div>
-    </div>
-    <div id="gres" hidden>
-      <div class="gtabs"><div class="seg" id="gtabs" role="tablist"><button data-t="weighted" class="on" role="tab">Best matches</button><button data-t="diverse" role="tab">Explore formulations</button></div>
-        <span class="small" id="gtabnote"></span></div>
-      <div class="kv" id="gquery" style="margin-bottom:8px"></div>
-      <div class="grid" id="ggrid"></div>
-      <div class="small" id="gimgmsg" style="margin-top:8px"></div>
-    </div>
-  </section>
+  </div>
 
   <section class="card c-full" id="colcard">
-    <h2><span class="n">4</span>Colours <span class="opt">Color Search Lab V3: words · HEX · photo picker (card 1) · phrases — region-aware, not just the biggest colour</span></h2>
+    <h2><span class="n">4</span>Colours <span class="opt">optional · words, HEX, the photo picker or phrases (Color Search Lab V3) - region-aware, not just the biggest colour</span></h2>
     <div class="colgrid">
       <div>
         <label class="f" for="cphrase" style="margin-top:0">Describe the colours and where they are</label>
@@ -375,23 +521,24 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
         <div class="row"><input id="cword" placeholder="e.g. celadon, rust, sand"><input id="chex" placeholder="#RRGGBB" style="width:96px">
           <input type="color" id="cpick" value="#a0be9e" title="pick a colour" style="width:42px;padding:0;height:32px"><button id="chexadd">Add</button></div>
         <div class="cwords" id="cwords"></div>
-        <div class="small" style="margin-top:6px">From the photo: in card 1 switch to <b>Pick colour (HEX)</b>, click the object, then <b>Add as search colour</b>.</div>
+        <div class="small" style="margin-top:6px">From the photo: on <a href="#photo">📷 My photo</a> switch to <b>Pick colour (HEX)</b>, click the object, then <b>Add as pottery search colour</b>.</div>
       </div>
       <div>
         <div class="row" style="justify-content:space-between;flex-wrap:wrap;gap:6px"><span class="small">Colours used by the colour component</span>
           <span class="seg" id="csrc"><button data-c="photo" class="on">from the photo</button><button data-c="typed">typed / picked</button></span></div>
         <div id="clist" class="clist"></div>
-        <label class="small" style="display:block;margin-top:8px"><input type="checkbox" id="cfam"> a colour of the same family counts as a colour match (Color Lab V3 families)</label>
+        <label class="small" style="display:block;margin-top:8px"><input type="checkbox" id="cfam"> a colour of the same family counts as a colour match (Color Lab V3 families; changes the evaluation only)</label>
         <div id="crelBox"></div>
       </div>
     </div>
   </section>
 
   <section class="card c-full">
+    <h2><span class="n">5</span>Search <span class="opt">choose what matters most, then press Search</span></h2>
     <div class="ctl">
       <div>
         <div class="small" style="margin-bottom:4px">Search</div>
-        <div class="seg" id="stype"><button data-t="objects" class="on">Objects</button><button data-t="recipes">Recipes (previous model)</button></div>
+        <div class="seg" id="stype"><button data-t="objects" class="on">Objects</button><button data-t="recipes" title="the team's earlier image + text + formula model, kept for comparison">Recipes (older model)</button></div>
         <div class="seg" id="smode" style="margin-top:6px"><button data-m="balanced" class="on">Balanced</button><button data-m="shape">Shape</button><button data-m="glaze">Glaze / surface</button><button data-m="colour">Colour</button></div>
         <div class="small" id="mweights" style="margin-top:4px;max-width:520px"></div>
         <div id="priobox">
@@ -415,7 +562,7 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
         <button id="wreset" style="margin-top:4px;padding:3px 10px;font-size:12px">Reset weights</button>
       </div>
       <div>
-        <label class="small" for="ksel" style="display:block;margin-bottom:4px">Top K (Hit / Precision / Recall @K)</label>
+        <label class="small" for="ksel" style="display:block;margin-bottom:4px">Show top K (Hit / Precision / Recall @K)</label>
         <select id="ksel"><option>3</option><option>5</option><option selected>10</option><option>15</option><option>20</option></select>
       </div>
       <div style="width:210px">
@@ -424,23 +571,38 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
       </div>
       <div class="sp" style="flex:1"></div>
       <div style="text-align:right">
-        <button class="primary" id="go">Search</button>
+        <button class="primary" id="go">🔍 Search</button>
         <div class="small" id="gomsg" style="margin-top:4px"></div>
       </div>
     </div>
   </section>
 
   <section class="card c-full" id="rescard">
-    <h2>Results</h2>
+    <h2><span class="n">✓</span>Pots found <button class="ib" data-help="evaluation" title="How each search is evaluated">!</button></h2>
     <div class="stats" id="stats"></div>
-    <div id="results"><div class="empty">Add a photo, some tags or a formula, then press Search (or Enter).</div></div>
+    <div id="results"><div class="empty">Add a photo (or some words, a formula or colours), then press 🔍 Search.</div></div>
     <div class="row" style="margin-top:12px;justify-content:space-between">
       <span class="small">“Rule” = automatic relevance used in the report: colour within ΔE2000 20 of your photo and the cone / surface / transparency you entered match.
         Your marks are your own judgement.</span>
       <button id="savemarks" disabled>Save my marks to the log</button>
     </div>
   </section>
+</section>
 
+<!-- ============================================================ scores -->
+<section class="page" data-page="scores" id="pg-scores" hidden>
+  <div class="intro c-full"><span class="ii" aria-hidden="true">📊</span><div><b>Scores.</b> Every <a href="#pottery">🏺 similar pottery</a> search is checked automatically
+    and added up here: <i>did a matching pot show up near the top?</i> Glaze recipe searches are logged separately and are not in this table.</div></div>
+  <section class="card c-full">
+    <h2><span class="n">?</span>How to read the scores</h2>
+    <div class="explain">
+      <div><b>✓ match / ✗ no match</b><span>A result <i>matches</i> on <b>shape</b> when it has the same form (cup = cup), on <b>glaze</b> when its surface group is the same (glossy / satin / matte), on <b>colour</b> when it is within ΔE 20 of your colour. <b>Strict</b> = all three at once.</span></div>
+      <div><b>Hit Rate@K</b><span>In how many of your searches was <i>at least one</i> matching pot in the top K? 90 % at K = 3: nine searches in ten had a match in the first three.</span></div>
+      <div><b>P@K (precision)</b><span>Of the top K pots, how many match? 7 of the top 10 = 70 %.</span></div>
+      <div><b>nDCG</b><span>0 to 1: are the best matches at the very top? 1 = the best possible order.</span></div>
+      <div><b>Recall@K</b><span>Only when you typed the true Glazy recipe ID: how many of that recipe's own pots reached the top K.</span></div>
+    </div>
+  </section>
   <section class="card c-full">
     <h2>Session evaluation <span class="opt">all searches in work/queries/session_log.json</span> <button class="ib" data-help="metrics" title="What Hit Rate, Precision, Recall and nDCG mean">!</button></h2>
     <div class="tw" id="sess"></div>
@@ -450,6 +612,30 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
       <a href="/api/log.csv" download><button>Export CSV</button></a>
     </div>
   </section>
+</section>
+
+<!-- ============================================================ how to use -->
+<section class="page" data-page="guide" id="pg-guide" hidden>
+  <div class="intro c-full"><span class="ii" aria-hidden="true">📖</span><div><b>How to use.</b> Five steps, then real examples: what the app found for each photo, the top recipes and pots, and what every number means.</div></div>
+  <section class="card c-full">
+    <h2><span class="n">🚀</span>Quick start</h2>
+    <ol class="quick">
+      <li><b>Start the app:</b> double-click <code>RUN_GLAZE_SEARCH.bat</code> and keep its black window open. This page opens by itself (http://127.0.0.1:8770).</li>
+      <li><b>📷 My photo:</b> drop, paste or browse a photo, or click one of the examples below. Click the pot you mean (yellow outline).</li>
+      <li><b>Read what the app found:</b> the glaze colour, the shape and the surface, each with how sure the model is.</li>
+      <li><b>🧪 Glaze recipes:</b> press <i>Find glaze recipes</i>. Add words (<i>satin, cone 6</i>) to steer it. Open a recipe with <b>View on Glazy</b>.</li>
+      <li><b>🏺 Similar pottery:</b> press <i>Find similar pottery</i>, try the presets (Balanced, Shape, Glaze, Colour), and see ✓ / ✗ for each pot.</li>
+    </ol>
+    <div class="examples" id="exguide"></div>
+  </section>
+  <section class="card c-full">
+    <h2><span class="n">📘</span>The manual <span class="opt">worked examples, every number explained</span><span style="flex:1"></span>
+      <a id="manopen" href="/manual/CG2_Glaze_Search_Manual.html" target="_blank" rel="noopener"><button>Open in a new tab</button></a>
+      <a id="manpdf" href="/manual/CG2_Glaze_Search_Manual.pdf" target="_blank" rel="noopener"><button>PDF</button></a></h2>
+    <iframe id="manframe" title="Glaze Search manual" loading="lazy"></iframe>
+    <div class="small" id="manmsg"></div>
+  </section>
+</section>
 </main>
 <div class="mdl" id="mdl" hidden role="dialog" aria-modal="true" aria-labelledby="mdlt"><div class="mdlbox"><button class="x" id="mdlx" aria-label="close">✕</button><div id="mdlbody"></div></div></div>
 
@@ -494,6 +680,7 @@ async function init() {
   const m = META.model, t = META.timings || {};
   const os_ = META.object_search;
   $("hdr").textContent = `${os_ ? os_.objects.toLocaleString() + " segmented objects · " : ""}${META.gallery.toLocaleString()} recipes · model: image ${m.image}, text ${m.text}, formula ${m.formula} (${m.dim}-d) · GPU ${t.gpu_GB ?? "?"} GB · runs offline`;
+  $("hdr").title = $("hdr").textContent;
   if (!/^(127\.0\.0\.1|localhost)$/.test(location.hostname))       // the online Space (Hugging Face ZeroGPU)
     $("hdr").textContent = `${os_ ? os_.objects.toLocaleString() + " segmented objects · " : ""}${META.gallery.toLocaleString()} recipes · online demo on Hugging Face's free GPU: `
       + `each visitor has a small daily GPU allowance (a new photo uses about 2 - 30 s of it; most searches use none)`
@@ -555,6 +742,7 @@ function sendFile(f, source) {
 }
 function showSegMsg(t, err) { $("segmsg").innerHTML = `<div class="msg${err ? " err" : ""}">${t}</div>`; }
 async function segment(body) {
+  if (PAGE !== "photo") go("photo");
   showSegMsg(`<span class="busy"></span>Segmenting… (Grounding DINO + SAM 2.1 + CLIP on the GPU)`);
   try {
     const r = await api("/api/segment", body);
@@ -579,7 +767,7 @@ let ACT = null, PMODE = "select", LBL = null, HOV = 0, PICK = null;
 function activeObj() { return ACT != null && SEL.has(ACT) ? ACT : ([...SEL][0] ?? null); }
 function objOf(i) { return OBJS.find(o => o.index === i); }
 async function loadLabels(url) {
-  LBL = null; HOV = 0; $("ptip").hidden = true; $("pickbox").hidden = true;
+  LBL = null; HOV = 0; $("ptip").hidden = true;
   if (url) {
     try {
       const im = new Image(); im.src = url + "?t=" + Date.now(); await im.decode();
@@ -600,7 +788,6 @@ function setPMode(m) {
   PMODE = m;
   [...$("pmode").children].forEach(b => b.classList.toggle("on", b.dataset.pm === m));
   $("pstage").classList.toggle("pick", m === "pick");
-  $("pickbox").hidden = m !== "pick" || !PICK;
   $("pmhint").textContent = !LBL ? "This photo has no object map (uploaded earlier) - use the object list below."
     : m === "select" ? "Hover to see an object · click = use it · Ctrl+click = add / remove more"
     : "Click on the photo: the colour is averaged inside the object under the cursor";
@@ -688,20 +875,76 @@ async function pickColour(e, v) {
   $("pkfrom").textContent = (v ? `object #${v} · median of ${keep.length} pixel(s) inside its outline` : `outside every object · median of ${keep.length} pixel(s)`) +
     (cut ? ` (brightest and darkest ${cut} left out)` : "");
   $("pkmsg").innerHTML = v ? "" : `<span class="no">not on a ceramic object — background colour?</span>`;
-  $("pickbox").hidden = false;
+  PKC = {hex, label: v ? `picked on object #${v}` : "picked on photo", src: v ? `the photo: picked on object #${v}` : "the photo (picked outside every object)"};
+  PKSEQ++; $("pksug").hidden = true;
+}
+// the colour box: a picked colour, a typed HEX (# + 6 characters) or a colour word -> /api/colour_lookup (mm/colorlab.py: the
+// ColorThief colour names + Color Lab V3, compared in CIELAB with CIEDE2000): a word shows its colour + 10 related colours,
+// a typo 5 guesses (click one); PKC is the colour the buttons use
+let PKC = null, PKSEQ = 0, PKT = 0;
+const PKHEX = /^#?([0-9a-f]{6})$/i, PKNEED = "pick a colour on the photo, or type #1D325B or a colour word";
+const PKFAM = ["red", "orange", "yellow", "green", "blue", "purple", "pink", "brown", "black", "white", "gray", "cream"];
+function pkHex() { const m = $("pkhex").value.trim().match(PKHEX); return m ? "#" + m[1].toUpperCase() : (PKC ? PKC.hex : null); }
+function pkChoose(hex, label, src, el) {
+  PKC = {hex, label, src}; $("pkswatch").style.background = hex; $("pkfrom").textContent = `${label} · ${hex}`; $("pkmsg").textContent = "";
+  document.querySelectorAll("#pksug .pkc[data-hex]").forEach(b => b.classList.toggle("on", b === el));
+}
+const pkChip = (c, cls = "") => `<button class="pkc${cls}" data-hex="${c.hex}" data-name="${esc(c.name)}"
+  title="${esc(c.name)} ${c.hex} · ${c.family} family · ${esc(c.source)}${c.dE00 != null ? ` · ΔE00 ${c.dE00} from your colour (smaller = closer)` : ""}"><i style="background:${c.hex}"></i>${esc(c.name)}${c.dE00 != null ? ` <small>ΔE ${c.dE00}</small>` : ""}</button>`;
+async function pkLookup(q) {
+  const s = ++PKSEQ, box = $("pksug");
+  let r;
+  try { r = await (await fetch("/api/colour_lookup?q=" + encodeURIComponent(q))).json(); }
+  catch (e) { r = {kind: "none", message: "colour words need the newest app: close the black window and start RUN_GLAZE_SEARCH.bat again"}; }
+  if (s !== PKSEQ) return;                                  // a newer key press won
+  if (r.kind === "hex") {
+    PKC = {hex: r.hex, label: "typed HEX", src: "a typed HEX code"}; $("pkswatch").style.background = r.hex;
+    $("pkfrom").textContent = `typed HEX · looks like ${r.name.name} (ΔE ${r.name.dE00})`; box.hidden = true; return;
+  }
+  box.hidden = false;
+  if (r.kind === "word") {
+    const c = r.colour, src = n => `the colour word "${r.query}"` + (n === c.name ? "" : ` → ${n}`);
+    box.innerHTML = `<div class="lead">🎨 <b>${esc(r.query)}</b> = ${esc(c.how)}${r.same.length ? ` · also called ${r.same.map(esc).join(", ")}` : ""}</div>
+      <div class="pkchips">${pkChip(c, " on")}</div>
+      <div class="lead">✨ <b>${r.related.length} related colours</b>, closest first${PKFAM.includes(String(r.query).trim().toLowerCase().replace("grey", "gray")) ? ` (the ${c.family} family first)` : ""}.
+        ΔE = colour difference in CIELAB (CIEDE2000): under 5 looks almost the same, over 20 clearly different. Click one to use it.</div>
+      <div class="pkchips">${r.related.map(x => pkChip(x)).join("")}</div>`;
+    box.querySelectorAll(".pkc[data-hex]").forEach(b => b.dataset.src = src(b.dataset.name));
+    pkChoose(c.hex, c.name, src(c.name), box.querySelector(".pkc"));
+  } else {
+    PKC = null; $("pkswatch").style.background = "transparent"; $("pkfrom").textContent = "no colour chosen yet";
+    box.innerHTML = r.kind === "guess"
+      ? `<div class="lead">🤔 <b>${esc(r.unknown || r.query)}</b> is not a colour name I know. Did you mean…</div>
+         <div class="pkchips">${r.guesses.map(g => `<button class="pkc" data-say="${esc(g.say)}" title="${esc(g.name)} ${g.hex} · ${esc(g.source)}"><i style="background:${g.hex}"></i>${esc(g.say)}</button>`).join("")}</div>`
+      : `<div class="lead">🤔 ${esc(r.message)}</div>`;
+  }
 }
 $("pkhex").addEventListener("input", e => {
-  let h = e.target.value.trim(); if (!h.startsWith("#")) h = "#" + h;
-  if (okHex(h)) { $("pkswatch").style.background = h; $("pkmsg").textContent = ""; } else $("pkmsg").textContent = "HEX must look like #A1B2C3";
+  const v = e.target.value.trim(), m = v.match(PKHEX);
+  clearTimeout(PKT); $("pkmsg").textContent = "";
+  if (!v) { PKSEQ++; $("pksug").hidden = true; return; }
+  if (m) { $("pkswatch").style.background = "#" + m[1]; PKC = {hex: "#" + m[1].toUpperCase(), label: "typed HEX", src: "a typed HEX code"}; $("pksug").hidden = true; }
+  else if (v.startsWith("#")) { PKSEQ++; $("pksug").hidden = true; $("pkmsg").textContent = "a HEX code is # and 6 characters 0-9 / A-F, like #1D325B"; return; }
+  PKT = setTimeout(() => pkLookup(v), m ? 0 : 250);
+});
+$("pkhex").addEventListener("keydown", e => {
+  if (e.key !== "Enter") return;
+  e.preventDefault(); clearTimeout(PKT); if (e.target.value.trim()) pkLookup(e.target.value.trim());
+});
+$("pksug").addEventListener("click", e => {
+  const b = e.target.closest(".pkc"); if (!b) return;
+  if (b.dataset.say) { $("pkhex").value = b.dataset.say; pkLookup(b.dataset.say); return; }
+  pkChoose(b.dataset.hex, b.dataset.name, b.dataset.src, b);
 });
 $("pkcopy").addEventListener("click", async () => {
-  try { await navigator.clipboard.writeText($("pkhex").value.trim()); $("pkmsg").textContent = "copied"; } catch { $("pkhex").select(); $("pkmsg").textContent = "press Ctrl+C to copy"; }
+  const h = pkHex(); if (!h) { $("pkmsg").textContent = PKNEED; return; }
+  try { await navigator.clipboard.writeText(h); $("pkmsg").textContent = "copied " + h; } catch { $("pkhex").select(); $("pkmsg").textContent = "press Ctrl+C to copy"; }
 });
 $("pkadd").addEventListener("click", () => {
-  let h = $("pkhex").value.trim(); if (!h.startsWith("#")) h = "#" + h;
-  if (!okHex(h)) { $("pkmsg").textContent = "HEX must look like #A1B2C3"; return; }
-  addColour({hex: h.toUpperCase(), label: PICK && PICK.obj ? `picked on object #${PICK.obj}` : "picked on photo"});
-  $("pkmsg").innerHTML = `added to card 4 · it is used when card 4 is set to <b>typed / picked</b>`;
+  const h = pkHex();
+  if (!h) { $("pkmsg").textContent = PKNEED; return; }
+  addColour({hex: h, label: PKC && PKC.hex === h ? PKC.label : "typed HEX"});
+  $("pkmsg").innerHTML = `added to <a href="#pottery">🏺 Similar pottery</a> → Colours · used when it is set to <b>typed / picked</b>`;
 });
 function renderActInfo() {
   const a = activeObj();
@@ -754,7 +997,7 @@ for (const m of ["image", "text", "formula"]) $("w_" + m).addEventListener("inpu
 $("wreset").addEventListener("click", () => setWeights(META.weights));
 $("ksel").addEventListener("change", e => { K = +e.target.value; if (LAST) render(); });
 $("go").addEventListener("click", search);
-document.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && document.activeElement?.tagName !== "TEXTAREA" && !BUSY) { const t = document.activeElement?.tagName; if (t === "INPUT" || t === "SELECT" || t === "BODY") { e.preventDefault(); search(); } } });
+document.addEventListener("keydown", e => { if (e.key === "Enter" && PAGE === "pottery" && !e.shiftKey && document.activeElement?.tagName !== "TEXTAREA" && !BUSY) { const t = document.activeElement?.tagName; if (t === "INPUT" || t === "SELECT" || t === "BODY") { e.preventDefault(); search(); } } });
 
 let AGAIN = false;          // a search asked for while another one runs is done right after it
 async function searchRecipes() {
@@ -1055,8 +1298,9 @@ function objCard(x) {
   <div><b>${esc(x.object_id)}.jpg</b> <span class="small">(photo ${esc(x.parent || "")})</span> · <a href="${esc(x.url)}" target="_blank" rel="noopener">Glazy #${esc(x.recipe_id)}</a></div>
   <div class="tags">${esc(x.subtype || "?")}<br>${cone} · ${esc(x.surface || "surface ?")} · ${esc(x.transparency || "transparency ?")}</div>
   <div>${cm} ${rule} ${rev}</div>${evalChips(x)}${featMatches(x)}
+  <details class="ging"><summary>Why this rank? · score ${x.score.toFixed(2)}</summary>
   <div class="small" style="margin-top:2px">Similarity per component (raw, not a probability) · final score ${x.score.toFixed(2)}:</div><div class="simt">${simHtml}</div>${contribBars(x)}
-  <div class="conf"><div class="small">Classifier confidence / provenance:</div>${conf || "-"}</div>
+  <div class="conf"><div class="small">Classifier confidence / provenance:</div>${conf || "-"}</div></details>
   <div class="mk"><button class="y${m === true ? " on" : ""}" data-id="${esc(x.object_id)}" data-v="1">✓ relevant</button><button class="n${m === false ? " on" : ""}" data-id="${esc(x.object_id)}" data-v="0">✗ not</button></div></div></div>`;
 }
 
@@ -1390,11 +1634,11 @@ async function gMoreWords(t) {         // not a word of the model: Color Lab V3'
 function gMode(m) {
   [...$("gmode").children].forEach(b => b.classList.toggle("on", b.dataset.g === m));
   $("gcolor").hidden = m !== "color"; $("gimage").hidden = m !== "image";
-  $("gphoto").innerHTML = !QID ? "No photo yet - drop one in card 1." : `Photo ${esc(QID)} · ${OBJS.length} object(s) · active object #${activeObj() ?? "-"}`;
+  $("gphoto").innerHTML = !QID ? `No photo yet - add one on <a href="#photo">📷 My photo</a>.` : `Photo ${esc(QID)} · ${OBJS.length} object(s) · active object #${activeObj() ?? "-"}`;
 }
 function gUse(hex, src) {             // a colour from the photo (picker or colour region) -> card G
   gMode("image"); GAUTO = true; gSetHex(hex, {src}); $("guseimg").checked = true; $("gusecol").checked = true;
-  $("gcard").scrollIntoView({behavior: "smooth", block: "start"});
+  go("recipes");
 }
 async function gSearch() {
   if (GENG === "smart" && $("gusetext").checked) {           // read new text first: it can set the colour, cone and surface below
@@ -1405,7 +1649,7 @@ async function gSearch() {
   if (!hex) { $("ghexmsg").innerHTML = `<span class="no">HEX must look like #3054A5</span>`; return; }
   const lo = $("gcone_lo").value, hi = $("gcone_hi").value;
   const body = {hex, color_name: GAUTO ? "" : $("gcname").value.trim(), cone: lo && hi && hi !== lo ? `${lo} - ${hi}` : (lo || hi),
-                surface: $("gsurface").value, top_k: 10};
+                surface: $("gsurface").value, top_k: +$("gk").value || 10};
   $("ggo").disabled = true; $("gmsg").innerHTML = `<span class="busy"></span>scoring ${GOPT ? GOPT.recipes.toLocaleString() : ""} recipes…`;
   const t0 = performance.now();
   try {
@@ -1426,7 +1670,7 @@ async function gSearch() {
 }
 function gRender() {
   if (!GRES) return;
-  $("gres").hidden = false;
+  $("gres").hidden = false; $("gempty").hidden = true;
   const lst = GTAB === "diverse" ? GRES.diverse_results : GRES.weighted_results, q = GRES.query;
   [...$("gtabs").children].forEach(b => { b.classList.toggle("on", b.dataset.t === GTAB); b.setAttribute("aria-selected", b.dataset.t === GTAB); });
   $("gtabnote").innerHTML = GTAB === "diverse"
@@ -1486,6 +1730,7 @@ $("gcname").addEventListener("input", () => {
   if (GAUTO) gSetHex($("ghex").value);
 });
 $("ggo").addEventListener("click", gSearch);
+$("gk").addEventListener("change", () => { if (GRES) gSearch(); });
 $("gread").addEventListener("click", gRead);
 $("gengine").addEventListener("click", e => { const b = e.target.closest("button"); if (b && !b.disabled) gEngine(b.dataset.e); });
 $("gund").addEventListener("click", e => {                 // a suggested tag: use it
@@ -1504,9 +1749,9 @@ $("gcard").addEventListener("keydown", e => {              // Enter here searche
 });
 $("gtabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { GTAB = b.dataset.t; gRender(); } });
 $("pkglaze").addEventListener("click", () => {
-  const h = gHex($("pkhex").value);
-  if (!h) { $("pkmsg").textContent = "HEX must look like #A1B2C3"; return; }
-  gUse(h, PICK && PICK.obj ? `the photo: picked on object #${PICK.obj}` : "the photo (picked outside every object)");
+  const h = pkHex();
+  if (!h) { $("pkmsg").textContent = PKNEED; return; }
+  gUse(h, PKC && PKC.hex === h ? PKC.src : "a typed HEX code");
 });
 
 // ---------------------------------------------------------------- (!) help and (i) attribute explanations
@@ -1538,8 +1783,13 @@ const HELP = {
     <h4>Pick colour (HEX)</h4>
     <p>Switch the photo to <b>Pick colour</b> and click: the colour is the median of a 13 × 13 pixel square, using <b>only the pixels inside the object under the cursor</b>
     (background is left out); the brightest and darkest 15 % of them (reflections, shadows) are left out first. You see the HEX value, can edit or copy it,
-    <b>Add as search colour</b> puts it in card 4 - it is used when card 4 is set to <i>typed / picked</i> - and <b>Use for glaze search</b> sends it to card G.
-    Clicking outside every object still gives a colour, with a warning.</p>`,
+    <b>Add as pottery search colour</b> puts it in the Colours card of 🏺 Similar pottery (used when that card is set to <i>typed / picked</i>), and <b>Use for glaze search</b> opens 🧪 Glaze recipes with it.
+    Clicking outside every object still gives a colour, with a warning.</p>
+    <h4>Type a colour instead</h4>
+    <table><tr><th>You type</th><th>What happens</th></tr>
+    <tr><td><b>#</b> and 6 characters 0-9 / A-F, e.g. <code>#1D325B</code></td><td>that colour is used as it is; the box says which named colour it looks like</td></tr>
+    <tr><td>a colour word, e.g. <code>red</code>, <code>sand</code>, <code>celadon</code>, <code>dark sand</code>, <code>reddish brown</code></td><td>its colour is chosen, plus <b>10 related colours</b> to click: the named colours closest to it in CIELAB (CIEDE2000 ΔE; the ColorThief names that <i>What the app found</i> uses, then Color Lab V3); for a family word (red, blue, black …) that family comes first. <i>light, dark, pale, deep, bright, muted</i> change the lightness / colourfulness in CIELAB; two colour words are mixed 1/3 + 2/3</td></tr>
+    <tr><td>a typo, e.g. <code>blu</code>, <code>brwn</code>, <code>dark blu</code></td><td><b>5 guesses</b> (names that look like it); click one and it works like a colour word</td></tr></table>`,
   glaze: () => {
     const w = (GOPT && GOPT.weights) || {latent: 0.4, color: 0.4, surface: 0.1, cone: 0.1}, mpc = GOPT ? GOPT.max_per_cluster : 2;
     const sw = (GOPT && GOPT.smart && GOPT.smart.weights) || {}, ev = (GOPT && GOPT.smart && GOPT.smart.eval) || {};
@@ -1674,6 +1924,126 @@ async function fillRef(f, value) {
       <img src="${src(i)}" alt="${esc(i.caption)}" loading="lazy"></a><figcaption><b>${i.kind === "manual" ? "Your manual" : "Database example"}</b> · ${esc(i.caption)}</figcaption></figure>`).join("")}</div>
     <div class="small">Source: ${esc(d.source)} · folder <code>reference_library/${esc(d.folder)}</code></div>`;
 }
+
+// ---------------------------------------------------------------- pages (nav bar): #home #photo #recipes #pottery #scores #guide
+// One page shows at a time; all cards keep their state when you switch. The formula card moves to the page that uses it.
+const PAGES = ["home", "photo", "recipes", "pottery", "scores", "guide"];
+const MANUAL = "/manual/CG2_Glaze_Search_Manual.html";
+let PAGE = "home";
+function route() {
+  const h = location.hash.slice(1);
+  showPage(PAGES.includes(h) ? h : /(^|&)glaze=/.test(h) ? "recipes" : "home");
+}
+function go(p) { if (location.hash.slice(1) !== p) location.hash = p; else showPage(p); }
+function showPage(p) {
+  PAGE = p;
+  document.querySelectorAll(".page").forEach(s => s.hidden = s.dataset.page !== p);
+  document.querySelectorAll("#nav a").forEach(a => a.dataset.p === p ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("on", a.dataset.p === p));
+  const slot = $(p === "recipes" ? "formslot-recipes" : "formslot-pottery");
+  if ($("formcard").parentElement !== slot) slot.appendChild($("formcard"));
+  if (p === "photo") { drawStage(); if (QOBJ) renderQobj(); else renderFound(); }
+  if (p === "pottery") renderPotPhoto();
+  if (p === "recipes") gMode(document.querySelector("#gmode .on")?.dataset.g || "color");
+  if (p === "guide" && !$("manframe").getAttribute("src")) $("manframe").src = MANUAL;
+  window.scrollTo({top: 0});
+}
+addEventListener("hashchange", route);
+$("manframe").addEventListener("load", () => {
+  let missing = false;
+  try { missing = $("manframe").contentDocument.body.innerText.trim() === "not found"; } catch (e) { /* another origin: shown as it is */ }
+  $("manmsg").innerHTML = missing ? `<span class="no">The manual is not on this server yet: close RUN_GLAZE_SEARCH.bat and start it again, or open
+    docs\\manuals\\CG2_Glaze_Search_Manual.html (or the PDF next to it) directly.</span>` : "";
+});
+
+// ---- example photos (database photos of Glazy recipes; each opens on the photo page)
+const EXAMPLES = [
+  {id: 614435, title: "Four test tiles", hint: "several objects: click one"},
+  {id: 410101, title: "Green celadon vase", hint: "a satin glaze on a vase"},
+  {id: 577829, title: "Blue bowl in a hand", hint: "the hand is left out"},
+  {id: 799216, title: "Two-colour mug", hint: "blue glaze over brown"},
+];
+const exampleHtml = () => EXAMPLES.map(e => `<button class="ex" data-ex="${e.id}" title="load this photo"><img src="/thumb/${e.id}.jpg" alt="" loading="lazy"
+  onerror="this.onerror=null;this.src='/photo/${e.id}.jpg'"><span>${esc(e.title)}</span><small>${esc(e.hint)} · Glazy #${e.id}</small></button>`).join("");
+function renderExamples() { $("exhome").innerHTML = $("exguide").innerHTML = exampleHtml(); }
+document.addEventListener("click", e => { const b = e.target.closest("[data-ex]"); if (b) { e.preventDefault(); loadExample(+b.dataset.ex); } });
+async function loadExample(id) {
+  go("photo"); showSegMsg(`<span class="busy"></span>Loading the example photo (Glazy recipe #${id})…`);
+  try {
+    const r = await fetch(`/photo/${id}.jpg`);
+    if (!r.ok) throw new Error("the photo is not on this PC (run DOWNLOAD_DATA.bat)");
+    sendFile(await r.blob(), "example");
+  } catch (err) { showSegMsg("Could not load the example: " + esc(err.message), true); }
+}
+
+// ---- what the app found: the glaze colour, shape and surface of the active object, in plain words
+const FNICE = {form: "Shape", surface_finish: "Surface", transparency: "Transparency", texture: "Texture"};
+function mainColour() {
+  const a = activeObj(); if (!QOBJ || QOBJ.index !== a) return null;
+  if (PICK && PICK.obj === a) return {hex: PICK.hex, how: "picked by you on the glaze"};
+  const regs = (QOBJ.regions || []).filter(r => r.meaningful && !r.flags.some(f => /highlight|shadow/.test(f))).sort((x, y) => y.area_frac - x.area_frac);
+  return regs[0] ? {hex: regs[0].hex, name: regs[0].name, how: `the biggest colour area (${(100 * regs[0].area_frac).toFixed(0)} % of the pot)`, region: regs[0].id} : null;
+}
+function renderFound() {
+  const box = $("found");
+  if (!QID) { box.innerHTML = `<div class="small" style="margin-bottom:8px">No photo yet. Drop one on the left, or try an example:</div><div class="examples">${exampleHtml()}</div>`; return; }
+  if (!OBJS.length) { box.innerHTML = `<div class="msg err">No ceramic object was found in this photo. Try another photo, or search with words on <a href="#recipes">🧪 Glaze recipes</a>.</div>`; return; }
+  const a = activeObj();
+  if (a == null) { box.innerHTML = `<div class="small">Click a pot on the photo to see what the app found.</div>`; return; }
+  if (!QOBJ || QOBJ.index !== a || QOBJ.qid !== QID) { box.innerHTML = `<div class="small"><span class="busy"></span>Looking closely at object #${a}…</div>`; return; }
+  const det = (QOBJ.dino && QOBJ.dino.attributes) || {}, o = objOf(a), c = mainColour();
+  const bars = f => (det[f] && det[f].candidates || []).slice(0, 3).map(x => `<span>${esc(x.label)}</span><span class="bar"><i style="width:${(100 * x.p).toFixed(0)}%"></i></span><span class="pv">${Math.round(100 * x.p)} %</span>`).join("");
+  const top = f => det[f] && det[f].candidates && det[f].candidates[0];
+  const regs = (QOBJ.regions || []).filter(r => r.meaningful);
+  const fx = (det.glaze_effect && det.glaze_effect.present) || [];
+  const shape = top("form");
+  box.innerHTML = `<div class="found"><img class="thumb" src="${esc(QOBJ.object_image || (o && o.thumb) || "")}" alt="object #${a}">
+    <div class="fbox">
+      <div class="frow"><div class="fh">🎨 GLAZE COLOUR</div>${c ? `<div class="fv"><span class="bigsw" style="background:${esc(c.hex)}"></span>${esc(c.hex)}${c.name ? ` <span class="small">${esc(c.name)}</span>` : ""}</div>
+        <div class="small">${esc(c.how)}${PICK && PICK.obj === a ? "" : ` · not the glaze (bare clay, a shadow)? Switch to <b>🎨 Pick colour</b> and click the glaze.`}</div>` : `<div class="small">no colour measured</div>`}
+        ${regs.length > 1 ? `<div class="cwords" style="margin-top:6px">${regs.map(r => `<span class="cw" data-ghex="${esc(r.hex)}" data-greg="${r.id}" title="find glaze recipes with this colour"><span class="sw" style="background:${esc(r.hex)}"></span>R${r.id} ${esc(r.name)} ${(100 * r.area_frac).toFixed(0)} %</span>`).join("")}</div>` : ""}</div>
+      <div class="frow"><div class="fh">🏺 SHAPE (most likely)</div><div class="fv">${shape ? `${esc(shape.label)} <span class="small">${Math.round(100 * shape.p)} % sure</span>` : "?"}</div>
+        ${(det.form && det.form.candidates || []).length > 1 ? `<div class="pbar">${bars("form")}</div>` : ""}</div>
+      <div class="frow"><div class="fh">✨ SURFACE (top 3)</div><div class="pbar">${bars("surface_finish") || `<span class="small">?</span>`}</div></div>
+      <div class="frow"><div class="fh">🔎 MORE</div><div class="small">${["transparency", "texture"].map(f => top(f) ? `${FNICE[f]}: <b>${esc(top(f).label)}</b> ${Math.round(100 * top(f).p)} %` : "").filter(Boolean).join(" · ")}
+        ${fx.length ? ` · Glaze effects: <b>${esc(fx.join(", "))}</b>` : ""}${o && o.p_ceramic != null ? ` · Ceramic (CLIP): ${o.p_ceramic.toFixed(2)}` : ""}</div></div>
+    </div></div>
+    <div class="next"><button class="b-rec" id="fnRec">🧪 Find glaze recipes for this colour</button><button class="b-pot" id="fnPot">🏺 Find similar pottery</button></div>
+    <div class="small" style="margin-top:8px">% = how sure the model is (its probability), not a guarantee. Change any value in <b>Your object up close</b> below.</div>`;
+  $("fnRec").onclick = () => { const m = mainColour(); if (!m) return; gUse(m.hex.toUpperCase(), `the photo: ${m.how} of object #${a}`); gSearch(); };
+  $("fnPot").onclick = () => { go("pottery"); search(); };
+}
+$("found").addEventListener("click", e => {
+  const g = e.target.closest("[data-ghex]");
+  if (g && QREG) { gUse(g.dataset.ghex.toUpperCase(), `the photo: region R${g.dataset.greg} of object #${QREG.index}`); gSearch(); }
+});
+function renderPotPhoto() {
+  const a = activeObj(), o = a != null ? objOf(a) : null;
+  $("potphoto").innerHTML = o
+    ? `<div class="potstrip"><img src="${esc(o.thumb)}" alt="your object"><div style="flex:1;min-width:220px"><b>Searching with object #${a} of your photo</b>
+        <div class="small">${OBJS.length} object(s) on the photo · its shape, glaze look and colour regions are compared with 12,309 objects from Glazy photos.</div></div>
+        <button onclick="go('photo')">📷 Change on My photo</button></div>`
+    : `<div class="potstrip"><span style="font-size:34px" aria-hidden="true">📷</span><div style="flex:1;min-width:220px"><b>No photo yet</b>
+        <div class="small">The search can still use the words, formula and colours below; a photo gives the best results.</div></div>
+        <button class="primary" onclick="go('photo')">Add a photo</button></div>`;
+}
+HELP.found = () => `<h3 id="mdlt">Where these answers come from</h3>
+  <table><tr><th>Answer</th><th>How it is found</th></tr>
+  <tr><td>🎨 Glaze colour</td><td>The pot is split into colour regions (pixels of the cut-out only). The biggest region that is not a highlight or a shadow is shown first;
+    a colour you pick with <b>🎨 Pick colour</b> replaces it (median of 13 × 13 pixels inside the pot, brightest and darkest 15 % left out).</td></tr>
+  <tr><td>🏺 Shape · ✨ Surface · 🔎 more</td><td>Grounding DINO looks for phrases such as "mug with handle" or "mirror-like reflection"; a small trained layer turns that evidence
+    into a probability for every value. The three most likely values are shown. On 240 test objects the right shape was first 84 % of the time; the surface
+    finish only 45 % (glossy is easy, the matte types are hard), so check it.</td></tr>
+  <tr><td>Ceramic (CLIP)</td><td>How sure CLIP is that the object is ceramic (0 to 1). Objects below 0.35 are not selected by default.</td></tr></table>
+  <div class="note">% is the model's own probability, not a measured accuracy. The labels it was trained on were made by an AI model, not checked by a person.</div>`;
+{
+  const _ra = renderActInfo; renderActInfo = function () { _ra(); renderFound(); renderPotPhoto(); };
+  const _rqo = renderQobj; renderQobj = async function () { await _rqo(); renderFound(); };
+  const _pc = pickColour; pickColour = async function (e, v) { await _pc(e, v); renderFound(); };
+  $("clearimg").addEventListener("click", () => { renderFound(); renderPotPhoto(); });
+}
+if (/^(127\.0\.0\.1|localhost)$/.test(location.hostname)) $("manuals").href = MANUAL;
+renderExamples(); route(); renderFound(); renderPotPhoto();
 
 renderQattrs();
 {
