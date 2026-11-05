@@ -4,7 +4,7 @@ The glaze search of the CG2 pottery project is built on **7,063 Glazy glaze reci
 
 This branch contains **only Glaze Search**, with original photos and segmentation data required by the search. The Review app is on branch [`nghia_mike_ceramic`](https://github.com/haohaozai/GC2-Ensemble-Model-Pottery/tree/nghia_mike_ceramic).
 
-> **macOS status:** The `.command` launchers are converted from the provided Windows launchers, but have **not been verified on a Mac**. The data download step still needs a macOS-compatible downloader. Some ML dependencies may require additional Apple Silicon or Intel Mac adjustments.
+> **macOS status:** every step has a macOS launcher (`.command`), the same five steps as on Windows. They need an **Apple Silicon Mac (M1 or newer)**: PyTorch 2.11 has no Intel Mac builds. The image models run on the CPU (a Mac has no NVIDIA GPU), so a new photo takes longer; searching is as fast. The launchers were checked and their logic run on Windows, but **not yet on a real Mac**: please report what you see.
 
 ### Glaze Search documents at a glance
 
@@ -46,7 +46,7 @@ git clone -b nghia_mike_ceramic_search --single-branch https://github.com/haohao
 cd GC2-Ensemble-Model-Pottery
 ```
 
-Alternatively, select **Code → Download ZIP** on the branch page and extract the ZIP. The `.command` files must be present in the project root beside `requirements.txt`; if the repository does not yet contain them, copy the provided `.command` files there.
+Alternatively, select **Code → Download ZIP** on the branch page and extract the ZIP. A ZIP loses the "executable" permission of the `.command` files, so then run once in Terminal, in the project folder: `chmod +x *.command` (a `git clone` keeps it).
 
 ---
 
@@ -70,18 +70,11 @@ Install [uv](https://docs.astral.sh/uv/) once in Terminal:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Close and reopen Terminal so `uv` is available. In Terminal, navigate to the repository root and grant permission **once**:
+**Then double-click `SETUP.command` in Finder.** It opens Terminal, creates `.venv`, installs PyTorch 2.11 (Apple Silicon build) and the pinned packages, and downloads the pretrained models (~3.7 GB). Every launcher waits for Return before its window closes, so you can read the result. You can also run `./SETUP.command` in Terminal. On an Intel Mac it stops with a message.
 
-```bash
-cd ~/CG2/GC2-Ensemble-Model-Pottery
-chmod +x SETUP.command CHECK_DATA.command RUN_GLAZE_SEARCH.command
-```
+If Finder reports that the file cannot be opened, check the permission with `ls -l *.command` (it should start with `-rwx`; otherwise `chmod +x *.command`). The first time, macOS may block a downloaded script: inspect it, then use **System Settings → Privacy & Security → Open Anyway** only if you trust it.
 
-**Then double-click `SETUP.command` in Finder.** It opens Terminal and runs the setup. Keep Terminal open until it finishes; the launcher waits for Return before closing. You can also run `./SETUP.command` in Terminal.
-
-If Finder reports that the file cannot be opened, verify the executable permission with `ls -l *.command`. If macOS blocks a downloaded script, inspect the script first and use **System Settings → Privacy & Security → Open Anyway** only if you trust it. Do not bypass security checks for unknown scripts.
-
-**macOS notes:** The launcher uses `.venv/bin/python` and macOS-compatible PyTorch installation instead of Windows CUDA wheels. Apple Silicon/Intel dependencies have not been validated. Windows `.venv` directories cannot be copied to macOS; run setup on each computer.
+A Windows `.venv` cannot be copied to a Mac; run the setup on each computer.
 
 ### Windows — Step 2: `DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.bat`
 
@@ -96,11 +89,13 @@ Double-click to download **8 archives (~6.15 GB)** from [data-v2](https://github
 | Search index, labels, models, thumbnails          | `cg2_search_artifacts.tar`                                   | 0.31 GB  |
 | DINOv2 code                                       | `cg2_model_dinov2_code.tar`                                  | 0.004 GB |
 
-### macOS — Step 2: data download (not yet automated)
+### macOS — Step 2: `DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.command`
 
-**Do not double-click the Windows `.bat` downloader on macOS.** A macOS equivalent of `DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.bat` is not included in this package because its source was not provided for conversion.
+Double-click it: the same download as on Windows (8 archives, ~6.15 GB, sizes and SHA-256 checked, unpacked to the right folders, interrupted downloads continue when you run it again). Already have the `.tar` files? In Terminal:
 
-You may download the eight archives from the [data-v2 release](https://github.com/nghialeduc268-a11y/nghia_ceramic/releases/tag/data-v2), but **do not guess the extraction destinations**: follow the data layout documented in `docs/DATA_DOWNLOAD.md` and the downloader source. Check the SHA-256 values against the project's manifest before extracting. For a fully automated macOS installation, convert and verify that downloader as `DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.command` first.
+```bash
+./DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.command --from-folder "/path/to/the/tar/files"
+```
 
 ### Windows — Step 3: `CHECK_DATA.bat`
 
@@ -124,14 +119,16 @@ Drag the model ZIP (`test_similarity.zip`) onto `INSTALL_GLAZE_MODEL.bat`, or ru
 INSTALL_GLAZE_MODEL.bat "D:\path\to\test_similarity.zip"
 ```
 
-Without a path it uses the newest `test_similarity*.zip` in the project folder or the folder above it.
+Without a path it uses the newest `test_similarity*.zip` in the project folder, the folder above it or your Downloads folder.
 
-**What happens (about 2 minutes with an NVIDIA GPU):**
+**macOS:** put `test_similarity.zip` in Downloads (Finder cannot drop a file onto a `.command`) and double-click `INSTALL_GLAZE_MODEL.command`, or run `./INSTALL_GLAZE_MODEL.command ~/Downloads/test_similarity.zip`. The training runs on the CPU, so it takes longer than on a PC with an NVIDIA GPU.
+
+**What happens (about 2 – 5 minutes with an NVIDIA GPU):**
 
 1. **Colour match model:** three files (about 9 MB) are checked and copied to `multimodal_experiments\models\glaze_retrieval\`. If a check fails, the old model stays.
 2. **Smart search model:** the joint text + photo + formula model is trained on this PC from the downloaded data (STEP 2) and tested on held-out recipes. It goes to `multimodal_experiments\models\glaze_joint\`.
 
-Both folders are not in git. Run the BAT again when a new model ZIP arrives: a smart search model that is already trained is kept (its test numbers stay valid). To train it again: `.venv\Scripts\python.exe scripts\train_glaze_joint.py --retrain`.
+Both folders are not in git. Run the BAT again when a new model ZIP arrives: a smart search model that is already trained is kept (its test numbers stay valid). To train it again: `.venv\Scripts\python.exe scripts\train_glaze_joint.py --retrain` (Mac: `.venv/bin/python scripts/train_glaze_joint.py --retrain`).
 
 Card G also reads `7k_matched_all_data.csv` and `7k_matched_ingredients.csv` (recipe names, original cone values, ingredients) from the folder above the project (`D:\NUS study\CG2`), from `new image data\csv 7k data\`, or from the folder in the `CG2_7K_CSV_DIR` setting.
 
@@ -191,10 +188,10 @@ Held-out test results of the smart search model (recipes it never saw): a noisy 
 
 | Item             | Requirement                                                  |
 | ---------------- | ------------------------------------------------------------ |
-| Operating system | Windows 10/11; macOS launcher support is **experimental/unverified** |
+| Operating system | Windows 10/11; macOS on Apple Silicon (M1 or newer) with the `.command` launchers, **not yet tested on a real Mac** |
 | Disk space       | Approximately **20 GB** free; original project estimate ~15 GB retained, plus caches |
 | Downloads        | Approximately **13 GB** once (6.15 GB data, ~3.7 GB models, ~3 GB packages); exact macOS package sizes may differ |
-| GPU              | Windows: NVIDIA GPU with ≥6 GB VRAM recommended. CPU mode is slower. macOS: no CUDA; Apple Metal/MPS acceleration is **not verified** for this pipeline |
+| GPU              | Windows: NVIDIA GPU with ≥6 GB VRAM recommended. CPU mode is slower. macOS: no CUDA, so everything runs on the CPU (Apple's GPU, MPS, is not used) |
 | Python           | 3.11, provisioned by `uv` through the setup launcher         |
 
 ---
@@ -209,8 +206,10 @@ CG2/                                      # parent folder, any location
 │   ├── RUN_GLAZE_SEARCH.bat
 │   ├── DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.bat
 │   ├── INSTALL_GLAZE_MODEL.bat             # card G models (STEP 4)
-│   ├── SETUP.command                      # macOS (add converted files)
+│   ├── SETUP.command                      # macOS: the same five steps
+│   ├── DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.command
 │   ├── CHECK_DATA.command
+│   ├── INSTALL_GLAZE_MODEL.command
 │   ├── RUN_GLAZE_SEARCH.command
 │   ├── multimodal_experiments/            # server, search engine, work, cache
 │   ├── glazeprep/                         # shared paths, segmentation, CLIP
@@ -248,12 +247,12 @@ CG2/                                      # parent folder, any location
 | macOS security warning                         | Inspect and trust the script before allowing it via Privacy & Security |
 | Python environment missing                     | Run `SETUP.bat` (Windows) or `SETUP.command` (Mac)           |
 | `CHECK_DATA` reports `NO`                      | Restore missing archives/models and verify `.env` paths      |
-| Download stops or SHA-256 fails                | Windows: rerun downloader. Mac: use verified archives and follow data guide |
+| Download stops or SHA-256 fails                | Run the download launcher again (`.bat` on Windows, `.command` on Mac): it continues where it stopped |
 | Models missing / wants internet                | Rerun platform-specific SETUP launcher                       |
 | CUDA out of memory (Windows)                   | Close other GPU jobs; CPU mode in CMD: `set CUDA_VISIBLE_DEVICES=-1` then `RUN_GLAZE_SEARCH.bat` |
 | App already running                            | Open http://127.0.0.1:8770                                   |
 | Port 8770 busy                                 | Windows: `RUN_GLAZE_SEARCH.bat --port 8771`; Mac: `./RUN_GLAZE_SEARCH.command --port 8771` |
-| Mac dependency installation fails              | Check Apple Silicon/Intel architecture and Python package compatibility; macOS pipeline is unverified |
+| Mac: "needs Apple Silicon" or PyTorch will not install | PyTorch 2.11 has no Intel Mac builds: use a Mac with M1 or newer, or the [online version](https://huggingface.co/spaces/FBIWarninggg/glaze_search) |
 
 ---
 
@@ -280,4 +279,4 @@ Not included: Review app and review-only data (see [`nghia_mike_ceramic`](https:
 
 **Windows quick start:** `SETUP.bat` → `DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.bat` → `CHECK_DATA.bat` → `INSTALL_GLAZE_MODEL.bat` (card G) → `RUN_GLAZE_SEARCH.bat`.
 
-**macOS quick start (after data downloader is converted or data is correctly installed):** `SETUP.command` → data installation → `CHECK_DATA.command` → `RUN_GLAZE_SEARCH.command`.
+**macOS quick start (Apple Silicon):** `SETUP.command` → `DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.command` → `CHECK_DATA.command` → `INSTALL_GLAZE_MODEL.command` (card G) → `RUN_GLAZE_SEARCH.command`.

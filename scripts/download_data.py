@@ -28,6 +28,7 @@ sys.path.insert(0, str(CODE))
 from glazeprep.config import CG2_DATA, CG2_ROOT, MODEL_CACHE  # noqa: E402  (env / .env / defaults)
 
 ROOTS = {"data": CG2_DATA, "project": CODE, "models": MODEL_CACHE}
+EXT = ".bat" if sys.platform == "win32" else ".command"   # launcher names: Windows .bat, macOS .command
 
 
 def sha256(p: Path) -> str:
@@ -65,7 +66,7 @@ def download(url: str, dst: Path, size: int, tries: int = 8) -> None:
             print(f"    download interrupted ({type(exc).__name__}: {str(exc)[:120]}); retry {k}/{tries} in {wait} s", flush=True)
             time.sleep(wait)
     if not part.exists() or part.stat().st_size != size:
-        raise SystemExit(f"could not download {url} - run DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.bat again (it continues "
+        raise SystemExit(f"could not download {url} - run DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION{EXT} again (it continues "
                          "where it stopped)")
     os.replace(part, dst)
 
@@ -133,7 +134,7 @@ def main() -> int:
         marker.write_text(a["sha256"])
         if not args.from_folder and not args.keep_archives:
             src.unlink()
-    print("Data ready. Next: CHECK_DATA.bat, then RUN_GLAZE_SEARCH.bat", flush=True)
+    print(f"Data ready. Next: CHECK_DATA{EXT}, then INSTALL_GLAZE_MODEL{EXT} and RUN_GLAZE_SEARCH{EXT}", flush=True)
     return 0
 
 

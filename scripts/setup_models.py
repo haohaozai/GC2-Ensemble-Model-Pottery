@@ -20,6 +20,7 @@ from glazeprep.config import MODEL_CACHE  # noqa: E402  (sets HF_HOME / TORCH_HO
 from huggingface_hub import snapshot_download  # noqa: E402
 
 HUB = MODEL_CACHE / "huggingface" / "hub"
+EXT = ".bat" if sys.platform == "win32" else ".command"   # launcher names: Windows .bat, macOS .command
 MODELS = {   # repo: (revision used on the first PC, files)
     "IDEA-Research/grounding-dino-base": ("12bdfa3120f3e7ec7b434d90674b3396eccf88eb",
         ["config.json", "model.safetensors", "preprocessor_config.json", "special_tokens_map.json", "tokenizer.json",
@@ -59,7 +60,7 @@ def main() -> int:
         tmp = Path(str(ck) + ".part")
         urllib.request.urlretrieve(DINOV2[0], tmp)
         if tmp.stat().st_size != DINOV2[1]:
-            print(f"ERROR: DINOv2 download is {tmp.stat().st_size} bytes, expected {DINOV2[1]} - run SETUP.bat again", flush=True)
+            print(f"ERROR: DINOv2 download is {tmp.stat().st_size} bytes, expected {DINOV2[1]} - run SETUP{EXT} again", flush=True)
             return 1
         os.replace(tmp, ck)
     print("Models ready.", flush=True)

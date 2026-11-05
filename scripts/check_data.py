@@ -17,6 +17,7 @@ sys.path.insert(0, str(CODE))
 from glazeprep.config import CG2_DATA, MODEL_CACHE  # noqa: E402
 
 ROOTS = {"data": CG2_DATA, "project": CODE, "models": MODEL_CACHE}
+EXT = ".bat" if sys.platform == "win32" else ".command"   # launcher names: Windows .bat, macOS .command
 
 
 def count(folder: Path, pattern: str) -> int:
@@ -52,22 +53,22 @@ def main() -> int:
             ok = SM.have(repo, rev, files)
             print(f"  {'OK ' if ok else 'NO '} [search] model {repo}")
             if not ok:
-                missing.append(({"fix": "SETUP.bat"}, f"model {repo}"))
+                missing.append(({"fix": f"SETUP{EXT}"}, f"model {repo}"))
         ck = MODEL_CACHE / "torch" / "hub" / "checkpoints" / "dinov2_vitl14_pretrain.pth"
         ok = ck.exists() and ck.stat().st_size == SM.DINOV2[1]
         print(f"  {'OK ' if ok else 'NO '} [search] model DINOv2 ViT-L/14 weights")
         if not ok:
-            missing.append(({"fix": "SETUP.bat"}, "DINOv2 weights"))
-    py = CODE / ".venv" / "Scripts" / "python.exe"
+            missing.append(({"fix": f"SETUP{EXT}"}, "DINOv2 weights"))
+    py = CODE / ".venv" / ("Scripts/python.exe" if sys.platform == "win32" else "bin/python")
     if not py.exists():
-        missing.append(({"fix": "SETUP.bat"}, "Python environment .venv"))
+        missing.append(({"fix": f"SETUP{EXT}"}, "Python environment .venv"))
     print()
     if not missing:
-        print("All data and models are in place: start RUN_GLAZE_SEARCH.bat.")
+        print(f"All data and models are in place: start RUN_GLAZE_SEARCH{EXT} (and INSTALL_GLAZE_MODEL{EXT} once for the recipe page).")
         return 0
     print(f"MISSING: {len(missing)} item(s)")
     for c, line in missing:
-        print(f"  - {line.strip()}  ->  fix: {c.get('fix', 'DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.bat')}")
+        print(f"  - {line.strip()}  ->  fix: {c.get('fix', f'DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION{EXT}')}")
     print("If your data is in another folder, copy .env.example to .env and set CG2_DATA / CG2_MODEL_CACHE.")
     return 1
 

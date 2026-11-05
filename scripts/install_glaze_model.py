@@ -6,7 +6,7 @@ catalog columns, catalog and vectors in the same recipe order, checkpoint readab
 The old model stays in place when a check fails. Writes manifest.json (source, SHA-256 of every file, model version).
 The ZIP's notebook, training_data.csv and glaze_chemistry_models.joblib are not needed by the app and are not copied.
 usage: python scripts/install_glaze_model.py ["path\\to\\test_similarity.zip"]
-       without a path: the newest test_similarity*.zip in the project folder or the folder above it
+       without a path: the newest test_similarity*.zip in the project folder, the folder above it or Downloads
 """
 from __future__ import annotations
 
@@ -24,9 +24,11 @@ CODE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(CODE / "multimodal_experiments"))
 from mm.glaze_retrieval import FILES, load_artifacts, model_version, read_config, resolve  # noqa: E402
 
+EXT = ".bat" if sys.platform == "win32" else ".command"   # launcher names: Windows .bat, macOS .command
+
 
 def find_zip() -> Path | None:
-    hits = [p for d in (CODE, CODE.parent) for p in d.glob("test_similarity*.zip")]
+    hits = [p for d in (CODE, CODE.parent, Path.home() / "Downloads") if d.is_dir() for p in d.glob("test_similarity*.zip")]
     return max(hits, key=lambda p: p.stat().st_mtime) if hits else None
 
 
@@ -37,7 +39,7 @@ def main() -> int:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     src = Path(args.zip) if args.zip else find_zip()
     if src is None or not src.is_file():
-        print("No ZIP found. Drag the model ZIP onto INSTALL_GLAZE_MODEL.bat, or give its path.")
+        print(f"No ZIP found. Put test_similarity.zip next to the project or in Downloads, or give its path to INSTALL_GLAZE_MODEL{EXT}.")
         return 1
     dest = resolve(read_config()["model_dir"])
     print(f"ZIP:    {src}\nfolder: {dest}")
@@ -70,7 +72,7 @@ def main() -> int:
             print(f"ERROR: {type(exc).__name__}: {exc}\nNothing was changed.")
             return 1
     print(f"Installed model {ver}: {manifest['recipes']:,} recipes, {manifest['vector_dim']}-d vectors, "
-          f"{manifest['kmeans_clusters']} K-Means clusters.\nRestart RUN_GLAZE_SEARCH.bat to use it.")
+          f"{manifest['kmeans_clusters']} K-Means clusters.\nRestart RUN_GLAZE_SEARCH{EXT} to use it.")
     return 0
 
 
