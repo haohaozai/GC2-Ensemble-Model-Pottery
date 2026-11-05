@@ -12,7 +12,8 @@ search, cards 1 – 4, session evaluation) is unchanged.
 
 | Document | For |
 |---|---|
-| [manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf](manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf) | users: every step with screenshots, noisy text → values |
+| [manuals/CG2_Glaze_Search_Quick_Start.pdf](manuals/CG2_Glaze_Search_Quick_Start.pdf) | new users: install, then one full example screen by screen (photo + typed text → recipes) |
+| [manuals/CG2_Glaze_Search_Pretrained_Models.pdf](manuals/CG2_Glaze_Search_Pretrained_Models.pdf) · [manuals/CG2_Glaze_Search_Evaluation.pdf](manuals/CG2_Glaze_Search_Evaluation.pdf) | how each pretrained model works · every metric and test result |
 | [manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf](manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) | the process, the model and parameters of each step, test results |
 | [glaze_search_usage_mindmap.png](glaze_search_usage_mindmap.png) · [glaze_search_full_flow.png](glaze_search_full_flow.png) | usage mind map · the three flows of the whole system |
 | [glaze_search_ml_pipeline.png](glaze_search_ml_pipeline.png) | data → preprocessing → training → evaluation, as one hierarchy |

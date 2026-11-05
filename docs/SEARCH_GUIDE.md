@@ -6,9 +6,9 @@ runs on your computer: http://127.0.0.1:8770 (opens by itself). Keep the black w
 **Manual with worked examples** (what the app found for real photos, the top recipes and pots, every number explained):
 [manuals/CG2_Glaze_Search_Manual.html](manuals/CG2_Glaze_Search_Manual.html) (opens offline in any browser) and
 [manuals/CG2_Glaze_Search_Manual.pdf](manuals/CG2_Glaze_Search_Manual.pdf); in the app it is the **📖 How to use** page
-(http://127.0.0.1:8770/manual/CG2_Glaze_Search_Manual.html). Step-by-step guide with screenshots of the earlier one-page layout:
-[manuals/CG2_Glaze_Search_Beginner_Guide.pdf](manuals/CG2_Glaze_Search_Beginner_Guide.pdf); how everything fits together:
-[manuals/CG2_Flow_MindMap.pdf](manuals/CG2_Flow_MindMap.pdf).
+(http://127.0.0.1:8770/manual/CG2_Glaze_Search_Manual.html). New users: install and one full example, screen by screen:
+[manuals/CG2_Glaze_Search_Quick_Start.pdf](manuals/CG2_Glaze_Search_Quick_Start.pdf). Older guides with the earlier
+page layout (beginner guide, flow mind map): [manuals/older](manuals/older).
 
 ## The pages (nav bar at the top)
 
@@ -56,7 +56,7 @@ searches stay fast). Everything works offline after `SETUP.bat`.
    give count) or **Colour match** (colour + cone + surface: 0.40 latent + 0.40 CIEDE2000 + 0.10 surface + 0.10 cone).
    Two tabs from one search: **Best matches** and **Explore formulations** (the same ranking, at most 2 recipes per
    family). Each card shows the Glazy photo, the score parts and **View on Glazy**. Needs `INSTALL_GLAZE_MODEL.bat` once;
-   step by step with screenshots: [manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf](manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf);
+   step by step with screenshots: [manuals/CG2_Glaze_Search_Quick_Start.pdf](manuals/CG2_Glaze_Search_Quick_Start.pdf);
    details: [glaze_integration_architecture.md](glaze_integration_architecture.md).
 4. **Card 2 · Text**: subtype, firing cone, surface, transparency, atmosphere, free notes.
 5. **Card 3 · Formula**: oxides (weight % or UMF), optional ingredients.

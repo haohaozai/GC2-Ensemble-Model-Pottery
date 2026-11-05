@@ -10,10 +10,11 @@ This branch contains **only Glaze Search**, with original photos and segmentatio
 
 | You want to see | Open | What is in it |
 |---|---|---|
+| **New here? Install, then one full example** | [**Quick Start (PDF, 8 pages)**](docs/manuals/CG2_Glaze_Search_Quick_Start.pdf) | The five install steps (Windows and Mac), then a photo of a blue bowl + a typed sentence followed screen by screen to the final recipe list, with the real results |
 | The full process of a search | [Process, models and parameters (PDF, 8 pages)](docs/manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) · [mind map page](https://claude.ai/artifact/B1zswhT3kHGYnZYYvYgaa5) | Data → preprocessing → training → evaluation, and the 10 steps of a search with their settings |
 | Which pretrained model does what, with diagrams | [Pretrained models, illustrated (PDF, 16 pages)](docs/manuals/CG2_Glaze_Search_Pretrained_Models.pdf) | Grounding DINO, SAM 2.1, OpenCLIP, DINOv2 and MiniLM: zero-shot, frozen or with a trained head; an activity diagram and 13 figures from one real photo and sentence |
 | Metrics and evaluation results | [Evaluation (PDF, 14 pages)](docs/manuals/CG2_Glaze_Search_Evaluation.pdf) · [evaluation page](https://claude.ai/artifact/BVYzi6cWhbLpf6x1N8qQTh) | Every metric (R@K, P@10, MAD@K, accuracy, AUROC …) stage by stage, from the data and self-made labels to the final ranking, and the limits to state |
-| How to use the app | [Manual (HTML)](docs/manuals/CG2_Glaze_Search_Manual.html) / [PDF](docs/manuals/CG2_Glaze_Search_Manual.pdf) · [manual page](https://claude.ai/artifact/7rmiKzN17dk2Fhb4AGeJhz) · [step-by-step guide (PDF)](docs/manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf) | The pages of the app and six worked examples (photo, words with typos, a formula) |
+| How to use the app | [Manual (HTML)](docs/manuals/CG2_Glaze_Search_Manual.html) / [PDF](docs/manuals/CG2_Glaze_Search_Manual.pdf) · [manual page](https://claude.ai/artifact/7rmiKzN17dk2Fhb4AGeJhz) | All six pages of the app and six worked examples (photo, words with typos, a formula), every number explained |
 | Try it without installing | [Glaze Search on Hugging Face](https://huggingface.co/spaces/FBIWarninggg/glaze_search) | The same page and models, on Hugging Face's free GPU |
 
 ---
@@ -176,7 +177,7 @@ Uploads and searches: `multimodal_experiments/work/queries/`; session log: `mult
 
 The page has a nav bar: 🏠 Start · 📷 My photo · 🧪 Glaze recipes · 🏺 Similar pottery · 📊 Scores · 📖 How to use. Manual with worked examples: [CG2_Glaze_Search_Manual.html](docs/manuals/CG2_Glaze_Search_Manual.html) / [PDF](docs/manuals/CG2_Glaze_Search_Manual.pdf) (also the app's 📖 How to use page).
 
-Step-by-step guide with screenshots: [CG2_Glaze_Search_Step_by_Step_Guide.pdf](docs/manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf) · process, models and parameters: [CG2_Glaze_Search_Process_Models_MindMap.pdf](docs/manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) · [usage mind map](docs/glaze_search_usage_mindmap.png).
+New user, step by step with screenshots: [CG2_Glaze_Search_Quick_Start.pdf](docs/manuals/CG2_Glaze_Search_Quick_Start.pdf) · process, models and parameters: [CG2_Glaze_Search_Process_Models_MindMap.pdf](docs/manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) · [usage mind map](docs/glaze_search_usage_mindmap.png).
 
 The whole pipeline, data → preprocessing → training → evaluation: [glaze_search_ml_pipeline.png](docs/glaze_search_ml_pipeline.png). No pretrained model is fine-tuned: MiniLM and DINOv2 stay frozen and three small heads are trained on top of them (InfoNCE); "Explore formulations" uses K-Means families (k-means++ initialisation) because density clustering (DBSCAN / HDBSCAN) found no useful groups.
 
@@ -258,16 +259,20 @@ CG2/                                      # parent folder, any location
 
 ## 8. Manuals
 
-PDF manuals with screenshots in [docs/manuals](docs/manuals): Glaze Search beginner guide, manual v4 (search section), flow mind map, and attribute report.
+Current documents (November 2026, the app as it is now), in [docs/manuals](docs/manuals):
 
-- [Glaze Search manual](docs/manuals/CG2_Glaze_Search_Manual.html) ([PDF](docs/manuals/CG2_Glaze_Search_Manual.pdf)) — the pages, six worked examples and what every number means.
-- [Glaze Search Guide](docs/SEARCH_GUIDE.md) — Search inputs, priority sliders, results, and evaluation.
-- [Glaze recipe search (card G)](docs/glaze_integration_architecture.md) — smart search and colour match: architecture, API, cone handling, tests, and how to update the models ([system diagram](docs/glaze_search_full_flow.png)).
-- [Step-by-step guide (PDF)](docs/manuals/CG2_Glaze_Search_Step_by_Step_Guide.pdf) and [process, models and parameters (PDF)](docs/manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) for card G.
-- [Pretrained models, illustrated (PDF)](docs/manuals/CG2_Glaze_Search_Pretrained_Models.pdf) — how each pretrained model works on a real example, with an activity diagram.
-- [Evaluation (PDF)](docs/manuals/CG2_Glaze_Search_Evaluation.pdf) — every metric and test result, stage by stage.
-- [Data Download Guide](docs/DATA_DOWNLOAD.md) — Data archives, manual downloads, and dataset relationships.
-- [Manuals and Screenshots](docs/manuals) — Detailed PDF manuals, workflow diagrams, and attribute documentation.
+| Document | For | What is in it |
+|---|---|---|
+| [Quick Start (PDF)](docs/manuals/CG2_Glaze_Search_Quick_Start.pdf) | new users | install in five steps (Windows and Mac), then one full example screen by screen, with the real results |
+| [Manual (HTML)](docs/manuals/CG2_Glaze_Search_Manual.html) / [PDF](docs/manuals/CG2_Glaze_Search_Manual.pdf) | users | all six pages, six worked examples, what every number means (also the app's 📖 How to use page) |
+| [Process, models and parameters (PDF)](docs/manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) | the report | the whole pipeline, the 10 steps of a search and their settings, metrics |
+| [Pretrained models, illustrated (PDF)](docs/manuals/CG2_Glaze_Search_Pretrained_Models.pdf) | the report | how each pretrained model works on a real example, with an activity diagram and 13 figures |
+| [Evaluation (PDF)](docs/manuals/CG2_Glaze_Search_Evaluation.pdf) | the report | every metric and test result, stage by stage, and the limits to state |
+| [Photo attributes report (PDF)](docs/manuals/CG2_Attributes_v3_MindMap_Report.pdf) | the report | the six photo attributes (shape, surface, transparency, texture, effects, defects) and their tests |
+
+Also: [Glaze Search Guide](docs/SEARCH_GUIDE.md) (inputs, sliders, results, evaluation) · [Glaze recipe search (card G)](docs/glaze_integration_architecture.md) (architecture, API, tests, updating the models; [system diagram](docs/glaze_search_full_flow.png)) · [Data Download Guide](docs/DATA_DOWNLOAD.md).
+
+Older guides with the earlier page layout (October to 4 November 2026) are kept in [docs/manuals/older](docs/manuals/older): beginner guide, manual v4, flow mind map and the first step-by-step guide.
 
 ---
 
