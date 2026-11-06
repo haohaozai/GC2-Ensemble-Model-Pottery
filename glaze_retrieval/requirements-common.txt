@@ -1,0 +1,15 @@
+# Shared runtime dependencies for local Streamlit and notebook use.
+# Install torch and torchvision separately for your operating system / GPU.
+numpy==1.26.4
+scipy>=1.11,<1.15
+scikit-learn>=1.4,<1.7
+scikit-image>=0.22,<0.26
+pandas>=2.1,<3
+pillow>=10,<12
+opencv-python>=4.8,<5
+transformers>=4.51,<5
+open_clip_torch>=2.26,<4
+colorthief==0.2.1
+# Required by Transformers for downloading/caching pretrained model weights.
+# This is NOT Hugging Face hosting or Spaces.
+huggingface_hub>=0.34.0,<1.0
