@@ -15,7 +15,8 @@ Both projection heads apply L2 normalization, allowing the similarity between te
 The two projection heads are trained using a symmetric InfoNCE (Information Noise Contrastive Estimation) loss. The objective encourages embeddings from matching text-chemistry pairs to have higher cosine similarity than non-matching pairs within a training batch.
 The loss is calculated in both directions: text-to-chemistry and chemistry-to-text. This encourages bidirectional alignment between the two modalities.
 
-**Output:** `shared_space_heads.pt` (projection heads), `glaze_retrieval_vectors.npz` (recipe embedding vectors)
+**Output:** `shared_space_heads.pt` (projection heads), `glaze_retrieval_vectors.npz` (recipe embedding vectors).
+You can find these in [glaze_retrieval/retrieval_assets](../glaze_retrieval/retrieval_assets)
 
 # Dataset creation
 `/dataset_creation` holds the scripts and intermediate CSVs to generate `training_data.csv`.    
