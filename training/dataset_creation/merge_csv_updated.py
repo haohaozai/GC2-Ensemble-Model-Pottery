@@ -76,6 +76,6 @@ if missing_colors > 0:
     )
 
 print(f'Total of: {len(result_df)} rows')
-output_path = BASE_DIR / 'merged_output.csv'
+output_path = BASE_DIR / 'training_data.csv'
 result_df.to_csv(output_path, index=False)
 print(f'Merge, update, and checks complete! Saved to {output_path}')
