@@ -1,0 +1,5 @@
+# Notebook-only alternative on macOS or Windows
+-r requirements-common.txt
+notebook>=7,<8
+ipywidgets>=8,<9
+ipykernel>=6,<7

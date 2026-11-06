@@ -1,0 +1,6 @@
+# Apple Silicon macOS: both Streamlit and Jupyter Notebook
+-r requirements-common.txt
+streamlit>=1.40,<2
+notebook>=7,<8
+ipywidgets>=8,<9
+ipykernel>=6,<7

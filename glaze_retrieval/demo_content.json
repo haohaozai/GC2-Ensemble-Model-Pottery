@@ -1,0 +1,33 @@
+{
+  "title": "Multimodal Ceramic Glaze Retrieval Engine",
+  "font": "System default",
+  "intro": [
+    "Upload a pottery photo or select a demo image to find similar glaze recipes.",
+    "**How it works:** Ceramic surfaces or tiles are detected, the dominant colours are extracted, and the most similar recipes are retrieved from the catalog.",
+    "The final retrieval score is calculated using a weighted combination of four components: 40% from cosine similarity in the shared latent space, which captures the learned relationship between text descriptions and oxide compositions; 40% from CIEDE2000 perceptual color similarity, which measures how closely the recipe's color matches the user's requested color; and 10% each from surface finish and firing cone compatibility.",
+    "The below checks if the models are installed in this project yet. First time runs may encounter delays as models are downloaded. Loading the models may also require a few minutes."
+  ],
+  "samples": {
+    "38571.jpg": "",
+    "70574.jpg": "",
+    "222783.jpg": ""
+  },
+  "button_color": "#2E6D64",
+  "recipe_title_field": "Name",
+  "recipe_fields": [
+    {
+      "field": "recipe_id",
+      "label": "Recipe ID"
+    },
+    {
+      "field": "Cone",
+      "label": "Firing cone"
+    },
+    {
+      "field": "Surface",
+      "label": "Surface"
+    }
+  ],
+  "diversity_caption": "Broader variety: at most 2 recipes per cluster.",
+  "diversity_help": "Limits each K-means cluster to two recipes where possible, showing a wider variety of glaze groups. Ranking scores are unchanged."
+}

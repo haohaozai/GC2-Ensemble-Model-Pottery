@@ -1,0 +1,1 @@
+Place demo pottery photos here as JPG, PNG or WebP. They appear automatically in the Sample image selector. Add captions in demo_content.json using the exact filename.\n
