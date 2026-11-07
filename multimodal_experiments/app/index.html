@@ -443,7 +443,7 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
         <div class="two"><select id="gcone_lo" aria-label="cone"></select><select id="gcone_hi" aria-label="end of a cone range (optional)"></select></div>
         <label class="f" for="gsurface">Surface</label><select id="gsurface"></select>
         <div class="f step"><span class="sn">4</span>How to search</div>
-        <div class="seg" id="gengine"><button data-e="smart" class="on" title="joint model: text + photo + formula + colour + cone + surface">Smart search</button><button data-e="colour" title="text-chemistry model: colour + cone + surface">Colour match</button></div>
+        <div class="seg" id="gengine"><button data-e="auto" class="on" title="the engine the held-out evaluation found best for what you give">Auto (best for your input)</button><button data-e="smart" title="joint model: text + photo + formula + colour + cone + surface">Smart search</button><button data-e="colour" title="text-chemistry model: colour + cone + surface">Colour match</button></div>
         <div class="atm" id="guse" style="margin-top:6px"><label><input type="checkbox" id="gusetext" checked>text</label><label><input type="checkbox" id="gusecol" checked>colour</label>
           <label><input type="checkbox" id="guseimg">photo object (My photo)</label><label><input type="checkbox" id="guseform">formula (below)</label></div>
         <div class="small" id="gwts" style="margin-top:6px"></div>
@@ -972,16 +972,22 @@ $("unit").addEventListener("click", e => { const b = e.target.closest("button");
 $("oxclear").addEventListener("click", () => { document.querySelectorAll("[data-ox]").forEach(i => i.value = ""); $("oxpaste").value = ""; $("ings").value = ""; formCheck(); });
 // a formula is used only with >= 3 oxides including a flux: the UMF divides by the flux total (mm/formula.py R2O + RO)
 const FLUX = ["Li2O", "Na2O", "K2O", "Cu2O", "Ag2O", "BeO", "MgO", "CaO", "SrO", "BaO", "ZnO", "PbO", "CdO", "FeO", "MnO", "NiO", "CuO", "CoO"];
+let GFORMOK = false;                 // the formula was usable at the last check: a newly usable one ticks "formula" in card G, step 4
 function formCheck() {
-  const o = oxides(), n = Object.keys(o).length, fl = Object.keys(o).filter(k => FLUX.includes(k));
-  $("formchk").innerHTML = !n ? "" : n >= 3 && fl.length
-    ? `<span class="yes">✓ ${n} oxides including the flux ${esc(fl.join(", "))}: the formula is used in the search</span>`
+  const o = oxides(), n = Object.keys(o).length, fl = Object.keys(o).filter(k => FLUX.includes(k)), ok = n >= 3 && fl.length > 0;
+  if (ok && !GFORMOK) $("guseform").checked = true;
+  GFORMOK = ok;
+  const used = PAGE !== "recipes" || $("guseform").checked;           // Similar pottery always uses it; Glaze recipes when ticked
+  $("formchk").innerHTML = !n ? "" : ok
+    ? (used ? `<span class="yes">✓ ${n} oxides including the flux ${esc(fl.join(", "))}: the formula is used in the search</span>`
+            : `<span class="no">✓ ${n} oxides including the flux ${esc(fl.join(", "))}, but "formula" is not ticked in 4 · How to search: the search leaves it out</span>`)
     : `<span class="no">⚠ ${n} oxide${n > 1 ? "s" : ""}${fl.length ? "" : ", no flux"}: a formula needs at least 3 oxides including a flux
        (Na2O, K2O, Li2O, CaO, MgO, ZnO, BaO, SrO …) - until then it is ignored</span>`;
 }
 $("oxgrid").addEventListener("input", formCheck);
+$("guseform").addEventListener("change", formCheck);
 $("oxparse").addEventListener("click", () => {
-  const txt = $("oxpaste").value, re = /\b([A-Z][a-z]?\d*(?:[A-Z][a-z]?\d*)*)\s*[:=]?\s*(\d+(?:[.,]\d+)?)/g;
+  const txt = $("oxpaste").value.normalize("NFKC"), re = /\b([A-Z][a-z]?\d*(?:[A-Z][a-z]?\d*)*)\s*[:=]?\s*(\d+(?:[.,]\d+)?)/g;   // NFKC: SiO₂ -> SiO2
   let m, n = 0, extra = [];
   while ((m = re.exec(txt))) {
     const el = document.querySelector(`[data-ox="${m[1]}"]`);
@@ -1293,7 +1299,9 @@ function objCard(x) {
   const conf = ["form", "surface_finish", "glaze_effect"].filter(f => A[f]).map(f => `<div><b>${{form: "form", surface_finish: "surface", glaze_effect: "effects"}[f]}:</b> ${esc(fin(f))}${prov(f).startsWith("model") || prov(f).startsWith("zero") ? esc(topP(f)) : ""} <span title="${esc(prov(f))}">· ${esc(prov(f).split(" (")[0])}</span></div>`).join("");
   const cm = (x.colour_match || []).map(c => `<span title="query colour → closest region of this object, ΔE2000"><span class="sw" style="background:${c.query_hex}"></span>→<span class="sw" style="background:${c.object_hex}"></span> ΔE ${c.dE00}</span>`).join(" ");
   const rev = x.review_category === "review_tile" ? `<span class="badge ok">tile${x.reviewed ? " ✓ reviewed" : ""}</span>` : "";
-  return `<div class="rc"><div class="im"><img src="/obj/${esc(x.object_id)}.jpg" loading="lazy" alt="${esc(x.object_id)}.jpg" onclick="window.open('/photo/${esc(x.recipe_id)}.jpg','_blank')" title="click: open the whole photo"><span class="rk">${x.rank}</span></div>
+  const full = x.glazy_photo || `/photo/${x.recipe_id}.jpg`;    // the recipe's photo on Glazy (catalog image_path), else the photo on this PC
+  return `<div class="rc"><div class="im"><img src="/obj/${esc(x.object_id)}.jpg" loading="lazy" alt="${esc(x.object_id)}.jpg" data-full="${esc(full)}" onclick="window.open(this.dataset.full,'_blank')"
+    title="${x.glazy_photo ? "click: open the recipe's photo on Glazy" : "click: open the whole photo"}"><span class="rk">${x.rank}</span></div>
   <div class="b"><div class="nm">${esc(x.name)}</div>
   <div><b>${esc(x.object_id)}.jpg</b> <span class="small">(photo ${esc(x.parent || "")})</span> · <a href="${esc(x.url)}" target="_blank" rel="noopener">Glazy #${esc(x.recipe_id)}</a></div>
   <div class="tags">${esc(x.subtype || "?")}<br>${cone} · ${esc(x.surface || "surface ?")} · ${esc(x.transparency || "transparency ?")}</div>
@@ -1534,7 +1542,9 @@ $("cfam").addEventListener("change", soon);
 // ---------------------------------------------------------------- G: glaze recipes (smart search: text + photo + formula; colour match)
 // Both ways in (a colour, or a colour picked / a region chosen on the photo) make the same query: HEX + colour word + cone +
 // surface. One search returns both lists; the tabs only switch the view. Photos come straight from Glazy's server.
-let GOPT = null, GRES = null, GTAB = "weighted", GAUTO = true, GNT = null, GHT = null, GIMG = null, GENG = "smart", GUND = null, GREAD = "";
+let GOPT = null, GRES = null, GTAB = "weighted", GAUTO = true, GNT = null, GHT = null, GIMG = null, GENG = "auto", GUND = null, GREAD = "", GEX = false;   // GEX: the colour is still the page's example
+const GKIND = {photo_words_formula: "photo, words or formula", menus: "colour + cone / surface menus", colour: "colour only"};
+const GENGL = {smart: "Smart search", colour_match: "Colour match", colour_ranking: "colour ranking (no learned model)"};
 const GLBL = {latent: "latent", color: "colour", surface: "surface", cone: "cone", text: "text", photo: "photo", formula: "formula",
               colour: "colour", transparency: "transp.", atmosphere: "atmos."};
 async function gInit() {
@@ -1544,7 +1554,8 @@ async function gInit() {
   $("gcone_lo").innerHTML = `<option value="">any cone</option>` + GOPT.cones.map(opt).join("");
   $("gcone_hi").innerHTML = `<option value="">to (optional)</option>` + GOPT.cones.map(opt).join("");
   $("gsurface").innerHTML = `<option value="">any surface</option>` + GOPT.surfaces.map(opt).join("");
-  if (!GOPT.smart) { GENG = "colour"; const b = document.querySelector('#gengine [data-e="smart"]'); b.disabled = true; b.title = GOPT.smart_error || "not installed"; }
+  if (!GOPT.smart) { if (GENG === "smart") GENG = "colour"; const b = document.querySelector('#gengine [data-e="smart"]'); b.disabled = true; b.title = GOPT.smart_error || "not installed"; }
+  if (!GOPT.decision) { if (GENG === "auto") GENG = GOPT.smart ? "smart" : "colour"; const b = document.querySelector('#gengine [data-e="auto"]'); b.disabled = true; b.title = "no decision file (configs/glaze_decision.json)"; }
   gEngine(GENG);
   $("gmeta").textContent = `${(GOPT.smart ? GOPT.smart.recipes : GOPT.recipes).toLocaleString()} recipes · smart ${GOPT.smart ? GOPT.smart.model_version : "-"} · colour match ${GOPT.model_version} · cone scoring ${GOPT.cone_scoring === "orton" ? "Orton (04 ≠ 4)" : "as in the notebook"}`;
   gNames("");
@@ -1554,20 +1565,32 @@ async function gInit() {
     if (h.get("tab") === "diverse") GTAB = "diverse";
     gSetHex(h.get("glaze"), {src: "the page link"});
     gSearch();
-  } else gSetHex("#3054A5", {src: "an example (cobalt blue)"});
+  } else gSetHex("#3054A5", {src: "an example (cobalt blue)", example: true});
 }
 function gEngine(e) {
   GENG = e;
   [...$("gengine").children].forEach(b => b.classList.toggle("on", b.dataset.e === e));
-  $("guse").hidden = e !== "smart";
+  $("guse").hidden = e === "colour";
+  if (e === "auto") {
+    const d = GOPT.decision;
+    $("gwts").textContent = `Auto (decision of ${d.version}): ` + Object.entries(d.engines).map(([k, v]) => `${GKIND[k] || k} → ${GENGL[v] || v}`).join(" · ");
+    return;
+  }
   const w = e === "smart" && GOPT.smart ? GOPT.smart.weights : GOPT.weights;
   $("gwts").textContent = e === "smart"
     ? `Smart search: text ${w.text} · photo ${w.photo} · formula ${w.formula} · colour ${w.colour} · cone ${w.cone} · surface ${w.surface} (only the parts you give count, renormalised)`
     : `Colour match: latent ${w.latent.toFixed(2)} · CIEDE2000 colour ${w.color.toFixed(2)} · surface ${w.surface.toFixed(2)} · cone ${w.cone.toFixed(2)}`;
 }
+let GTXT = {cone: "", surface: ""};                       // the menu values the last reading of the words put there
+function gConeMenu() { const lo = $("gcone_lo").value, hi = $("gcone_hi").value; return lo && hi && hi !== lo ? `${lo} - ${hi}` : (lo || hi); }
+function gForget(u) {      // a cone / surface the earlier words put in a menu goes when the new words do not give it; one picked by hand stays
+  if (!(u && u.cone) && GTXT.cone && gConeMenu() === GTXT.cone) { $("gcone_lo").value = ""; $("gcone_hi").value = ""; }
+  if (!(u && u.surface) && GTXT.surface && $("gsurface").value === GTXT.surface) $("gsurface").value = "";
+  GTXT = {cone: u && u.cone ? u.cone.value : "", surface: u && u.surface ? u.surface.value : ""};
+}
 async function gRead() {
   const t = $("gtext").value.trim();
-  if (!t) { GUND = null; GREAD = ""; $("gund").innerHTML = ""; return null; }
+  if (!t) { GUND = null; GREAD = ""; $("gund").innerHTML = ""; gForget(null); return null; }
   try { GUND = await api("/api/glaze/understand", {text: t}); GREAD = t; } catch (e) { $("gund").innerHTML = `<span class="no">${esc(e.message)}</span>`; return null; }
   const u = GUND, chip = (k, v, ev, cls = "") => `<span class="gu ${cls}"><i>${k}</i> <b>${v}</b>${ev ? ` <i>← "${esc(ev)}"</i>` : ""}</span>`;
   let h = "";
@@ -1588,6 +1611,7 @@ async function gRead() {
   }
   $("gund").innerHTML = h || `<span class="small">no keyword or value found - the text model still reads the words</span>`;
   if (u.colour) { GAUTO = true; gSetHex(u.colour.hex, {name: u.colour.model_word, src: `the text "${u.colour.words}"`}); }
+  gForget(u);
   if (u.cone) { const [lo, hi] = u.cone.value.split(" - "); $("gcone_lo").value = lo; $("gcone_hi").value = hi || ""; }
   if (u.surface) $("gsurface").value = u.surface.value;
   return u;
@@ -1601,7 +1625,7 @@ function gSetHex(hex, o = {}) {
   const h = gHex(hex);
   if (!h) { $("ghexmsg").innerHTML = `<span class="no">HEX must look like #3054A5</span>`; return; }
   $("ghex").value = h; $("gpick").value = h.toLowerCase(); $("gsw").style.background = h;
-  $("ghexmsg").textContent = ""; if (o.src) $("gsrc").textContent = "from " + o.src;
+  $("ghexmsg").textContent = ""; if (o.src) { $("gsrc").textContent = "from " + o.src; GEX = !!o.example; }
   if (o.name) { $("gcname").value = o.name; GAUTO = true; $("gcnote").textContent = "one of the model's colour words"; return; }
   if (!GAUTO) return;
   clearTimeout(GHT);
@@ -1641,9 +1665,9 @@ function gUse(hex, src) {             // a colour from the photo (picker or colo
   go("recipes");
 }
 async function gSearch() {
-  if (GENG === "smart" && $("gusetext").checked) {           // read new text first: it can set the colour, cone and surface below
+  if ($("gusetext").checked) {          // read changed words first (every engine): they set, or clear, the colour word, cone and surface below
     const t = $("gtext").value.trim();
-    if (t && t !== GREAD) await gRead();
+    if (t !== GREAD) await gRead();
   }
   const hex = gHex($("ghex").value);
   if (!hex) { $("ghexmsg").innerHTML = `<span class="no">HEX must look like #3054A5</span>`; return; }
@@ -1652,17 +1676,22 @@ async function gSearch() {
                 surface: $("gsurface").value, top_k: +$("gk").value || 10};
   $("ggo").disabled = true; $("gmsg").innerHTML = `<span class="busy"></span>scoring ${GOPT ? GOPT.recipes.toLocaleString() : ""} recipes…`;
   const t0 = performance.now();
+  let skipEx = false;
   try {
-    if (GENG === "smart") {
+    if (GENG !== "colour") {                                    // smart search, or Auto: the server picks the engine (mm/glaze_decision.py)
       const text = $("gusetext").checked ? $("gtext").value.trim() : "";
       const u = text ? GUND : null, ox = oxides();
       const photo = $("guseimg").checked && QID && activeObj() != null;
-      Object.assign(body, {text, hex: $("gusecol").checked ? hex : "", transparency: u && u.transparency ? u.transparency.value : "",
+      const fx = $("guseform").checked && Object.keys(ox).length > 0;
+      skipEx = GEX && !!(text || photo || fx);                  // the untouched example colour does not join a search with its own input
+      Object.assign(body, {text, hex: $("gusecol").checked && !skipEx ? hex : "", transparency: u && u.transparency ? u.transparency.value : "",
         atmospheres: u ? u.atmospheres.map(a => a.value) : [], use_photo: !!photo, qid: photo ? QID : null, object: photo ? activeObj() : null,
-        oxides: $("guseform").checked && Object.keys(ox).length ? ox : null, oxide_unit: UNIT});   // the server says when it cannot use it
-      GRES = await api("/api/glaze/smart_search", body); GRES.engine = "smart";
+        oxides: fx ? ox : null, oxide_unit: UNIT});   // the server says when it cannot use it
+      if (GENG === "auto") GRES = await api("/api/glaze/auto", body);           // GRES.engine: the engine that answered
+      else { GRES = await api("/api/glaze/smart_search", body); GRES.engine = "smart"; }
     } else { GRES = await api("/api/glaze/search", body); GRES.engine = "colour"; }
-    $("gmsg").textContent = `search ${GRES.timings.retrieval_ms} ms in the model · ${Math.round(performance.now() - t0)} ms with the page`;
+    $("gmsg").textContent = `search ${GRES.timings.retrieval_ms} ms in the model · ${Math.round(performance.now() - t0)} ms with the page` +
+      (skipEx ? ` · the example colour ${hex} was left out (pick a colour to use one)` : "");
     if (GAUTO && GRES.query.color_name) $("gcname").value = GRES.query.color_name;
     gRender();
   } catch (e) { $("gmsg").innerHTML = `<span class="no">${esc(e.message)}</span>`; }
@@ -1677,11 +1706,15 @@ function gRender() {
     ? `The same scores as Best matches, but at most <b>${GRES.max_per_cluster}</b> recipes per K-Means ${GRES.engine === "smart" ? "family of the joint model" : "chemistry cluster"}: different families of formulations for a similar result. Different chemistry is not safer or better.`
     : `The highest weighted scores over all ${GRES.searched.toLocaleString()} recipes.`;
   const sw = q.hex ? `<span class="sw" style="background:${esc(q.hex)}"></span> <b>${esc(q.hex)}</b> · ` : "";
-  $("gquery").innerHTML = (GRES.engine === "smart"
+  const d = GRES.decision;
+  $("gquery").innerHTML = (d ? `<div><b>Auto</b> (decision of ${esc(d.version)}): ${esc(GKIND[d.input] || d.input)} → <b>${esc(GENGL[d.engine] || d.engine)}</b>. ${esc(d.why)}` +
+      `${d.note ? ` <span class="no">${esc(d.note)}</span>` : ""}</div>` : "") + (GRES.engine === "smart"
     ? `${sw}cone ${esc(q.cone || "any")} · ${esc(q.surface || "any surface")}${q.transparency ? " · " + esc(q.transparency) : ""}${(q.atmospheres || []).length ? " · " + esc(q.atmospheres.join(", ")) : ""}` +
       `${q.photo_object ? " · photo object " + esc(q.photo_object) : ""}${q.oxides ? " · formula " + Object.keys(q.oxides).length + " oxides" : ""}${q.text ? ` · text <code>${esc(q.text)}</code>` : ""}` +
       `<br>parts of the score: ${Object.entries(GRES.parts).map(([k, v]) => `${GLBL[k] || k} ${v.toFixed(2)}`).join(" · ")}`
-    : `${sw}cone ${esc(q.cone || "any")} · ${esc(q.surface || "any surface")} · the model reads <code>${esc(GRES.model_text)}</code>` +
+    : `${sw}cone ${esc(q.cone || "any")} · ${esc(q.surface || "any surface")} · ` + (GRES.weights && GRES.weights.latent === 0
+        ? `learned part switched off (weight 0): ranked by CIEDE2000 colour, surface and cone`
+        : `the model reads <code>${esc(GRES.model_text)}</code>`) +
       `${GRES.cone_scoring === "orton" ? "" : " · cone scoring as in the notebook (04 = 4)"}`) + GRES.warnings.map(w => `<div class="no">⚠ ${esc(w)}</div>`).join("");
   if (!lst.length) { $("ggrid").innerHTML = `<div class="empty">No recipes found.</div>`; $("gimgmsg").textContent = ""; return; }
   GIMG = {id: (GIMG ? GIMG.id : 0) + 1, t0: performance.now(), n: lst.filter(x => x.thumb_url || x.image_url).length, ok: 0, bad: 0};
@@ -1942,6 +1975,7 @@ function showPage(p) {
   document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("on", a.dataset.p === p));
   const slot = $(p === "recipes" ? "formslot-recipes" : "formslot-pottery");
   if ($("formcard").parentElement !== slot) slot.appendChild($("formcard"));
+  formCheck();                                     // its "used in the search" line depends on the page
   if (p === "photo") { drawStage(); if (QOBJ) renderQobj(); else renderFound(); }
   if (p === "pottery") renderPotPhoto();
   if (p === "recipes") gMode(document.querySelector("#gmode .on")?.dataset.g || "color");

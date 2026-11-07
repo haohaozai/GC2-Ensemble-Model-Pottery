@@ -10,7 +10,10 @@ This branch contains **only Glaze Search**, with original photos and segmentatio
 
 | You want to see | Open | What is in it |
 |---|---|---|
-| **New here? Install, then one full example** | [**Quick Start (PDF, 11 pages)**](docs/manuals/CG2_Glaze_Search_Quick_Start.pdf) | The five install steps (Windows and Mac), then one example click by click: a photo of a blue bowl + a typed sentence to the final recipe list. Every screenshot is the real app doing exactly these steps |
+| **New here? Install, then one full example** | [**Quick Start (PDF, 14 pages)**](docs/manuals/CG2_Glaze_Search_Quick_Start.pdf) | The five install steps (Windows and Mac), then one example click by click: a photo of a blue bowl + a typed sentence to the final recipe list, and the same photo to similar pots. Every screenshot is the real app doing exactly these steps |
+| **Writing the report? Everything in one folder** | [**Report Pack**](docs/manuals/Report_Pack/) | All current documents numbered in report order (overview → method → worked examples → evaluation → decision), with an index, a report outline and the headline numbers with their source |
+| Worked examples, every score calculated | [Recipes from a bowl photo](docs/manuals/CG2_Glaze_Search_Step_by_Step_Bowl_2026-11-06.pdf) · [Recipes, "sand satin" cases](docs/manuals/CG2_Glaze_Recipes_Sand_Examples_2026-11-07.pdf) · [Similar pottery from a bowl photo](docs/manuals/CG2_Similar_Pottery_Step_by_Step_2026-11-07.pdf) | Real screenshots with red frames on what to read; for each case which engine answered, the pretrained model and algorithm of each step, and the score of #1 worked out |
+| Which recipe engine, and why | [Model decision and engine evaluation (PDF, 7 pages)](docs/manuals/CG2_Glaze_Search_Model_Decision_2026-11-06.pdf) | The team's colour-match model, smart search, a colour ranking and two hybrids compared on 395 held-out recipes; the decision tree behind the **Auto** engine |
 | The full process of a search | [Process, models and parameters (PDF, 8 pages)](docs/manuals/CG2_Glaze_Search_Process_Models_MindMap.pdf) · [mind map page](https://claude.ai/artifact/B1zswhT3kHGYnZYYvYgaa5) | Data → preprocessing → training → evaluation, and the 10 steps of a search with their settings |
 | Which pretrained model does what, with diagrams | [Pretrained models, illustrated (PDF, 16 pages)](docs/manuals/CG2_Glaze_Search_Pretrained_Models.pdf) | Grounding DINO, SAM 2.1, OpenCLIP, DINOv2 and MiniLM: zero-shot, frozen or with a trained head; an activity diagram and 13 figures from one real photo and sentence |
 | Metrics and evaluation results | [Evaluation (PDF, 14 pages)](docs/manuals/CG2_Glaze_Search_Evaluation.pdf) · [evaluation page](https://claude.ai/artifact/BVYzi6cWhbLpf6x1N8qQTh) | Every metric (R@K, P@10, MAD@K, accuracy, AUROC …) stage by stage, from the data and self-made labels to the final ranking, and the limits to state |
@@ -172,7 +175,7 @@ Uploads and searches: `multimodal_experiments/work/queries/`; session log: `mult
 | 2 | Click the object you mean | It becomes the active object (yellow outline) |
 | 3 | **Pick colour (HEX)** → click the glaze → **Use for glaze search**, or press **glaze** next to a colour region in card 1b | The colour (median of 13 × 13 pixels inside the object, highlights and shadows left out) goes to card G; correct the HEX by hand if needed |
 | 4 | Card G · **Describe it**: type freely, e.g. `shinyy cobolt blu ^6 ox, kinda runny` → **Read it** | Keywords and values are read and shown as chips: colour → HEX, Orton cone (`04` ≠ `4`), surface, transparency, atmosphere, effects, colourant %, oxides; typos are fixed; suggestions come from Glazy descriptions |
-| 5 | Choose **Smart search** (text + colour + photo object + formula + cone + surface) or **Colour match** (colour + cone + surface), then **Find recipes** | Every recipe is scored, about 0.1 s |
+| 5 | Keep **Auto** (the default) or choose **Smart search** (text + colour + photo object + formula + cone + surface) or **Colour match** (colour + cone + surface), then **Find recipes** | Every recipe is scored, about 0.1 s. Auto picks the engine that was best for what you gave: a photo, words or a formula → smart search; only the colour + cone / surface menus → colour match; only a colour → colour ranking. The line above the results says which engine answered and why |
 | 6 | Read **Best matches** and **Explore formulations** (≤ 2 per family) | Each card: Glazy photo, score parts, ingredients, **View on Glazy** |
 
 The page has a nav bar: 🏠 Start · 📷 My photo · 🧪 Glaze recipes · 🏺 Similar pottery · 📊 Scores · 📖 How to use. Manual with worked examples: [CG2_Glaze_Search_Manual.html](docs/manuals/CG2_Glaze_Search_Manual.html) / [PDF](docs/manuals/CG2_Glaze_Search_Manual.pdf) (also the app's 📖 How to use page).
@@ -182,6 +185,8 @@ New user, step by step with screenshots: [CG2_Glaze_Search_Quick_Start.pdf](docs
 The whole pipeline, data → preprocessing → training → evaluation: [glaze_search_ml_pipeline.png](docs/glaze_search_ml_pipeline.png). No pretrained model is fine-tuned: MiniLM and DINOv2 stay frozen and three small heads are trained on top of them (InfoNCE); "Explore formulations" uses K-Means families (k-means++ initialisation) because density clustering (DBSCAN / HDBSCAN) found no useful groups.
 
 Held-out test results of the smart search model (recipes it never saw): a noisy sentence finds the right recipe in the top 10 for 74 % of the test recipes (pretrained text model alone: 62 %); a photo object for 45 %; a formula for 33 % (random: 1 %). Read values are right for 93 % (colour) to 100 % (atmosphere) of noisy sentences.
+
+The engines compared on 395 recipes that neither model trained on (`python scripts/eval_glaze_engines.py`, [decision document](docs/manuals/CG2_Glaze_Search_Model_Decision_2026-11-06.pdf)): with a typed sentence the right recipe is in the top 10 for 79 % (smart search) vs 43 % (colour match); with only a colour, 88 % of the colour ranking's results have the same colour (smart search 59 %); with only the menus, colour match gives the most results with the same colour and surface (63 % vs 54 %). Adding the colour-match learned match to smart search did not help (best weight 0). These results set the **Auto** engine (`configs/glaze_decision.json`).
 
 ---
 
@@ -233,6 +238,7 @@ CG2/                                      # parent folder, any location
 ## 6. Online version
 
 - [Glaze Search on Hugging Face](https://huggingface.co/spaces/FBIWarninggg/glaze_search) (Hugging Face's free GPU)
+- Google Colab (free GPU, a temporary public link while the notebook runs): [colab/CG2_Glaze_Search_Colab.ipynb](colab/CG2_Glaze_Search_Colab.ipynb) runs the same app; open it in Colab (File → Upload notebook), choose a T4 GPU and Run all
 - Web pages: [Glaze Search Mind Map](https://claude.ai/artifact/B1zswhT3kHGYnZYYvYgaa5) · [Glaze Search Evaluation](https://claude.ai/artifact/BVYzi6cWhbLpf6x1N8qQTh) · [Glaze Search Manual](https://claude.ai/artifact/7rmiKzN17dk2Fhb4AGeJhz)
 
 ---
@@ -269,6 +275,11 @@ Current documents (November 2026, the app as it is now), in [docs/manuals](docs/
 | [Pretrained models, illustrated (PDF)](docs/manuals/CG2_Glaze_Search_Pretrained_Models.pdf) | the report | how each pretrained model works on a real example, with an activity diagram and 13 figures |
 | [Evaluation (PDF)](docs/manuals/CG2_Glaze_Search_Evaluation.pdf) | the report | every metric and test result, stage by stage, and the limits to state |
 | [Photo attributes report (PDF)](docs/manuals/CG2_Attributes_v3_MindMap_Report.pdf) | the report | the six photo attributes (shape, surface, transparency, texture, effects, defects) and their tests |
+| [Recipes from a bowl photo (PDF)](docs/manuals/CG2_Glaze_Search_Step_by_Step_Bowl_2026-11-06.pdf) | the report | one photo + one sentence through every step and engine, the pretrained model of each step |
+| [Recipes, "sand satin" cases (PDF)](docs/manuals/CG2_Glaze_Recipes_Sand_Examples_2026-11-07.pdf) | users, the report | every kind of input from a colour alone to words + photo + formula, the engine Auto picks and the score of #1 worked out |
+| [Similar pottery from a bowl photo (PDF)](docs/manuals/CG2_Similar_Pottery_Step_by_Step_2026-11-07.pdf) | users, the report | colour only, the presets, words and a formula; how z-scores and shares make a pot's score |
+| [Model decision and engine evaluation (PDF)](docs/manuals/CG2_Glaze_Search_Model_Decision_2026-11-06.pdf) | the report | the engines on 395 held-out recipes, hybrids, the decision tree behind Auto |
+| [**Report Pack**](docs/manuals/Report_Pack/) | the report | all of the above numbered in report order, with an index, a report outline and the headline numbers |
 
 Also: [Glaze Search Guide](docs/SEARCH_GUIDE.md) (inputs, sliders, results, evaluation) · [Glaze recipe search (card G)](docs/glaze_integration_architecture.md) (architecture, API, tests, updating the models; [system diagram](docs/glaze_search_full_flow.png)) · [Data Download Guide](docs/DATA_DOWNLOAD.md).
 

@@ -342,10 +342,10 @@ class JointSearch:
         u["inferred"] = self.tags.predict(text) if (self.tags and text.strip()) else {}
         return u
 
-    def search(self, p: dict, photo_vec: np.ndarray | None = None) -> dict:
+    def score(self, p: dict, photo_vec: np.ndarray | None = None) -> dict:
+        """every given part of the query scored for EVERY gallery recipe; search() ranks it, the evaluation reads it whole."""
         from skimage.color import deltaE_ciede2000
         from .glaze_reference import normalize_cone
-        t0 = time.perf_counter()
         w = {**self.cfg["weights"], **{k: float(v) for k, v in (p.get("weights") or {}).items() if k in PARTS}}
         text = re.sub(r"\s+", " ", str(p.get("text") or "")).strip()[:500]
         u = GT.extract(text) if text else None
@@ -399,6 +399,12 @@ class JointSearch:
         if tot <= 0:
             raise ValueError("no part of this query has a weight above 0")
         score = sum(w[k] * S[k] for k in S) / tot
+        return {"S": S, "w": w, "tot": tot, "score": score, "used": used, "query": q, "understood": u, "warnings": warn}
+
+    def search(self, p: dict, photo_vec: np.ndarray | None = None) -> dict:
+        t0 = time.perf_counter()
+        r = self.score(p, photo_vec)
+        S, w, tot, score, used = r["S"], r["w"], r["tot"], r["score"], r["used"]
         order = np.lexsort((-S.get("text", np.zeros(self.n)), -score))
         k, mpf = int(p.get("top_k") or self.cfg["top_k"]), int(self.cfg["max_per_family"])
         best = order[:k]
@@ -411,9 +417,9 @@ class JointSearch:
             if len(chosen) == k:
                 break
         card = lambda i, r: self._card(i, r, S, w, tot, score, used)  # noqa: E731
-        return {"query": q, "understood": u, "parts": {k2: round(w[k2] / tot, 4) for k2 in S}, "model_version": self.version,
-                "weighted_results": [card(i, r) for r, i in enumerate(best, 1)], "diverse_results": [card(i, r) for r, i in enumerate(chosen, 1)],
-                "max_per_cluster": mpf, "searched": self.n, "warnings": warn,
+        return {"query": r["query"], "understood": r["understood"], "parts": {k2: round(w[k2] / tot, 4) for k2 in S}, "model_version": self.version,
+                "weighted_results": [card(i, rk) for rk, i in enumerate(best, 1)], "diverse_results": [card(i, rk) for rk, i in enumerate(chosen, 1)],
+                "max_per_cluster": mpf, "searched": self.n, "warnings": r["warnings"],
                 "timings": {"retrieval_ms": round(1000 * (time.perf_counter() - t0), 1), "total_ms": round(1000 * (time.perf_counter() - t0), 1)}}
 
     def _card(self, i, rank, S, w, tot, score, used) -> dict:

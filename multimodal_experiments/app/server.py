@@ -331,6 +331,17 @@ def query_object(qid: str, index: int) -> dict:
             "dino_available": S.get("qattr") is not None}
 
 
+def glazy_photos() -> dict:
+    """recipe id -> the recipe's photo on Glazy (image_path of the colour-match catalog), built once; {} without that model"""
+    if "glazy_photos" not in S:
+        g = S.get("glaze")
+        if g is None:
+            return {}
+        from mm.glaze_retrieval import GLAZY_CDN
+        S["glazy_photos"] = {int(r): u for r, u in zip(g.catalog["recipe_id"], g.catalog["image_path"]) if isinstance(u, str) and u.startswith(GLAZY_CDN)}
+    return S["glazy_photos"]
+
+
 def run_object_search(p: dict) -> dict:
     """Balanced / shape / glaze / colour search over the segmented OBJECTS (exact object images)."""
     from mm.balanced import colour_query  # noqa: F401  (typed colours are converted inside ObjectSearch)
@@ -350,6 +361,10 @@ def run_object_search(p: dict) -> dict:
         palette = [[c["hex"], 1.0] for c in colours[:1]]
     qattr = eng.query_attributes(cleaned, palette)
     res = osr.search(p, qf, tv, fv, qattr, q_attrs=p.get("query_attrs") or {})
+    photos = glazy_photos()
+    for r in res.get("results", []):             # a cut-out of the recipe's own Glazy photo opens that photo on Glazy
+        rid = str(r.get("recipe_id") or "")
+        r["glazy_photo"] = photos.get(int(rid)) if rid.isdigit() and r.get("parent") == f"{rid}.jpg" else None
     if qf is not None:
         res["query_object"] = {"index": oi, "regions": osr.region_list(qf["details"]), "attributes": qf["details"]["attributes"]}
     res.update({"query": info, "palette": palette, "seconds": round(time.time() - t0, 2)})
@@ -391,11 +406,40 @@ def glaze_log(res: dict, mode: str):
             f.write(json.dumps(entry, ensure_ascii=False, default=str) + "\n")
 
 
-def glaze_search(p: dict) -> dict:
+def glaze_search(p: dict, mode: str = "colour match") -> dict:
     """card G, colour match: colour + cone + surface -> the text-chemistry retrieval model (mm/glaze_retrieval.py).
     CPU only, so it never waits for the GPU lock; each search is one line of work/queries/glaze_search_log.jsonl."""
     res = S["glaze"].search(p)
-    glaze_log(res, "colour match")
+    glaze_log(res, mode)
+    return res
+
+
+def glaze_decision() -> dict | None:
+    try:
+        from mm import glaze_decision as GD
+        return GD.read_config()
+    except Exception as exc:  # noqa: BLE001  (no decision file: the page offers the two engines only)
+        log().warning(f"[app] no Auto engine: {type(exc).__name__}: {exc}")
+        return None
+
+
+def glaze_auto(p: dict) -> dict:
+    """card G, Auto: the engine the held-out evaluation chose for what this query gives (mm/glaze_decision.py,
+    configs/glaze_decision.json). The answer carries the decision: engine, why, version date."""
+    from mm import glaze_decision as GD
+    cfg = GD.read_config()
+    d = GD.choose(p, cfg, bool(S.get("joint")))
+    mode = f"auto {d['version']}: {d['engine'].replace('_', ' ')}"
+    if d["engine"] == "smart":
+        res = glaze_smart(p, mode)
+        res["engine"] = "smart"
+    else:
+        q = {k: p.get(k) for k in ("hex", "color_name", "cone", "surface", "top_k")}
+        if d["engine"] == "colour_ranking":
+            q["weights"] = cfg["colour_ranking_weights"]
+        res = glaze_search(q, mode)
+        res["engine"] = "colour"
+    res["decision"] = d
     return res
 
 
@@ -415,7 +459,7 @@ def glaze_understand(p: dict) -> dict:
     return {**u, "inferred": {}}
 
 
-def glaze_smart(p: dict) -> dict:
+def glaze_smart(p: dict, mode: str = "smart search") -> dict:
     """card G, smart search: free text + photo object + formula + colour / cone / surface -> the joint model
     (mm/glaze_joint.py). The photo object is encoded with DINOv2 on the GPU (under the GPU lock); the rest on the CPU."""
     from mm.query import umf_to_wt
@@ -433,7 +477,7 @@ def glaze_smart(p: dict) -> dict:
     res = S["joint"].search({**p, "oxides": ox or None}, photo)
     if photo is not None:
         res["query"]["photo_object"] = f"{p['qid']} #{p.get('object')}"
-    glaze_log(res, "smart search")
+    glaze_log(res, mode)
     return res
 
 
@@ -566,7 +610,7 @@ class H(BaseHTTPRequestHandler):
             return self._json(colour_lookup(parse_qs(urlparse(self.path).query).get("q", [""])[0]))
         if path == "/api/glaze/options":                    # card G: cone / surface choices, colour words, weights, model versions
             return self._json({**S["glaze"].options(), "smart": S["joint"].options() if S.get("joint") else None,
-                               "smart_error": S.get("joint_error")}) if self._glaze_ready() else None
+                               "smart_error": S.get("joint_error"), "decision": glaze_decision()}) if self._glaze_ready() else None
         if path == "/api/glaze/color_name":                 # HEX -> nearest colour word of the retrieval model
             from urllib.parse import parse_qs, urlparse
             if not self._glaze_ready():
@@ -647,6 +691,8 @@ class H(BaseHTTPRequestHandler):
                     return self._json({"error": f"smart search is not available ({S.get('joint_error') or 'not loaded'}) - "
                                                 "run INSTALL_GLAZE_MODEL.bat, then restart RUN_GLAZE_SEARCH.bat"}, 503)
                 return self._json(glaze_smart(p))
+            if path == "/api/glaze/auto":                     # card G, Auto: the engine the evaluation chose for this kind of query
+                return self._json(glaze_auto(p)) if self._glaze_ready() else None
             if path == "/api/parse_colours":
                 from mm.colorlab import parse_phrase
                 return self._json(parse_phrase(p.get("text", "")))

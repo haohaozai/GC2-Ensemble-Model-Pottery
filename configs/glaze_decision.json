@@ -1,0 +1,23 @@
+{
+  "_about": "Auto engine of card G (multimodal_experiments/mm/glaze_decision.py): the recipe engine for each kind of query, chosen on recipes no model trained on by scripts/eval_glaze_engines.py. Read at every Auto search (no restart needed). A new evaluation = a new version here and a new dated document.",
+  "version": "2026-11-06",
+  "document": "docs/manuals/CG2_Glaze_Search_Model_Decision_2026-11-06.pdf",
+  "_engines": "smart = smart search (the joint model) · colour_match = the text-chemistry model as it is · colour_ranking = colour match with its learned part off (colour_ranking_weights)",
+  "engines": {
+    "photo_words_formula": "smart",
+    "menus": "colour_match",
+    "colour": "colour_ranking"
+  },
+  "why": {
+    "photo_words_formula": "With a photo, words or a formula, smart search finds the recipe far more often (typed sentence: in the top 10 for 79 % vs 43 % with colour match) and gives more results of the same colour and surface.",
+    "menus": "With only the colour, cone and surface menus, colour match gives the most results with both the same colour and the same surface (63 % vs 54 % smart search); it finds the exact recipe a little less often (MRR 0.31 vs 0.34).",
+    "colour": "With only a colour, the plain CIEDE2000 colour ranking beats both learned models: 88 % of the results in the same colour (smart search 59 %) and the recipe found more often (MRR 0.14 vs 0.11)."
+  },
+  "_colour_ranking_weights": "colour match weights with the learned part off: latent, CIEDE2000 colour, surface, cone (sum 1)",
+  "colour_ranking_weights": {
+    "latent": 0.0,
+    "color": 0.8,
+    "surface": 0.1,
+    "cone": 0.1
+  }
+}

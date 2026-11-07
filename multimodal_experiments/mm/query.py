@@ -64,10 +64,11 @@ def umf_to_wt(umf: dict) -> dict:
 
 
 def parse_oxides(text: str) -> dict:
-    """'SiO2 64.2  Al2O3: 13.1, CaO 9' (or a table copied from Glazy) -> {oxide: value}."""
+    """'SiO2 64.2  Al2O3: 13.1, CaO 9' (or a table copied from Glazy; subscripts SiO₂ / Al₂O₃ too) -> {oxide: value}."""
     import re
+    import unicodedata
     out = {}
-    for k, v in re.findall(r"\b([A-Z][a-z]?\d*(?:[A-Z][a-z]?\d*)*)\s*[:=]?\s*(-?\d+(?:[.,]\d+)?)", text or ""):
+    for k, v in re.findall(r"\b([A-Z][a-z]?\d*(?:[A-Z][a-z]?\d*)*)\s*[:=]?\s*(-?\d+(?:[.,]\d+)?)", unicodedata.normalize("NFKC", text or "")):
         if F.molar_mass(k) and "O" in k or k == "F":
             out[k] = float(v.replace(",", "."))
     return {k: v for k, v in out.items() if v > 0}

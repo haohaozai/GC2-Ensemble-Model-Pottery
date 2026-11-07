@@ -96,7 +96,8 @@ def extract(text: str) -> dict:
 
     # oxide analysis (formula tokens with a number): needs >= 3 oxides to count as an analysis
     ox = {}
-    for m in re.finditer(r"\b(" + "|".join(sorted(OXIDES, key=len, reverse=True)) + r")\s*[:=]?\s*" + AMOUNT, raw, re.I):
+    for m in re.finditer(r"\b(" + "|".join(sorted(OXIDES, key=len, reverse=True)) + r")\s*[:=]?\s*" + AMOUNT,
+                         unicodedata.normalize("NFKC", raw), re.I):              # NFKC: SiO₂ -> SiO2, Al₂O₃ -> Al2O3
         name = next(o for o in OXIDES if o.lower() == m.group(1).lower())
         ox[name] = float(m.group(2).replace(",", "."))
     if len(ox) >= 3:

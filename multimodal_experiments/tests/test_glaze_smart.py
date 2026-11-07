@@ -53,6 +53,15 @@ class Reader(unittest.TestCase):
         "transparant clear base cone 05-03 electric kiln": {"cone": "05 - 03", "transparency": "Transparent", "atm": ["Oxidation"], "colour": None},
     }
 
+    def test_subscript_formula(self):
+        """a formula written with subscripts (SiO₂, Al₂O₃) reads like SiO2, Al2O3, in the words box and in a pasted analysis"""
+        from mm.query import parse_oxides
+        want = {"SiO2": 44.0, "Al2O3": 16.8, "CaO": 9.7, "MgO": 7.0, "Na2O": 2.9, "B2O3": 2.8, "K2O": 0.8}
+        text = "SiO₂ 44.0 · Al₂O₃ 16.8 · CaO 9.7 · MgO 7.0 · Na₂O 2.9 · B₂O₃ 2.8 · K₂O 0.8"
+        self.assertEqual(GT.extract(text)["oxides"], want)
+        self.assertEqual(GT.extract(text)["unused"], [])
+        self.assertEqual(parse_oxides(text), want)
+
     def test_sentences(self):
         for text, want in self.CASES.items():
             u = GT.extract(text)
@@ -151,6 +160,41 @@ class JointModel(unittest.TestCase):
         self.assertIn("inferred", u)
         self.assertTrue({"surface", "transparency", "atmosphere"} <= set(u["inferred"]))
 
+    def test_score_is_what_search_ranks(self):
+        js = joint()
+        p = {"text": "satin white liner cone 6", "hex": "#E8E4DA"}
+        s, r = js.score(p), js.search(p)
+        self.assertEqual(set(s["S"]), set(r["parts"]))
+        self.assertEqual(len(s["score"]), js.n)
+        top = r["weighted_results"][0]
+        i = int(np.flatnonzero(js.g["ids"].astype(int) == top["recipe_id"])[0])
+        self.assertAlmostEqual(float(s["score"][i]), top["similarity_score"], places=5)
+        self.assertAlmostEqual(float(s["score"].max()), top["similarity_score"], places=5)
+
+
+class Decision(unittest.TestCase):
+    """the Auto engine's rules (mm/glaze_decision.py, configs/glaze_decision.json)"""
+
+    def test_input_kind(self):
+        from mm import glaze_decision as GD
+        for p, kind in [({"hex": "#3054A5"}, "colour"), ({"hex": "#3054A5", "cone": "6"}, "menus"), ({"hex": "#3054A5", "surface": "Glossy"}, "menus"),
+                        ({"text": "blue"}, "photo_words_formula"), ({"text": "  ", "hex": "#111111"}, "colour"),
+                        ({"use_photo": True, "qid": "q1", "hex": "#3054A5"}, "photo_words_formula"), ({"use_photo": True, "qid": None, "hex": "#3054A5"}, "colour"),
+                        ({"oxides": {"SiO2": 60, "Al2O3": 12, "CaO": 10}}, "photo_words_formula")]:
+            with self.subTest(p=p):
+                self.assertEqual(GD.input_kind(p), kind)
+
+    def test_config_and_fallback(self):
+        from mm import glaze_decision as GD
+        cfg = GD.read_config()
+        self.assertEqual(set(cfg["engines"]), set(GD.KINDS))
+        self.assertEqual(set(cfg["why"]), set(GD.KINDS))
+        self.assertAlmostEqual(sum(cfg["colour_ranking_weights"].values()), 1.0)
+        self.assertEqual(cfg["colour_ranking_weights"]["latent"], 0.0)
+        d = GD.choose({"text": "blue"}, {**cfg, "engines": {**cfg["engines"], "photo_words_formula": "smart"}}, smart_ready=False)
+        self.assertEqual(d["engine"], "colour_match")
+        self.assertTrue(d["note"])
+
 
 @unittest.skipUnless(HAVE_MODEL, "smart search model not trained")
 class Http(unittest.TestCase):
@@ -194,6 +238,32 @@ class Http(unittest.TestCase):
         self.assertEqual(json.loads(self.srv.GLAZE_LOG.read_text(encoding="utf-8").splitlines()[-1])["mode"], "smart search")
         self.assertEqual(self.call("/api/glaze/smart_search", {})[0], 400)
         self.assertEqual(self.call("/api/glaze/smart_search", {"use_photo": True, "qid": "nope", "object": 1})[0], 400)
+
+    def test_auto(self):
+        from mm.glaze_retrieval import FILES, GlazeRetriever, read_config
+        if not all((J.CODE / read_config()["model_dir"] / f).is_file() for f in FILES.values()):
+            self.skipTest("colour match model not installed")
+        if not self.srv.S.get("glaze"):
+            self.srv.S["glaze"] = GlazeRetriever()
+        cases = [({"text": "matt white liner mid fire", "hex": "#EDEAE0"}, "smart", "smart"),
+                 ({"hex": "#3054A5", "cone": "6", "surface": "Glossy", "color_name": ""}, "colour", "colour_match"),
+                 ({"hex": "#3054A5", "color_name": ""}, "colour", "colour_ranking")]
+        for body, engine, decided in cases:
+            with self.subTest(decided=decided):
+                code, r = self.call("/api/glaze/auto", {**body, "top_k": 5})
+                self.assertEqual(code, 200, r)
+                self.assertEqual((r["engine"], r["decision"]["engine"]), (engine, decided))
+                self.assertEqual(len(r["weighted_results"]), 5)
+                self.assertTrue(r["decision"]["version"] and r["decision"]["why"])
+                mode = json.loads(self.srv.GLAZE_LOG.read_text(encoding="utf-8").splitlines()[-1])["mode"]
+                self.assertTrue(mode.startswith("auto ") and mode.endswith(decided.replace("_", " ")), mode)
+        self.assertEqual(r["weights"]["latent"], 0.0)                     # colour ranking: the learned part is off
+        code, o = self.call_get("/api/glaze/options")
+        self.assertEqual(o["decision"]["version"], r["decision"]["version"])
+
+    def call_get(self, path):
+        with urllib.request.urlopen(self.base + path, timeout=60) as r:
+            return r.status, json.loads(r.read())
 
     def test_not_installed(self):
         js = self.srv.S.pop("joint")
