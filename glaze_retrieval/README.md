@@ -83,9 +83,9 @@ The notebook reads a local image path via `IMAGE_PATH`. Run cells in order and c
 
 ## Customization and assets
 
-`demo_content.json` is used for customizing the Streamlit app: title, introduction, font, button colour, sample descriptions, displayed recipe fields and diversification text. See `DEMO_CUSTOMIZATION.md`. Demo images available in `sample_images/`.
+`demo_content.json` is used for customizing the Streamlit app: title, introduction, font, button colour, sample descriptions, displayed recipe fields and diversification text. Demo images available in `sample_images/`.
 
-The bundled `retrieval_assets/shared_space_heads.pt` is loaded with `weights_only=True`; keep `retrieval_assets/` intact. Pretrained segmentation/encoder models are normally cached by Hugging Face in `~/.cache/huggingface/hub` (or `HF_HOME`) and may download on first use. **The `huggingface_hub` package is used only for pretrained-model downloads and cache diagnostics; it does not deploy or host the app.**
+The bundled `retrieval_assets/shared_space_heads.pt` is loaded with `weights_only=True`; keep `retrieval_assets/` intact. Pretrained segmentation/encoder models are normally cached by Hugging Face in `~/.cache/huggingface/hub` (or `HF_HOME`) and may download on first use.
 
 ## Troubleshooting
 
