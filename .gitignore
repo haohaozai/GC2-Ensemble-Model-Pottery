@@ -222,3 +222,5 @@ __marimo__/
 # Text branch generated artifacts (regenerate with `python -m text_branch ...`)
 outputs/
 .DS_Store
+/model_cache
+/glaze_retrieval/notebook_results

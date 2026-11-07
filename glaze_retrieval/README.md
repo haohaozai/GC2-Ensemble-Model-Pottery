@@ -5,10 +5,11 @@ This project runs **locally** on macOS or Windows.
 - **Streamlit (recommended):** `glaze_retrieval_app.py` — upload an image or choose a sample, segment pottery, and search for recipes.
 - **Jupyter Notebook (alternative):** `glaze_retrieval.ipynb` — specify an image file path and run the same segmentation/retrieval code in cells.
 
-Both interfaces share `glazeprep/`, `segmentation_frontend.py`, `retrieval_service.py`, `retrieval_assets/` and `sample_images/`. Python **3.11** is recommended. You only need **one** virtual environment for both interfaces.
+Both interfaces share `glazeprep/`, `segmentation_frontend.py`, `retrieval_service.py`, `retrieval_assets/` and `sample_images/`. Python **3.11** with a virtual environment is recommended. You only need **one** virtual environment for both interfaces.
 
 ## macOS (Apple Silicon) — first-time installation
 
+Creates the python virtual environment and installs requirements.
 In Terminal, `cd` to the extracted project folder, then:
 
 ```bash
@@ -38,6 +39,7 @@ python -m notebook glaze_retrieval.ipynb
 
 ## Windows (PowerShell) — first-time installation
 
+Creates the python virtual environment and installs requirements.
 Install Python 3.11, open PowerShell in the extracted project folder, then:
 
 ```powershell
@@ -91,4 +93,17 @@ The bundled `retrieval_assets/shared_space_heads.pt` is loaded with `weights_onl
 - **GPU check:** `torch.backends.mps.is_available()` for Apple Silicon; `torch.cuda.is_available()` for Windows NVIDIA. CPU is supported but may be slow for SAM 2.1 Large.
 - **First run:** allow time and disk space for model downloads.
 
-Full end-to-end inference has not been tested on every platform.
+### Model loading and reuse (Streamlit)
+
+The segmentation models (Grounding DINO, SAM 2.1, Ceramic CLIP) are **lazy-loaded**
+only when **Detect pottery** is first clicked. Streamlit's `st.cache_resource`
+keeps the initialized segmenter in server memory across subsequent uploaded
+images, sample-image changes and widget reruns. A shared lock serializes
+segmentation requests from multiple sessions. The retrieval encoder is also
+cached separately and loads on the first recipe search. Selecting another
+photo does **not** reload either model group.
+
+The models will initialize again if you restart the Streamlit server, clear
+Streamlit's resource cache, or change the cached function's source code. The
+Hugging Face model download cache is separate: it normally persists on disk
+across app restarts, even though in-memory models must be initialized again.

@@ -7,6 +7,7 @@ import os
 import json
 import re
 import time
+from threading import Lock
 from pathlib import Path
 
 import numpy as np
@@ -16,6 +17,7 @@ from PIL import Image, ImageOps
 
 from glazeprep import config as C
 from model_status import statuses
+import pandas as pd
 
 ROOT = Path(__file__).resolve().parent
 SAMPLES_DIR = ROOT / "sample_images"
@@ -153,8 +155,21 @@ def get_palette_function():
 
 @st.cache_resource(show_spinner="Loading Grounding DINO, SAM 2.1 and Ceramic CLIP…")
 def get_segmenter():
+    """Lazy singleton: initialize the three models on the first Detect click only.
+
+    Streamlit retains this resource across widget reruns, sample changes and
+    image uploads. It is rebuilt only if the server/cache is reset or this
+    cached function's source changes.
+    """
     from segmentation_frontend import load_segmenter
     return load_segmenter()
+
+
+@st.cache_resource
+
+def get_segmentation_lock():
+    """Serialize access to the shared model on concurrent browser sessions."""
+    return Lock()
 
 st.title("🎨 " + APP_TITLE)
 if CONTENT.get("intro"):
@@ -165,14 +180,14 @@ if CONTENT.get("intro"):
         intro = "\n\n".join(str(part) for part in intro)
     if isinstance(intro, str):
         st.markdown(intro)
-model_ready = "Ready" if "segmenter_load_seconds" in st.session_state else "Not loaded"
+model_ready = "Ready (reused for subsequent images)" if "segmenter_load_seconds" in st.session_state else "Not loaded (loads on first detection)"
 timing = f" · Last segmentation {st.session_state['segmentation_seconds']:.1f}s" if "segmentation_seconds" in st.session_state else ""
 st.caption(f"Inference: **{C.DEVICE.upper()}** · Segmentation models: **{model_ready}**{timing}")
 # Full-width expander avoids Streamlit's popover icon overlapping a long button label.
 with st.expander("Model availability / diagnostics", expanded=False):
     st.write(f"Device: `{C.DEVICE}` · MPS: `{torch.backends.mps.is_available()}` · CPU fallback: `{bool(os.environ.get('PYTORCH_ENABLE_MPS_FALLBACK'))}`")
     if "segmenter_load_seconds" in st.session_state:
-        st.success(f"Models loaded in {st.session_state['segmenter_load_seconds']:.1f}s")
+        st.success(f"First model initialization: {st.session_state['segmenter_load_seconds']:.1f}s. Subsequent images reuse the loaded models.")
     for name, ready in statuses().items():
         if ready is True:
             st.success(f"{name}: cached weights detected")
@@ -224,7 +239,10 @@ if photo is not None:
                     st.session_state["segmenter_load_seconds"] = time.perf_counter() - load_start
                 st.write(f"Models ready on {segmenter.device}")
                 start = time.perf_counter()
-                objects, meta = extract_objects(photo, segmenter)
+                # Cached models are shared between sessions; protect their use
+                # against simultaneous inference from multiple browser tabs.
+                with get_segmentation_lock():
+                    objects, meta = extract_objects(photo, segmenter)
                 st.session_state["segmentation_seconds"] = time.perf_counter() - start
                 st.session_state["segmented_objects"] = objects
                 st.session_state["segmentation_meta"] = meta
@@ -302,6 +320,18 @@ def render_results():
                 diversify_view = st.toggle("Diversify clusters", key="diversify_results_view",
                     help=DIVERSITY_HELP)
                 st.caption(DIVERSITY_CAPTION)
+            # Display-only options: toggling these does not rerun retrieval.
+            score_col1, score_col2, _ = st.columns([1.35, 1.35, 3.5], vertical_alignment="center")
+            with score_col1:
+                show_latent_score = st.checkbox(
+                    "Show latent score", value=False, key="show_latent_score",
+                    help="Normalized similarity from the learned latent embedding space (0–100%).",
+                )
+            with score_col2:
+                show_color_score = st.checkbox(
+                    "Show colour score", value=False, key="show_color_score",
+                    help="CIEDE2000-based colour similarity (0–100%).",
+                )
             results = diversified_results if diversify_view else regular_results
             with export:
                 st.download_button("Export CSV", results.to_csv(index=False).encode("utf-8"),
@@ -322,6 +352,34 @@ def render_results():
                         name = display_value(rec.get(RECIPE_TITLE_FIELD)) or f'Recipe {rec["recipe_id"]}'
                         st.markdown(f'<div class="recipe-title" title="{html.escape(str(name), quote=True)}">{html.escape(str(name))}</div>', unsafe_allow_html=True)
                         details = []
+                        score = rec.get("final_score")
+                        if score is not None:
+                            try:
+                                score_number = float(score)
+                                if pd.notna(score_number):
+                                    details.append(f'<div class="recipe-meta-row"><strong>Similarity score:</strong> {score_number * 100:.2f}%</div>')
+                            except (TypeError, ValueError):
+                                pass
+                        for enabled, field_name, label in (
+                            (show_latent_score, "latent_score", "Latent score"),
+                            (show_color_score, "color_score", "Colour score"),
+                        ):
+                            if enabled:
+                                try:
+                                    value = float(rec.get(field_name))
+                                    if np.isfinite(value):
+                                        details.append(
+                                            f'<div class="recipe-meta-row"><strong>{label}:</strong> {value * 100:.2f}%</div>'
+                                        )
+                                except (TypeError, ValueError):
+                                    pass
+                        if diversify_view:
+                            cluster_value = rec.get("kmeans_cluster")
+                            if cluster_value is not None and pd.notna(cluster_value):
+                                cluster_label = html.escape(str(cluster_value))
+                                details.append(
+                                    f'<div class="recipe-meta-row"><strong>Cluster:</strong> {cluster_label}</div>'
+                                )
                         for item in RECIPE_FIELDS:
                             value = display_value(rec.get(item["field"]))
                             if value is not None:
