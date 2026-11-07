@@ -5,13 +5,15 @@
     "Upload a pottery photo or select a demo image to find similar glaze recipes.",
     "**How it works:** Ceramic surfaces or tiles are detected, the dominant colours are extracted, and the most similar recipes are retrieved from the catalog.",
     "The final retrieval score is calculated using a weighted combination of four components: 40% from cosine similarity in the shared latent space, which captures the learned relationship between text descriptions and oxide compositions; 40% from CIEDE2000 perceptual color similarity, which measures how closely the recipe's color matches the user's requested color; and 10% each from surface finish and firing cone compatibility.",
+    "The most similar recipes are retrieved. Thus, **surface and cone are not hard filters**.",
     "K-means clustering was performed to group recipes based on their oxide composition, but cluster results are not used in the retrieval process. To explore other chemical groups, 'Diversify' mode can be enabled to explore alternative chemical formulations. Instead of returning only the highest-scoring recipes, a maximum of two recipes from each cluster is selected. This allows users to discover glazes with different chemical compositions that may still achieve similar appearances. Although some diversified results may have lower similarity scores, they offer a wider variety of potential glaze formulations to explore.",
     "The below checks if the models are installed in this project yet. First time runs may encounter delays as models are downloaded. Loading the models may also require a few minutes."
   ],
   "samples": {
-    "38571.jpg": "",
-    "70574.jpg": "",
-    "222783.jpg": ""
+    "light_blue.jpg": "",
+    "pink.jpg": "",
+    "multi_object.jpg": "",
+    "blue.jpg": ""
   },
   "button_color": "#2E6D64",
   "recipe_title_field": "Name",
