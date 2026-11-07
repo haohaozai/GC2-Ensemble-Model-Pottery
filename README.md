@@ -56,6 +56,8 @@ Alternatively, select **Code → Download ZIP** on the branch page and extract t
 
 ## 2. Installation — in order
 
+> **The `.bat` or `.command` files cannot be started** (blocked by the PC, no double-click, Linux, or you work in an editor)? One Python file does all five steps and opens the page: `python glaze_search.py`. See [Any system: one Python file instead of the launchers](#any-system-one-python-file-instead-of-the-launchers).
+
 ### Windows — Step 1: `SETUP.bat`
 
 Install [uv](https://docs.astral.sh/uv/) once in PowerShell:
@@ -136,6 +138,30 @@ Both folders are not in git. Run the BAT again when a new model ZIP arrives: a s
 
 Card G also reads `7k_matched_all_data.csv` and `7k_matched_ingredients.csv` (recipe names, original cone values, ingredients) from the folder above the project (`D:\NUS study\CG2`), from `new image data\csv 7k data\`, or from the folder in the `CG2_7K_CSV_DIR` setting.
 
+### Any system: one Python file instead of the launchers
+
+`glaze_search.py` in the project folder runs the same commands as the `.bat` and `.command` files. It works on Windows, macOS and Linux, in CMD, PowerShell, Terminal or an editor's terminal, and needs only a Python 3.8 or newer to start (the app itself runs in the Python 3.11 `.venv` it creates). Open a terminal in the project folder and run:
+
+```bash
+python glaze_search.py
+```
+
+(macOS / Linux: `python3 glaze_search.py`.) It does what is still missing and skips what is done: **setup** if there is no `.venv`, **check**, then the pretrained models and the **download** if the check finds something missing, the **glaze recipe models** if they are not installed, and finally it **starts the app and opens http://127.0.0.1:8770** in your browser. The first time this takes long (about 10 GB to download); afterwards the same command just starts the app. Keep the window open while you use the page; Ctrl+C stops the app.
+
+One step at a time:
+
+| Command | Does the same as |
+|---|---|
+| `python glaze_search.py setup` | `SETUP.bat` / `SETUP.command` |
+| `python glaze_search.py download` (or `download --from-folder "D:\tar files"`) | `DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION` |
+| `python glaze_search.py check` | `CHECK_DATA` |
+| `python glaze_search.py install-model` (or `install-model "D:\path\to\test_similarity.zip"`) | `INSTALL_GLAZE_MODEL` |
+| `python glaze_search.py run` | `RUN_GLAZE_SEARCH`: starts the app and opens the page (if the app is already running, it only opens the page) |
+
+Options: `--port 8771` when port 8770 is busy, `--no-browser` to not open the page. `python glaze_search.py -h` lists everything.
+
+**No Python on the PC?** With [uv](https://docs.astral.sh/uv/) installed (Step 1), `uv run --no-project --python 3.11 glaze_search.py` runs the same file with a Python that uv downloads. If `uv` is missing, `glaze_search.py setup` first tries to install it with pip and otherwise prints the install command.
+
 ---
 
 ## 3. Start Glaze Search
@@ -147,6 +173,8 @@ Card G also reads `7k_matched_all_data.csv` and `7k_matched_ingredients.csv` (re
 ```bash
 ./RUN_GLAZE_SEARCH.command
 ```
+
+**Any system, or when a launcher cannot be started:** `python glaze_search.py run` (macOS / Linux: `python3`). It waits until the app answers, then opens the page.
 
 The local page should be available at **http://127.0.0.1:8770** once the server starts. Keep the Terminal/CMD window open while using the app; press Ctrl+C in Terminal to stop it.
 
@@ -217,6 +245,7 @@ CG2/                                      # parent folder, any location
 │   ├── CHECK_DATA.command
 │   ├── INSTALL_GLAZE_MODEL.command
 │   ├── RUN_GLAZE_SEARCH.command
+│   ├── glaze_search.py                    # any system: the same five steps in one Python file
 │   ├── multimodal_experiments/            # server, search engine, work, cache
 │   ├── glazeprep/                         # shared paths, segmentation, CLIP
 │   ├── reference_library/
@@ -248,6 +277,7 @@ CG2/                                      # parent folder, any location
 | Problem                                        | Fix                                                          |
 | ---------------------------------------------- | ------------------------------------------------------------ |
 | `git` not found                                | Install Git, reopen Terminal/CMD                             |
+| A `.bat` / `.command` is blocked, closes at once or opens in an editor | Run `python glaze_search.py` in a terminal in the project folder (macOS / Linux: `python3`): the same steps, then the page opens |
 | `uv` not found                                 | Install `uv` using the platform-specific command above, reopen Terminal/CMD |
 | macOS says permission denied                   | In repository root: `chmod +x *.command`                     |
 | `.command` opens in editor instead of Terminal | Finder → Get Info → Open with → Terminal; ensure executable bit is set |
@@ -258,7 +288,7 @@ CG2/                                      # parent folder, any location
 | Models missing / wants internet                | Rerun platform-specific SETUP launcher                       |
 | CUDA out of memory (Windows)                   | Close other GPU jobs; CPU mode in CMD: `set CUDA_VISIBLE_DEVICES=-1` then `RUN_GLAZE_SEARCH.bat` |
 | App already running                            | Open http://127.0.0.1:8770                                   |
-| Port 8770 busy                                 | Windows: `RUN_GLAZE_SEARCH.bat --port 8771`; Mac: `./RUN_GLAZE_SEARCH.command --port 8771` |
+| Port 8770 busy                                 | Windows: `RUN_GLAZE_SEARCH.bat --port 8771`; Mac: `./RUN_GLAZE_SEARCH.command --port 8771`; any system: `python glaze_search.py run --port 8771` |
 | Mac: "needs Apple Silicon" or PyTorch will not install | PyTorch 2.11 has no Intel Mac builds: use a Mac with M1 or newer, or the [online version](https://huggingface.co/spaces/FBIWarninggg/glaze_search) |
 
 ---
@@ -296,3 +326,5 @@ Not included: Review app and review-only data (see [`nghia_mike_ceramic`](https:
 **Windows quick start:** `SETUP.bat` → `DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.bat` → `CHECK_DATA.bat` → `INSTALL_GLAZE_MODEL.bat` (card G) → `RUN_GLAZE_SEARCH.bat`.
 
 **macOS quick start (Apple Silicon):** `SETUP.command` → `DOWNLOAD_DATA_ORIGINAL_AND_SEGMENTATION.command` → `CHECK_DATA.command` → `INSTALL_GLAZE_MODEL.command` (card G) → `RUN_GLAZE_SEARCH.command`.
+
+**Any system, one command (when the launchers cannot be started):** `python glaze_search.py` (macOS / Linux: `python3 glaze_search.py`): all five steps, skipping what is done, then the page opens.
