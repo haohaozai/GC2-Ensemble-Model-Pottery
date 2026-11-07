@@ -14,7 +14,7 @@ The engine's core capabilities include:
 **Multimodal Feature Extraction & Shared Latent Space:** Aligns chemical oxide compositions (processed via PCA and trainable projection heads) with descriptive text attributes (processed via MiniLM) using a symmetric InfoNCE loss function.      
 **Perceptual Color & Metadata Reranking:** Integrates CIEDE2000 perceptual color matching, surface finish classification, and firing cone compatibility to score and rank recommendations.   
 **Cluster-Based Result Diversification:** Utilizes $k$-means chemical composition clustering to help users explore diverse chemical formulations that achieve similar fired appearances.     
-**Dual-Interface Accessibility:** Provides both a local interactive Streamlit web application (`glaze_retrieval_app.py`) and a Jupyter Notebook workflow (`glaze_retrieval.ipynb`) for flexible deployment and experimentation.     
+**Dual-Interface Accessibility:** Provides both a local interactive Streamlit web application [(`glaze_retrieval_app.py`)](/glaze_retrieval/glaze_retrieval_app.py) and a Jupyter Notebook workflow [(`glaze_retrieval.ipynb`)](/glaze_retrieval/glaze_retrieval.ipynb) for flexible deployment and experimentation.     
 
 ## SECTION 2 : EXECUTIVE SUMMARY / PAPER ABSTRACT
 Ceramic glaze formulation is traditionally governed by exhaustive empirical testing and domain expertise, while existing digital repositories remain restricted to rigid keyword or stoichiometric queries that fail to capture nuanced visual behavior. To address this gap, this paper introduces the Multimodal Ceramic Glaze Retrieval Engine, an end-to-end framework that maps low-level visual inputs to quantitative glaze appearances and chemical compositions. The system automates object extraction and segmentation using Grounded-SAM and OpenCLIP pipelines, and aligns oxide chemical compositions with descriptive text features within a shared latent space optimized via InfoNCE loss. Retrieval results are scored and reranked using a hybrid weighting scheme combining shared latent similarity, CIEDE2000 perceptual color matching, surface finish compatibility, and firing cone requirements, alongside $k$-means chemical clustering for result diversification. Evaluated across real-world ceramic photographs, the system achieves a 95% Hit@5 and a mean Precision@5 of 56%, demonstrating significant improvements in bridging the divide between visual aesthetics and chemical recipe discovery. 
@@ -42,3 +42,4 @@ See the `README.md` in [glaze_retrieval](glaze_retrieval/) to get create a Pytho
 | `glaze_retrieval/` | Streamlit app and Jupyter notebook for uploading image and running retrieval
 
 ## SECTION 6 : PROJECT REPORT / PAPER
+See [glaze_retrieval_final_report.pdf](glaze_retrieval_final_report.pdf)
