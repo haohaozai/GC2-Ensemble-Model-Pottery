@@ -6,10 +6,10 @@
 
 | Official Full Name  | Student ID (MTech Applicable)  | Work Items (Who Did What) | Email (Optional) |
 | :------------ |:---------------:| :-----| :-----|
-| Lim Hao | A0354214M | tbd | zdino1998@gmail.com |
-| Pang Claire Fuiyi | A0357738L | tbd | clairepang22@gmail.com |
-| Polthai Nakhin | A0355086X | tbd | nakhinbill@gmail.com |
-| Le Duc Nghia | A0356261E | tbd | nghialeduc268@gmail.com |
+| Lim Hao | A0354214M | project and technical research, system architecture, model training | zdino1998@gmail.com |
+| Pang Claire Fuiyi | A0357738L | system architecture, data processing, model training, retrieval algorithm, front-end app | clairepang22@gmail.com |
+| Polthai Nakhin | A0355086X | system architecture, model training, evaluation metrics | nakhinbill@gmail.com |
+| Le Duc Nghia | A0356261E | image segmentation algorithm, color extraction pipeline, front-end app | nghialeduc268@gmail.com |
 
 ## SECTION 4 : VIDEO OF SYSTEM MODELLING & USE CASE DEMO
 
